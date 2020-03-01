@@ -1,4 +1,4 @@
-package phase1;
+package entities;
 
 import java.util.ArrayList;
 
