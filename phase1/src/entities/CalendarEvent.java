@@ -2,6 +2,8 @@ package entities;
 
 import java.util.Date;
 
+// TODO: Java doc
+
 public class CalendarEvent {
     private String eventID;
     private String name;

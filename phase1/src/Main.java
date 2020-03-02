@@ -1,8 +1,8 @@
-import presenter.CommandLinePresenter;
+import ui.CommandLineUI;
 
 public class Main {
     public static void main(String[] args) {
-        CommandLinePresenter presenter = new CalendarAppBuilder().build();
+        CommandLineUI presenter = new CalendarAppBuilder().build();
         presenter.run();
     }
 }

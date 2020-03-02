@@ -1,12 +1,12 @@
 package controller;
 
-import usecases.UseCaseManager;
+import usecases.IUseCaseManager;
 import entities.CalendarEvent;
 
 public class SimpleController {
-    private UseCaseManager useCaseManager;
+    private IUseCaseManager useCaseManager;
 
-    public SimpleController(UseCaseManager useCaseManager) {
+    public SimpleController(IUseCaseManager useCaseManager) {
         this.useCaseManager = useCaseManager;
     }
 

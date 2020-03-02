@@ -2,10 +2,10 @@ package usecases.event;
 
 import entities.CalendarEvent;
 
-public class EventManager implements IEventManager {
+class EventManager implements IEventManager {
     private IEventRepository repository;
 
-    public EventManager(IEventRepository repository) {
+    EventManager(IEventRepository repository) {
         this.repository = repository;
     }
 

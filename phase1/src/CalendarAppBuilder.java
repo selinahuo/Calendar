@@ -1,39 +1,33 @@
 import controller.SimpleController;
 import dataacess.CSVEventRepository;
-import presenter.CommandLinePresenter;
-import usecases.event.EventManager;
+import ui.CommandLineUI;
+import usecases.UseCaseManagerBuilder;
 import usecases.event.IEventRepository;
-import usecases.UseCaseManager;
+import usecases.IUseCaseManager;
 
 public class CalendarAppBuilder {
     private IEventRepository eventRepository;
-    private EventManager eventManager;
-    private UseCaseManager useCaseManager;
+    private IUseCaseManager useCaseManager;
     private SimpleController controller;
-    private CommandLinePresenter presenter;
+    private CommandLineUI presenter;
 
     private void buildEventRepository() {
         this.eventRepository = new CSVEventRepository();
     }
 
-    private void buildEventManager() {
-        this.eventManager = new EventManager(this.eventRepository);
-    }
-
     private void buildUseCaseManager() {
-        this.useCaseManager = new UseCaseManager(this.eventManager);
+        this.useCaseManager = new UseCaseManagerBuilder(this.eventRepository).build();
     }
 
-    private void buildProceduralController() {
+    private void buildSimpleController() {
         this.controller = new SimpleController(this.useCaseManager);
     }
 
-    public CommandLinePresenter build() {
+    public CommandLineUI build() {
         this.buildEventRepository();
-        this.buildEventManager();
         this.buildUseCaseManager();
-        this.buildProceduralController();
-        this.presenter = new CommandLinePresenter(this.controller);
+        this.buildSimpleController();
+        this.presenter = new CommandLineUI(this.controller);
         return this.presenter;
     }
 }

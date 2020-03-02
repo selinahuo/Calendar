@@ -1,14 +1,14 @@
-package presenter;
+package ui;
 
 import java.util.Scanner;
 
 import controller.SimpleController;
 
-public class CommandLinePresenter {
+public class CommandLineUI {
     private SimpleController controller;
     private String userID;
 
-    public CommandLinePresenter(SimpleController controller) {
+    public CommandLineUI(SimpleController controller) {
         this.controller = controller;
     }
 

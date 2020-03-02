@@ -3,7 +3,7 @@ package usecases;
 import entities.CalendarEvent;
 import usecases.event.IEventManager;
 
-public class UseCaseManager {
+class UseCaseManager implements IUseCaseManager {
     private IEventManager eventManager;
 //    private ISeriesManager seriesManager;
 //    private IAlertManager alertManager;
