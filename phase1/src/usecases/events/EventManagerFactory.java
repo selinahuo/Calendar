@@ -1,4 +1,4 @@
-package usecases.event;
+package usecases.events;
 
 /**
  * EventManagerFactory which instantiates EventManagers

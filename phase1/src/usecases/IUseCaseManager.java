@@ -9,7 +9,7 @@ public interface IUseCaseManager {
     /**
      * Create a CalendarEvent and return it.
      * @param event the event to be created
-     * @return the event that was created
+     * @return whether the event was successfully created
      */
-    CalendarEvent createEvent(CalendarEvent event);
+    boolean createEvent(CalendarEvent event);
 }
