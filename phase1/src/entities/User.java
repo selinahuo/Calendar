@@ -8,17 +8,22 @@ public class User {
     private String username;
     private String password;
     private String[] events;
+    private String[] series;
 
     /**
      * Construct a new User.
+     * @param userID the user's ID
      * @param username the user's username
      * @param password the user's password
      * @param events list of the user's events' eventIDs
+     * @param series list of the user's series' seriesIDs
      */
-    public User(String username, String password, String[] events) {
+    public User(String userID, String username, String password, String[] events, String[] series) {
+        this.userID = userID;
         this.username = username;
         this.password = password;
         this.events = events;
+        this.series = series;
     }
 
     /**
@@ -51,5 +56,13 @@ public class User {
      */
     public String[] getEvents() {
         return events;
+    }
+
+    /**
+     * Get the user's seriesIDs.
+     * @return user's seriesIDs
+     */
+    public String[] getSeries() {
+        return series;
     }
 }

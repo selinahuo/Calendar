@@ -2,18 +2,21 @@ package usecases;
 
 import entities.CalendarEvent;
 import usecases.events.IEventManager;
+import usecases.series.ISeriesManager;
 import usecases.users.IUserManager;
 
 class UseCaseManager implements IUseCaseManager {
     private IEventManager eventManager;
     private IUserManager userManager;
+    private ISeriesManager seriesManager;
 //    private ISeriesManager seriesManager;
 //    private IAlertManager alertManager;
 //    private ITagManager tagManager;
 
-    public UseCaseManager(IEventManager eventManager, IUserManager userManager) {
+    public UseCaseManager(IEventManager eventManager, IUserManager userManager, ISeriesManager seriesManager) {
         this.eventManager = eventManager;
         this.userManager = userManager;
+        this.seriesManager = seriesManager;
     }
 
     public boolean createEvent(CalendarEvent event) {
