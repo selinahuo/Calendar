@@ -16,7 +16,7 @@ public interface IEventManager {
     boolean createEvent(CalendarEvent event);
 
     /**
-     * Get an CalendarEvent by its ID.
+     * Get a CalendarEvent by its ID.
      * @param id the ID to filter by.
      * @return the corresponding CalendarEvent or null if it does not exist
      */
