@@ -1,5 +1,6 @@
 package usecases.items;
 
+import entities.CalendarEvent;
 import entities.Tag;
 
 import entities.Memo;
@@ -51,4 +52,10 @@ public interface IItemManager {
      * @return the corresponding Tag or null if it does not exist
      */
     Tag getTagById(String id);
+
+    CalendarEvent[] getEventsByTagIDAndUserID(String tagID, String userID);
+
+    CalendarEvent[] getEventsByMemoIDAndUserID(String tagID, String userID);
+
+
 }

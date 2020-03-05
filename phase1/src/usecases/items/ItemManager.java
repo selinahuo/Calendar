@@ -1,15 +1,20 @@
 package usecases.items;
 
+import entities.CalendarEvent;
 import entities.Tag;
 
 import entities.Memo;
+import usecases.events.IEventManager;
 
-import java.util.ArrayList;
 
 class ItemManager implements IItemManager {
     private IItemRepository repository;
+    private IEventManager eventManager;
 
-    ItemManager(IItemRepository repository) {this.repository = repository;}
+    ItemManager(IItemRepository repository, IEventManager eventManager) {
+        this.repository = repository;
+        this.eventManager = eventManager;
+    }
 
     /**
      * Create a Memo.
@@ -71,4 +76,22 @@ class ItemManager implements IItemManager {
      */
     @Override
     public Tag getTagById(String id) {return this.repository.fetchTagById(id);}
+
+    @Override
+    public CalendarEvent[] getEventsByTagIDAndUserID(String tagID, String userID) {
+        Tag tag = this.repository.fetchTagByIDAndUserID(tagID, userID);
+        if (tag == null) {
+            return new CalendarEvent[0];
+        }
+        return this.eventManager.getEventsBySeriesIDAndUserID(tagID, userID);
+    }
+
+    @Override
+    public CalendarEvent[] getEventsByMemoIDAndUserID(String memoID, String userID) {
+        Memo memo = this.repository.fetchMemoByIDAndUserID(memoID, userID);
+        if (memo == null) {
+            return new CalendarEvent[0];
+        }
+        return this.eventManager.getEventsBySeriesIDAndUserID(memoID, userID);
+    }
 }
