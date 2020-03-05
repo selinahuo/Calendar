@@ -7,6 +7,10 @@ import java.util.GregorianCalendar;
 class EventManager implements IEventManager {
     private IEventRepository repository;
 
+    public EventManager(IEventRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
     public boolean createEvent(CalendarEvent event) {
         return this.repository.saveEvent(event);
