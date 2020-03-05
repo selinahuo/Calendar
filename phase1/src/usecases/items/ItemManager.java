@@ -72,7 +72,5 @@ class ItemManager implements IItemManager {
      * @return the corresponding Tag or null if it does not exist
      */
     @Override
-    public Tag getTagById(String id) {
-        return this.repository.fetchTagById(id);
-    }
+    public Tag getTagById(String id) {return this.repository.fetchTagById(id);}
 }
