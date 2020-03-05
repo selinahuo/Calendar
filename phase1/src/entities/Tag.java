@@ -6,7 +6,7 @@ public class Tag{
     String name;
     String id;
 
-    public Tag(String name, ArrayList<String> events, String id){
+    public Tag(String name, String id){
         this.name = name;
         this.id =id;
     }
