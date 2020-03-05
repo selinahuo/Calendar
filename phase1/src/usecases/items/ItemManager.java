@@ -49,12 +49,10 @@ class ItemManager implements IItemManager {
     @Override
     public Memo getMemoByName(String name) {
         return null;
+        //TODO
     }
 
-    @Override
-    public Memo getMemoById(String id) {
-        return null;
-    }
+
 
     /**
      * Get a Tag by its name.

@@ -5,7 +5,7 @@ import entities.Memo;
 
 import java.util.Date;
 
-public class AlertManager {
+public class AlertManager implements IAlertManager {
     private IAlertRepository repository;
 
     AlertManager(IAlertRepository repository){
@@ -33,6 +33,12 @@ public class AlertManager {
     @Override
     public Memo getMemoByName(String name) {
         return null;
+    }
+
+    @Override
+    public Alert getAlertById(String id) {
+        return null;
+        //TODO
     }
 
 
