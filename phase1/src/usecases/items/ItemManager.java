@@ -14,14 +14,13 @@ class ItemManager implements IItemManager {
     /**
      * Create a Memo.
      * @param name the name of the memo
-     * @param events all of the events associated to this memo
      * @param note the note which the memo contains
      * @param id the unique id of the memo
      * @return true if event creation was successful, false otherwise
      */
     @Override
-    public boolean createMemo(String name, ArrayList<String> events, String note, String id) {
-        Memo memo = new Memo(name, events, note, id);
+    public boolean createMemo(String name, String note, String id) {
+        Memo memo = new Memo(name, note, id);
         this.repository.saveMemo(memo);
         return true;
     }
@@ -29,13 +28,12 @@ class ItemManager implements IItemManager {
     /**
      * Create a Tag.
      * @param name the Tag to create
-     * @param events the events associated with this tag
      * @param id the unique id of this tag
      * @return true if event creation was successful, false otherwise
      */
     @Override
-    public boolean createTag(String name, ArrayList<String> events, String id) {
-        Tag tag = new Tag(name, events, id);
+    public boolean createTag(String name, String id) {
+        Tag tag = new Tag(name, id);
         this.repository.saveTag(tag);
         return true;
     }
