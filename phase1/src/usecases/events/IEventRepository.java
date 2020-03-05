@@ -28,7 +28,7 @@ public interface IEventRepository {
      * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventByNameAndUserID(String name, String userID);
+    CalendarEvent[] fetchEventsByNameAndUserID(String name, String userID);
 
     /**
      * Fetch all CalendarEvents that have an ID in a list of IDs in the specified appropriate Date range
@@ -37,7 +37,7 @@ public interface IEventRepository {
      * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventByDateAndUserID(Date before, Date after, String userID);
+    CalendarEvent[] fetchEventsByDateAndUserID(Date before, Date after, String userID);
 
     /**
      * Fetch all CalendarEvents that have an ID in a list of IDs that end before a Date
@@ -45,7 +45,7 @@ public interface IEventRepository {
      * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventByDateBeforeAndUserID(Date before, String userID);
+    CalendarEvent[] fetchEventsByDateBeforeAndUserID(Date before, String userID);
 
     /**
      * fetch all CalendarEvents that have an ID in a list of IDs that start after a Date
@@ -53,16 +53,16 @@ public interface IEventRepository {
      * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventByDateAfterAndUserID(Date after, String userID);
+    CalendarEvent[] fetchEventsByDateAfterAndUserID(Date after, String userID);
 
     // series
-    CalendarEvent fetchEventBySeriesIDAndUserID(String seriesID, String userID);
-    CalendarEvent editEventSeriesID(String eventID, String newSeriesID);
+    CalendarEvent[] fetchEventBySeriesIDAndUserID(String seriesID, String userID);
+    boolean editEventSeriesID(String eventID, String newSeriesID);
 
 
     // notes
-    CalendarEvent fetchEventByTagIDAndUserID(String tagID, String userID);
-    CalendarEvent fetchEventByMemoIDAndUserID(String memoID, String userID);
+    CalendarEvent[] fetchEventsByTagIDAndUserID(String tagID, String userID);
+    CalendarEvent[] fetchEventsByMemoIDAndUserID(String memoID, String userID);
     //edit
 
     // get event by alertID (and userID)

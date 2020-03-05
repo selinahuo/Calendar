@@ -9,66 +9,61 @@ class EventManager implements IEventManager {
 
     @Override
     public boolean createEvent(CalendarEvent event) {
-        return false;
+        return this.repository.saveEvent(event);
     }
 
     @Override
     public CalendarEvent getEventByID(String id) {
-        return null;
+        return this.repository.fetchEventByID(id);
     }
 
     @Override
-    public CalendarEvent[] getEventByIDs(String[] ids) {
+    public CalendarEvent[] getEventsByIDs(String[] ids) {
         return new CalendarEvent[0];
     }
 
     @Override
-    public CalendarEvent[] getEventByNameAndUserID(String name, String userID) {
-        return new CalendarEvent[0];
+    public CalendarEvent[] getEventsByNameAndUserID(String name, String userID) {
+        return this.repository.fetchEventsByNameAndUserID(name, userID);
     }
 
     @Override
-    public CalendarEvent[] getEventByDateAndUserID(Date before, Date after, String userID) {
-        return new CalendarEvent[0];
+    public CalendarEvent[] getEventsByDateAndUserID(Date before, Date after, String userID) {
+        return this.repository.fetchEventsByDateAndUserID(before, after, userID);
     }
 
     @Override
-    public CalendarEvent[] getEventByDateBeforeAndUserID(Date before, String userID) {
-        return new CalendarEvent[0];
+    public CalendarEvent[] getEventsByDateBeforeAndUserID(Date before, String userID) {
+        return this.repository.fetchEventsByDateBeforeAndUserID(before, userID);
     }
 
     @Override
-    public CalendarEvent[] getEventByDateAfterAndIDs(Date after, String userID) {
-        return new CalendarEvent[0];
+    public CalendarEvent[] getEventsByDateAfterAndUserID(Date after, String userID) {
+        return this.repository.fetchEventsByDateAfterAndUserID(after, userID);
     }
 
     @Override
     public CalendarEvent[] getEventsBySeriesIDAndUserID(String seriesID, String userID) {
-        return new CalendarEvent[0];
+        return this.repository.fetchEventBySeriesIDAndUserID(seriesID, userID);
     }
 
     @Override
-    public CalendarEvent editEventSeriesID(String eventID, String newSeriesID) {
-        return null;
+    public boolean editEventSeriesID(String eventID, String newSeriesID) {
+        return false;
     }
 
     @Override
-    public CalendarEvent[] fetchEventsByTagIDAndUserID(String tagID, String userID) {
-        return new CalendarEvent[0];
+    public CalendarEvent[] getEventsByTagIDAndUserID(String tagID, String userID) {
+        return this.repository.fetchEventsByTagIDAndUserID(tagID, userID);
     }
 
     @Override
-    public CalendarEvent[] fetchEventsByMemoIDAndUserID(String memoID, String userID) {
-        return new CalendarEvent[0];
+    public CalendarEvent[] getEventsByMemoIDAndUserID(String memoID, String userID) {
+        return this.repository.fetchEventsByMemoIDAndUserID(memoID, userID);
     }
 
     @Override
-    public CalendarEvent[] fetchEventsByAlertIDAndUserID(String alertID, String userID) {
-        return new CalendarEvent[0];
-    }
-
-    @Override
-    public CalendarEvent editEventAlertID(String eventID, String newAlertID) {
-        return null;
+    public CalendarEvent getEventByAlertIDAndUserID(String alertID, String userID) {
+        return this.repository.fetchEventByAlertIDAndUserID(alertID, userID);
     }
 }
