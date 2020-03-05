@@ -23,42 +23,49 @@ public interface IEventRepository {
     CalendarEvent fetchEventByID(String id);
 
     /**
-     * Fetch all CalendarEvents that have an ID in a list of IDs
-     * @param ids returned CalendarEvents must have an ID in this list
-     * @return list of matching CalendarEvents
-     */
-    CalendarEvent[] fetchEventByIDs(String[] ids);
-
-    /**
      * Fetch all CalendarEvents that have an ID in a list of IDs and a matching name
      * @param name events must have this name
-     * @param ids returned CalendarEvents must have an ID in this list
+     * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventByNameAndIDs(String name, String[] ids);
+    CalendarEvent[] fetchEventByNameAndUserID(String name, String userID);
 
     /**
      * Fetch all CalendarEvents that have an ID in a list of IDs in the specified appropriate Date range
      * @param before returned CalendarEvents must start before this Date
      * @param after returned CalendarEvents must end after this Date
-     * @param ids returned CalendarEvents must have an ID in this list
+     * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventByDateAndIDs(Date before, Date after, String[] ids);
+    CalendarEvent[] fetchEventByDateAndUserID(Date before, Date after, String userID);
 
     /**
      * Fetch all CalendarEvents that have an ID in a list of IDs that end before a Date
      * @param before returned CalendarEvents must end before this Date
-     * @param ids returned CalendarEvents must have an ID in this list
+     * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventByDateBeforeAndIDs(Date before, String[] ids);
+    CalendarEvent[] fetchEventByDateBeforeAndUserID(Date before, String userID);
 
     /**
      * fetch all CalendarEvents that have an ID in a list of IDs that start after a Date
      * @param after returned CalendarEvents must start after this Date
-     * @param ids returned CalendarEvents must have an ID in this list
+     * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventByDateAfterAndIDs(Date after, String[] ids);
+    CalendarEvent[] fetchEventByDateAfterAndUserID(Date after, String userID);
+
+    // series
+    CalendarEvent fetchEventBySeriesIDAndUserID(String seriesID, String userID);
+    CalendarEvent editEventSeriesID(String eventID, String newSeriesID);
+
+
+    // notes
+    CalendarEvent fetchEventByTagIDAndUserID(String tagID, String userID);
+    CalendarEvent fetchEventByMemoIDAndUserID(String memoID, String userID);
+    //edit
+
+    // get event by alertID (and userID)
+    CalendarEvent fetchEventByAlertIDAndUserID(String alertID, String userID);
+    // edit event's alertID
 }
