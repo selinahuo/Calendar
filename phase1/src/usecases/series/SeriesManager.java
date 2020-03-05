@@ -1,71 +1,72 @@
 package usecases.series;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.UUID;
+
+import entities.CalendarEvent;
 import entities.Series;
+import usecases.events.IEventManager;
 
 class SeriesManager implements ISeriesManager {
     private ISeriesRepository repository;
+    private IEventManager eventManager;
 
-    SeriesManager(ISeriesRepository repository) {
+    SeriesManager(ISeriesRepository repository, IEventManager eventManager) {
         this.repository = repository;
+        this.eventManager = eventManager;
     }
 
-    /**
-     * Create and save a Series.
-     *
-     * @param name   name of the series
-     * @param events that belong to the series
-     * @return true if series creation was successful, false otherwise
-     */
+
     @Override
-    public boolean createSeries(String name, String events) {
-        return false;
+    public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {
+        Series newSeries = new Series(UUID.randomUUID().toString(), seriesName, eventIDs.length, userID);
+        this.repository.saveSeries(newSeries);
+        for (String id : eventIDs) {
+            this.eventManager.editEventSeriesID(id, newSeries.getSeriesID());
+        }
+        return true;
     }
 
-    /**
-     * Edit a series with matching ID
-     *
-     * @param seriesID ID of the series to edit
-     * @param name     new name of the series
-     * @param events   new events of the series
-     * @return true if series edit was successful, false otherwise
-     */
     @Override
-    public boolean editSeries(String seriesID, String name, String events) {
-        return false;
+    public boolean createSeriesFromEventFormula(String seriesName, GregorianCalendar start, GregorianCalendar end, String frequency, int numEvents, String userID) {
+        Series newSeries = new Series(UUID.randomUUID().toString(), seriesName, numEvents, userID);
+        ArrayList<GregorianCalendar[]> times = getTimes(start, end, frequency, numEvents);
+        for (GregorianCalendar[] time : times) {
+            CalendarEvent eventToCreate = new CalendarEvent(UUID.randomUUID().toString(), seriesName, time[0], time[1], "", userID, null, null, newSeries.getSeriesID(), null);
+            this.eventManager.createEvent(eventToCreate);
+        }
+        return true;
+    }
+    private ArrayList<GregorianCalendar[]> getTimes(GregorianCalendar start, GregorianCalendar end, String frequency, int numEvents) {
+        int daysToAdd;
+        if (frequency == "d") {
+            daysToAdd = 1;
+        } else {
+            daysToAdd = 7;
+        }
+        ArrayList<GregorianCalendar[]> times = new ArrayList<>();
+        GregorianCalendar startTime = (GregorianCalendar) start.clone();
+        GregorianCalendar endTime =  (GregorianCalendar) end.clone();
+        int i = 0;
+        while (i < numEvents) {
+            GregorianCalendar startClone = (GregorianCalendar) startTime.clone();
+            GregorianCalendar endClone = (GregorianCalendar) endTime.clone();
+            GregorianCalendar[] timeArray = {startClone, endClone};
+            times.add(timeArray);
+            startTime.add(Calendar.DAY_OF_MONTH, daysToAdd);
+            endTime.add(Calendar.DAY_OF_MONTH, daysToAdd);
+        }
+        return times;
     }
 
-    /**
-     * Get all Series that have an ID in a list of IDs
-     *
-     * @param ids returned Series must have an ID in this list
-     * @return list of matching Series
-     */
     @Override
-    public Series[] getSeriesByIDs(String[] ids) {
-        return new Series[0];
-    }
-
-    /**
-     * Get a Series that has an ID in a list of IDs and a matching name
-     *
-     * @param name Series must match this name
-     * @param ids  Series' ID must be in this list
-     * @return a matching Series
-     */
-    @Override
-    public Series getSeriesByNameAndIDs(String name, String[] ids) {
-        return null;
-    }
-
-    /**
-     * Get a Series that has an ID in a list of IDs and contains an eventID
-     *
-     * @param eventID Series must contain this event ID
-     * @param ids     Series' ID must be in this list
-     * @return a matching Series
-     */
-    @Override
-    public Series getSeriesByEventIDAndIDs(String eventID, String[] ids) {
-        return null;
+    public CalendarEvent[] getEventsBySeriesNameAndUserID(String seriesName, String userID) {
+        Series series = this.repository.fetchSeriesByNameAndUserID(seriesName, userID);
+        if (series == null) {
+            return new CalendarEvent[0];
+        }
+        return this.eventManager.getEventsBySeriesIDAndUserID(series.getSeriesID(), userID);
     }
 }
