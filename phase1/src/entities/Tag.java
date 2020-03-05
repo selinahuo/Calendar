@@ -9,6 +9,7 @@ public class Tag{
 
     public Tag(String name, ArrayList<String> events, String id){
         this.name = name;
+        this.events = events;
         this.id =id;
     }
 }
