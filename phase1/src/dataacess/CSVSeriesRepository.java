@@ -5,6 +5,7 @@ import usecases.series.ISeriesRepository;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class CSVSeriesRepository implements ISeriesRepository {
@@ -20,7 +21,21 @@ public class CSVSeriesRepository implements ISeriesRepository {
      */
     @Override
     public boolean saveSeries(Series series) {
-        return false;
+        System.out.println("user creating");
+        try{
+            FileWriter fw = new FileWriter("Series.csv");
+            String seriesID = series.getSeriesID();
+            String seriesName = series.getName();
+            String seriesEventCount = String.valueOf(series.getEventCount());
+            String serisUserID = series.getUserID();
+            String seriesInfo = seriesID + seriesName + seriesEventCount + serisUserID;
+            fw.write(seriesInfo);
+            fw.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return true;
     }
 
     /**
@@ -42,6 +57,7 @@ public class CSVSeriesRepository implements ISeriesRepository {
                 String[] event = line.split(cvsSplitBy);
                 if (event[0].equals(seriesID)){
                     int eventCount = Integer.parseInt(event[2]);
+                    br.close();
                     return new Series(event[0], event[1], eventCount, event[3]);
                 }
             }
@@ -83,6 +99,7 @@ public class CSVSeriesRepository implements ISeriesRepository {
                 String[] event = line.split(cvsSplitBy);
                 if ((event[1].equals(name))& (event[3].equals(userID))){
                     int eventCount = Integer.parseInt(event[2]);
+                    br.close();
                     return new Series(event[0], event[1], eventCount, event[3]);
                 }
             }
