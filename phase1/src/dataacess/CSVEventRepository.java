@@ -3,9 +3,18 @@ package dataacess;
 import entities.CalendarEvent;
 import usecases.events.IEventRepository;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 
 public class CSVEventRepository implements IEventRepository {
+
+    static private String pathToCsv = "Event.csv";
+    static private String cvsSplitBy = ",";
+
     /**
      * Save a CalendarEvent.
      * @param event the event to save
@@ -24,67 +33,79 @@ public class CSVEventRepository implements IEventRepository {
      * @return the corresponding CalendarEvent or null if it does not exist
      */
     @Override
-    public CalendarEvent fetchEventByID(String id) {
-        return null;
-    }
+    public CalendarEvent fetchEventByID(String id){
 
-    /**
-     * Fetch all CalendarEvents that have an ID in a list of IDs
-     *
-     * @param ids returned CalendarEvents must have an ID in this list
-     * @return list of matching CalendarEvents
-     */
-    @Override
-    public CalendarEvent[] fetchEventByIDs(String[] ids) {
-        return new CalendarEvent[0];
+        HashMap<String,String> eventInfo = new HashMap<String,String>();
+        String line = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(pathToCsv))) {
+
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] event = line.split(cvsSplitBy);
+
+                if(event[0] == id){
+                    return
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**
      * Fetch all CalendarEvents that have an ID in a list of IDs and a matching name
      *
      * @param name events must have this name
-     * @param ids  returned CalendarEvents must have an ID in this list
+     * @param userID  returned CalendarEvents must have an ID in this list
      * @return list of matching CalendarEvents
      */
     @Override
-    public CalendarEvent[] fetchEventByNameAndIDs(String name, String[] ids) {
+    public CalendarEvent[] fetchEventsByNameAndUserID(String name, String userID) {
         return new CalendarEvent[0];
     }
 
-    /**
-     * Fetch all CalendarEvents that have an ID in a list of IDs in the specified appropriate Date range
-     *
-     * @param before returned CalendarEvents must start before this Date
-     * @param after  returned CalendarEvents must end after this Date
-     * @param ids    returned CalendarEvents must have an ID in this list
-     * @return list of matching CalendarEvents
-     */
     @Override
-    public CalendarEvent[] fetchEventByDateAndIDs(Date before, Date after, String[] ids) {
+    public CalendarEvent[] fetchEventsByDateAndUserID(Date before, Date after, String userID) {
         return new CalendarEvent[0];
     }
 
-    /**
-     * Fetch all CalendarEvents that have an ID in a list of IDs that end before a Date
-     *
-     * @param before returned CalendarEvents must end before this Date
-     * @param ids    returned CalendarEvents must have an ID in this list
-     * @return list of matching CalendarEvents
-     */
     @Override
-    public CalendarEvent[] fetchEventByDateBeforeAndIDs(Date before, String[] ids) {
+    public CalendarEvent[] fetchEventsByDateBeforeAndUserID(Date before, String userID) {
         return new CalendarEvent[0];
     }
 
-    /**
-     * fetch all CalendarEvents that have an ID in a list of IDs that start after a Date
-     *
-     * @param after returned CalendarEvents must start after this Date
-     * @param ids   returned CalendarEvents must have an ID in this list
-     * @return list of matching CalendarEvents
-     */
     @Override
-    public CalendarEvent[] fetchEventByDateAfterAndIDs(Date after, String[] ids) {
+    public CalendarEvent[] fetchEventsByDateAfterAndUserID(Date after, String userID) {
         return new CalendarEvent[0];
+    }
+
+    @Override
+    public CalendarEvent[] fetchEventBySeriesIDAndUserID(String seriesID, String userID) {
+        return new CalendarEvent[0];
+    }
+
+    @Override
+    public boolean editEventSeriesID(String eventID, String newSeriesID) {
+        return false;
+    }
+
+    @Override
+    public CalendarEvent[] fetchEventsByTagIDAndUserID(String tagID, String userID) {
+        return new CalendarEvent[0];
+    }
+
+    @Override
+    public CalendarEvent[] fetchEventsByMemoIDAndUserID(String memoID, String userID) {
+        return new CalendarEvent[0];
+    }
+
+    @Override
+    public CalendarEvent fetchEventByAlertIDAndUserID(String alertID, String userID) {
+        return null;
     }
 }
