@@ -8,7 +8,7 @@ public interface IItemManager {
     /**
      * Create and save a Memo.
      * @param memo the Memo to save
-     * @return true if event creation was successful, false otherwise
+     * @return true if item creation was successful, false otherwise
      */
     boolean createMemo(Memo memo);
 

@@ -17,6 +17,7 @@ class ItemManager implements IItemManager {
     @Override
     public boolean createMemo(Memo memo){
         this.repository.saveMemo(memo);
+
         return true;
     }
     /**
