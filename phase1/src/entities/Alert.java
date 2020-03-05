@@ -1,5 +1,6 @@
 package entities;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Class representing a Calendar Alert
@@ -7,11 +8,11 @@ import java.util.Date;
 public abstract class Alert {
     private String alertID;
     private String alertName;
-    private Date start;
-    private Date end;
+    private GregorianCalendar start;
+    private GregorianCalendar end;
 
 
-    public Alert(String alertID, String alertName, Date start, Date end) {
+    public Alert(String alertID, String alertName, GregorianCalendar start, GregorianCalendar end) {
         this.alertID = alertID;
         this.alertName = alertName;
         this.start = start;
@@ -26,11 +27,11 @@ public abstract class Alert {
         return alertName;
     }
 
-    public Date getStart() {
+    public GregorianCalendar getStart() {
         return start;
     }
 
-    public Date getEnd() {
+    public GregorianCalendar getEnd() {
         return end;
     }
 

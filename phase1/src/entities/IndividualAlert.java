@@ -1,9 +1,11 @@
 package entities;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class IndividualAlert extends Alert {
-    public IndividualAlert(String alertID, String alertName, Date start, Date end){
-        super(String alertID, String alertName, Date start, Date end);
+
+    public IndividualAlert(String alertID, String alertName, GregorianCalendar start, GregorianCalendar end){
+
+        super(alertID, alertName, start, end);
     }
 }

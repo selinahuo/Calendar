@@ -1,12 +1,13 @@
 package entities;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class FrequencyAlert extends Alert{
-    private Date[] frequency;
+    private GregorianCalendar[] frequency;
 
-    public FrequencyAlert(String alertID, String alertName, Date start, Date end, Date[] frequency){
-        super(String alertID, String alertName, Date start, Date end);
+    public FrequencyAlert(String alertID, String alertName, GregorianCalendar start, GregorianCalendar end, GregorianCalendar[] frequency){
+        super(alertID, alertName, start, end);
         this.frequency = frequency;
     }
 
