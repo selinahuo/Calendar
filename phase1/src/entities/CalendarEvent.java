@@ -1,7 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * A class that represents a CalendarEvent
@@ -9,8 +9,8 @@ import java.util.Date;
 public class CalendarEvent {
     private String eventID;
     private String name;
-    private Date start;
-    private Date end;
+    private GregorianCalendar start;
+    private GregorianCalendar end;
     private String location;
 
     private String userID;

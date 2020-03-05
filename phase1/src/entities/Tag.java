@@ -2,9 +2,14 @@ package entities;
 
 import java.util.ArrayList;
 
-public class Tag extends Item{
+public class Tag{
+    String name;
+    ArrayList<String> events;
+    String id;
 
-    public Tag(String name, ArrayList<String> events) {
-        super(name, events);
+    public Tag(String name, ArrayList<String> events, String id){
+        this.name = name;
+        this.events = events;
+        this.id =id;
     }
 }

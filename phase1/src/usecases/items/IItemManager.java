@@ -4,20 +4,27 @@ import entities.Tag;
 
 import entities.Memo;
 
+import java.util.ArrayList;
+
 public interface IItemManager {
     /**
-     * Create and save a Memo.
-     * @param memo the Memo to save
-     * @return true if item creation was successful, false otherwise
-     */
-    boolean createMemo(Memo memo);
-
-    /**
-     * Create and save a Tag.
-     * @param tag the Tag to save
+     * Create a Memo.
+     * @param name the name of the memo
+     * @param events all of the events associated to this memo
+     * @param note the note which the memo contains
+     * @param id the unique id of the memo
      * @return true if event creation was successful, false otherwise
      */
-    boolean createTag(Tag tag);
+    boolean createMemo(String name, ArrayList<String> events, String note, String id);
+
+    /**
+     * Create a Tag.
+     * @param name the Tag to create
+     * @param events the events associated with this tag
+     * @param id the unique id of this tag
+     * @return true if event creation was successful, false otherwise
+     */
+    boolean createTag(String name, ArrayList<String> events, String id);
 
     /**
      * Get a Memo by its name.
@@ -27,9 +34,23 @@ public interface IItemManager {
     Memo getMemoByName(String name);
 
     /**
+     * Get a Memo by its id.
+     * @param id the id to filter by.
+     * @return the corresponding Memo or null if it does not exist
+     */
+    Memo getMemoById(String id);
+
+    /**
      * Get a Tag by its name.
      * @param name the name to filter by.
      * @return the corresponding Tag or null if it does not exist
      */
     Tag getTagByName(String name);
+
+    /**
+     * Get a Tag by its id.
+     * @param id the id to filter by.
+     * @return the corresponding Tag or null if it does not exist
+     */
+    Tag getTagById(String id);
 }
