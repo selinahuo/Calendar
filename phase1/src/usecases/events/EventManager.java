@@ -2,7 +2,7 @@ package usecases.events;
 
 import entities.CalendarEvent;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 class EventManager implements IEventManager {
     private IEventRepository repository;
@@ -28,17 +28,17 @@ class EventManager implements IEventManager {
     }
 
     @Override
-    public CalendarEvent[] getEventsByDateAndUserID(Date before, Date after, String userID) {
+    public CalendarEvent[] getEventsByDateAndUserID(GregorianCalendar before, GregorianCalendar after, String userID) {
         return this.repository.fetchEventsByDateAndUserID(before, after, userID);
     }
 
     @Override
-    public CalendarEvent[] getEventsByDateBeforeAndUserID(Date before, String userID) {
+    public CalendarEvent[] getEventsByDateBeforeAndUserID(GregorianCalendar before, String userID) {
         return this.repository.fetchEventsByDateBeforeAndUserID(before, userID);
     }
 
     @Override
-    public CalendarEvent[] getEventsByDateAfterAndUserID(Date after, String userID) {
+    public CalendarEvent[] getEventsByDateAfterAndUserID(GregorianCalendar after, String userID) {
         return this.repository.fetchEventsByDateAfterAndUserID(after, userID);
     }
 

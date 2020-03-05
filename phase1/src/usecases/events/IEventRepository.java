@@ -2,7 +2,7 @@ package usecases.events;
 
 import entities.CalendarEvent;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Provides a public interface for event repository operations
@@ -37,7 +37,7 @@ public interface IEventRepository {
      * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventsByDateAndUserID(Date before, Date after, String userID);
+    CalendarEvent[] fetchEventsByDateAndUserID(GregorianCalendar before, GregorianCalendar after, String userID);
 
     /**
      * Fetch all CalendarEvents that have an ID in a list of IDs that end before a Date
@@ -45,7 +45,7 @@ public interface IEventRepository {
      * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventsByDateBeforeAndUserID(Date before, String userID);
+    CalendarEvent[] fetchEventsByDateBeforeAndUserID(GregorianCalendar before, String userID);
 
     /**
      * fetch all CalendarEvents that have an ID in a list of IDs that start after a Date
@@ -53,7 +53,7 @@ public interface IEventRepository {
      * @param userID returned CalendarEvents must belong to this user
      * @return list of matching CalendarEvents
      */
-    CalendarEvent[] fetchEventsByDateAfterAndUserID(Date after, String userID);
+    CalendarEvent[] fetchEventsByDateAfterAndUserID(GregorianCalendar after, String userID);
 
     // series
     CalendarEvent[] fetchEventBySeriesIDAndUserID(String seriesID, String userID);

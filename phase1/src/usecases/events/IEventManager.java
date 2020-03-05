@@ -1,6 +1,6 @@
 package usecases.events;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 import entities.CalendarEvent;
 
@@ -14,11 +14,11 @@ public interface IEventManager {
     CalendarEvent[] getEventsByIDs(String[] ids);
     CalendarEvent[] getEventsByNameAndUserID(String name, String userID);
 
-    CalendarEvent[] getEventsByDateAndUserID(Date before, Date after, String userID);
+    CalendarEvent[] getEventsByDateAndUserID(GregorianCalendar before, GregorianCalendar after, String userID);
 
-    CalendarEvent[] getEventsByDateBeforeAndUserID(Date before, String userID);
+    CalendarEvent[] getEventsByDateBeforeAndUserID(GregorianCalendar before, String userID);
 
-    CalendarEvent[] getEventsByDateAfterAndUserID(Date after, String userID);
+    CalendarEvent[] getEventsByDateAfterAndUserID(GregorianCalendar after, String userID);
 
     // series
     CalendarEvent[] getEventsBySeriesIDAndUserID(String seriesID, String userID);
