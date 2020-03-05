@@ -1,5 +1,0 @@
-﻿eventid,eventname,time,location,tag,memo,alert
-user002-event001,;Iron Man 2;, ;Iron Man 2;,{2020.2.2},\BA3175\,"['pepper', 'superhero']"," (""second individual film"", ""advangers film"")","""""None"""""
-user002-event001,;Iron Man 3;,{2020.3.3},\Conhall\,"['pepper', 'superhero']"," (""third individual film"", ""advangers film"")","""""None"""""
-user002-event003,;Avengers Infinity War;,{2020.3.4},\BA3175\,"['war','superhero']","(""advangers film"")","""""10"""""
-user002-event004,;Avengers Endgame;,{2020.3.5},\Robarts\,"['war', 'spiderman', 'superhero']","(""advangers resemble"")","""""20"""""

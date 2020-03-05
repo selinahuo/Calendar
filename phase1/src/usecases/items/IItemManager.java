@@ -1,5 +1,6 @@
 package usecases.items;
 
+import entities.CalendarEvent;
 import entities.Tag;
 
 import entities.Memo;
@@ -10,21 +11,19 @@ public interface IItemManager {
     /**
      * Create a Memo.
      * @param name the name of the memo
-     * @param events all of the events associated to this memo
      * @param note the note which the memo contains
      * @param id the unique id of the memo
      * @return true if event creation was successful, false otherwise
      */
-    boolean createMemo(String name, ArrayList<String> events, String note, String id);
+    boolean createMemo(String name, String note, String id);
 
     /**
      * Create a Tag.
      * @param name the Tag to create
-     * @param events the events associated with this tag
      * @param id the unique id of this tag
      * @return true if event creation was successful, false otherwise
      */
-    boolean createTag(String name, ArrayList<String> events, String id);
+    boolean createTag(String name, String id);
 
     /**
      * Get a Memo by its name.
@@ -53,4 +52,10 @@ public interface IItemManager {
      * @return the corresponding Tag or null if it does not exist
      */
     Tag getTagById(String id);
+
+    CalendarEvent[] getEventsByTagIDAndUserID(String tagID, String userID);
+
+    CalendarEvent[] getEventsByMemoIDAndUserID(String tagID, String userID);
+
+
 }

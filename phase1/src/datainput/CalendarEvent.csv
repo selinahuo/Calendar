@@ -1,4 +1,4 @@
-﻿eventid,Iron Man 2,2020-02-05T04:00:00,2020-02-05T08:00:00,BA3175,userID,tagiIDs,memoIDs,seriesID,alertsID
-eventid,Iron Man 3,2020-02-06T09:00:00,2020-02-06T10:00:00,Conhall,userID,tagiIDs,memoIDs,seriesID,alertsID
-eventid,Avengers Infinity War,2020-02-07T11:30:00,2020-02-07T12:00:00,BA3175,userID,tagiIDs,memoIDs,seriesID,alertsID
-eventid,Avengers Endgame,2020-02-08T10:00:00,2020-02-08T23:00:00,Robarts,userID,tagiIDs,memoIDs,seriesID,alertsID
+﻿eventid,Iron Man 2,2020-02-05-04-00-00,2020-02-05-08-00-00,BA3175,userID,tagiIDs,memoIDs,seriesID,alertsID
+eventid,Iron Man 3,2020-02-06-09-00-00,2020-02-06-10-00-00,Conhall,userID,tagiIDs,memoIDs,seriesID,alertsID
+eventid,Avengers Infinity War,2020-02-07-11-30-00,2020-02-07-12-00-00,BA3175,userID,tagiIDs,memoIDs,seriesID,alertsID
+eventid,Avengers Endgame,2020-02-08-10-00-00,2020-02-08-23-00-00,Robarts,userID,tagiIDs,memoIDs,seriesID,alertsID
