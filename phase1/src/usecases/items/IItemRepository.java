@@ -36,4 +36,18 @@ public interface IItemRepository {
      * @return the corresponding Tag or null if it does not exist
      */
     entities.Tag fetchTagByName(String name);
+
+    /**
+     * Fetch a Memo by its id.
+     * @param id the name to filter by.
+     * @return the corresponding Memo or null if it does not exist
+     */
+    entities.Memo fetchMemoById(String id);
+
+    /**
+     * Fetch a Tag by its id.
+     * @param id the name to filter by.
+     * @return the corresponding Tag or null if it does not exist
+     */
+    entities.Tag fetchTagById(String id);
 }

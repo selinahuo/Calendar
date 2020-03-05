@@ -46,14 +46,15 @@ class ItemManager implements IItemManager {
      * @return the corresponding Memo or null if it does not exist
      */
     @Override
-    public Memo getMemoByName(String name) {
-        return null;
-    }
+    public Memo getMemoByName(String name) {return this.repository.fetchMemoByName(name); }
 
+    /**
+     * Get a Memo by its id.
+     * @param id the name to filter by.
+     * @return the corresponding Memo or null if it does not exist
+     */
     @Override
-    public Memo getMemoById(String id) {
-        return null;
-    }
+    public Memo getMemoById(String id) {return this.repository.fetchMemoById(id);}
 
     /**
      * Get a Tag by its name.
@@ -62,11 +63,16 @@ class ItemManager implements IItemManager {
      */
     @Override
     public Tag getTagByName(String name) {
-        return null;
+        return this.repository.fetchTagByName(name);
     }
 
+    /**
+     * Get a Tag by its id.
+     * @param id the name to filter by.
+     * @return the corresponding Tag or null if it does not exist
+     */
     @Override
     public Tag getTagById(String id) {
-        return null;
+        return this.repository.fetchTagById(id);
     }
 }
