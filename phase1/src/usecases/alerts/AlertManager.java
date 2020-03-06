@@ -8,6 +8,7 @@ import usecases.events.IEventManager;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 
 class AlertManager implements IAlertManager {
     private IAlertRepository alertRepository;
@@ -21,55 +22,86 @@ class AlertManager implements IAlertManager {
     }
 
     /**
-     * @param alertID the ID of this alert
-     * @param alertName the name of this alert
-     * @param start start time of the alert
-     * @return true if alert creation was successful, false otherwise.
+     * generate an alertID
      */
-    @Override
-    public boolean createIndividualAlert (String alertID, String alertName, GregorianCalendar start{
-        Alert alert = new IndividualAlert( alertID, alertName, start);
-        this.alertRepository.saveAlert(alert);
-        return true;
+    private String generateAlertID(){
+        return UUID.randomUUID().toString();
     }
 
     /**
      *
-     * @param alertID the id of this alert
-     * @param alertName the name of this alert
-     * @param frequency the rate of which this is repeating
-     * @return true if alert creation was successful, false otherwise.
+     * @param eventID
+     * @param name
+     * @param startTime
+     * @param userID
+     * @return
      */
     @Override
-    public boolean createFrequencylAlert(String alertID, String alertName, GregorianCalendar[] frequency){
-        Alert alert = new FrequencyAlert(alertID, alertName, frequency);
-        this.alertRepository.saveAlert(alert);
-        return true;
+    public Boolean createIndividualAlertOnEvent(String eventID, String name, GregorianCalendar startTime, String userID){
+        //create individual alert
+        String alertID = generateAlertID();
+        Alert alert = new IndividualAlert(alertID, name, startTime, userID);
+        //update the event's alertID
+        this.eventManager.getEventByID(eventID).setAlertID(alertID);
+        return this.alertRepository.saveAlert(alert);
     }
 
+    /**
+     *
+     * @param eventID
+     * @param name
+     * @param frequency
+     * @param userID
+     * @return
+     */
     @Override
-    public boolean createFrequencylAlertByEvent(String alertID, String alertName,  GregorianCalendar end, String eventId) {
-        // this alert is attached to a single event
-        if (this.eventManager.getEventByID(eventId).getSeriesID() == null) {
-            GregorianCalendar alertTime = this.eventManager.getEventByID(eventId).getStart();
-            GregorianCalendar[] frequency = {alertTime};
-            Alert alert = new FrequencyAlert(alertID,alertName,frequency );
-            this.alertRepository.saveAlert(alert);
+    public boolean createFrequencylAlert(String eventID, String name, GregorianCalendar[] frequency, String userID){
+        //create the alert
+        String alertID = generateAlertID();
+        Alert alert = new FrequencyAlert(alertID, name, frequency, userID);
+        //update the event's alertID
+        this.eventManager.getEventByID(eventID).setAlertID(alertID);
+        return this.alertRepository.saveAlert(alert);
+    }
+
+    /**
+     *
+     * @param eventID
+     * @param name
+     * @param first
+     * @param userID
+     * @return
+     */
+    @Override
+    public boolean createFrequencyAlertOnEvent(String eventID, String name, GregorianCalendar first, String userID) {
+        //generate alertID
+        String alertID = generateAlertID();
+        //edit event alertID
+        this.eventManager.getEventByID(eventID).setAlertID(alertID);
+        // find the frequency of this event and create alert
+            // this alert is attached to a single event
+        if (this.eventManager.getEventByID(eventID).getSeriesID() == null) {
+            GregorianCalendar[] frequency = {this.eventManager.getEventByID(eventID).getStart()};
+            Alert alert = new FrequencyAlert(alertID,name,frequency,userID );
+            return this.alertRepository.saveAlert(alert);
         }
-        // i.e. this alert will notify user at the start of a series of events, i.e. every math lecture.
+            // this alert is attached to a series of event
         else {
-            String seriesID = this.eventManager.getEventByID(eventId).getSeriesID();
-            String userID = this.eventManager.getEventByID(eventId).getUserID();
+            String seriesID = this.eventManager.getEventByID(eventID).getSeriesID();
             CalendarEvent[] allEvents= this.eventManager.getEventsBySeriesIDAndUserID(seriesID, userID);
             GregorianCalendar[] frequency = new GregorianCalendar[allEvents.length];
             for(int i = 0; i < allEvents.length; i++) {
                 frequency[i] = allEvents[i].getStart();
             }
-            Alert alert = new FrequencyAlert(alertID, alertName, frequency[0], end, frequency );
-            this.alertRepository.saveAlert(alert);
+            Alert alert = new FrequencyAlert(alertID,name,frequency,userID );
+            return this.alertRepository.saveAlert(alert);
         }
-        return true;
     }
+
+    public Alert acknowledgeAlert(alertID, String userID) {
+
+    }
+    // get the alert and acknowledge it
 
 //    /**
 //     * Edit a alert with matching ID
