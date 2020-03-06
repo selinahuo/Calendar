@@ -1,13 +1,31 @@
 package entities;
 
-import java.util.ArrayList;
+public class Tag implements java.io.Serializable {
+    private String tagID;
+    private String name;
+    private int count;
+    private String userID;
 
-public class Tag{
-    String name;
-    String id;
-
-    public Tag(String name, String id){
+    public Tag(String tagID, String name, int count, String userID) {
+        this.tagID = tagID;
         this.name = name;
-        this.id =id;
+        this.count = count;
+        this.userID = userID;
+    }
+
+    public String getTagID() {
+        return tagID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public String getUserID() {
+        return userID;
     }
 }

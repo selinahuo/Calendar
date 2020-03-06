@@ -9,7 +9,7 @@ public class ItemManagerFactory {
      * @param repository the injected EventRepositoryImplementation
      * @return the new EventManager instance
      */
-    public static IItemManager build(IItemRepository repository) {
+    public static IItemManager build(IMemoRepository repository) {
         return new ItemManager(repository);
     }
 }

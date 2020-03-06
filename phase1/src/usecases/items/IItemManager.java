@@ -23,7 +23,7 @@ public interface IItemManager {
      * @param id the unique id of this tag
      * @return true if event creation was successful, false otherwise
      */
-    boolean createTag(String name, String id);
+    boolean createTag(String name, int count, String userID);
 
     /**
      * Get a Memo by its name.
@@ -40,22 +40,13 @@ public interface IItemManager {
     Memo getMemoById(String id);
 
     /**
-     * Get a Tag by its name.
-     * @param name the name to filter by.
-     * @return the corresponding Tag or null if it does not exist
-     */
-    Tag getTagByName(String name);
-
-    /**
      * Get a Tag by its id.
      * @param id the id to filter by.
      * @return the corresponding Tag or null if it does not exist
      */
     Tag getTagById(String id);
 
-    CalendarEvent[] getEventsByTagIDAndUserID(String tagID, String userID);
+    CalendarEvent[] getEventsByTagNameAndUserID(String tagName, String userID);
 
     CalendarEvent[] getEventsByMemoIDAndUserID(String tagID, String userID);
-
-
 }
