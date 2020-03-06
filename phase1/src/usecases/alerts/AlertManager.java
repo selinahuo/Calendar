@@ -24,12 +24,11 @@ class AlertManager implements IAlertManager {
      * @param alertID the ID of this alert
      * @param alertName the name of this alert
      * @param start start time of the alert
-     * @param  end end time of the alert
      * @return true if alert creation was successful, false otherwise.
      */
     @Override
-    public boolean createIndividualAlert (String alertID, String alertName, GregorianCalendar start, GregorianCalendar end){
-        Alert alert = new IndividualAlert( alertID, alertName, start, end);
+    public boolean createIndividualAlert (String alertID, String alertName, GregorianCalendar start{
+        Alert alert = new IndividualAlert( alertID, alertName, start);
         this.alertRepository.saveAlert(alert);
         return true;
     }
@@ -38,14 +37,12 @@ class AlertManager implements IAlertManager {
      *
      * @param alertID the id of this alert
      * @param alertName the name of this alert
-     * @param start start time
-     * @param end end time
      * @param frequency the rate of which this is repeating
      * @return true if alert creation was successful, false otherwise.
      */
     @Override
-    public boolean createFrequencylAlert(String alertID, String alertName, GregorianCalendar start, GregorianCalendar end, GregorianCalendar[] frequency){
-        Alert alert = new FrequencyAlert(alertID, alertName, start, end, frequency);
+    public boolean createFrequencylAlert(String alertID, String alertName, GregorianCalendar[] frequency){
+        Alert alert = new FrequencyAlert(alertID, alertName, frequency);
         this.alertRepository.saveAlert(alert);
         return true;
     }
@@ -56,7 +53,7 @@ class AlertManager implements IAlertManager {
         if (this.eventManager.getEventByID(eventId).getSeriesID() == null) {
             GregorianCalendar alertTime = this.eventManager.getEventByID(eventId).getStart();
             GregorianCalendar[] frequency = {alertTime};
-            Alert alert = new FrequencyAlert(alertID,alertName,alertTime,end, frequency );
+            Alert alert = new FrequencyAlert(alertID,alertName,frequency );
             this.alertRepository.saveAlert(alert);
         }
         // i.e. this alert will notify user at the start of a series of events, i.e. every math lecture.

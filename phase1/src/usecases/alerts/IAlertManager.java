@@ -13,21 +13,18 @@ public interface IAlertManager {
      * @param alertID the id of this alert
      * @param alertName the name of this alert
      * @param start start time
-     * @param end end time
      * @return ttrue if event creation was successful, false otherwise
      */
-    boolean createIndividualAlert(String alertID, String alertName, GregorianCalendar start, GregorianCalendar end);
+    boolean createIndividualAlert(String alertID, String alertName, GregorianCalendar start);
 
     /**
      *
      * @param alertID the id of this alert
      * @param alertName the name of this alert
-     * @param start start time
-     * @param end end time
      * @param frequency the rate of which this is repeating
      * @return true if event creation was successful, false otherwise
      */
-    public boolean createFrequencylAlert(String alertID, String alertName, GregorianCalendar start, GregorianCalendar end, GregorianCalendar[] frequency);
+    public boolean createFrequencylAlert(String alertID, String alertName, GregorianCalendar[] frequency);
 
     public boolean createFrequencylAlertByEvent(String alertID, String alertName,  GregorianCalendar end, String eventId);
 
