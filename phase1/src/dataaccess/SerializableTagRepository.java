@@ -1,4 +1,4 @@
-package dataacess;
+package dataaccess;
 
 import entities.Tag;
 import usecases.items.ITagRepository;

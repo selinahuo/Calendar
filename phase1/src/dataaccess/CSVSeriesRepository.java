@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class CSVSeriesRepository implements ISeriesRepository {
 
-    private static  String pathToCsv = "Series.csv";
+    private static String pathToCsv = "Series.csv";
     private final static String cvsSplitBy = ",";
 
     /**

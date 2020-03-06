@@ -1,19 +1,22 @@
-package dataacess;
+package dataaccess;
 
 import entities.CalendarEvent;
 import usecases.events.IEventRepository;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.GregorianCalendar;
 
 public class CSVEventRepository implements IEventRepository {
 
-    static private String pathToCsv = "Event.csv";
-    static private String cvsSplitBy = ",";
+    private static final String pathToCsv = "CalenderEvent.csv";
+    private static final String cvsSplitBy = ",";
+    private static final String gregorianSplitBy = "-";
+    private static final String arrListSplitBy = ";";
+
 
     /**
      * Save a CalendarEvent.
@@ -35,18 +38,37 @@ public class CSVEventRepository implements IEventRepository {
     @Override
     public CalendarEvent fetchEventByID(String id){
 
-        HashMap<String,String> eventInfo = new HashMap<String,String>();
         String line = "";
         try (BufferedReader br = new BufferedReader(new FileReader(pathToCsv))) {
 
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator
-                String[] event = line.split(cvsSplitBy);
+                String[] eventInfo = line.split(cvsSplitBy);
+                String eventID = eventInfo[0];
+                String name = eventInfo[1];
+                String[] startTime = eventInfo[2].split(gregorianSplitBy);
+                GregorianCalendar start = new GregorianCalendar(Integer.parseInt(startTime[0]),
+                        Integer.parseInt(startTime[1]), Integer.parseInt(startTime[2]), Integer.parseInt(startTime[3]),
+                        Integer.parseInt(startTime[4]), Integer.parseInt(startTime[5]));
+                String[] endTime = eventInfo[3].split(gregorianSplitBy);
+                GregorianCalendar end = new GregorianCalendar(Integer.parseInt(endTime[0]),
+                        Integer.parseInt(endTime[1]), Integer.parseInt(endTime[2]), Integer.parseInt(endTime[3]),
+                        Integer.parseInt(endTime[4]), Integer.parseInt(endTime[5]));
+                String location = eventInfo[4];
+                String userID = eventInfo[5];
+                ArrayList<String> tagIDs = (ArrayList<String>) Arrays.asList(eventInfo[6].split(arrListSplitBy));
+                ArrayList<String> memoIDs = (ArrayList<String>) Arrays.asList(eventInfo[7].split(arrListSplitBy));
+                String seriesID = eventInfo[8];
+                String alertID = eventInfo[9];
 
-                if(event[0] == id){
-                    return
+                if(eventID.equals(id)){
+                    CalendarEvent event = new CalendarEvent(eventID, name, start, end, location, userID, tagIDs, memoIDs,
+                            seriesID, alertID);
+                    br.close();
+                    return event;
                 }
+
 
             }
 
@@ -70,17 +92,17 @@ public class CSVEventRepository implements IEventRepository {
     }
 
     @Override
-    public CalendarEvent[] fetchEventsByDateAndUserID(Date before, Date after, String userID) {
+    public CalendarEvent[] fetchEventsByDateAndUserID(GregorianCalendar before, GregorianCalendar after, String userID) {
         return new CalendarEvent[0];
     }
 
     @Override
-    public CalendarEvent[] fetchEventsByDateBeforeAndUserID(Date before, String userID) {
+    public CalendarEvent[] fetchEventsByDateBeforeAndUserID(GregorianCalendar before, String userID) {
         return new CalendarEvent[0];
     }
 
     @Override
-    public CalendarEvent[] fetchEventsByDateAfterAndUserID(Date after, String userID) {
+    public CalendarEvent[] fetchEventsByDateAfterAndUserID(GregorianCalendar after, String userID) {
         return new CalendarEvent[0];
     }
 
