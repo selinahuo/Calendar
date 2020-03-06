@@ -10,7 +10,7 @@ import java.io.FileWriter;
 
 public class CSVUserRepository implements IUserRepository {
 
-    private static String pathToCsv = "Series.csv";
+    private static String pathToCsv = "User.csv";
     private final static String cvsSplitBy = ";";
     /**
      * Save a User.
@@ -22,7 +22,7 @@ public class CSVUserRepository implements IUserRepository {
     public boolean saveUser(User user) {
         System.out.println("user creating");
         try{
-            FileWriter fw = new FileWriter("Series.csv");
+            FileWriter fw = new FileWriter("User.csv");
             String userID = user.getUserID();
             String userName = user.getUsername();
             String userPassword = user.getPassword();
