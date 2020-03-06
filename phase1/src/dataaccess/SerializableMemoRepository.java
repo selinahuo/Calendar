@@ -44,9 +44,9 @@ public class SerializableMemoRepository implements IMemoRepository {
     }
 
     /**
-     * Saves a tag.
+     * Saves a memo.
      *
-     * @param memo the tag to save
+     * @param memo the memo to save
      * @return true if event creation was successful, false otherwise
      */
     @Override
@@ -61,7 +61,7 @@ public class SerializableMemoRepository implements IMemoRepository {
      * Fetch a Memo by its name.
      *
      * @param memoName the name to filter by.
-     * @return the corresponding Tag or null if it does not exist
+     * @return the corresponding Memo or null if it does not exist
      */
     @Override
     public Memo fetchMemoByName(String memoName) {
@@ -90,11 +90,11 @@ public class SerializableMemoRepository implements IMemoRepository {
     }
 
     /**
-     * Fetch a Tag by its Name.
+     * Fetch a Memo by its Name.
      *
      * @param name   the name to filter by.
      * @param userID
-     * @return the corresponding Tag or null if it does not exist
+     * @return the corresponding memo or null if it does not exist
      */
     @Override
     public Memo fetchMemoByIDAndUserID(String name, String userID) {
