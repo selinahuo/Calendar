@@ -18,7 +18,6 @@ class SeriesManager implements ISeriesManager {
         this.eventManager = eventManager;
     }
 
-
     @Override
     public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {
         Series newSeries = new Series(UUID.randomUUID().toString(), seriesName, eventIDs.length, userID);
