@@ -21,7 +21,7 @@ public class CSVSeriesRepository implements ISeriesRepository {
      */
     @Override
     public boolean saveSeries(Series series) {
-        try{
+        try {
             FileWriter fw = new FileWriter(pathToCsv, true);
             String seriesID = series.getSeriesID();
             String seriesName = series.getName();
@@ -31,7 +31,7 @@ public class CSVSeriesRepository implements ISeriesRepository {
             fw.write(seriesInfo);
             fw.close();
         }
-        catch (IOException e){
+        catch (IOException e) {
             e.printStackTrace();
         }
         return true;
