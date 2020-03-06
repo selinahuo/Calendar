@@ -22,10 +22,10 @@ public interface IMemoRepository {
 
     /**
      * Fetch a Memo by its id.
-     * @param Memoid the name to filter by.
+     * @param memoid the name to filter by.
      * @return the corresponding Memo or null if it does not exist
      */
-    entities.Memo fetchMemoByMemoId(String Memoid);
+    entities.Memo fetchMemoByMemoId(String memoid);
 
     /**
      * Fetch a Memo that has an ID in the list of IDS with a matching name
