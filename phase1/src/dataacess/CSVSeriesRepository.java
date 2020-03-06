@@ -1,4 +1,4 @@
-package dataacess;
+package dataaccess;
 
 import entities.Series;
 import usecases.series.ISeriesRepository;
@@ -11,7 +11,7 @@ import java.io.IOException;
 public class CSVSeriesRepository implements ISeriesRepository {
 
     private static  String pathToCsv = "Series.csv";
-    private final static String cvsSplitBy = ";";
+    private final static String cvsSplitBy = ",";
 
     /**
      * Save a Series.
@@ -21,14 +21,13 @@ public class CSVSeriesRepository implements ISeriesRepository {
      */
     @Override
     public boolean saveSeries(Series series) {
-        System.out.println("user creating");
         try{
-            FileWriter fw = new FileWriter("Series.csv");
+            FileWriter fw = new FileWriter(pathToCsv, true);
             String seriesID = series.getSeriesID();
             String seriesName = series.getName();
             String seriesEventCount = String.valueOf(series.getEventCount());
-            String serisUserID = series.getUserID();
-            String seriesInfo = seriesID + seriesName + seriesEventCount + serisUserID;
+            String seriesUserID = series.getUserID();
+            String seriesInfo = seriesID + "," + seriesName + "," + seriesEventCount + "," + seriesUserID + "\n";
             fw.write(seriesInfo);
             fw.close();
         }
@@ -46,13 +45,9 @@ public class CSVSeriesRepository implements ISeriesRepository {
      */
     @Override
     public Series fetchSeriesByID(String seriesID) {
-
         String line = "";
-
         try (BufferedReader br = new BufferedReader(new FileReader(pathToCsv))) {
-
             while ((line = br.readLine()) != null) {
-
                 // use comma as separator
                 String[] event = line.split(cvsSplitBy);
                 if (event[0].equals(seriesID)){
@@ -61,7 +56,6 @@ public class CSVSeriesRepository implements ISeriesRepository {
                     return new Series(event[0], event[1], eventCount, event[3]);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,39 +69,21 @@ public class CSVSeriesRepository implements ISeriesRepository {
      * @param userID  returned Series must have an ID in this list
      * @return a Series fitting the name and ID criteria
      */
-
     @Override
     public Series fetchSeriesByNameAndUserID(String name, String userID) {
-
-
-        /**
-         * Fetch a Series that has an ID in the list of IDs and contains the eventID
-         *
-         * @param eventID eventID of a calendar event that is part of the matching series
-         * @param ids     returned Series must have an ID in this list
-         * @return a Series fitting the eventID and ID criteria
-         */
-
         String line = "";
-
         try (BufferedReader br = new BufferedReader(new FileReader(pathToCsv))) {
-
-
             while ((line = br.readLine()) != null) {
-
-                // use comma as separator
                 String[] event = line.split(cvsSplitBy);
-                if ((event[1].equals(name))& (event[3].equals(userID))){
+                if (event[1].equals(name) && event[3].equals(userID)) {
                     int eventCount = Integer.parseInt(event[2]);
                     br.close();
                     return new Series(event[0], event[1], eventCount, event[3]);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-
 }
