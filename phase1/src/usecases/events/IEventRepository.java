@@ -55,17 +55,44 @@ public interface IEventRepository {
      */
     CalendarEvent[] fetchEventsByDateAfterAndUserID(GregorianCalendar after, String userID);
 
-    // series
+    /**
+     * fetch all CalendarEvents that have matching series ID and user ID
+     * @param seriesID returned CalendarEvents must belong to the series
+     * @param userID returned CalendarEvents must belong to this user
+     * @return list of matching CalendarEvents
+     */
     CalendarEvent[] fetchEventBySeriesIDAndUserID(String seriesID, String userID);
+
+    /**
+     * update the Series ID of the CalendarEvent that have the matching ID
+     * @param eventID returned CalendarEvents must belong to the series
+     * @param newSeriesID new Series ID for the event
+     * @return True if successfully updated, false otherwise
+     */
     boolean editEventSeriesID(String eventID, String newSeriesID);
 
 
-    // notes
+    /**
+     * update the Series ID of the CalendarEvent that have the matching ID
+     * @param tagID returned CalendarEvents must belong to the tag
+     * @param userID returned CalendarEvents must belong to the tag
+     * @return list of matching CalenderEvents
+     */
     CalendarEvent[] fetchEventsByTagIDAndUserID(String tagID, String userID);
-    CalendarEvent[] fetchEventsByMemoIDAndUserID(String memoID, String userID);
-    //edit
 
-    // get event by alertID (and userID)
+    /**
+     * update the Series ID of the CalendarEvent that have the matching ID
+     * @param memoID returned CalendarEvents must belong to the memo
+     * @param userID returned CalendarEvents must belong to the tag
+     * @return list of matching CalenderEvents
+     */
+    CalendarEvent[] fetchEventsByMemoIDAndUserID(String memoID, String userID);
+
+    /**
+     * update the Series ID of the CalendarEvent that have the matching ID
+     * @param alertID returned CalendarEvents must belong to the alert
+     * @param userID returned CalendarEvents must belong to the tag
+     * @return list of matching CalenderEvents
+     */
     CalendarEvent fetchEventByAlertIDAndUserID(String alertID, String userID);
-    // edit event's alertID
 }

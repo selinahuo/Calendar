@@ -35,6 +35,46 @@ public class CalendarEvent {
         this.alertID = alertID;
     }
 
+    public void setEventID(String eventID) {
+        this.eventID = eventID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStart(GregorianCalendar start) {
+        this.start = start;
+    }
+
+    public void setEnd(GregorianCalendar end) {
+        this.end = end;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setTagIDs(ArrayList<String> tagIDs) {
+        this.tagIDs = tagIDs;
+    }
+
+    public void setMemoIDs(ArrayList<String> memoIDs) {
+        this.memoIDs = memoIDs;
+    }
+
+    public void setSeriesID(String seriesID) {
+        this.seriesID = seriesID;
+    }
+
+    public void setAlertID(String alertID) {
+        this.alertID = alertID;
+    }
+
     public String getEventID() {
         return eventID;
     }
