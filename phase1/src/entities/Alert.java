@@ -9,12 +9,14 @@ public abstract class Alert {
     private String alertID;
     private String alertName;
     Boolean acknowledged;
+    String userID;
 
 
-    public Alert(String alertID, String alertName) {
+    public Alert(String alertID, String alertName, String userID) {
         this.alertID = alertID;
         this.alertName = alertName;
         this.acknowledged = false;
+        this.userID = userID;
     }
 
     public String getAlertID() {

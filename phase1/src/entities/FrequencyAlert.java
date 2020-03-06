@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class FrequencyAlert extends Alert{
     private HashMap<GregorianCalendar, Boolean> times = new HashMap<GregorianCalendar, Boolean>();
 
-    public FrequencyAlert(String alertID, String alertName, GregorianCalendar[] frequency){
-        super(alertID, alertName);
+    public FrequencyAlert(String alertID, String alertName, GregorianCalendar[] frequency, String userID){
+        super(alertID, alertName, userID);
         for (GregorianCalendar time: frequency) {
             times.put(time, false);
         }
