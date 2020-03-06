@@ -1,17 +1,17 @@
 package dataacess;
 
-import entities.Series;
 import entities.User;
 import usecases.users.IUserRepository;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
 
 public class CSVUserRepository implements IUserRepository {
+    private static String pathToCsv = "User.csv";
+    private final static String cvsSplitBy = ",";
 
-    private static  String pathToCsv = "Series.csv";
-    private final static String cvsSplitBy = ";";
     /**
      * Save a User.
      *
@@ -20,8 +20,19 @@ public class CSVUserRepository implements IUserRepository {
      */
     @Override
     public boolean saveUser(User user) {
-        System.out.println("user creating");
-        return false;
+        try{
+            FileWriter fw = new FileWriter("User.csv", true);
+            String userID = user.getUserID();
+            String userName = user.getUsername();
+            String userPassword = user.getPassword();
+            String userInfo = userID + "," + userName + "," + userPassword + "\n";
+            fw.write(userInfo);
+            fw.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return true;
     }
 
     /**
@@ -33,18 +44,14 @@ public class CSVUserRepository implements IUserRepository {
     @Override
     public User fetchUserByID(String userID) {
         String line = "";
-
         try (BufferedReader br = new BufferedReader(new FileReader(pathToCsv))) {
-
             while ((line = br.readLine()) != null) {
-
-                // use comma as separator
                 String[] event = line.split(cvsSplitBy);
                 if (event[0].equals(userID)){
+                    br.close();
                     return new User(event[0], event[1], event[2]);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,18 +67,14 @@ public class CSVUserRepository implements IUserRepository {
     @Override
     public User fetchUserByUsername(String username) {
         String line = "";
-
         try (BufferedReader br = new BufferedReader(new FileReader(pathToCsv))) {
-
             while ((line = br.readLine()) != null) {
-
-                // use comma as separator
                 String[] event = line.split(cvsSplitBy);
                 if (event[1].equals(username)){
+                    br.close();
                     return new User(event[0], event[1], event[2]);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
