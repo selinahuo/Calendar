@@ -1,4 +1,4 @@
-package dataacess;
+package dataaccess;
 
 import entities.User;
 import usecases.users.IUserRepository;

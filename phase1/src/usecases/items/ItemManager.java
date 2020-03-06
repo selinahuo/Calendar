@@ -6,13 +6,17 @@ import entities.Tag;
 import entities.Memo;
 import usecases.events.IEventManager;
 
+import java.util.UUID;
+
 
 class ItemManager implements IItemManager {
-    private IItemRepository repository;
+    private IMemoRepository memoRepository;
+    private ITagRepository tagRepository;
     private IEventManager eventManager;
 
-    ItemManager(IItemRepository repository, IEventManager eventManager) {
-        this.repository = repository;
+    ItemManager(IMemoRepository memoRepository, ITagRepository tagRepository, IEventManager eventManager) {
+        this.memoRepository = memoRepository;
+        this.tagRepository = tagRepository;
         this.eventManager = eventManager;
     }
 
@@ -26,7 +30,7 @@ class ItemManager implements IItemManager {
     @Override
     public boolean createMemo(String name, String note, String id) {
         Memo memo = new Memo(name, note, id);
-        this.repository.saveMemo(memo);
+        this.memoRepository.saveMemo(memo);
         return true;
     }
 
@@ -37,10 +41,9 @@ class ItemManager implements IItemManager {
      * @return true if event creation was successful, false otherwise
      */
     @Override
-    public boolean createTag(String name, String id) {
-        Tag tag = new Tag(name, id);
-        this.repository.saveTag(tag);
-        return true;
+    public boolean createTag(String name, int count, String userID) {
+        Tag tag = new Tag(UUID.randomUUID().toString(), name, count, userID);
+        return this.tagRepository.saveTag(tag);
     }
 
     /**
@@ -49,7 +52,7 @@ class ItemManager implements IItemManager {
      * @return the corresponding Memo or null if it does not exist
      */
     @Override
-    public Memo getMemoByName(String name) {return this.repository.fetchMemoByName(name); }
+    public Memo getMemoByName(String name) {return this.memoRepository.fetchMemoByName(name); }
 
     /**
      * Get a Memo by its id.
@@ -57,17 +60,7 @@ class ItemManager implements IItemManager {
      * @return the corresponding Memo or null if it does not exist
      */
     @Override
-    public Memo getMemoById(String id) {return this.repository.fetchMemoById(id);}
-
-    /**
-     * Get a Tag by its name.
-     * @param name the name to filter by.
-     * @return the corresponding Tag or null if it does not exist
-     */
-    @Override
-    public Tag getTagByName(String name) {
-        return this.repository.fetchTagByName(name);
-    }
+    public Memo getMemoById(String id) {return this.memoRepository.fetchMemoById(id);}
 
     /**
      * Get a Tag by its id.
@@ -75,20 +68,20 @@ class ItemManager implements IItemManager {
      * @return the corresponding Tag or null if it does not exist
      */
     @Override
-    public Tag getTagById(String id) {return this.repository.fetchTagById(id);}
+    public Tag getTagById(String id) {return this.tagRepository.fetchTagByID(id);}
 
     @Override
-    public CalendarEvent[] getEventsByTagIDAndUserID(String tagID, String userID) {
-        Tag tag = this.repository.fetchTagByIDAndUserID(tagID, userID);
+    public CalendarEvent[] getEventsByTagNameAndUserID(String tagName, String userID) {
+        Tag tag = this.tagRepository.fetchTagByNameAndUserID(tagName, userID);
         if (tag == null) {
             return new CalendarEvent[0];
         }
-        return this.eventManager.getEventsBySeriesIDAndUserID(tagID, userID);
+        return this.eventManager.getEventsBySeriesIDAndUserID(tag.getTagID(), userID);
     }
 
     @Override
     public CalendarEvent[] getEventsByMemoIDAndUserID(String memoID, String userID) {
-        Memo memo = this.repository.fetchMemoByIDAndUserID(memoID, userID);
+        Memo memo = this.memoRepository.fetchMemoByIDAndUserID(memoID, userID);
         if (memo == null) {
             return new CalendarEvent[0];
         }
