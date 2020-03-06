@@ -1,14 +1,17 @@
 package usecases.alerts;
 
 import entities.Alert;
+import usecases.events.IEventManager;
 
 import java.util.GregorianCalendar;
 
 class AlertManager implements IAlertManager {
     private IAlertRepository repository;
+    private IAlertManager alertManager;
 
-    public AlertManager(IAlertRepository repository){
+    public AlertManager(IAlertRepository repository, IAlertManager alertManager){
         this.repository = repository;
+        this.alertManager = alertManager;
     }
 
     /**

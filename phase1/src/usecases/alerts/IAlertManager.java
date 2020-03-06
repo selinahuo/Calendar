@@ -1,9 +1,6 @@
 package usecases.alerts;
 
 import entities.Alert;
-import entities.Memo;
-import entities.Series;
-import entities.User;
 
 import java.util.GregorianCalendar;
 
