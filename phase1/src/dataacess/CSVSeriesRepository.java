@@ -21,7 +21,7 @@ public class CSVSeriesRepository implements ISeriesRepository {
      */
     @Override
     public boolean saveSeries(Series series) {
-        System.out.println("user creating");
+        System.out.println("series creating");
         try{
             FileWriter fw = new FileWriter("Series.csv");
             String seriesID = series.getSeriesID();
