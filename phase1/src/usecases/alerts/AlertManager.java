@@ -52,15 +52,14 @@ class AlertManager implements IAlertManager {
 
     @Override
     public boolean createFrequencylAlertByEvent(String alertID, String alertName,  GregorianCalendar end, String eventId) {
-        // single event
+        // this alert is attached to a single event
         if (this.eventManager.getEventByID(eventId).getSeriesID() == null) {
             GregorianCalendar alertTime = this.eventManager.getEventByID(eventId).getStart();
             GregorianCalendar[] frequency = {alertTime};
             Alert alert = new FrequencyAlert(alertID,alertName,alertTime,end, frequency );
             this.alertRepository.saveAlert(alert);
-            return true;
         }
-        // multiple events i.e. study sessions everyday
+        // i.e. this alert will notify user at the start of a series of events, i.e. every math lecture.
         else {
             String seriesID = this.eventManager.getEventByID(eventId).getSeriesID();
             String userID = this.eventManager.getEventByID(eventId).getUserID();
@@ -71,8 +70,8 @@ class AlertManager implements IAlertManager {
             }
             Alert alert = new FrequencyAlert(alertID, alertName, frequency[0], end, frequency );
             this.alertRepository.saveAlert(alert);
-            return true;
         }
+        return true;
     }
 
 //    /**
