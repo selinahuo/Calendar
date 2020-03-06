@@ -21,15 +21,16 @@ class ItemManager implements IItemManager {
     }
 
     /**
-     * Create a Memo.
-     * @param name the name of the memo
-     * @param note the note which the memo contains
-     * @param id the unique id of the memo
-     * @return true if event creation was successful, false otherwise
+     *
+     * @param name
+     * @param note
+     * @param memoid
+     * @param userid
+     * @return
      */
     @Override
-    public boolean createMemo(String name, String note, String id) {
-        Memo memo = new Memo(name, note, id);
+    public boolean createMemo(String name, String note, String memoid, String userid) {
+        Memo memo = new Memo(name, note, memoid, userid);
         this.memoRepository.saveMemo(memo);
         return true;
     }
@@ -37,7 +38,7 @@ class ItemManager implements IItemManager {
     /**
      * Create a Tag.
      * @param name the Tag to create
-     * @param id the unique id of this tag
+     * @param useID the unique id of this tag
      * @return true if event creation was successful, false otherwise
      */
     @Override
@@ -60,7 +61,7 @@ class ItemManager implements IItemManager {
      * @return the corresponding Memo or null if it does not exist
      */
     @Override
-    public Memo getMemoById(String id) {return this.memoRepository.fetchMemoById(id);}
+    public Memo getMemoById(String id) {return this.memoRepository.fetchMemoByMemoId(id);}
 
     /**
      * Get a Tag by its id.

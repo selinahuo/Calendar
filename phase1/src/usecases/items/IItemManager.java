@@ -9,18 +9,19 @@ import java.util.ArrayList;
 
 public interface IItemManager {
     /**
-     * Create a Memo.
-     * @param name the name of the memo
-     * @param note the note which the memo contains
-     * @param id the unique id of the memo
-     * @return true if event creation was successful, false otherwise
+     *
+     * @param name
+     * @param note
+     * @param memoid
+     * @param userid
+     * @return
      */
-    boolean createMemo(String name, String note, String id);
+    boolean createMemo(String name, String note, String memoid, String userid);
 
     /**
      * Create a Tag.
      * @param name the Tag to create
-     * @param id the unique id of this tag
+     * @param userID the unique id of this tag
      * @return true if event creation was successful, false otherwise
      */
     boolean createTag(String name, int count, String userID);
