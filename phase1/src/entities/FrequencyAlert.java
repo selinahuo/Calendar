@@ -11,4 +11,11 @@ public class FrequencyAlert extends Alert{
         this.frequency = frequency;
     }
 
+    public GregorianCalendar[] getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(GregorianCalendar[] frequency) {
+        this.frequency = frequency;
+    }
 }

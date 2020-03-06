@@ -14,15 +14,15 @@ public interface IAlertRepository {
      */
     boolean saveAlert(Alert alert);
 
-    /**
-     * Edit a Alert.
-     * @param id the ID of the alert to edit
-     * @param name the new name of the alert
-     * @param start the new start time of the alert
-     * @param end the new end time of the alert
-     * @return true if series edit was successful,
-     */
-    boolean editAlert(String id, String name, GregorianCalendar start, GregorianCalendar end);
+//    /**
+//     * Edit a Alert.
+//     * @param id the ID of the alert to edit
+//     * @param name the new name of the alert
+//     * @param start the new start time of the alert
+//     * @param end the new end time of the alert
+//     * @return true if series edit was successful,
+//     */
+//    boolean editAlert(String id, String name, GregorianCalendar start, GregorianCalendar end);
 
 
     /**
@@ -35,9 +35,10 @@ public interface IAlertRepository {
     /**
      * Fetch a Alert by its Name.
      * @param name the name to filter by.
+     * @param userID involves in this alert
      * @return the corresponding alert or null if it does not exist
      */
-    entities.Alert fetchAlertByName(String name);
+    Alert fetchAlertByNameAndUserID(String name, String userID);
 
 
 

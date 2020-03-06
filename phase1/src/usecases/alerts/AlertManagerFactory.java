@@ -7,11 +7,11 @@ package usecases.alerts;
  */
 public class AlertManagerFactory {
     /**
-     * Builds a new AlertManager instance using an injected AlerttRepository implementation.
+     * Builds a new AlertManager instance using an injected AlertRepository implementation.
      * @param repository the injected AlertRepositoryImplementation
      * @return the new AlertManager instance
      */
-    public static IAlertManager build(IAlertRepository repository) {
-        return new AlertManager(repository);
+    public static IAlertManager build(IAlertRepository repository, IAlertManager alertManager) {
+        return new AlertManager(repository, alertManager);
     }
 }
