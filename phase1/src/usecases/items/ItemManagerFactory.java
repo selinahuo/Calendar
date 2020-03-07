@@ -1,15 +1,12 @@
 package usecases.items;
 
+import usecases.events.IEventManager;
+
 /**
  * EventManagerFactory which instantiates EventManagers
  */
 public class ItemManagerFactory {
-    /**
-     * Builds a new EventManager instance using an injected EventRepository implementation.
-     * @param repository the injected EventRepositoryImplementation
-     * @return the new EventManager instance
-     */
-    public static IItemManager build(IMemoRepository repository) {
-        return new ItemManager(repository);
+    public static IItemManager build(IMemoRepository memoRepository, ITagRepository tagRepository, IEventManager em) {
+        return new ItemManager(memoRepository, tagRepository, em);
     }
 }
