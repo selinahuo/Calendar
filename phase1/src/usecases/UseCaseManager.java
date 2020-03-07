@@ -5,6 +5,7 @@ import entities.CalendarEvent;
 import entities.Memo;
 import usecases.alerts.IAlertManager;
 import usecases.events.IEventManager;
+import usecases.notes.INoteManager;
 import usecases.series.ISeriesManager;
 import usecases.users.IUserManager;
 
@@ -15,7 +16,7 @@ class UseCaseManager implements IUseCaseManager {
     private IUserManager userManager;
     private IAlertManager alertManager;
     private ISeriesManager seriesManager;
-    //    private ITagManager tagManager;
+    private INoteManager noteManager;
 
     @Override
     public String loginUser(String username, String password) {
@@ -52,10 +53,10 @@ class UseCaseManager implements IUseCaseManager {
         return new CalendarEvent[0];
     }
 
-    @Override
-    public CalendarEvent[] getEventByDate(GregorianCalendar date, String userID) {
-        return new CalendarEvent[0];
-    }
+//    @Override
+//    public CalendarEvent[] getEventByDate(GregorianCalendar date, String userID) {
+//        return this.eventManager.getEventsByDateAndUserID();
+//    }
 
     @Override
     public Alert[] getOverdueAlerts(String userID) {
@@ -84,46 +85,46 @@ class UseCaseManager implements IUseCaseManager {
 
     @Override
     public boolean createSeriesFromEvents(String[] eventIDs, String seriesName, String userID) {
-        return false;
+        return this.seriesManager.createSeriesByCombiningEvents(seriesName, eventIDs, userID);
     }
 
     @Override
     public boolean createSeriesFromEventFormula(String seriesName, GregorianCalendar start, GregorianCalendar end, String frequency, int numEvents, String userID) {
-        return false;
+        return this.seriesManager.createSeriesFromEventFormula(seriesName, start, end, frequency, numEvents, userID);
     }
 
     @Override
     public CalendarEvent[] getEventsBySeriesName(String seriesName, String userID) {
-        return new CalendarEvent[0];
+        return this.seriesManager.getEventsBySeriesNameAndUserID(seriesName, userID);
     }
 
     @Override
     public Memo[] getMemos(String userID) {
-        return new Memo[0];
+        return this.noteManager.getMemosByUserID(userID);
     }
 
     @Override
-    public CalendarEvent[] getEventsByMemoID(String memoID, String UserID) {
-        return new CalendarEvent[0];
+    public CalendarEvent[] getEventsByMemoID(String memoID, String userID) {
+        return this.noteManager.getEventsByMemoIDAndUserID(memoID, userID);
     }
 
     @Override
     public CalendarEvent[] getEventsByTagName(String tagName, String userID) {
-        return new CalendarEvent[0];
+        return this.noteManager.getEventsByTagNameAndUserID(tagName, userID);
     }
 
     @Override
-    public boolean createMemo(String userID) {
-        return false;
+    public boolean createMemo(String name, String note, String userID) {
+        return this.noteManager.createMemo(name, note, userID);
     }
 
     @Override
-    public boolean attachMemoToEvents(String memoID, String[] eventIDs, String userID) {
-        return false;
+    public boolean attachMemoToEvent(String memoID, String eventID, String userID) {
+        return this.noteManager.attachMemoToEvent(memoID, eventID, userID);
     }
 
     @Override
     public boolean tagEvent(String eventID, String tagName, String userID) {
-        return false;
+        return this.noteManager.tagEvent(eventID, tagName, userID);
     }
 }

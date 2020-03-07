@@ -2,6 +2,7 @@ package usecases.events;
 
 import entities.CalendarEvent;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 class EventManager implements IEventManager {
@@ -62,8 +63,18 @@ class EventManager implements IEventManager {
     }
 
     @Override
+    public boolean setEventTagIDs(ArrayList<String> tagIDs, String eventID, String userID) {
+        return this.repository.setEventTagIDs(tagIDs, eventID, userID);
+    }
+
+    @Override
     public CalendarEvent[] getEventsByMemoIDAndUserID(String memoID, String userID) {
         return this.repository.fetchEventsByMemoIDAndUserID(memoID, userID);
+    }
+
+    @Override
+    public boolean setEventMemoIDs(ArrayList<String> memoIDs, String eventID, String userID) {
+        return this.repository.setEventMemoIDs(memoIDs, eventID, userID);
     }
 
     @Override

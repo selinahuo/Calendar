@@ -5,6 +5,7 @@ import usecases.events.IEventRepository;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class SerializableEventRepository implements IEventRepository {
 
     private void serialize() {
         try {
-            FileOutputStream fos = new FileOutputStream("calenderEvents");
+            FileOutputStream fos = new FileOutputStream("events.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.calendarEvents);
             oos.close();
@@ -30,7 +31,7 @@ public class SerializableEventRepository implements IEventRepository {
 
     private void deserialize() {
         try {
-            FileInputStream fis = new FileInputStream("calenderEvents");
+            FileInputStream fis = new FileInputStream("events.ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
             this.calendarEvents = (ArrayList<CalendarEvent>) ois.readObject();
             ois.close();
@@ -216,6 +217,18 @@ public class SerializableEventRepository implements IEventRepository {
         return arr_events;
     }
 
+    @Override
+    public boolean setEventTagIDs(ArrayList<String> tagIDs, String eventID, String userID) {
+        deserialize();
+        CalendarEvent eventToEdit = this.fetchEventByID(eventID);
+        if (eventToEdit == null || !eventToEdit.getUserID().equals(userID)) {
+            return false;
+        }
+        eventToEdit.setTagIDs(tagIDs);
+        serialize();
+        return true;
+    }
+
     /**
      * update the Series ID of the CalendarEvent that have the matching ID
      * @param memoID returned CalendarEvents must belong to the memo
@@ -234,6 +247,18 @@ public class SerializableEventRepository implements IEventRepository {
         CalendarEvent[] arr_events = new CalendarEvent[events.size()];
         arr_events = events.toArray(arr_events);
         return arr_events;
+    }
+
+    @Override
+    public boolean setEventMemoIDs(ArrayList<String> memoIDs, String eventID, String userID) {
+        deserialize();
+        CalendarEvent eventToEdit = this.fetchEventByID(eventID);
+        if (eventToEdit == null || !eventToEdit.getUserID().equals(userID)) {
+            return false;
+        }
+        eventToEdit.setMemoIDs(memoIDs);
+        serialize();
+        return true;
     }
 
     /**

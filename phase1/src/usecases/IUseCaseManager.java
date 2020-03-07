@@ -30,7 +30,7 @@ public interface IUseCaseManager {
     // get user's future events
     CalendarEvent[] getFutureEvents(String userID);
     // get event that start on date
-    CalendarEvent[] getEventByDate(GregorianCalendar date, String userID);
+//    CalendarEvent[] getEventByDate(GregorianCalendar date, String userID);
 
     // === ALERTS === //
 
@@ -58,16 +58,15 @@ public interface IUseCaseManager {
     // === NOTES === //
 
     // get a user's memos
-    Memo[] getMemos(String userID);
+    Memo[] getMemos(String userID); // DONE
     // get a user's event from list of memos
     CalendarEvent[] getEventsByMemoID(String memoID, String UserID);
     // get a user's event by tag name
     CalendarEvent[] getEventsByTagName(String tagName, String userID);
 
     // create a memo
-    // TODO: add additional parameters (name, content, etc.)
-    boolean createMemo(String userID);
-    boolean attachMemoToEvents(String memoID, String[] eventIDs, String userID);
+    boolean createMemo(String name, String note, String userID);
+    boolean attachMemoToEvent(String memoID, String eventID, String userID);
     // create a tag
     // TODO: this would check if a tag with the name exists if not create a new one. Tag the event with the appropriate ID
     boolean tagEvent(String eventID, String tagName, String userID);

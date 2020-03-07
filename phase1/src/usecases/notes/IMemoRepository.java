@@ -1,4 +1,4 @@
-package usecases.items;
+package usecases.notes;
 
 import entities.Memo;
 
@@ -18,14 +18,14 @@ public interface IMemoRepository {
      * @param name the name to filter by.
      * @return the corresponding Memo or null if it does not exist
      */
-    entities.Memo fetchMemoByName(String name);
+    Memo fetchMemoByName(String name);
 
     /**
      * Fetch a Memo by its id.
-     * @param memoid the name to filter by.
+     * @param memoID the name to filter by.
      * @return the corresponding Memo or null if it does not exist
      */
-    entities.Memo fetchMemoByMemoId(String memoid);
+    Memo fetchMemoByMemoId(String memoID);
 
     /**
      * Fetch a Memo that has an ID in the list of IDS with a matching name
@@ -33,5 +33,7 @@ public interface IMemoRepository {
      * @param userID returned Series must have an ID in this list
      * @return a Memo fitting the name and ID criteria
      */
-    entities.Memo fetchMemoByIDAndUserID(String memoID, String userID);
+    Memo fetchMemoByIDAndUserID(String memoID, String userID);
+
+    Memo[] fetchMemosByUserID(String userID);
 }

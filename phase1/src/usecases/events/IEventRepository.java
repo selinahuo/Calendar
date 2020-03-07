@@ -2,6 +2,7 @@ package usecases.events;
 
 import entities.CalendarEvent;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
@@ -79,6 +80,7 @@ public interface IEventRepository {
      * @return list of matching CalenderEvents
      */
     CalendarEvent[] fetchEventsByTagIDAndUserID(String tagID, String userID);
+    boolean setEventTagIDs(ArrayList<String> tagIDs, String eventID, String userID);
 
     /**
      * update the Series ID of the CalendarEvent that have the matching ID
@@ -87,6 +89,8 @@ public interface IEventRepository {
      * @return list of matching CalenderEvents
      */
     CalendarEvent[] fetchEventsByMemoIDAndUserID(String memoID, String userID);
+
+    boolean setEventMemoIDs(ArrayList<String> memoIDs, String eventID, String userID);
 
     /**
      * update the Series ID of the CalendarEvent that have the matching ID
