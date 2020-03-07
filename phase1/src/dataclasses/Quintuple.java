@@ -1,4 +1,4 @@
-package DataClasses;
+package dataclasses;
 
 public class Quintuple<T, U, V, W, X> {
     private T first;

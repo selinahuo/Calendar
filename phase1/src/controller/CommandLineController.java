@@ -1,6 +1,6 @@
 package controller;
 
-import DataClasses.Quintuple;
+import dataclasses.Quintuple;
 import controller.viewmodels.ListModel;
 import controller.viewmodels.SingularEventModel;
 import entities.*;

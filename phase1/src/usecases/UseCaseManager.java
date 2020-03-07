@@ -1,9 +1,7 @@
 package usecases;
 
-import DataClasses.Quintuple;
+import dataclasses.Quintuple;
 import entities.*;
-import javafx.util.Pair;
-import sun.util.calendar.Gregorian;
 import usecases.alerts.IAlertManager;
 import usecases.events.IEventManager;
 import usecases.notes.INoteManager;
