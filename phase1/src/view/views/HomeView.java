@@ -1,13 +1,13 @@
 package view.views;
 
 import controller.CommandLineController;
-import controller.viewmodels.AuthenticatedModel;
+import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 
 import java.util.Scanner;
 
-public class HomeView extends AuthenticatedView {
-    public HomeView(LocalStorage localStorage, AuthenticatedModel model, CommandLineController controller) {
+public class HomeView extends View {
+    public HomeView(LocalStorage localStorage, ViewModel model, CommandLineController controller) {
         super(localStorage, model, controller);
     }
 

@@ -68,6 +68,5 @@ public interface IUseCaseManager {
     boolean createMemo(String name, String note, String userID);
     boolean attachMemoToEvent(String memoID, String eventID, String userID);
     // create a tag
-    // TODO: this would check if a tag with the name exists if not create a new one. Tag the event with the appropriate ID
     boolean tagEvent(String eventID, String tagName, String userID);
 }
