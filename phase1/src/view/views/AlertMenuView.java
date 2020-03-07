@@ -14,25 +14,42 @@ public class AlertMenuView extends View {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
+        System.out.println("[1] Get Overdue Alert");
+        System.out.println("[2] Get Individual Alert");
+        System.out.println("[3] Create a new alert");
+        System.out.println("[4] Acknowledge Alert");
         System.out.println("[~] Go Home");
     }
 
     @Override
     public View run() {
-        printTitle("Alert List");
+        super.printTitle("Alert Menu");
         Scanner input = new Scanner(System.in);
-
-        System.out.println("");
-
         while (true) {
             inputPrompt();
             String selection = input.nextLine();
             switch(selection) {
+                case "1":
+                    return null;
+                case "2":
+                    return null;
+                case "3":
+                    return new CreateAlertView(getLocalStorage(), getModel(), getController());
                 case "~":
-                    return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
+                    return null;
                 default:
                     super.printInputError();
             }
         }
     }
+
+    // getOverdueAlerts
+    //getIndividualAlert
+    //createIndividualAlertOnEvent
+    //createFrequencyAlertOnEvent
+    //acknowledgeAlert
+
+
+
+
 }
