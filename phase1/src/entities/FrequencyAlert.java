@@ -28,6 +28,10 @@ public class FrequencyAlert extends Alert{
         return this.times;
     }
 
+    public void setTimes(ArrayList<GregorianCalendar> frequency){
+        this.times = frequency;
+    }
+
     public List<Boolean> getAcknowledge(){
         return this.acknowledge;
     }

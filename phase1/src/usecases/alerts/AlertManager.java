@@ -121,44 +121,43 @@ class AlertManager implements IAlertManager {
         if (alert.getAcknowledge().get(alert.getAcknowledge().size() - 1)) {
             alert.setAcknowledged();
         }
+        this.alertRepository.acknowledgeAlert(alertID,userID);
+    }
+
+
+    // TODO implement this method
+
+    /**
+     *
+     * @param date
+     * @param userID
+     * @return
+     */
+    public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID){}
+
+
+        /**
+     *
+     * @param alertID
+     * @param name
+     * @param newStart
+     * @return
+     */
+    @Override
+    public boolean editIndividualAlert(String alertID, String name, GregorianCalendar newStart){
+        IndividualAlert alert = getIndividualAlertByID(alertID);
+        alert.setAlertName(name);
+        alert.setStartTime(newStart);
+        return true;
     }
 
     @Override
-    public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID){
-        //TODO
-
+    public boolean editFrequencyAlerts(String alertID, String name,ArrayList<GregorianCalendar> frequency){
+        FrequencyAlert alert = getFrequencyAlertByID(alertID);
+        alert.setAlertName(name);
+        alert.setTimes(frequency);
+        return true;
     }
-
-
-
-
-//    /**
-//     * Edit a alert with matching ID
-//     * @param alertID ID of the alert to edit
-//     * @param name new name of the alert
-//     * @param newStart new start time of the series
-//     * @param newEnd new end time of the series
-//     * @return true if alerts edit was successful, false otherwise
-//     */
-//    @Override
-//    public boolean editAlerts(String alertID, String name, GregorianCalendar newStart, GregorianCalendar newEnd){
-//        return false;
-//    }
-
-//    /**
-//     * Edit a alert with matching ID
-//     * @param alertID ID of the alert to edit
-//     * @param name new name of the alert
-//     * @param newStart new start time of the alert
-//     * @param newEnd new end time of the alert
-//     * @param newFrequency new frequency of the alert
-//     * @return true if alerts edit was successful, false otherwise
-//     */
-//    @Override
-//    public boolean editFrequencyAlerts(String alertID, String name, GregorianCalendar newStart, GregorianCalendar newEnd,
-//                                GregorianCalendar[] newFrequency){
-//        return false;
-//    }
 
     /**
      * Get all Alerts that have an ID in a list of IDs
@@ -190,6 +189,12 @@ class AlertManager implements IAlertManager {
        return this.eventManager.getEventByAlertIDAndUserID(alert.getAlertID(), userID);
     }
 
+    public IndividualAlert getIndividualAlertByID(String alertID){
+        return this.alertRepository.fetchIndividualAlertByID(alertID);
+    }
 
+    public FrequencyAlert getFrequencyAlertByID(String alertID){
+        return this.alertRepository.fetchFrequencyAlertByID(alertID);
+    }
 
 }

@@ -1,5 +1,7 @@
 package usecases.alerts;
 import entities.Alert;
+import entities.FrequencyAlert;
+import entities.IndividualAlert;
 
 import java.util.GregorianCalendar;
 
@@ -54,6 +56,9 @@ public interface IAlertRepository {
      * @return
      */
     Alert fetchAlertByIDAndUserID(String alertID, String userID);
+
+    IndividualAlert fetchIndividualAlertByID(String alertID);
+    FrequencyAlert fetchFrequencyAlertByID(String alertID);
 
 
 

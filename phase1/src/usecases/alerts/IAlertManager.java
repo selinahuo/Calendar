@@ -31,27 +31,10 @@ public interface IAlertManager {
 
     public boolean createFrequencyAlertOnEvent(String eventID, String name, GregorianCalendar first, String userID);
 
-//    /**
-//     * Edit a alert with matching ID
-//     * @param alertID ID of the alert to edit
-//     * @param name new name of the alert
-//     * @param newStart new start time of the series
-//     * @param newEnd new end time of the series
-//     * @return true if alerts edit was successful, false otherwise
-//     */
-//    boolean editAlerts(String alertID, String name, GregorianCalendar newStart, GregorianCalendar newEnd);
-//
-//    /**
-//     * Edit a alert with matching ID
-//     * @param alertID ID of the alert to edit
-//     * @param name new name of the alert
-//     * @param newStart new start time of the alert
-//     * @param newEnd new end time of the alert
-//     * @param newFrequency new frequency of the alert
-//     * @return true if alerts edit was successful, false otherwise
-//     */
-//    boolean editFrequencyAlerts(String alertID, String name, GregorianCalendar newStart, GregorianCalendar newEnd,
-//                                GregorianCalendar[] newFrequency);
+    public boolean  editFrequencyAlerts(String alertID, String name,ArrayList<GregorianCalendar> frequency);
+
+
+    public boolean  editIndividualAlert(String alertID, String name, GregorianCalendar newStart);
 
     public void acknowledgeIndividualAlert(String alertID, String userID);
     public void acknowledgeFrequencyAlert(String alertID, String userID);

@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class IndividualAlert extends Alert {
 
@@ -11,6 +12,9 @@ public class IndividualAlert extends Alert {
         this.startTime = startTime;
     }
 
+    public void setStartTime(GregorianCalendar startTime) {
+        this.startTime = startTime;
+    }
 
     @Override
     public GregorianCalendar getNextRing() {
@@ -20,6 +24,15 @@ public class IndividualAlert extends Alert {
        return null;
     }
 
+    @Override
+    public List<GregorianCalendar> getTimes() {
+        return null;
+    }
+
+    @Override
+    public List<Boolean> getAcknowledge() {
+        return null;
+    }
 
 
 }

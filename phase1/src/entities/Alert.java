@@ -36,4 +36,8 @@ public abstract class Alert {
     public abstract GregorianCalendar getNextRing();
     public abstract List<GregorianCalendar> getTimes();
     public abstract List<Boolean> getAcknowledge();
+
+    public void setAlertName(String newName) {
+        this.alertName = newName;
+    }
 }
