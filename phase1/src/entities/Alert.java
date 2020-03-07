@@ -2,7 +2,7 @@ package entities;
 import java.util.*;
 
 /**
- * Class representing a Calendar Alert
+ * Class representing  a Calendar Alert
  */
 public class Alert {
     private String alertID;
