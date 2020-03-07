@@ -1,6 +1,7 @@
 package view.views;
 
 import controller.CommandLineController;
+import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 
@@ -30,7 +31,7 @@ public class HomeView extends View {
                 case "1":
                     return new EventMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "2":
-                    return null;
+                    return new AlertMenuView(super.getLocalStorage(), (ListModel) super.getModel(), super.getController());
                 case "3":
                     System.out.println("Series");
                     break;
