@@ -148,7 +148,7 @@ class AlertManager implements IAlertManager {
         IndividualAlert alert = getIndividualAlertByID(alertID);
         alert.setAlertName(name);
         alert.setStartTime(newStart);
-        return true;
+        return this.alertRepository.editIndividualAlert(alertID, name, newStart);
     }
 
     @Override
@@ -156,7 +156,7 @@ class AlertManager implements IAlertManager {
         FrequencyAlert alert = getFrequencyAlertByID(alertID);
         alert.setAlertName(name);
         alert.setTimes(frequency);
-        return true;
+        return this.alertRepository.editFrequencyAlerts(alertID, name, frequency);
     }
 
     /**

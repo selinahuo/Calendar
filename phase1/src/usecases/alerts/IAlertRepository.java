@@ -3,6 +3,7 @@ import entities.Alert;
 import entities.FrequencyAlert;
 import entities.IndividualAlert;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
@@ -23,7 +24,8 @@ public interface IAlertRepository {
      * @param UserID
      * @return
      */
-    boolean editAlert(String ID, String name, String UserID);
+    boolean editIndividualAlert(String alertID, String name, GregorianCalendar newStart);
+    boolean editFrequencyAlerts(String alertID, String name, ArrayList<GregorianCalendar> frequency);
 
     /**
      * switch the acknowledged to false
