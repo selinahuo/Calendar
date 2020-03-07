@@ -23,7 +23,13 @@ public interface IAlertRepository {
      */
     boolean editAlert(String ID, String name, String UserID);
 
-    Alert acknowledgeAlert(String ID, String UserID);
+    /**
+     * switch the acknowledged to false
+     * @param ID
+     * @param UserID
+     * @return true if acknowledge alert was successful, false otherwise
+     */
+    boolean  acknowledgeAlert(String ID, String UserID);
 
 
     /**

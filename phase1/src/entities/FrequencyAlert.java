@@ -1,27 +1,34 @@
 package entities;
 
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class FrequencyAlert extends Alert{
-    private HashMap<GregorianCalendar, Boolean> times = new HashMap<GregorianCalendar, Boolean>();
+    private ArrayList<GregorianCalendar> times = new ArrayList<GregorianCalendar>();
+    private List<Boolean> acknowledge = new ArrayList<Boolean>();
 
-    public FrequencyAlert(String alertID, String alertName, GregorianCalendar[] frequency, String userID){
+    public FrequencyAlert(String alertID, String alertName, ArrayList<GregorianCalendar> frequency, String userID){
         super(alertID, alertName, userID);
-        for (GregorianCalendar time: frequency) {
-            times.put(time, false);
+        this.times = frequency;
+        for(GregorianCalendar time : frequency) {
+            acknowledge.add(false);
         }
     }
 
     @Override
     public GregorianCalendar getNextRing() {
-        for (GregorianCalendar b : times.keySet()) {
-            if (times.get(b)) {
-                return b;
-            }
+        int i = 0;
+        while(acknowledge.get(i)) {
+            i++;
         }
-        return null;
+        return times.get(i);
+    }
+
+    public List<GregorianCalendar> getTimes(){
+        return this.times;
+    }
+
+    public List<Boolean> getAcknowledge(){
+        return this.acknowledge;
     }
 }

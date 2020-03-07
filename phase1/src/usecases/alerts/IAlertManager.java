@@ -4,29 +4,32 @@ import entities.Alert;
 
 import entities.CalendarEvent;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public interface IAlertManager {
 
     /**
      *
-     * @param alertID the id of this alert
-     * @param alertName the name of this alert
-     * @param start start time
-     * @return ttrue if event creation was successful, false otherwise
+     * @param eventID
+     * @param name
+     * @param startTime
+     * @param userID
+     * @return
      */
-    boolean createIndividualAlert(String alertID, String alertName, GregorianCalendar start);
+    public Boolean createIndividualAlertOnEvent(String eventID, String name, GregorianCalendar startTime, String userID);
 
     /**
      *
-     * @param alertID the id of this alert
-     * @param alertName the name of this alert
-     * @param frequency the rate of which this is repeating
-     * @return true if event creation was successful, false otherwise
+     * @param eventID
+     * @param name
+     * @param frequency
+     * @param userID
+     * @return
      */
-    public boolean createFrequencylAlert(String alertID, String alertName, GregorianCalendar[] frequency);
+    public boolean createFrequencyAlert(String eventID, String name, ArrayList<GregorianCalendar> frequency, String userID);
 
-    public boolean createFrequencylAlertByEvent(String alertID, String alertName,  GregorianCalendar end, String eventId);
+    public boolean createFrequencyAlertOnEvent(String eventID, String name, GregorianCalendar first, String userID);
 
 //    /**
 //     * Edit a alert with matching ID
@@ -49,6 +52,10 @@ public interface IAlertManager {
 //     */
 //    boolean editFrequencyAlerts(String alertID, String name, GregorianCalendar newStart, GregorianCalendar newEnd,
 //                                GregorianCalendar[] newFrequency);
+
+    public void acknowledgeIndividualAlert(String alertID, String userID);
+    public void acknowledgeFrequencyAlert(String alertID, String userID);
+    public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID);
 
     /**
      * Get all Alerts that have an ID in a list of IDs

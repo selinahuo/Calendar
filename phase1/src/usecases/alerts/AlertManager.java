@@ -8,6 +8,7 @@ import usecases.events.IEventManager;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 class AlertManager implements IAlertManager {
@@ -55,7 +56,7 @@ class AlertManager implements IAlertManager {
      * @return
      */
     @Override
-    public boolean createFrequencylAlert(String eventID, String name, GregorianCalendar[] frequency, String userID){
+    public boolean createFrequencyAlert(String eventID, String name, ArrayList<GregorianCalendar> frequency, String userID){
         //create the alert
         String alertID = generateAlertID();
         Alert alert = new FrequencyAlert(alertID, name, frequency, userID);
@@ -81,7 +82,8 @@ class AlertManager implements IAlertManager {
         // find the frequency of this event and create alert
             // this alert is attached to a single event
         if (this.eventManager.getEventByID(eventID).getSeriesID() == null) {
-            GregorianCalendar[] frequency = {this.eventManager.getEventByID(eventID).getStart()};
+            ArrayList<GregorianCalendar> frequency = new ArrayList<GregorianCalendar>();
+            frequency.add(this.eventManager.getEventByID(eventID).getStart());
             Alert alert = new FrequencyAlert(alertID,name,frequency,userID );
             return this.alertRepository.saveAlert(alert);
         }
@@ -89,19 +91,46 @@ class AlertManager implements IAlertManager {
         else {
             String seriesID = this.eventManager.getEventByID(eventID).getSeriesID();
             CalendarEvent[] allEvents= this.eventManager.getEventsBySeriesIDAndUserID(seriesID, userID);
-            GregorianCalendar[] frequency = new GregorianCalendar[allEvents.length];
-            for(int i = 0; i < allEvents.length; i++) {
-                frequency[i] = allEvents[i].getStart();
+            ArrayList<GregorianCalendar> frequency = new ArrayList<GregorianCalendar>();
+            for (CalendarEvent allEvent : allEvents) {
+                frequency.add(allEvent.getStart());
             }
             Alert alert = new FrequencyAlert(alertID,name,frequency,userID );
             return this.alertRepository.saveAlert(alert);
         }
     }
 
-    public Alert acknowledgeAlert(alertID, String userID) {
+    @Override
+    public void acknowledgeIndividualAlert(String alertID, String userID) {
+        Alert alert = this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
+        alert.setAcknowledged();
+        //turn off the alert
+        this.alertRepository.acknowledgeAlert(alertID, userID);
+    }
+
+    @Override
+    public void acknowledgeFrequencyAlert(String alertID, String userID) {
+        Alert alert = this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
+        int i = 0;
+        while (alert.getAcknowledge().get(i)) {
+            i++;
+        }
+        alert.getAcknowledge().set(i, true);
+
+        // acknowledge all times in the frequency Alert
+        if (alert.getAcknowledge().get(alert.getAcknowledge().size() - 1)) {
+            alert.setAcknowledged();
+        }
+    }
+
+    @Override
+    public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID){
+        //TODO
 
     }
-    // get the alert and acknowledge it
+
+
+
 
 //    /**
 //     * Edit a alert with matching ID

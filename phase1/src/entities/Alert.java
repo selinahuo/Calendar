@@ -1,6 +1,8 @@
 package entities;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class representing a Calendar Alert
@@ -27,8 +29,11 @@ public abstract class Alert {
         return alertName;
     }
 
+    public void setAcknowledged() {
+        this.acknowledged = !this.acknowledged;
+    }
 
     public abstract GregorianCalendar getNextRing();
-
-
+    public abstract List<GregorianCalendar> getTimes();
+    public abstract List<Boolean> getAcknowledge();
 }
