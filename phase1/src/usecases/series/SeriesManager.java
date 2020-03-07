@@ -72,6 +72,6 @@ class SeriesManager implements ISeriesManager {
 
     @Override
     public Series getSeriesByIDAndUserID(String seriesID, String userID) {
-        return this.getSeriesByIDAndUserID(seriesID, userID);
+        return this.repository.fetchSeriesByIDAndUserID(seriesID, userID);
     }
 }

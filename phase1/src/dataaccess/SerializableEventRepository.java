@@ -158,10 +158,10 @@ public class SerializableEventRepository extends SerializableRepository <Calenda
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getEventID().equals(eventID)) {
                 calendarEvent.setSeriesID(newSeriesID);
+                serialize(calendarEvents);
                 return true;
             }
         }
-        serialize(calendarEvents);
         return false;
     }
 

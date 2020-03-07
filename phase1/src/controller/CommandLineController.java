@@ -76,6 +76,16 @@ public class CommandLineController {
         return new SingularEventModel(event, alert, memo, tag, series);
     }
 
+    public ListModel getEventsBySeriesName(String seriesName, String userID) {
+        CalendarEvent[] events = this.useCaseManager.getEventsBySeriesName(seriesName, userID);
+        return createListModel(events);
+    }
+
+    public boolean createSeriesFromEvents(String eventString, String seriesName, String userID) {
+        String[] eventIDs = eventString.split(",");
+        return this.useCaseManager.createSeriesFromEvents(eventIDs, seriesName, userID);
+    }
+
     private ListModel createListModel(CalendarEvent[] events) {
         ListModel listModel = new ListModel();
         ArrayList<String> eventStrings = new ArrayList<>();

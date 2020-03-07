@@ -33,8 +33,7 @@ public class HomeView extends View {
                 case "2":
                     return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "3":
-                    System.out.println("Series");
-                    break;
+                    return new SeriesMenuView(getLocalStorage(), getModel(), getController());
                 case "4":
                     System.out.println("Notes");
                     break;
