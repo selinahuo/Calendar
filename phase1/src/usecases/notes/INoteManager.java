@@ -40,6 +40,8 @@ public interface INoteManager {
      */
     Memo getMemoById(String id);
 
+    Tag getTagByID(String tagID);
+
     /**
      * Get a Tag by its id.
      * @param id the id to filter by.

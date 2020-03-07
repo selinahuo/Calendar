@@ -13,10 +13,9 @@ public class EventMenuView extends View {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-        System.out.println("[1] Get event by Name");
+        System.out.println("[1] Get events by Name");
         System.out.println("[2] Get events by relative date (past/current/future)");
-        System.out.println("[3] Get event by date");
-        System.out.println("[4] Create a new event");
+        System.out.println("[3] Create a new event");
         System.out.println("[~] Go Home");
     }
 
@@ -29,14 +28,10 @@ public class EventMenuView extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    System.out.println("Get event by name");
-                    break;
+                    return new GetEventByNameView(getLocalStorage(), getModel(), getController());
                 case "2":
                     return new GetEventByRelativeDateView(getLocalStorage(), getModel(), getController());
                 case "3":
-                    System.out.println("get event by date");
-                    break;
-                case "4":
                     return new CreateEventView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());

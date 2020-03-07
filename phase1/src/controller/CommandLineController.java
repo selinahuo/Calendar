@@ -1,7 +1,9 @@
 package controller;
 
+import DataClasses.Quintuple;
 import controller.viewmodels.ListModel;
-import entities.CalendarEvent;
+import controller.viewmodels.SingularEventModel;
+import entities.*;
 import usecases.IUseCaseManager;
 
 import java.text.DateFormat;
@@ -45,11 +47,8 @@ public class CommandLineController {
     }
 
     public ListModel getEventsByName(String eventName, String userID) {
-//        return new ListModel(new String[0]);
-        // call the use case list of events
-        // convert each event to a string add it to an array
-        // return a list model using that array
-        return new ListModel();
+        CalendarEvent[] events = this.useCaseManager.getEventsByName(eventName, userID);
+        return createListModel(events);
     }
 
     public ListModel getPastEvents(String userID) {
@@ -67,23 +66,74 @@ public class CommandLineController {
         return createListModel(events);
     }
 
+    public SingularEventModel getSingularEvent(String eventID, String userID) {
+        Quintuple<CalendarEvent, Alert, Memo, Tag, Series> eventData = this.useCaseManager.getSingularEvent(eventID, userID);
+        String event = generateEventString(eventData.getFirst());
+        String alert = generateAlertString(eventData.getSecond());
+        String memo = generateMemoString(eventData.getThird());
+        String tag = generateTagString(eventData.getFourth());
+        String series = generateSeriesString(eventData.getFifth());
+        return new SingularEventModel(event, alert, memo, tag, series);
+    }
+
     private ListModel createListModel(CalendarEvent[] events) {
         ListModel listModel = new ListModel();
         ArrayList<String> eventStrings = new ArrayList<>();
         for (CalendarEvent event: events) {
-            StringBuilder str = new StringBuilder();
-            SimpleDateFormat fmt = new SimpleDateFormat("MMM dd, yyyy | HH:mm");
-            str.append("ID: ");
-            str.append(event.getEventID());
-            str.append(" - ");
-            str.append(event.getName());
-            str.append(" from ");
-            str.append(fmt.format(event.getStart().getTime()) + " to " + fmt.format(event.getEnd().getTime()));
-            str.append(" at ");
-            str.append(event.getLocation());
-            eventStrings.add(str.toString());
+            String eventString = generateEventString(event);
+            eventStrings.add(eventString);
         }
         listModel.setList(eventStrings);
         return listModel;
+    }
+
+    private String generateEventString(CalendarEvent event) {
+        if (event == null) {
+            return "";
+        }
+        StringBuilder str = new StringBuilder();
+        SimpleDateFormat fmt = new SimpleDateFormat("MMM dd, yyyy | HH:mm");
+        str.append("Event ID: ");
+        str.append(event.getEventID());
+        str.append(" - ");
+        str.append(event.getName());
+        str.append(" from ");
+        str.append(fmt.format(event.getStart().getTime()) + " to " + fmt.format(event.getEnd().getTime()));
+        str.append(" at ");
+        str.append(event.getLocation());
+        return str.toString();
+    }
+
+    private String generateAlertString(Alert alert) {
+        if (alert == null) {
+            return "";
+        }
+        SimpleDateFormat fmt = new SimpleDateFormat("MMM dd, yyyy | HH:mm");
+        StringBuilder str = new StringBuilder();
+        str.append("Alert ID: " + alert.getAlertID() + " - " + alert.getAlertName());
+        str.append(" rings next at " + fmt.format(alert.getNextRing()));
+
+        return str.toString();
+    }
+
+    private String generateSeriesString(Series series) {
+        if (series == null) {
+            return "";
+        }
+        return "Series ID: " + series.getSeriesID() + " - " + series.getName();
+    }
+
+    private String generateMemoString(Memo memo) {
+        if (memo == null) {
+            return "";
+        }
+        return "Memo ID: " + memo.getMemoID() + " - " + memo.getName() + " - " + memo.getNote();
+    }
+
+    private String generateTagString(Tag tag) {
+        if (tag == null) {
+            return "";
+        }
+        return "Tag ID: " + tag.getTagID() + " - " + tag.getName();
     }
 }

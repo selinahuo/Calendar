@@ -2,6 +2,7 @@ package view.views;
 
 import controller.CommandLineController;
 import controller.viewmodels.ListModel;
+import controller.viewmodels.SingularEventModel;
 import view.LocalStorage;
 
 import java.util.Scanner;
@@ -13,6 +14,7 @@ public class EventListView extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
+        System.out.println("[1] View individual event");
         System.out.println("[~] Go Home");
     }
 
@@ -30,6 +32,16 @@ public class EventListView extends ListView {
             inputPrompt();
             String selection = input.nextLine();
             switch(selection) {
+                case "1":
+                    System.out.println("Please enter the event's ID:");
+                    String eventID = input.nextLine();
+                    SingularEventModel model = getController().getSingularEvent(eventID, getLocalStorage().getUserID());
+                    if (model == null) {
+                        super.printError("That event could not be found.");
+                    } else {
+                        return new SingularEventView(getLocalStorage(), model, getController());
+                    }
+                    break;
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:

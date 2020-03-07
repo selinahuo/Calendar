@@ -69,4 +69,9 @@ class SeriesManager implements ISeriesManager {
         }
         return this.eventManager.getEventsBySeriesIDAndUserID(series.getSeriesID(), userID);
     }
+
+    @Override
+    public Series getSeriesByIDAndUserID(String seriesID, String userID) {
+        return this.getSeriesByIDAndUserID(seriesID, userID);
+    }
 }

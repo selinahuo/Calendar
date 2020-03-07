@@ -1,8 +1,8 @@
 package usecases;
 
-import entities.Alert;
-import entities.CalendarEvent;
-import entities.Memo;
+import DataClasses.Quintuple;
+import entities.*;
+import javafx.util.Pair;
 import sun.util.calendar.Gregorian;
 import usecases.alerts.IAlertManager;
 import usecases.events.IEventManager;
@@ -40,13 +40,33 @@ class UseCaseManager implements IUseCaseManager {
     }
 
     @Override
-    public CalendarEvent getSingularEvent(String eventID, String userID) {
+    public Quintuple<CalendarEvent, Alert, Memo, Tag, Series> getSingularEvent(String eventID, String userID) {
+        CalendarEvent event = this.eventManager.getEventByID(eventID);
+        if (event != null) {
+            Alert alert = null;
+            Memo memo = null;
+            Tag tag = null;
+            Series series = null;
+            if (event.getAlertID() != null) {
+                alert = this.alertManager.getAlertByIDAndUserID(event.getAlertID(), userID);
+            }
+            if (event.getMemoIDs() != null && event.getMemoIDs().size() != 0) {
+                memo = this.noteManager.getMemoById(event.getMemoIDs().get(0));
+            }
+            if (event.getTagIDs() != null && event.getTagIDs().size() != 0) {
+                tag = this.noteManager.getTagByID(event.getTagIDs().get(0));
+            }
+            if (event.getSeriesID() != null && !event.getSeriesID().equals("")) {
+                series = this.seriesManager.getSeriesByIDAndUserID(event.getSeriesID(), userID);
+            }
+            return new Quintuple<CalendarEvent, Alert, Memo, Tag, Series>(event, alert, memo, tag, series);
+        }
         return null;
     }
 
     @Override
-    public CalendarEvent getSingularEventByName(String name, String userID) {
-        return null;
+    public CalendarEvent[] getEventsByName(String name, String userID) {
+        return this.eventManager.getEventsByNameAndUserID(name, userID);
     }
 
     @Override

@@ -1,8 +1,7 @@
 package usecases;
 
-import entities.Alert;
-import entities.CalendarEvent;
-import entities.Memo;
+import DataClasses.Quintuple;
+import entities.*;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -20,8 +19,8 @@ public interface IUseCaseManager {
     boolean createEvent(String eventName, GregorianCalendar start, GregorianCalendar end, String location, String userID);
 
     // get a user's singular event (series if part of, alert if part of, and memos and tags)
-    CalendarEvent getSingularEvent(String eventID, String userID);
-    CalendarEvent getSingularEventByName(String name, String userID);
+    Quintuple<CalendarEvent, Alert, Memo, Tag, Series> getSingularEvent(String eventID, String userID);
+    CalendarEvent[] getEventsByName(String name, String userID);
 
     // get user's past events
     CalendarEvent[] getPastEvents(String userID);

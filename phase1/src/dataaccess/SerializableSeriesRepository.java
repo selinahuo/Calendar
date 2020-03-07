@@ -24,6 +24,17 @@ public class SerializableSeriesRepository extends SerializableRepository<Series>
         return true;
     }
 
+    @Override
+    public Series fetchSeriesByIDAndUserID(String seriesID, String userID) {
+        ArrayList<Series> seriesArr = deserialize();
+        for (Series series: seriesArr) {
+            if (series.getSeriesID().equals(seriesID) && series.getUserID().equals(userID)) {
+                return series;
+            }
+        }
+        return null;
+    }
+
     /**
      * Fetch a Series that has an ID in the list of IDS with a matching name
      *

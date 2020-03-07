@@ -91,8 +91,8 @@ class NoteManager implements INoteManager {
      * @param id the name to filter by.
      * @return the corresponding Tag or null if it does not exist
      */
-//    @Override
-    public Tag getTagById(String id) {return this.tagRepository.fetchTagByID(id);}
+    @Override
+    public Tag getTagByID(String tagID) {return this.tagRepository.fetchTagByID(tagID);}
 
     @Override
     public CalendarEvent[] getEventsByTagNameAndUserID(String tagName, String userID) {
