@@ -37,7 +37,7 @@ public class SeriesMenuView extends View {
                 case "2":
                     return new CreateSeriesFromExistingEventsView(getLocalStorage(), getModel(), getController());
                 case "3":
-                    return new CreateEventView(super.getLocalStorage(), super.getModel(), super.getController());
+                    return new CreateSeriesFromFormulaView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:

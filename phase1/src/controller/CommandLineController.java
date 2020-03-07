@@ -86,6 +86,13 @@ public class CommandLineController {
         return this.useCaseManager.createSeriesFromEvents(eventIDs, seriesName, userID);
     }
 
+    public boolean createSeriesFromFormula(String seriesName, String startStr, String endStr, String frequency,
+                                           int numEvents, String userID) {
+        GregorianCalendar start = convertStringToCalendar(startStr);
+        GregorianCalendar end = convertStringToCalendar(endStr);
+        return this.useCaseManager.createSeriesFromEventFormula(seriesName, start, end, frequency, numEvents, userID);
+    }
+
     private ListModel createListModel(CalendarEvent[] events) {
         ListModel listModel = new ListModel();
         ArrayList<String> eventStrings = new ArrayList<>();
