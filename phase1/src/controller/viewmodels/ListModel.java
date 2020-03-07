@@ -1,13 +1,23 @@
 package controller.viewmodels;
 
-public class ListModel extends ViewModel {
-    private String[] list;
+import java.util.ArrayList;
 
-    public ListModel(String[] list) {
+public class ListModel extends ViewModel {
+    private ArrayList<String> list;
+
+    public ListModel() {
+        this.list = new ArrayList<>();
+    }
+
+    public ListModel(ArrayList<String> list) {
         this.list = list;
     }
 
-    public String[] getList() {
+    public ArrayList<String> getList() {
         return list;
+    }
+
+    public void setList(ArrayList<String> list) {
+        this.list = list;
     }
 }

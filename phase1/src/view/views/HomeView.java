@@ -12,7 +12,7 @@ public class HomeView extends View {
     }
 
     private void inputPrompt() {
-        System.out.println("Please select one of the following menus by typing the number:");
+        System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Events");
         System.out.println("[2] Alerts");
         System.out.println("[3] Series");

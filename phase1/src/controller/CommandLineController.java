@@ -7,6 +7,7 @@ import usecases.IUseCaseManager;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -44,24 +45,45 @@ public class CommandLineController {
     }
 
     public ListModel getEventsByName(String eventName, String userID) {
-        return new ListModel(new String[0]);
+//        return new ListModel(new String[0]);
         // call the use case list of events
         // convert each event to a string add it to an array
         // return a list model using that array
+        return new ListModel();
     }
 
     public ListModel getPastEvents(String userID) {
         CalendarEvent[] events = this.useCaseManager.getPastEvents(userID);
-        return new ListModel(new String[0]);
+        return createListModel(events);
     }
 
     public ListModel getCurrentEvents(String userID) {
         CalendarEvent[] events = this.useCaseManager.getCurrentEvents(userID);
-        return new ListModel(new String[0]);
+        return createListModel(events);
     }
 
     public ListModel getFutureEvents(String userID) {
         CalendarEvent[] events = this.useCaseManager.getFutureEvents(userID);
-        return new ListModel(new String[0]);
+        return createListModel(events);
+    }
+
+    private ListModel createListModel(CalendarEvent[] events) {
+        ListModel listModel = new ListModel();
+        ArrayList<String> eventStrings = new ArrayList<>();
+        for (CalendarEvent event: events) {
+            StringBuilder str = new StringBuilder();
+            SimpleDateFormat fmt = new SimpleDateFormat("MMM dd, yyyy | HH:mm");
+            str.append("ID: ");
+            str.append(event.getEventID());
+            str.append(" - ");
+            str.append(event.getName());
+            str.append(" from ");
+            str.append(fmt.format(event.getStart().getTime()) + " to " + fmt.format(event.getEnd().getTime()));
+            str.append(" at ");
+            str.append(event.getLocation());
+            eventStrings.add(str.toString());
+        }
+        listModel.setList(eventStrings);
+        return listModel;
     }
 }
