@@ -2,12 +2,13 @@ package view.views;
 
 import controller.CommandLineController;
 import controller.viewmodels.ListModel;
+import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 
 import java.util.Scanner;
 
 public class AlertMenuView extends View {
-    public AlertMenuView(LocalStorage localStorage, ListModel model, CommandLineController controller) {
+    public AlertMenuView(LocalStorage localStorage, ViewModel model, CommandLineController controller) {
         super(localStorage, model, controller);
     }
 

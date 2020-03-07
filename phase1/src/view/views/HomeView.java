@@ -31,7 +31,7 @@ public class HomeView extends View {
                 case "1":
                     return new EventMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "2":
-                    return new AlertMenuView(super.getLocalStorage(), (ListModel) super.getModel(), super.getController());
+                    return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "3":
                     System.out.println("Series");
                     break;
