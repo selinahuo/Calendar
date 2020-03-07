@@ -1,10 +1,7 @@
 package usecases.alerts;
 import entities.Alert;
-import entities.FrequencyAlert;
-import entities.IndividualAlert;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Provides a public interface for alert repository operations
@@ -19,21 +16,22 @@ public interface IAlertRepository {
 
     /**
      *
-     * @param ID
+     * @param alertID
      * @param name
-     * @param UserID
+     * @param newStart
      * @return
      */
-    boolean editIndividualAlert(String alertID, String name, GregorianCalendar newStart);
-    boolean editFrequencyAlerts(String alertID, String name, ArrayList<GregorianCalendar> frequency);
+//    boolean editIndividualAlert(String alertID, String name, GregorianCalendar newStart);
 
     /**
-     * switch the acknowledged to false
-     * @param ID
-     * @param UserID
-     * @return true if acknowledge alert was successful, false otherwise
+     *
+     * @param alertID
+     * @param name
+     * @param frequency
+     * @return
      */
-    boolean  acknowledgeAlert(String ID, String UserID);
+//    boolean editFrequencyAlerts(String alertID, String name, ArrayList<GregorianCalendar> frequency);
+
 
 
     /**
@@ -41,7 +39,7 @@ public interface IAlertRepository {
      * @param id the ID to filter by.
      * @return the corresponding Alert or null if it does not exist
      */
-    Alert fetchAlertByID(String id);
+//    Alert fetchAlertByID(String id);
 
     /**
      * Fetch a Alert by its Name.
@@ -49,7 +47,7 @@ public interface IAlertRepository {
      * @param userID involves in this alert
      * @return the corresponding alert or null if it does not exist
      */
-    Alert fetchAlertByNameAndUserID(String name, String userID);
+//    Alert fetchAlertByNameAndUserID(String name, String userID);
 
     /**
      *
@@ -59,9 +57,10 @@ public interface IAlertRepository {
      */
     Alert fetchAlertByIDAndUserID(String alertID, String userID);
 
-    IndividualAlert fetchIndividualAlertByID(String alertID);
-    FrequencyAlert fetchFrequencyAlertByID(String alertID);
+//    IndividualAlert fetchIndividualAlertByID(String alertID);
+//    FrequencyAlert fetchFrequencyAlertByID(String alertID);
 
+    Alert[] fetchAlertByUserID(String userID);
 
-
+    boolean editAlertAcknowledge(String alertID, List<Boolean> acknowledge);
 }
