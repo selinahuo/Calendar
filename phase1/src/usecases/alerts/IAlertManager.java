@@ -17,7 +17,7 @@ public interface IAlertManager {
      * @param userID
      * @return
      */
-    public Boolean createIndividualAlertOnEvent(String eventID, String name, GregorianCalendar startTime, String userID);
+    public boolean createIndividualAlertOnEvent(String eventID, String alertName, GregorianCalendar startTime, String userID);
 
     /**
      *
@@ -27,17 +27,17 @@ public interface IAlertManager {
      * @param userID
      * @return
      */
-    public boolean createFrequencyAlert(String eventID, String name, ArrayList<GregorianCalendar> frequency, String userID);
+//    public boolean createFrequencyAlert(String eventID, String name, ArrayList<GregorianCalendar> frequency, String userID);
 
-    public boolean createFrequencyAlertOnEvent(String eventID, String name, GregorianCalendar first, String userID);
+    boolean createFrequencyAlertOnEvent(String eventID, String alertName, String userID, GregorianCalendar startTime, String frequency);
 
-    public boolean  editFrequencyAlerts(String alertID, String name,ArrayList<GregorianCalendar> frequency);
+//    public boolean  editFrequencyAlerts(String alertID, String name,ArrayList<GregorianCalendar> frequency);
 
 
-    public boolean  editIndividualAlert(String alertID, String name, GregorianCalendar newStart);
+//    public boolean  editIndividualAlert(String alertID, String name, GregorianCalendar newStart);
 
-    public void acknowledgeIndividualAlert(String alertID, String userID);
-    public void acknowledgeFrequencyAlert(String alertID, String userID);
+//    public void acknowledgeIndividualAlert(String alertID, String userID);
+//    public void acknowledgeFrequencyAlert(String alertID, String userID);
     public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID);
 
     /**
@@ -45,7 +45,7 @@ public interface IAlertManager {
      * @param id id of the desired Alert
      * @return Alert that match the id
      */
-    Alert getAlertByIDs(String id);
+//    Alert getAlertByIDs(String id);
 
     /**
      * Get a Alert that has an ID  and a matching name
@@ -53,9 +53,11 @@ public interface IAlertManager {
      * @param id id of this alert
      * @return a matching Alert
      */
-    Alert getAlertByNameAndId(String name, String id);
+//    Alert getAlertByNameAndId(String name, String id);
 
-    CalendarEvent getEventByAlertNameAndUserID(String alertName, String userID);
+    //CalendarEvent getEventByAlertNameAndUserID(String alertName, String userID);
 
+    Alert getAlertByIDAndUserID(String alertID, String userID);
 
+    boolean acknowledgeAlert(String alertID, String userID);
 }

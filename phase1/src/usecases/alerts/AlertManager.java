@@ -1,72 +1,163 @@
-//package usecases.alerts;
-//
-//import entities.Alert;
-//import entities.CalendarEvent;
-//import entities.FrequencyAlert;
-//import entities.IndividualAlert;
-//import usecases.events.IEventManager;
-//
-//import java.util.ArrayList;
-//import java.util.GregorianCalendar;
-//import java.util.List;
-//import java.util.UUID;
-//
-//class AlertManager implements IAlertManager {
-//    private IAlertRepository alertRepository;
-//    private IAlertManager alertManager;
-//    private IEventManager eventManager;
-//
-//    public AlertManager(IAlertRepository repository, IAlertManager alertManager, IEventManager eventManager){
-//        this.alertRepository = repository;
-//        this.alertManager = alertManager;
-//        this.eventManager = eventManager;
-//    }
-//
-//    /**
-//     * generate an alertID
-//     */
-//    private String generateAlertID(){
-//        return UUID.randomUUID().toString();
-//    }
-//
-//    /**
-//     *
-//     * @param eventID
-//     * @param name
-//     * @param startTime
-//     * @param userID
-//     * @return
-//     */
+package usecases.alerts;
+
+import entities.Alert;
+
+import usecases.events.IEventManager;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.UUID;
+
+class AlertManager implements IAlertManager {
+    private IAlertRepository alertRepository;
+    private IAlertManager alertManager;
+    private IEventManager eventManager;
+
+    public AlertManager(IAlertRepository repository, IAlertManager alertManager, IEventManager eventManager){
+        this.alertRepository = repository;
+        this.alertManager = alertManager;
+        this.eventManager = eventManager;
+    }
+
+    /**
+     * generate an alertID
+     */
+    private String generateAlertID(){
+        return UUID.randomUUID().toString();
+    }
+
+    /**
+     *
+     * @param eventID
+     * @param alertName
+     * @param userID
+     * @param start
+     * @return
+     */
+    private Alert createIndividualAlert(String eventID, String alertName, String userID, GregorianCalendar start) {
+        // generate alertID
+        String alertID = generateAlertID();
+        // create an alert
+        Alert alert = new Alert(alertID, alertName, userID, start);
+        return alert;
+    }
+
+
+    /**
+     *
+     * @param eventID
+     * @param alertName
+     * @param userID
+     * @param startTime
+     * @param frequency
+     * @return
+     */
+    private Alert createFrequencyAlert(String eventID, String alertName, String userID, GregorianCalendar startTime, String frequency){
+        // generate alertID
+        String alertID = generateAlertID();
+        // organize alertTimes
+        GregorianCalendar end = this.eventManager.getEventByID(eventID).getEnd();
+        ArrayList<GregorianCalendar> alertTimes = new ArrayList<>();
+        GregorianCalendar start = (GregorianCalendar) startTime.clone();
+
+        while (start.before(end)) {
+            GregorianCalendar currTime = (GregorianCalendar) start.clone();
+            alertTimes.add(currTime);
+            if (frequency == "d"){
+                start.add(Calendar.DAY_OF_MONTH, 1 );
+            }
+            else if (frequency == "w") {
+                start.add(Calendar.DAY_OF_MONTH, 7 );
+            }
+            else if (frequency == "h") {
+                start.add(Calendar.HOUR_OF_DAY, 1);
+            }
+        }
+        //create the alert
+        Alert alert = new Alert(alertID, alertName, userID,alertTimes);
+        return alert;
+    }
+
+    /**
+     *
+     * @param eventID
+     * @param alertName
+     * @param userID
+     * @param start
+     * @return
+     */
+    @Override
+    public boolean createIndividualAlertOnEvent(String eventID, String alertName, GregorianCalendar start, String userID) {
+        //create individual alert
+        Alert alert = createIndividualAlert(eventID, alertName, userID, start);
+        //update the event's alertID
+        this.eventManager.getEventByID(eventID).setAlertID(alert.getAlertID());
+        return this.alertRepository.saveAlert(alert);
+    }
+
+    /**
+     *
+     * @param eventID
+     * @param alertName
+     * @param userID
+     * @param startTime
+     * @param frequency
+     * @return
+     */
+    @Override
+    public boolean createFrequencyAlertOnEvent(String eventID, String alertName, String userID, GregorianCalendar startTime, String frequency) {
+        // create frequency alert
+        Alert alert = createFrequencyAlert(eventID, alertName, userID, startTime, frequency);
+        //update the event's alertID
+        this.eventManager.getEventByID(eventID).setAlertID(alert.getAlertID());
+        return this.alertRepository.saveAlert(alert);
+    }
+
+    /**
+     *
+     * @param alertID
+     * @param userID
+     */
+    @Override
+    public boolean acknowledgeAlert(String alertID, String userID) {
+        Alert alert = this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
+        if (alert != null) {
+            alert.acknowledge();
+            return this.alertRepository.editAlertAcknowledge(alertID, alert.getAcknowledge());
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param date
+     * @param userID
+     * @return
+     */
+    @Override
+    public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID){
+        Alert[] alerts = this.alertRepository.fetchAlertByUserID(userID);
+        ArrayList<Alert> alertsArr = new ArrayList<Alert>();
+        for (Alert alert: alerts) {
+            GregorianCalendar nextRing = alert.getNextRing();
+            if (nextRing != null && nextRing.before(date)) {
+                alertsArr.add(alert);
+            }
+        }
+        return  alertsArr;
+    }
+
 //    @Override
-//    public Boolean createIndividualAlertOnEvent(String eventID, String name, GregorianCalendar startTime, String userID){
-//        //create individual alert
-//        String alertID = generateAlertID();
-//        Alert alert = new IndividualAlert(alertID, name, startTime, userID);
-//        //update the event's alertID
-//        this.eventManager.getEventByID(eventID).setAlertID(alertID);
-//        return this.alertRepository.saveAlert(alert);
+//    public boolean editAlert(String name, String alertID, GregorianCalendar alertTime){
+//        Alert alert = this.alertRepository.fetchAlertByNameAndUserID(name, alertID);
+//        for(GregorianCalendar time: alert.getTimes()){
+//            if ()
+//        }
 //    }
-//
+
 //    /**
-//     *
-//     * @param eventID
-//     * @param name
-//     * @param frequency
-//     * @param userID
-//     * @return
-//     */
-//    @Override
-//    public boolean createFrequencyAlert(String eventID, String name, ArrayList<GregorianCalendar> frequency, String userID){
-//        //create the alert
-//        String alertID = generateAlertID();
-//        Alert alert = new FrequencyAlert(alertID, name, frequency, userID);
-//        //update the event's alertID
-//        this.eventManager.getEventByID(eventID).setAlertID(alertID);
-//        return this.alertRepository.saveAlert(alert);
-//    }
-//
-//    /**
-//     *
+//     * For Phase II
 //     * @param eventID
 //     * @param name
 //     * @param first
@@ -99,58 +190,13 @@
 //            return this.alertRepository.saveAlert(alert);
 //        }
 //    }
-//
-//    @Override
-//    public void acknowledgeIndividualAlert(String alertID, String userID) {
-//        Alert alert = this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
-//        alert.setAcknowledged();
-//        //turn off the alert
-//        this.alertRepository.acknowledgeAlert(alertID, userID);
-//    }
-//
-//    @Override
-//    public void acknowledgeFrequencyAlert(String alertID, String userID) {
-//        Alert alert = this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
-//        int i = 0;
-//        while (alert.getAcknowledge().get(i)) {
-//            i++;
-//        }
-//        alert.getAcknowledge().set(i, true);
-//
-//        // acknowledge all times in the frequency Alert
-//        if (alert.getAcknowledge().get(alert.getAcknowledge().size() - 1)) {
-//            alert.setAcknowledged();
-//        }
-//        this.alertRepository.acknowledgeAlert(alertID,userID);
-//    }
-//
-//
-//    // TODO implement this method
-//
-//    /**
-//     *
-//     * @param date
-//     * @param userID
-//     * @return
-//     */
-//    public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID){}
-//
-//
-//        /**
-//     *
-//     * @param alertID
-//     * @param name
-//     * @param newStart
-//     * @return
-//     */
-//    @Override
-//    public boolean editIndividualAlert(String alertID, String name, GregorianCalendar newStart){
-//        IndividualAlert alert = getIndividualAlertByID(alertID);
-//        alert.setAlertName(name);
-//        alert.setStartTime(newStart);
-//        return this.alertRepository.editIndividualAlert(alertID, name, newStart);
-//    }
-//
+
+
+
+
+
+
+
 //    @Override
 //    public boolean editFrequencyAlerts(String alertID, String name,ArrayList<GregorianCalendar> frequency){
 //        FrequencyAlert alert = getFrequencyAlertByID(alertID);
@@ -158,28 +204,28 @@
 //        alert.setTimes(frequency);
 //        return this.alertRepository.editFrequencyAlerts(alertID, name, frequency);
 //    }
-//
-//    /**
-//     * Get all Alerts that have an ID in a list of IDs
-//     * @param id id of the desired Alert
-//     * @return Alert that match the id
-//     */
+
+    /**
+     * Get all Alerts that have an ID in a list of IDs
+     * @param id id of the desired Alert
+     * @return Alert that match the id
+     */
 //    @Override
 //    public Alert getAlertByIDs(String id){
 //        return this.alertRepository.fetchAlertByID(id);
 //    }
-//
-//    /**
-//     * Get a Alert that has an ID  and a matching name
-//     * @param name Alert must match this name
-//     * @param id id of this alert
-//     * @return a matching Alert
-//     */
+
+    /**
+     * Get a Alert that has an ID  and a matching name
+     * @param name Alert must match this name
+     * @param id id of this alert
+     * @return a matching Alert
+     */
 //    @Override
 //    public Alert getAlertByNameAndId(String name, String id) {
 //        return this.alertRepository.fetchAlertByNameAndUserID(name, id);
 //    }
-//
+
 //    @Override
 //    public CalendarEvent getEventByAlertNameAndUserID(String alertName, String userID) {
 //        Alert alert = this.alertRepository.fetchAlertByNameAndUserID(alertName, userID);
@@ -188,7 +234,7 @@
 //        }
 //       return this.eventManager.getEventByAlertIDAndUserID(alert.getAlertID(), userID);
 //    }
-//
+
 //    public IndividualAlert getIndividualAlertByID(String alertID){
 //        return this.alertRepository.fetchIndividualAlertByID(alertID);
 //    }
@@ -196,5 +242,9 @@
 //    public FrequencyAlert getFrequencyAlertByID(String alertID){
 //        return this.alertRepository.fetchFrequencyAlertByID(alertID);
 //    }
-//
-//}
+    @Override
+    public Alert getAlertByIDAndUserID(String alertID, String userID) {
+        return this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
+    }
+
+}
