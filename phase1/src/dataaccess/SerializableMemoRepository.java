@@ -1,10 +1,12 @@
 package dataaccess;
 
+import entities.CalendarEvent;
 import entities.Memo;
-import usecases.items.IMemoRepository;
+import usecases.notes.IMemoRepository;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SerializableMemoRepository implements IMemoRepository {
@@ -16,7 +18,7 @@ public class SerializableMemoRepository implements IMemoRepository {
 
     private void serialize() {
         try {
-            FileOutputStream fos = new FileOutputStream("Memos.csv");
+            FileOutputStream fos = new FileOutputStream("memos.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.Memos);
             oos.close();
@@ -28,7 +30,7 @@ public class SerializableMemoRepository implements IMemoRepository {
 
     private void deserialize() {
         try {
-            FileInputStream fis = new FileInputStream("Memo.csv");
+            FileInputStream fis = new FileInputStream("memos.ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
             this.Memos = (ArrayList<Memo>) ois.readObject();
             ois.close();
@@ -63,6 +65,7 @@ public class SerializableMemoRepository implements IMemoRepository {
      * @param memoName the name to filter by.
      * @return the corresponding Memo or null if it does not exist
      */
+
     @Override
     public Memo fetchMemoByName(String memoName) {
         deserialize();
@@ -76,13 +79,13 @@ public class SerializableMemoRepository implements IMemoRepository {
 
     /**
      *
-     * @param memoid the name to filter by.
+     * @param memoID the name to filter by.
      * @return
      */
-    public Memo fetchMemoByMemoId(String memoid) {
+    public Memo fetchMemoByMemoId(String memoID) {
         deserialize();
         for (Memo memo : Memos) {
-            if (memo.getMemoID().equals(memoid)) {
+            if (memo.getMemoID().equals(memoID)) {
                 return memo;
             }
         }
@@ -105,5 +108,19 @@ public class SerializableMemoRepository implements IMemoRepository {
             }
         }
         return null;
+    }
+
+    @Override
+    public Memo[] fetchMemosByUserID(String userID) {
+        deserialize();
+        List<Memo> memoList = new ArrayList<>();
+        for (Memo memo: Memos) {
+            if (memo.getUserID() == userID) {
+                memoList.add(memo);
+            }
+        }
+        Memo[] memoArray  = new Memo[memoList.size()];
+        memoArray = memoList.toArray(memoArray);
+        return memoArray;
     }
 }

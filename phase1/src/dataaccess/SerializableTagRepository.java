@@ -1,7 +1,7 @@
 package dataaccess;
 
 import entities.Tag;
-import usecases.items.ITagRepository;
+import usecases.notes.ITagRepository;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class SerializableTagRepository implements ITagRepository {
 
     private void serialize() {
         try {
-            FileOutputStream fos = new FileOutputStream("tags");
+            FileOutputStream fos = new FileOutputStream("tags.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.tags);
             oos.close();
@@ -27,7 +27,7 @@ public class SerializableTagRepository implements ITagRepository {
 
     private void deserialize() {
         try {
-            FileInputStream fis = new FileInputStream("tags");
+            FileInputStream fis = new FileInputStream("tags.ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
             this.tags = (ArrayList<Tag>) ois.readObject();
             ois.close();
