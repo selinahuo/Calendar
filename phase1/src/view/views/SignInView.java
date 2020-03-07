@@ -1,7 +1,6 @@
 package view.views;
 
 import controller.CommandLineController;
-import controller.viewmodels.AuthenticatedModel;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 
@@ -20,11 +19,11 @@ public class SignInView extends View{
             String username = input.nextLine();
             System.out.println("Enter password:");
             String password = input.nextLine();
-            AuthenticatedModel newModel = super.getController().authenticateUser(username, password);
-            if (newModel != null) {
+            String userID = super.getController().authenticateUser(username, password);
+            if (userID != null) {
                 System.out.println("User login successful.");
-                super.getLocalStorage().setUserID(newModel.getUserID());
-                return new HomeView(super.getLocalStorage(), newModel, super.getController());
+                super.getLocalStorage().setUserID(userID);
+                return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
             } else {
                 System.out.println("Username or password are incorrect.");
             }

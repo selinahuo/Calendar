@@ -1,7 +1,6 @@
 package view.views;
 
 import controller.CommandLineController;
-import controller.viewmodels.AuthenticatedModel;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 

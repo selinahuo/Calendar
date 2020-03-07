@@ -1,13 +1,13 @@
 package view.views;
 
 import controller.CommandLineController;
-import controller.viewmodels.AuthenticatedModel;
+import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 
 import java.util.Scanner;
 
-public class EventMenuView extends AuthenticatedView {
-    public EventMenuView(LocalStorage localStorage, AuthenticatedModel model, CommandLineController controller) {
+public class EventMenuView extends View {
+    public EventMenuView(LocalStorage localStorage, ViewModel model, CommandLineController controller) {
         super(localStorage, model, controller);
     }
 
@@ -28,13 +28,13 @@ public class EventMenuView extends AuthenticatedView {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    System.out.println("Events");
+                    System.out.println("Get event by name");
                     break;
                 case "2":
-                    System.out.println("Alerts");
+                    System.out.println("Get event by (past/ongoing/future)");
                     break;
                 case "3":
-                    System.out.println("Series");
+                    System.out.println("get event by date");
                     break;
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
