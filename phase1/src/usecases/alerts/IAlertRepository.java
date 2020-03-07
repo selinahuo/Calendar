@@ -14,15 +14,16 @@ public interface IAlertRepository {
      */
     boolean saveAlert(Alert alert);
 
-//    /**
-//     * Edit a Alert.
-//     * @param id the ID of the alert to edit
-//     * @param name the new name of the alert
-//     * @param start the new start time of the alert
-//     * @param end the new end time of the alert
-//     * @return true if series edit was successful,
-//     */
-//    boolean editAlert(String id, String name, GregorianCalendar start, GregorianCalendar end);
+    /**
+     *
+     * @param ID
+     * @param name
+     * @param UserID
+     * @return
+     */
+    boolean editAlert(String ID, String name, String UserID);
+
+    Alert acknowledgeAlert(String ID, String UserID);
 
 
     /**
@@ -40,6 +41,13 @@ public interface IAlertRepository {
      */
     Alert fetchAlertByNameAndUserID(String name, String userID);
 
+    /**
+     *
+     * @param alertID
+     * @param userID involves in this alert
+     * @return
+     */
+    Alert fetchAlertByIDAndUserID(String alertID, String userID);
 
 
 
