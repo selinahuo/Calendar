@@ -1,6 +1,5 @@
 package dataaccess;
 
-import entities.CalendarEvent;
 import entities.Memo;
 import usecases.notes.IMemoRepository;
 
@@ -8,41 +7,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class SerializableMemoRepository implements IMemoRepository {
-    private ArrayList<Memo> Memos;
-
+public class SerializableMemoRepository extends SerializableRepository<Memo> implements IMemoRepository {
     public SerializableMemoRepository() {
-        this.Memos = new ArrayList<Memo>();
-    }
-
-    private void serialize() {
-        try {
-            FileOutputStream fos = new FileOutputStream("memos.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.Memos);
-            oos.close();
-            fos.close();
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    private void deserialize() {
-        try {
-            FileInputStream fis = new FileInputStream("memos.ser");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            this.Memos = (ArrayList<Memo>) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-            return;
-        } catch(ClassNotFoundException c) {
-            System.out.println("Class not found");
-            c.printStackTrace();
-            return;
-        }
+        super("memos.ser");
     }
 
     /**
@@ -53,9 +20,9 @@ public class SerializableMemoRepository implements IMemoRepository {
      */
     @Override
     public boolean saveMemo(Memo memo) {
-        deserialize();
-        this.Memos.add(memo);
-        serialize();
+        ArrayList<Memo> memos = deserialize();
+        memos.add(memo);
+        serialize(memos);
         return true;
     }
 
@@ -68,8 +35,8 @@ public class SerializableMemoRepository implements IMemoRepository {
 
     @Override
     public Memo fetchMemoByName(String memoName) {
-        deserialize();
-        for (Memo memo : Memos) {
+        ArrayList<Memo> memos = deserialize();
+        for (Memo memo : memos) {
             if (memo.getName().equals(memoName)) {
                 return memo;
             }
@@ -83,8 +50,8 @@ public class SerializableMemoRepository implements IMemoRepository {
      * @return
      */
     public Memo fetchMemoByMemoId(String memoID) {
-        deserialize();
-        for (Memo memo : Memos) {
+        ArrayList<Memo> memos = deserialize();
+        for (Memo memo : memos) {
             if (memo.getMemoID().equals(memoID)) {
                 return memo;
             }
@@ -101,8 +68,8 @@ public class SerializableMemoRepository implements IMemoRepository {
      */
     @Override
     public Memo fetchMemoByIDAndUserID(String name, String userID) {
-        deserialize();
-        for (Memo memo: Memos) {
+        ArrayList<Memo> memos = deserialize();
+        for (Memo memo: memos) {
             if (memo.getName().equals(name) && memo.getUserID().equals(userID)) {
                 return memo;
             }
@@ -112,15 +79,15 @@ public class SerializableMemoRepository implements IMemoRepository {
 
     @Override
     public Memo[] fetchMemosByUserID(String userID) {
-        deserialize();
+        ArrayList<Memo> memos = deserialize();
         List<Memo> memoList = new ArrayList<>();
-        for (Memo memo: Memos) {
-            if (memo.getUserID() == userID) {
+        for (Memo memo: memos) {
+            if (memo.getUserID().equals(userID)) {
                 memoList.add(memo);
             }
         }
         Memo[] memoArray  = new Memo[memoList.size()];
-        memoArray = memoList.toArray(memoArray);
+        memoList.toArray(memoArray);
         return memoArray;
     }
 }

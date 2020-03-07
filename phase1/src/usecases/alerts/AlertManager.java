@@ -11,12 +11,10 @@ import java.util.UUID;
 
 class AlertManager implements IAlertManager {
     private IAlertRepository alertRepository;
-    private IAlertManager alertManager;
     private IEventManager eventManager;
 
-    public AlertManager(IAlertRepository repository, IAlertManager alertManager, IEventManager eventManager){
+    public AlertManager(IAlertRepository repository, IEventManager eventManager){
         this.alertRepository = repository;
-        this.alertManager = alertManager;
         this.eventManager = eventManager;
     }
 
@@ -126,7 +124,7 @@ class AlertManager implements IAlertManager {
             alert.acknowledge();
             return this.alertRepository.editAlertAcknowledge(alertID, alert.getAcknowledge());
         }
-        return false;
+        return true;
     }
 
     /**
@@ -191,12 +189,6 @@ class AlertManager implements IAlertManager {
 //        }
 //    }
 
-
-
-
-
-
-
 //    @Override
 //    public boolean editFrequencyAlerts(String alertID, String name,ArrayList<GregorianCalendar> frequency){
 //        FrequencyAlert alert = getFrequencyAlertByID(alertID);
@@ -242,6 +234,7 @@ class AlertManager implements IAlertManager {
 //    public FrequencyAlert getFrequencyAlertByID(String alertID){
 //        return this.alertRepository.fetchFrequencyAlertByID(alertID);
 //    }
+
     @Override
     public Alert getAlertByIDAndUserID(String alertID, String userID) {
         return this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);

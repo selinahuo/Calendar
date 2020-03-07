@@ -1,7 +1,6 @@
 package usecases.users;
 
 import entities.User;
-import usecases.events.IEventRepository;
 
 class UserManager implements IUserManager {
     private IUserRepository repository;
@@ -20,11 +19,13 @@ class UserManager implements IUserManager {
     @Override
     public String authenticateUser(String username, String password) {
         User user = this.repository.fetchUserByUsername(username);
-        if (user != null && user.getPassword() == password) {
+        if (user != null && user.getPassword().equals(password)) {
             return user.getUserID();
         }
-        return "";
+        return null;
     }
+
+    // === END OF PHASE 1 === //
 
     /**
      * Create and save a new User.

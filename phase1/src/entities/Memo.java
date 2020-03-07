@@ -1,6 +1,8 @@
 package entities;
 
-public class Memo{
+import java.io.Serializable;
+
+public class Memo implements Serializable {
     String note;
     String name;
     String memoID;

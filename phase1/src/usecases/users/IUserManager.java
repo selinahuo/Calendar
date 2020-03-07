@@ -6,6 +6,10 @@ import entities.User;
  * IUserManager provides a public interface for user operations
  */
 public interface IUserManager {
+    String authenticateUser(String username, String password);
+
+    // === END OF PHASE 1 === //
+
     /**
      * Create and save a new User.
      * @param username the user's username
@@ -27,6 +31,4 @@ public interface IUserManager {
      * @return the matching User
      */
 //    User getUserByUsername(String username);
-
-    String authenticateUser(String username, String password);
 }

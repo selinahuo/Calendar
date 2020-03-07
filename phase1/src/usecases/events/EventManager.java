@@ -29,10 +29,10 @@ class EventManager implements IEventManager {
         return this.repository.fetchEventByID(id);
     }
 
-    @Override
-    public CalendarEvent[] getEventsByIDs(String[] ids) {
-        return new CalendarEvent[0];
-    }
+//    @Override
+//    public CalendarEvent[] getEventsByIDs(String[] ids) {
+//        return this.repository.fetchEventsBy
+//    }
 
     @Override
     public CalendarEvent[] getEventsByNameAndUserID(String name, String userID) {
@@ -61,7 +61,7 @@ class EventManager implements IEventManager {
 
     @Override
     public boolean editEventSeriesID(String eventID, String newSeriesID) {
-        return false;
+        return this.repository.editEventSeriesID(eventID, newSeriesID);
     }
 
     @Override

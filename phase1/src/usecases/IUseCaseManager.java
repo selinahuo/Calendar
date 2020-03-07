@@ -40,9 +40,8 @@ public interface IUseCaseManager {
     Alert getIndividualAlert(String alertID, String userID);
 
     // user set's an alert for an event
-    // TODO: include additional parameters, (date, name of event, etc.)
-    boolean createIndividualAlertOnEvent(String eventID, String userID);
-    boolean createFrequencyAlertOnEvent(String eventID, String userID);
+    boolean createIndividualAlertOnEvent(String eventID, String alertName, GregorianCalendar start, String userID);
+    boolean createFrequencyAlertOnEvent(String eventID, String alertName, GregorianCalendar start, String frequency, String userID);
     boolean acknowledgeAlert(String alertID, String userID);
 
     // === SERIES === //

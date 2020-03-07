@@ -3,12 +3,15 @@ package usecases;
 import entities.Alert;
 import entities.CalendarEvent;
 import entities.Memo;
+import sun.util.calendar.Gregorian;
 import usecases.alerts.IAlertManager;
 import usecases.events.IEventManager;
 import usecases.notes.INoteManager;
 import usecases.series.ISeriesManager;
 import usecases.users.IUserManager;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 class UseCaseManager implements IUseCaseManager {
@@ -17,6 +20,14 @@ class UseCaseManager implements IUseCaseManager {
     private IAlertManager alertManager;
     private ISeriesManager seriesManager;
     private INoteManager noteManager;
+
+    public UseCaseManager(IEventManager eventManager, IUserManager userManager, IAlertManager alertManager, ISeriesManager seriesManager, INoteManager noteManager) {
+        this.eventManager = eventManager;
+        this.userManager = userManager;
+        this.alertManager = alertManager;
+        this.seriesManager = seriesManager;
+        this.noteManager = noteManager;
+    }
 
     @Override
     public String loginUser(String username, String password) {
@@ -40,17 +51,20 @@ class UseCaseManager implements IUseCaseManager {
 
     @Override
     public CalendarEvent[] getPastEvents(String userID) {
-        return new CalendarEvent[0];
+        Calendar calendar = Calendar.getInstance();
+        GregorianCalendar now = (GregorianCalendar) calendar;
+        return this.eventManager.getEventsByDateBeforeAndUserID(now, userID);
     }
 
     @Override
     public CalendarEvent[] getCurrentEvents(String userID) {
-        return new CalendarEvent[0];
+        GregorianCalendar now = now();
+        return this.eventManager.getEventsByDateAndUserID(now, now, userID);
     }
 
     @Override
     public CalendarEvent[] getFutureEvents(String userID) {
-        return new CalendarEvent[0];
+        return this.eventManager.getEventsByDateAfterAndUserID(now(), userID);
     }
 
 //    @Override
@@ -60,7 +74,10 @@ class UseCaseManager implements IUseCaseManager {
 
     @Override
     public Alert[] getOverdueAlerts(String userID) {
-        return new Alert[0];
+        ArrayList<Alert> alertList = this.alertManager.getOverdueAlertsAfterDate(now(), userID);
+        Alert[] alertArr = new Alert[alertList.size()];
+        alertList.toArray(alertArr);
+        return alertArr;
     }
 
     @Override
@@ -69,18 +86,18 @@ class UseCaseManager implements IUseCaseManager {
     }
 
     @Override
-    public boolean createIndividualAlertOnEvent(String eventID, String userID) {
-        return false;
+    public boolean createIndividualAlertOnEvent(String eventID, String alertName, GregorianCalendar start, String userID) {
+        return this.alertManager.createIndividualAlertOnEvent(eventID, alertName, start, userID);
     }
 
     @Override
-    public boolean createFrequencyAlertOnEvent(String eventID, String userID) {
-        return false;
+    public boolean createFrequencyAlertOnEvent(String eventID, String alertName, GregorianCalendar start, String frequency, String userID) {
+        return this.alertManager.createFrequencyAlertOnEvent(eventID, alertName, userID, start, frequency);
     }
 
     @Override
     public boolean acknowledgeAlert(String alertID, String userID) {
-        return false;
+        return this.alertManager.acknowledgeAlert(alertID, userID);
     }
 
     @Override
@@ -126,5 +143,11 @@ class UseCaseManager implements IUseCaseManager {
     @Override
     public boolean tagEvent(String eventID, String tagName, String userID) {
         return this.noteManager.tagEvent(eventID, tagName, userID);
+    }
+
+    private GregorianCalendar now() {
+        Calendar calendar = Calendar.getInstance();
+        GregorianCalendar now = (GregorianCalendar) calendar;
+        return now;
     }
 }

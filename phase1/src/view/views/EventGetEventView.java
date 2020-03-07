@@ -32,7 +32,7 @@ public class EventGetEventView extends View{
                 case "1":
                     System.out.println("Past events:");
                     super.getController().getPastEvents(super.getLocalStorage().getUserID());
-                    System.out.println(System.out.println("Type [<] for back to the Event Menu");
+                    System.out.println("Type [<] for back to the Event Menu");
                     String secSelection = input.nextLine();
                     if (secSelection.equals("<")){
                         return new EventGetEventView(super.getLocalStorage(), super.getModel(), super.getController());

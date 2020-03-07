@@ -23,7 +23,7 @@ public class CreateEventView extends View {
         String end = input.nextLine();
         System.out.println("Event location:");
         String location = input.nextLine();
-        boolean success = super.getController().createEvents(eventName, start, end, location, getLocalStorage().getUserID());
+        boolean success = super.getController().createEvent(eventName, start, end, location, getLocalStorage().getUserID());
         if (success) {
             System.out.println("Event was created successfully.");
         } else {

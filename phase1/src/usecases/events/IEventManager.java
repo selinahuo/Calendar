@@ -14,7 +14,7 @@ public interface IEventManager {
     boolean createEvent(String eventName, GregorianCalendar start, GregorianCalendar end, String location, String userID);
 
     CalendarEvent getEventByID(String id);
-    CalendarEvent[] getEventsByIDs(String[] ids);
+//    CalendarEvent[] getEventsByIDs(String[] ids);
     CalendarEvent[] getEventsByNameAndUserID(String name, String userID);
 
     CalendarEvent[] getEventsByDateAndUserID(GregorianCalendar before, GregorianCalendar after, String userID);
@@ -28,8 +28,6 @@ public interface IEventManager {
     CalendarEvent[] getEventsByMemoIDAndUserID(String memoID, String userID);
     boolean setEventMemoIDs(ArrayList<String> memoIDs, String eventID, String userID);
     boolean setEventTagIDs(ArrayList<String> tagIDs, String eventID, String userID);
-
-
 
     // get event by alertID (and userID)
     CalendarEvent getEventByAlertIDAndUserID(String alertID, String userID);

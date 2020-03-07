@@ -12,16 +12,13 @@ import java.util.GregorianCalendar;
 
 public class CommandLineController {
     private IUseCaseManager useCaseManager;
-//
-//    public CommandLineController(IUseCaseManager useCaseManager) {
-//        this.useCaseManager = useCaseManager;
-//    }
+
+    public CommandLineController(IUseCaseManager useCaseManager) {
+        this.useCaseManager = useCaseManager;
+    }
 
     public String authenticateUser(String username, String password) {
-        if (username.equals("Michael") && password.equals("123")) {
-            return "userID";
-        }
-        return null;
+        return this.useCaseManager.loginUser(username, password);
     }
 
     private GregorianCalendar convertStringToCalendar(String dateString) {
@@ -37,8 +34,7 @@ public class CommandLineController {
         return calDate;
     }
 
-    public boolean createEvents(String eventName, String start, String end, String location, String userID) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
+    public boolean createEvent(String eventName, String start, String end, String location, String userID) {
         GregorianCalendar calStart = convertStringToCalendar(start);
         GregorianCalendar calEnd = convertStringToCalendar(end);
         if (calStart != null && calEnd != null) {

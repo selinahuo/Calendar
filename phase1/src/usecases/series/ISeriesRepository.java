@@ -18,7 +18,7 @@ public interface ISeriesRepository {
      * @param id the ID to filter by
      * @return the corresponding Series or null if it does not exist
      */
-    Series fetchSeriesByID(String id);
+//    Series fetchSeriesByID(String id);
 
     /**
      * Fetch a Series that has an ID in the list of IDS with a matching name

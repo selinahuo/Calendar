@@ -1,6 +1,8 @@
 package entities;
 
-public class Tag implements java.io.Serializable {
+import java.io.Serializable;
+
+public class Tag implements Serializable {
     private String tagID;
     private String name;
     private int count;

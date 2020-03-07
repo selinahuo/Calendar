@@ -1,12 +1,13 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
  * A class that represents a CalendarEvent
  */
-public class CalendarEvent {
+public class CalendarEvent implements Serializable {
     private String eventID;
     private String name;
     private GregorianCalendar start;

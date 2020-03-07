@@ -1,10 +1,11 @@
 package entities;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Class representing  a Calendar Alert
  */
-public class Alert {
+public class Alert implements Serializable {
     private String alertID;
     private String alertName;
     private Boolean totalAcknowledged;

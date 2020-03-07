@@ -6,40 +6,9 @@ import usecases.notes.ITagRepository;
 import java.io.*;
 import java.util.ArrayList;
 
-public class SerializableTagRepository implements ITagRepository {
-    private ArrayList<Tag> tags;
-
+public class SerializableTagRepository extends SerializableRepository<Tag> implements ITagRepository {
     public SerializableTagRepository() {
-        this.tags = new ArrayList<Tag>();
-    }
-
-    private void serialize() {
-        try {
-            FileOutputStream fos = new FileOutputStream("tags.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.tags);
-            oos.close();
-            fos.close();
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    private void deserialize() {
-        try {
-            FileInputStream fis = new FileInputStream("tags.ser");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            this.tags = (ArrayList<Tag>) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-            return;
-        } catch(ClassNotFoundException c) {
-            System.out.println("Class not found");
-            c.printStackTrace();
-            return;
-        }
+        super("tags.ser");
     }
 
     /**
@@ -50,9 +19,9 @@ public class SerializableTagRepository implements ITagRepository {
      */
     @Override
     public boolean saveTag(Tag tag) {
-        deserialize();
-        this.tags.add(tag);
-        serialize();
+        ArrayList<Tag> tags = deserialize();
+        tags.add(tag);
+        serialize(tags);
         return true;
     }
 
@@ -64,9 +33,9 @@ public class SerializableTagRepository implements ITagRepository {
      */
     @Override
     public Tag fetchTagByID(String id) {
-        deserialize();
+        ArrayList<Tag> tags = deserialize();
         for (Tag tag : tags) {
-            if (tag.getTagID() == id) {
+            if (tag.getTagID().equals(id)) {
                 return tag;
             }
         }
@@ -82,7 +51,7 @@ public class SerializableTagRepository implements ITagRepository {
      */
     @Override
     public Tag fetchTagByNameAndUserID(String name, String userID) {
-        deserialize();
+        ArrayList<Tag> tags = deserialize();
         for (Tag tag: tags) {
             if (tag.getName().equals(name) && tag.getUserID().equals(userID)) {
                 return tag;
