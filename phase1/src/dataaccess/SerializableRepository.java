@@ -38,8 +38,13 @@ public abstract class SerializableRepository<T> {
             fis.close();
             return this.items;
         } catch(IOException ioe) {
-            ioe.printStackTrace();
-            System.exit(1);
+            try {
+                serialize(this.items);
+                return deserialize();
+            } catch(Exception e) {
+                ioe.printStackTrace();
+                System.exit(1);
+            }
         } catch(ClassNotFoundException c) {
             c.printStackTrace();
             System.exit(1);
