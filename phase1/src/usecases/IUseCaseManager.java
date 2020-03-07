@@ -17,7 +17,7 @@ public interface IUseCaseManager {
     String loginUser(String username, String password);
 
     // === EVENTS === //
-    boolean createEvent(CalendarEvent event, String userID);
+    boolean createEvent(String eventName, GregorianCalendar start, GregorianCalendar end, String location, String userID);
 
     // get a user's singular event (series if part of, alert if part of, and memos and tags)
     CalendarEvent getSingularEvent(String eventID, String userID);

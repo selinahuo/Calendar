@@ -11,14 +11,14 @@ public interface IUserRepository {
      * @param user the User to save
      * @return true if User creation was successful, false otherwise
      */
-    boolean saveUser(User user);
+//    boolean saveUser(User user);
 
     /**
      * Fetch an User by their ID.
      * @param id the ID to filter by.
      * @return the corresponding User or null if it does not exist
      */
-    User fetchUserByID(String id);
+//    User fetchUserByID(String id);
 
     /**
      * Fetch User by their username.

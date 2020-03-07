@@ -38,6 +38,7 @@ class SeriesManager implements ISeriesManager {
         }
         return true;
     }
+
     private ArrayList<GregorianCalendar[]> getTimes(GregorianCalendar start, GregorianCalendar end, String frequency, int numEvents) {
         int daysToAdd;
         if (frequency == "d") {

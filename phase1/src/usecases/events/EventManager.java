@@ -4,6 +4,7 @@ import entities.CalendarEvent;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 
 class EventManager implements IEventManager {
     private IEventRepository repository;
@@ -14,6 +15,12 @@ class EventManager implements IEventManager {
 
     @Override
     public boolean createEvent(CalendarEvent event) {
+        return this.repository.saveEvent(event);
+    }
+
+    @Override
+    public boolean createEvent(String eventName, GregorianCalendar start, GregorianCalendar end, String location, String userID) {
+        CalendarEvent event = new CalendarEvent(UUID.randomUUID().toString(), eventName, start, end, location, userID);
         return this.repository.saveEvent(event);
     }
 

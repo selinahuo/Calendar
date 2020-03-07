@@ -16,6 +16,7 @@ public class EventMenuView extends View {
         System.out.println("[1] Get Event by Name");
         System.out.println("[2] Get events (past/ongoing/future)");
         System.out.println("[3] Get event by date");
+        System.out.println("[4] Create a new event");
         System.out.println("[~] Go Home");
     }
 
@@ -36,6 +37,8 @@ public class EventMenuView extends View {
                 case "3":
                     System.out.println("get event by date");
                     break;
+                case "4":
+                    return new CreateEventView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:

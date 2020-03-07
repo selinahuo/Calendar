@@ -1,12 +1,22 @@
-//
-//public class CalendarAppBuilder {
-////    private IEventRepository eventRepository;
-//    private IUserRepository userRepository;
-//    private ISeriesRepository seriesRepository;
-//    private IUseCaseManager useCaseManager;
-//    private SimpleController controller;
-//    private CommandLineUI presenter;
-//
+import usecases.alerts.IAlertRepository;
+import usecases.events.IEventRepository;
+import usecases.notes.IMemoRepository;
+import usecases.notes.INoteManager;
+import usecases.notes.ITagRepository;
+import usecases.series.ISeriesRepository;
+import usecases.users.IUserRepository;
+
+public class CalendarAppBuilder {
+    private IEventRepository eventRepository;
+    private IUserRepository userRepository;
+    private IAlertRepository alertRepository;
+    private ISeriesRepository seriesRepository;
+    private IMemoRepository memoRepository;
+    private ITagRepository tagRepository;
+    private IUseCaseManager useCaseManager;
+    private SimpleController controller;
+    private CommandLineUI presenter;
+
 //    private void buildEventRepository() {
 //        this.eventRepository = new CSVEventRepository();
 //    }
@@ -37,4 +47,4 @@
 //        this.presenter = new CommandLineUI(this.controller);
 //        return this.presenter;
 //    }
-//}
+}

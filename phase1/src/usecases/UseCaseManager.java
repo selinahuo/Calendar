@@ -20,12 +20,12 @@ class UseCaseManager implements IUseCaseManager {
 
     @Override
     public String loginUser(String username, String password) {
-        return "";
+        return this.userManager.authenticateUser(username, password);
     }
 
     @Override
-    public boolean createEvent(CalendarEvent event, String userID) {
-        return false;
+    public boolean createEvent(String eventName, GregorianCalendar start, GregorianCalendar end, String location, String userID) {
+        return this.eventManager.createEvent(eventName, start, end, location, userID);
     }
 
     @Override

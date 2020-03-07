@@ -21,6 +21,20 @@ public class CalendarEvent {
     private String alertID;
 
     public CalendarEvent(String eventID, String name, GregorianCalendar start, GregorianCalendar end, String location,
+                         String userID) {
+        this.eventID = eventID;
+        this.name = name;
+        this.start = start;
+        this.end = end;
+        this.location = location;
+        this.userID = userID;
+        this.tagIDs = new ArrayList<String>();
+        this.memoIDs = new ArrayList<String>();
+        this.seriesID = "";
+        this.alertID = "";
+    }
+
+    public CalendarEvent(String eventID, String name, GregorianCalendar start, GregorianCalendar end, String location,
                          String userID, ArrayList<String> tagIDs, ArrayList<String> memoIDs,
                          String seriesID, String alertID) {
         this.eventID = eventID;

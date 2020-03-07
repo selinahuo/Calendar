@@ -4,6 +4,12 @@ import controller.viewmodels.ListModel;
 import entities.CalendarEvent;
 import usecases.IUseCaseManager;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class CommandLineController {
     private IUseCaseManager useCaseManager;
 //
@@ -16,6 +22,29 @@ public class CommandLineController {
             return "userID";
         }
         return null;
+    }
+
+    private GregorianCalendar convertStringToCalendar(String dateString) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
+        GregorianCalendar calDate;
+        try {
+            Date date = df.parse(dateString);
+            calDate = new GregorianCalendar();
+            calDate.setTime(date);
+        } catch (ParseException e) {
+            return null;
+        }
+        return calDate;
+    }
+
+    public boolean createEvents(String eventName, String start, String end, String location, String userID) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
+        GregorianCalendar calStart = convertStringToCalendar(start);
+        GregorianCalendar calEnd = convertStringToCalendar(end);
+        if (calStart != null && calEnd != null) {
+            return this.useCaseManager.createEvent(eventName, calStart, calEnd, location, userID);
+        }
+        return false;
     }
 
     public ListModel getEventsByName(String eventName, String userID) {

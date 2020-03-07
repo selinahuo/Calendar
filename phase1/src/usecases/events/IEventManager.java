@@ -11,6 +11,7 @@ import entities.CalendarEvent;
  */
 public interface IEventManager {
     boolean createEvent(CalendarEvent event);
+    boolean createEvent(String eventName, GregorianCalendar start, GregorianCalendar end, String location, String userID);
 
     CalendarEvent getEventByID(String id);
     CalendarEvent[] getEventsByIDs(String[] ids);
