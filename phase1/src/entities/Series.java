@@ -1,11 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * A class that represents a Series of CalendarEvents
  */
-public class Series {
+public class Series implements Serializable {
     private String seriesID;
     private String name;
     private int eventCount;

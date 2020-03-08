@@ -1,13 +1,12 @@
 package entities;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Memo{
+public class Memo implements Serializable {
     String note;
     String name;
     String memoID;
     String userID;
-
 
     public Memo(String name, String note, String memoID, String userID) {
         this.name = name;

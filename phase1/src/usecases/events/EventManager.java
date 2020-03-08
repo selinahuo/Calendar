@@ -2,7 +2,9 @@ package usecases.events;
 
 import entities.CalendarEvent;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 
 class EventManager implements IEventManager {
     private IEventRepository repository;
@@ -17,14 +19,20 @@ class EventManager implements IEventManager {
     }
 
     @Override
+    public boolean createEvent(String eventName, GregorianCalendar start, GregorianCalendar end, String location, String userID) {
+        CalendarEvent event = new CalendarEvent(UUID.randomUUID().toString(), eventName, start, end, location, userID);
+        return this.repository.saveEvent(event);
+    }
+
+    @Override
     public CalendarEvent getEventByID(String id) {
         return this.repository.fetchEventByID(id);
     }
 
-    @Override
-    public CalendarEvent[] getEventsByIDs(String[] ids) {
-        return new CalendarEvent[0];
-    }
+//    @Override
+//    public CalendarEvent[] getEventsByIDs(String[] ids) {
+//        return this.repository.fetchEventsBy
+//    }
 
     @Override
     public CalendarEvent[] getEventsByNameAndUserID(String name, String userID) {
@@ -53,7 +61,7 @@ class EventManager implements IEventManager {
 
     @Override
     public boolean editEventSeriesID(String eventID, String newSeriesID) {
-        return false;
+        return this.repository.editEventSeriesID(eventID, newSeriesID);
     }
 
     @Override
@@ -62,8 +70,18 @@ class EventManager implements IEventManager {
     }
 
     @Override
+    public boolean setEventTagIDs(ArrayList<String> tagIDs, String eventID, String userID) {
+        return this.repository.setEventTagIDs(tagIDs, eventID, userID);
+    }
+
+    @Override
     public CalendarEvent[] getEventsByMemoIDAndUserID(String memoID, String userID) {
         return this.repository.fetchEventsByMemoIDAndUserID(memoID, userID);
+    }
+
+    @Override
+    public boolean setEventMemoIDs(ArrayList<String> memoIDs, String eventID, String userID) {
+        return this.repository.setEventMemoIDs(memoIDs, eventID, userID);
     }
 
     @Override

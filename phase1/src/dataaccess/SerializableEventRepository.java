@@ -3,46 +3,13 @@ package dataaccess;
 import entities.CalendarEvent;
 import usecases.events.IEventRepository;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class SerializableEventRepository implements IEventRepository {
-
-    private ArrayList<CalendarEvent> calendarEvents;
-
+public class SerializableEventRepository extends SerializableRepository <CalendarEvent> implements IEventRepository {
     public SerializableEventRepository() {
-        this.calendarEvents = new ArrayList<CalendarEvent>();
-    }
-
-    private void serialize() {
-        try {
-            FileOutputStream fos = new FileOutputStream("calenderEvents");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.calendarEvents);
-            oos.close();
-            fos.close();
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    private void deserialize() {
-        try {
-            FileInputStream fis = new FileInputStream("calenderEvents");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            this.calendarEvents = (ArrayList<CalendarEvent>) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-            return;
-        } catch(ClassNotFoundException c) {
-            System.out.println("Class not found");
-            c.printStackTrace();
-            return;
-        }
+        super("events.ser");
     }
 
     /**
@@ -53,9 +20,9 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public boolean saveEvent(CalendarEvent event) {
-        deserialize();
-        this.calendarEvents.add(event);
-        serialize();
+        ArrayList<CalendarEvent> events = deserialize();
+        events.add(event);
+        serialize(events);
         return true;
     }
 
@@ -67,8 +34,8 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public CalendarEvent fetchEventByID(String id) {
-        deserialize();
-        for (CalendarEvent calenderEvent : calendarEvents) {
+        ArrayList<CalendarEvent> events = deserialize();
+        for (CalendarEvent calenderEvent : events) {
             if (calenderEvent.getEventID().equals(id)) {
                 return calenderEvent;
             }
@@ -78,16 +45,16 @@ public class SerializableEventRepository implements IEventRepository {
 
     @Override
     public CalendarEvent[] fetchEventsByNameAndUserID(String name, String userID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getName().equals(name) && calendarEvent.getUserID().equals(userID)) {
                 events.add(calendarEvent);
             }
         }
-        CalendarEvent[] arr_events = new CalendarEvent[events.size()];
-        arr_events = events.toArray(arr_events);
-        return arr_events;
+        CalendarEvent[] arrEvents = new CalendarEvent[events.size()];
+        events.toArray(arrEvents);
+        return arrEvents;
     }
 
     /**
@@ -99,7 +66,7 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public CalendarEvent[] fetchEventsByDateAndUserID(GregorianCalendar before, GregorianCalendar after, String userID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getUserID().equals(userID)) {
@@ -109,9 +76,9 @@ public class SerializableEventRepository implements IEventRepository {
                 }
             }
         }
-        CalendarEvent[] arr_events = new CalendarEvent[events.size()];
-        arr_events = events.toArray(arr_events);
-        return arr_events;
+        CalendarEvent[] arrEvents = new CalendarEvent[events.size()];
+        events.toArray(arrEvents);
+        return arrEvents;
     }
 
     /**
@@ -122,7 +89,7 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public CalendarEvent[] fetchEventsByDateBeforeAndUserID(GregorianCalendar before, String userID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getUserID().equals(userID)) {
@@ -131,9 +98,9 @@ public class SerializableEventRepository implements IEventRepository {
                 }
             }
         }
-        CalendarEvent[] arr_events = new CalendarEvent[events.size()];
-        arr_events = events.toArray(arr_events);
-        return arr_events;
+        CalendarEvent[] arrEvents = new CalendarEvent[events.size()];
+        events.toArray(arrEvents);
+        return arrEvents;
     }
 
     /**
@@ -144,7 +111,7 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public CalendarEvent[] fetchEventsByDateAfterAndUserID(GregorianCalendar after, String userID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getUserID().equals(userID)) {
@@ -153,9 +120,9 @@ public class SerializableEventRepository implements IEventRepository {
                 }
             }
         }
-        CalendarEvent[] arr_events = new CalendarEvent[events.size()];
-        arr_events = events.toArray(arr_events);
-        return arr_events;
+        CalendarEvent[] arrEvents = new CalendarEvent[events.size()];
+        events.toArray(arrEvents);
+        return arrEvents;
     }
 
     /**
@@ -166,16 +133,17 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public CalendarEvent[] fetchEventBySeriesIDAndUserID(String seriesID, String userID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
+            System.out.println(calendarEvent.getName());
             if (calendarEvent.getUserID().equals(userID) && calendarEvent.getSeriesID().equals(seriesID)) {
                 events.add(calendarEvent);
             }
         }
-        CalendarEvent[] arr_events = new CalendarEvent[events.size()];
-        arr_events = events.toArray(arr_events);
-        return arr_events;
+        CalendarEvent[] arrEvents = new CalendarEvent[events.size()];
+        events.toArray(arrEvents);
+        return arrEvents;
     }
 
     /**
@@ -186,10 +154,11 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public boolean editEventSeriesID(String eventID, String newSeriesID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getEventID().equals(eventID)) {
                 calendarEvent.setSeriesID(newSeriesID);
+                serialize(calendarEvents);
                 return true;
             }
         }
@@ -204,16 +173,29 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public CalendarEvent[] fetchEventsByTagIDAndUserID(String tagID, String userID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getTagIDs().equals(tagID) && calendarEvent.getUserID().equals(userID)) {
                 events.add(calendarEvent);
             }
         }
-        CalendarEvent[] arr_events = new CalendarEvent[events.size()];
-        arr_events = events.toArray(arr_events);
-        return arr_events;
+        CalendarEvent[] arrEvents = new CalendarEvent[events.size()];
+        events.toArray(arrEvents);
+        return arrEvents;
+    }
+
+    @Override
+    public boolean setEventTagIDs(ArrayList<String> tagIDs, String eventID, String userID) {
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
+        for (CalendarEvent calendarEvent: calendarEvents) {
+            if (calendarEvent.getEventID().equals(eventID) && calendarEvent.getUserID().equals(userID)) {
+                calendarEvent.setTagIDs(tagIDs);
+                serialize(calendarEvents);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -224,16 +206,29 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public CalendarEvent[] fetchEventsByMemoIDAndUserID(String memoID, String userID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getMemoIDs().contains(memoID) && calendarEvent.getUserID().equals(userID)) {
                 events.add(calendarEvent);
             }
         }
-        CalendarEvent[] arr_events = new CalendarEvent[events.size()];
-        arr_events = events.toArray(arr_events);
-        return arr_events;
+        CalendarEvent[] arrEvents = new CalendarEvent[events.size()];
+        events.toArray(arrEvents);
+        return arrEvents;
+    }
+
+    @Override
+    public boolean setEventMemoIDs(ArrayList<String> memoIDs, String eventID, String userID) {
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
+        for (CalendarEvent calendarEvent: calendarEvents) {
+            if (calendarEvent.getEventID().equals(eventID) && calendarEvent.getUserID().equals(userID)) {
+                calendarEvent.setMemoIDs(memoIDs);
+                serialize(calendarEvents);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -244,9 +239,9 @@ public class SerializableEventRepository implements IEventRepository {
      */
     @Override
     public CalendarEvent fetchEventByAlertIDAndUserID(String alertID, String userID) {
-        deserialize();
+        ArrayList<CalendarEvent> calendarEvents = deserialize();
         for (CalendarEvent calendarEvent: calendarEvents) {
-            if (calendarEvent.getMemoIDs().contains(alertID) && calendarEvent.getUserID().equals(userID)) {
+            if (calendarEvent.getAlertID().equals(alertID) && calendarEvent.getUserID().equals(userID)) {
                 return calendarEvent;
             }
         }

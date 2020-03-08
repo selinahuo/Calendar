@@ -1,4 +1,4 @@
-package usecases.items;
+package usecases.notes;
 
 import entities.Tag;
 

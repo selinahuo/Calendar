@@ -4,58 +4,48 @@ import entities.Alert;
 
 import entities.CalendarEvent;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public interface IAlertManager {
 
     /**
      *
-     * @param alertID the id of this alert
-     * @param alertName the name of this alert
-     * @param start start time
-     * @return ttrue if event creation was successful, false otherwise
+     * @param eventID
+     * @param name
+     * @param startTime
+     * @param userID
+     * @return
      */
-    boolean createIndividualAlert(String alertID, String alertName, GregorianCalendar start);
+    public boolean createIndividualAlertOnEvent(String eventID, String alertName, GregorianCalendar startTime, String userID);
 
     /**
      *
-     * @param alertID the id of this alert
-     * @param alertName the name of this alert
-     * @param frequency the rate of which this is repeating
-     * @return true if event creation was successful, false otherwise
+     * @param eventID
+     * @param name
+     * @param frequency
+     * @param userID
+     * @return
      */
-    public boolean createFrequencylAlert(String alertID, String alertName, GregorianCalendar[] frequency);
+//    public boolean createFrequencyAlert(String eventID, String name, ArrayList<GregorianCalendar> frequency, String userID);
 
-    public boolean createFrequencylAlertByEvent(String alertID, String alertName,  GregorianCalendar end, String eventId);
+    boolean createFrequencyAlertOnEvent(String eventID, String alertName, String userID, GregorianCalendar startTime, String frequency);
 
-//    /**
-//     * Edit a alert with matching ID
-//     * @param alertID ID of the alert to edit
-//     * @param name new name of the alert
-//     * @param newStart new start time of the series
-//     * @param newEnd new end time of the series
-//     * @return true if alerts edit was successful, false otherwise
-//     */
-//    boolean editAlerts(String alertID, String name, GregorianCalendar newStart, GregorianCalendar newEnd);
-//
-//    /**
-//     * Edit a alert with matching ID
-//     * @param alertID ID of the alert to edit
-//     * @param name new name of the alert
-//     * @param newStart new start time of the alert
-//     * @param newEnd new end time of the alert
-//     * @param newFrequency new frequency of the alert
-//     * @return true if alerts edit was successful, false otherwise
-//     */
-//    boolean editFrequencyAlerts(String alertID, String name, GregorianCalendar newStart, GregorianCalendar newEnd,
-//                                GregorianCalendar[] newFrequency);
+//    public boolean  editFrequencyAlerts(String alertID, String name,ArrayList<GregorianCalendar> frequency);
+
+
+//    public boolean  editIndividualAlert(String alertID, String name, GregorianCalendar newStart);
+
+//    public void acknowledgeIndividualAlert(String alertID, String userID);
+//    public void acknowledgeFrequencyAlert(String alertID, String userID);
+    public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID);
 
     /**
      * Get all Alerts that have an ID in a list of IDs
      * @param id id of the desired Alert
      * @return Alert that match the id
      */
-    Alert getAlertByIDs(String id);
+//    Alert getAlertByIDs(String id);
 
     /**
      * Get a Alert that has an ID  and a matching name
@@ -63,9 +53,11 @@ public interface IAlertManager {
      * @param id id of this alert
      * @return a matching Alert
      */
-    Alert getAlertByNameAndId(String name, String id);
+//    Alert getAlertByNameAndId(String name, String id);
 
-    CalendarEvent getEventByAlertNameAndUserID(String alertName, String userID);
+    //CalendarEvent getEventByAlertNameAndUserID(String alertName, String userID);
 
+    Alert getAlertByIDAndUserID(String alertID, String userID);
 
+    boolean acknowledgeAlert(String alertID, String userID);
 }

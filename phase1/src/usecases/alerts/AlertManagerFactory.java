@@ -12,7 +12,7 @@ public class AlertManagerFactory {
      * @param repository the injected AlertRepositoryImplementation
      * @return the new AlertManager instance
      */
-    public static IAlertManager build(IAlertRepository repository, IAlertManager alertManager, IEventManager eventManager) {
-        return new AlertManager(repository, alertManager, eventManager);
+    public static IAlertManager build(IAlertRepository repository, IEventManager eventManager) {
+        return new AlertManager(repository, eventManager);
     }
 }

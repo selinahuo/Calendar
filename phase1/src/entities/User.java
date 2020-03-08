@@ -1,9 +1,11 @@
 package entities;
 
+import java.io.Serializable;
+
 /**
  * Class representing a CalendarApp User
  */
-public class User {
+public class User implements Serializable {
     private String userID;
     private String username;
     private String password;

@@ -1,12 +1,13 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
  * A class that represents a CalendarEvent
  */
-public class CalendarEvent {
+public class CalendarEvent implements Serializable {
     private String eventID;
     private String name;
     private GregorianCalendar start;
@@ -19,6 +20,20 @@ public class CalendarEvent {
     private ArrayList<String> memoIDs;
     private String seriesID;
     private String alertID;
+
+    public CalendarEvent(String eventID, String name, GregorianCalendar start, GregorianCalendar end, String location,
+                         String userID) {
+        this.eventID = eventID;
+        this.name = name;
+        this.start = start;
+        this.end = end;
+        this.location = location;
+        this.userID = userID;
+        this.tagIDs = new ArrayList<String>();
+        this.memoIDs = new ArrayList<String>();
+        this.seriesID = "";
+        this.alertID = "";
+    }
 
     public CalendarEvent(String eventID, String name, GregorianCalendar start, GregorianCalendar end, String location,
                          String userID, ArrayList<String> tagIDs, ArrayList<String> memoIDs,

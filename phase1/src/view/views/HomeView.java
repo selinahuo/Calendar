@@ -1,18 +1,21 @@
 package view.views;
 
 import controller.CommandLineController;
-import controller.viewmodels.AuthenticatedModel;
+import controller.viewmodels.ViewModel;
 import view.LocalStorage;
+import view.views.alert.AlertMenuView;
+import view.views.event.EventMenuView;
+import view.views.series.SeriesMenuView;
 
 import java.util.Scanner;
 
-public class HomeView extends AuthenticatedView {
-    public HomeView(LocalStorage localStorage, AuthenticatedModel model, CommandLineController controller) {
+public class HomeView extends View {
+    public HomeView(LocalStorage localStorage, ViewModel model, CommandLineController controller) {
         super(localStorage, model, controller);
     }
 
     private void inputPrompt() {
-        System.out.println("Please select one of the following menus by typing the number:");
+        System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Events");
         System.out.println("[2] Alerts");
         System.out.println("[3] Series");
@@ -30,11 +33,9 @@ public class HomeView extends AuthenticatedView {
                 case "1":
                     return new EventMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "2":
-                    System.out.println("Alerts");
-                    break;
+                    return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "3":
-                    System.out.println("Series");
-                    break;
+                    return new SeriesMenuView(getLocalStorage(), getModel(), getController());
                 case "4":
                     System.out.println("Notes");
                     break;

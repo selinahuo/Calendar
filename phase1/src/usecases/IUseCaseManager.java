@@ -1,10 +1,8 @@
 package usecases;
 
-import entities.Alert;
-import entities.CalendarEvent;
-import entities.Memo;
+import dataclasses.Quintuple;
+import entities.*;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -17,11 +15,11 @@ public interface IUseCaseManager {
     String loginUser(String username, String password);
 
     // === EVENTS === //
-    boolean createEvent(CalendarEvent event, String userID);
+    boolean createEvent(String eventName, GregorianCalendar start, GregorianCalendar end, String location, String userID);
 
     // get a user's singular event (series if part of, alert if part of, and memos and tags)
-    CalendarEvent getSingularEvent(String eventID, String userID);
-    CalendarEvent getSingularEventByName(String name, String userID);
+    Quintuple<CalendarEvent, Alert, Memo, Tag, Series> getSingularEvent(String eventID, String userID);
+    CalendarEvent[] getEventsByName(String name, String userID);
 
     // get user's past events
     CalendarEvent[] getPastEvents(String userID);
@@ -30,7 +28,7 @@ public interface IUseCaseManager {
     // get user's future events
     CalendarEvent[] getFutureEvents(String userID);
     // get event that start on date
-    CalendarEvent[] getEventByDate(GregorianCalendar date, String userID);
+//    CalendarEvent[] getEventByDate(GregorianCalendar date, String userID);
 
     // === ALERTS === //
 
@@ -40,9 +38,8 @@ public interface IUseCaseManager {
     Alert getIndividualAlert(String alertID, String userID);
 
     // user set's an alert for an event
-    // TODO: include additional parameters, (date, name of event, etc.)
-    boolean createIndividualAlertOnEvent(String eventID, String userID);
-    boolean createFrequencyAlertOnEvent(String eventID, String userID);
+    boolean createIndividualAlertOnEvent(String eventID, String alertName, GregorianCalendar start, String userID);
+    boolean createFrequencyAlertOnEvent(String eventID, String alertName, GregorianCalendar start, String frequency, String userID);
     boolean acknowledgeAlert(String alertID, String userID);
 
     // === SERIES === //
@@ -58,17 +55,15 @@ public interface IUseCaseManager {
     // === NOTES === //
 
     // get a user's memos
-    Memo[] getMemos(String userID);
+    Memo[] getMemos(String userID); // DONE
     // get a user's event from list of memos
     CalendarEvent[] getEventsByMemoID(String memoID, String UserID);
     // get a user's event by tag name
     CalendarEvent[] getEventsByTagName(String tagName, String userID);
 
     // create a memo
-    // TODO: add additional parameters (name, content, etc.)
-    boolean createMemo(String userID);
-    boolean attachMemoToEvents(String memoID, String[] eventIDs, String userID);
+    boolean createMemo(String name, String note, String userID);
+    boolean attachMemoToEvent(String memoID, String eventID, String userID);
     // create a tag
-    // TODO: this would check if a tag with the name exists if not create a new one. Tag the event with the appropriate ID
     boolean tagEvent(String eventID, String tagName, String userID);
 }

@@ -36,8 +36,10 @@ class SeriesManager implements ISeriesManager {
             CalendarEvent eventToCreate = new CalendarEvent(UUID.randomUUID().toString(), seriesName, time[0], time[1], "", userID, null, null, newSeries.getSeriesID(), null);
             this.eventManager.createEvent(eventToCreate);
         }
+        this.repository.saveSeries(newSeries);
         return true;
     }
+
     private ArrayList<GregorianCalendar[]> getTimes(GregorianCalendar start, GregorianCalendar end, String frequency, int numEvents) {
         int daysToAdd;
         if (frequency == "d") {
@@ -56,6 +58,7 @@ class SeriesManager implements ISeriesManager {
             times.add(timeArray);
             startTime.add(Calendar.DAY_OF_MONTH, daysToAdd);
             endTime.add(Calendar.DAY_OF_MONTH, daysToAdd);
+            i++;
         }
         return times;
     }
@@ -67,5 +70,10 @@ class SeriesManager implements ISeriesManager {
             return new CalendarEvent[0];
         }
         return this.eventManager.getEventsBySeriesIDAndUserID(series.getSeriesID(), userID);
+    }
+
+    @Override
+    public Series getSeriesByIDAndUserID(String seriesID, String userID) {
+        return this.repository.fetchSeriesByIDAndUserID(seriesID, userID);
     }
 }

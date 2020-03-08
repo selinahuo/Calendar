@@ -13,12 +13,7 @@ public interface ISeriesRepository {
      */
     boolean saveSeries(Series series);
 
-    /**
-     * Fetch a Series by its ID.
-     * @param id the ID to filter by
-     * @return the corresponding Series or null if it does not exist
-     */
-    Series fetchSeriesByID(String id);
+    Series fetchSeriesByIDAndUserID(String seriesID, String userID);
 
     /**
      * Fetch a Series that has an ID in the list of IDS with a matching name
