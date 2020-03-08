@@ -22,15 +22,13 @@ public class CreateIndividualAlertView extends View {
         String alertName = input.nextLine();
         System.out.println("Alert start time (YYYY-MM-DD-HH-MM):");
         String startTime = input.nextLine();
-        System.out.println("User ID:");
-        String userID = input.nextLine();
-        boolean success = super.getController().CreateIndividualAlert(eventID, alertName, startTime,userID);
+        boolean success = super.getController().CreateIndividualAlert(eventID, alertName, startTime, getLocalStorage().getUserID());
         if (success) {
             System.out.println("Event was created successfully.");
         } else {
             super.printError("Something went wrong with individual alert creation");
         }
-        return new CreateAlertView(super.getLocalStorage(), super.getModel(), super.getController());
+        return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
     }
 
 }

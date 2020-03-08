@@ -4,6 +4,7 @@ import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 
+import view.views.alert.AlertMenuView;
 import view.views.event.EventMenuView;
 import view.views.notes.NoteMenuView;
 import view.views.series.SeriesMenuView;
@@ -34,7 +35,7 @@ public class HomeView extends View {
                 case "1":
                     return new EventMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "2":
-                    //return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
+                    return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "3":
                     return new SeriesMenuView(getLocalStorage(), getModel(), getController());
                 case "4":

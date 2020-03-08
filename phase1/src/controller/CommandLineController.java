@@ -104,6 +104,17 @@ public class CommandLineController {
         return listModel;
     }
 
+    private ListModel createListModel(Alert[] alerts) {
+        ListModel listModel = new ListModel();
+        ArrayList<String> alertStrings = new ArrayList<>();
+        for (Alert alert: alerts) {
+            String eventString = generateAlertString(alert);
+            alertStrings.add(eventString);
+        }
+        listModel.setList(alertStrings);
+        return listModel;
+    }
+
     private String generateEventString(CalendarEvent event) {
         if (event == null) {
             return "";
@@ -128,7 +139,7 @@ public class CommandLineController {
         SimpleDateFormat fmt = new SimpleDateFormat("MMM dd, yyyy | HH:mm");
         StringBuilder str = new StringBuilder();
         str.append("Alert ID: " + alert.getAlertID() + " - " + alert.getAlertName());
-        str.append(" rings next at " + fmt.format(alert.getNextRing()));
+        str.append(" is ringing since it's past " + fmt.format(alert.getNextRing().getTime()));
 
         return str.toString();
     }
@@ -156,7 +167,7 @@ public class CommandLineController {
 
     public boolean CreateFrequencyAlert(String eventID, String alertName, String start, String frequency, String userID) {
         GregorianCalendar startTime = convertStringToCalendar(start);
-        if(startTime != null) {
+        if (startTime != null) {
             return this.useCaseManager.createFrequencyAlertOnEvent(eventID, alertName,startTime,frequency,userID);
         }
         return false;
@@ -170,8 +181,13 @@ public class CommandLineController {
         return false;
     }
 
-    public Alert[] getOverdueAlerts(String userID){
-        return this.useCaseManager.getOverdueAlerts(userID);
+    public ListModel getOverdueAlerts(String userID){
+        Alert[] alerts = this.useCaseManager.getOverdueAlerts(userID);
+        return createListModel(alerts);
+    }
+
+    public boolean acknowledgeAlert(String alertID, String userID) {
+        return this.useCaseManager.acknowledgeAlert(alertID, userID);
     }
 
     public Memo[] getMemos(String userID){

@@ -19,6 +19,7 @@ public class AlertListView extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
+        System.out.println("[1] Acknowledge an alert");
         System.out.println("[~] Go Home");
     }
 
@@ -37,6 +38,8 @@ public class AlertListView extends ListView {
             inputPrompt();
             String selection = input.nextLine();
             switch (selection) {
+                case "1":
+                    return new AcknowledgeAlertView(getLocalStorage(), null, getController());
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:
