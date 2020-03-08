@@ -7,6 +7,7 @@ import entities.CalendarEvent;
 import view.LocalStorage;
 import view.views.HomeView;
 import view.views.View;
+import view.views.event.EventListView;
 
 import java.util.Scanner;
 
@@ -33,15 +34,12 @@ public class GetEventByMemoID extends View {
                     super.printTitle("Get Event by MemoID");
                     System.out.println("Enter MemoID:");
                     String memoID = input.nextLine();
-                    CalendarEvent[] events = super.getController().getEventsByMemoID(memoID, super.getLocalStorage().getUserID());
+                    ListModel events = super.getController().getEventsByMemoID(memoID, super.getLocalStorage().getUserID());
                     if (events == null){
                         super.printError("Please enter the MemoID again");
                         return new GetEventByMemoID(getLocalStorage(), getModel(), getController());
                     } else {
-                        for(CalendarEvent event: events){
-                            System.out.println(event);
-                        }
-                        return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
+                        return new EventListView(super.getLocalStorage(), events, super.getController());
                     }
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());

@@ -5,6 +5,7 @@ import controller.viewmodels.ListModel;
 import controller.viewmodels.SingularEventModel;
 import entities.*;
 import usecases.IUseCaseManager;
+import view.views.ListView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -115,6 +116,17 @@ public class CommandLineController {
         return listModel;
     }
 
+    private ListModel createListModel(Memo[] memos){
+        ListModel listModel = new ListModel();
+        ArrayList<String> memoString = new ArrayList<>();
+        for (Memo memo: memos) {
+            String memoStr = generateMemoString(memo);
+            memoString.add(memoStr);
+        }
+        listModel.setList(memoString);
+        return listModel;
+    }
+
     private String generateEventString(CalendarEvent event) {
         if (event == null) {
             return "";
@@ -190,12 +202,12 @@ public class CommandLineController {
         return this.useCaseManager.acknowledgeAlert(alertID, userID);
     }
 
-    public Memo[] getMemos(String userID){
-        return this.useCaseManager.getMemos(userID);
+    public ListModel getMemos(String userID){
+        return createListModel(this.useCaseManager.getMemos(userID));
     }
 
-    public CalendarEvent[] getEventsByMemoID(String memoID, String UserID){
-        return this.useCaseManager.getEventsByMemoID(memoID, UserID);
+    public ListModel getEventsByMemoID(String memoID, String UserID){
+        return createListModel(this.useCaseManager.getEventsByMemoID(memoID, UserID));
     }
 
    public CalendarEvent[] getEventsByTagName(String tagName, String userID){

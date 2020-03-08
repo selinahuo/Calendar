@@ -1,7 +1,9 @@
 package view.views.notes;
 
 import controller.CommandLineController;
+import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
+import entities.Memo;
 import view.LocalStorage;
 import view.views.HomeView;
 import view.views.View;
@@ -32,7 +34,8 @@ public class MemoMenuView extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return new GetMemoByUserIDView(getLocalStorage(), getModel(), getController());
+                    ListModel model = getController().getMemos(super.getLocalStorage().getUserID());
+                    return new MemoListView(getLocalStorage(), model, getController());
                 case "2":
                     return new GetEventByMemoID(getLocalStorage(), getModel(), getController());
                 case "3":
