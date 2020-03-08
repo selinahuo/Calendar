@@ -36,6 +36,7 @@ class SeriesManager implements ISeriesManager {
             CalendarEvent eventToCreate = new CalendarEvent(UUID.randomUUID().toString(), seriesName, time[0], time[1], "", userID, null, null, newSeries.getSeriesID(), null);
             this.eventManager.createEvent(eventToCreate);
         }
+        this.repository.saveSeries(newSeries);
         return true;
     }
 
@@ -57,6 +58,7 @@ class SeriesManager implements ISeriesManager {
             times.add(timeArray);
             startTime.add(Calendar.DAY_OF_MONTH, daysToAdd);
             endTime.add(Calendar.DAY_OF_MONTH, daysToAdd);
+            i++;
         }
         return times;
     }
@@ -72,6 +74,6 @@ class SeriesManager implements ISeriesManager {
 
     @Override
     public Series getSeriesByIDAndUserID(String seriesID, String userID) {
-        return this.getSeriesByIDAndUserID(seriesID, userID);
+        return this.repository.fetchSeriesByIDAndUserID(seriesID, userID);
     }
 }

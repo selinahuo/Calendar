@@ -76,20 +76,21 @@ public class CommandLineController {
         return new SingularEventModel(event, alert, memo, tag, series);
     }
 
-    public boolean CreateIndividualAlert(String eventID, String alertName, String start, String userID) {
-        GregorianCalendar startTime = convertStringToCalendar(start);
-        if (startTime != null) {
-            return this.useCaseManager.createIndividualAlertOnEvent(eventID, alertName, startTime, userID);
-        }
-        return false;
+    public ListModel getEventsBySeriesName(String seriesName, String userID) {
+        CalendarEvent[] events = this.useCaseManager.getEventsBySeriesName(seriesName, userID);
+        return createListModel(events);
     }
 
-    public boolean CreateFrequencyAlert(String eventID, String alertName, String start, String frequency, String userID){
-        GregorianCalendar startTime = convertStringToCalendar(start);
-        if (startTime != null) {
-            return this.useCaseManager.createFrequencyAlertOnEvent(eventID, alertName, startTime,frequency, userID);
-        }
-        return false;
+    public boolean createSeriesFromEvents(String eventString, String seriesName, String userID) {
+        String[] eventIDs = eventString.split(",");
+        return this.useCaseManager.createSeriesFromEvents(eventIDs, seriesName, userID);
+    }
+
+    public boolean createSeriesFromFormula(String seriesName, String startStr, String endStr, String frequency,
+                                           int numEvents, String userID) {
+        GregorianCalendar start = convertStringToCalendar(startStr);
+        GregorianCalendar end = convertStringToCalendar(endStr);
+        return this.useCaseManager.createSeriesFromEventFormula(seriesName, start, end, frequency, numEvents, userID);
     }
 
     private ListModel createListModel(CalendarEvent[] events) {
@@ -102,7 +103,6 @@ public class CommandLineController {
         listModel.setList(eventStrings);
         return listModel;
     }
-
 
     private String generateEventString(CalendarEvent event) {
         if (event == null) {
@@ -152,5 +152,21 @@ public class CommandLineController {
             return "";
         }
         return "Tag ID: " + tag.getTagID() + " - " + tag.getName();
+    }
+
+    public boolean CreateFrequencyAlert(String eventID, String alertName, String start, String frequency, String userID) {
+        GregorianCalendar startTime = convertStringToCalendar(start);
+        if(startTime != null) {
+            return this.useCaseManager.createFrequencyAlertOnEvent(eventID, alertName,startTime,frequency,userID);
+        }
+        return false;
+    }
+
+    public boolean CreateIndividualAlert(String eventID, String alertName, String start, String userID) {
+        GregorianCalendar startTime = convertStringToCalendar(start);
+        if(startTime != null) {
+            return this.useCaseManager.createIndividualAlertOnEvent(eventID, alertName,startTime,userID);
+        }
+        return false;
     }
 }

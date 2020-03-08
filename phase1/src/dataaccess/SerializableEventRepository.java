@@ -3,7 +3,6 @@ package dataaccess;
 import entities.CalendarEvent;
 import usecases.events.IEventRepository;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -137,6 +136,7 @@ public class SerializableEventRepository extends SerializableRepository <Calenda
         ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
+            System.out.println(calendarEvent.getName());
             if (calendarEvent.getUserID().equals(userID) && calendarEvent.getSeriesID().equals(seriesID)) {
                 events.add(calendarEvent);
             }
@@ -158,10 +158,10 @@ public class SerializableEventRepository extends SerializableRepository <Calenda
         for (CalendarEvent calendarEvent: calendarEvents) {
             if (calendarEvent.getEventID().equals(eventID)) {
                 calendarEvent.setSeriesID(newSeriesID);
+                serialize(calendarEvents);
                 return true;
             }
         }
-        serialize(calendarEvents);
         return false;
     }
 
