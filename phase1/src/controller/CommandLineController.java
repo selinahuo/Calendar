@@ -76,6 +76,22 @@ public class CommandLineController {
         return new SingularEventModel(event, alert, memo, tag, series);
     }
 
+    public boolean CreateIndividualAlert(String eventID, String alertName, String start, String userID) {
+        GregorianCalendar startTime = convertStringToCalendar(start);
+        if (startTime != null) {
+            return this.useCaseManager.createIndividualAlertOnEvent(eventID, alertName, startTime, userID);
+        }
+        return false;
+    }
+
+    public boolean CreateFrequencyAlert(String eventID, String alertName, String start, String frequency, String userID){
+        GregorianCalendar startTime = convertStringToCalendar(start);
+        if (startTime != null) {
+            return this.useCaseManager.createFrequencyAlertOnEvent(eventID, alertName, startTime,frequency, userID);
+        }
+        return false;
+    }
+
     private ListModel createListModel(CalendarEvent[] events) {
         ListModel listModel = new ListModel();
         ArrayList<String> eventStrings = new ArrayList<>();
@@ -86,6 +102,7 @@ public class CommandLineController {
         listModel.setList(eventStrings);
         return listModel;
     }
+
 
     private String generateEventString(CalendarEvent event) {
         if (event == null) {

@@ -27,9 +27,9 @@ public class CreateAlertView extends View{
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    //return new GetEventByNameView(getLocalStorage(), getModel(), getController());
+                    return new CreateIndividualAlertView(getLocalStorage(), getModel(), getController());
                 case "2":
-                    //return new GetEventByRelativeDateView(getLocalStorage(), getModel(), getController());
+                    return new CreateFrequencyAlertView(getLocalStorage(), getModel(), getController());
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:
