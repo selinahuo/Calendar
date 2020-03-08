@@ -23,7 +23,7 @@ public class NoteMenuView extends View {
 
     @Override
     public View run() {
-        super.printTitle("Memo Menu");
+        super.printTitle("Note Menu");
         Scanner input = new Scanner(System.in);
         while (true) {
             inputPrompt();

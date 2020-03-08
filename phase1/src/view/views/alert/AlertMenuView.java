@@ -4,6 +4,7 @@ import controller.CommandLineController;
 import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
+import view.views.HomeView;
 import view.views.View;
 
 import java.util.Scanner;
@@ -44,8 +45,10 @@ public class AlertMenuView extends View {
                     break;
                 case "3":
                     return new CreateAlertView(getLocalStorage(), getModel(), getController());
+                case "4":
+                    return new AcknowledgeAlertView(getLocalStorage(), getModel(), getController());
                 case "~":
-                    return null;
+                    return new HomeView(getLocalStorage(), null, getController());
                 default:
                     super.printInputError();
             }
@@ -57,8 +60,4 @@ public class AlertMenuView extends View {
     //createIndividualAlertOnEvent
     //createFrequencyAlertOnEvent
     //acknowledgeAlert
-
-
-
-
 }

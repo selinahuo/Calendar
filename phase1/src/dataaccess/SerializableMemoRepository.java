@@ -62,15 +62,15 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
     /**
      * Fetch a Memo by its Name.
      *
-     * @param name   the name to filter by.
+     * @param memoID   the ID to filter by.
      * @param userID
      * @return the corresponding memo or null if it does not exist
      */
     @Override
-    public Memo fetchMemoByIDAndUserID(String name, String userID) {
+    public Memo fetchMemoByIDAndUserID(String memoID, String userID) {
         ArrayList<Memo> memos = deserialize();
         for (Memo memo: memos) {
-            if (memo.getName().equals(name) && memo.getUserID().equals(userID)) {
+            if (memo.getMemoID().equals(memoID) && memo.getUserID().equals(userID)) {
                 return memo;
             }
         }

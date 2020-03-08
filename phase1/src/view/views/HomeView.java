@@ -4,7 +4,7 @@ import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 
-import view.views.alert.AlertMenuView;
+import view.views.alert.*;
 import view.views.event.EventMenuView;
 import view.views.notes.NoteMenuView;
 import view.views.series.SeriesMenuView;
@@ -22,6 +22,7 @@ public class HomeView extends View {
         System.out.println("[2] Alerts");
         System.out.println("[3] Series");
         System.out.println("[4] Notes");
+        System.out.println("[q] Quit");
     }
 
     @Override
@@ -40,6 +41,8 @@ public class HomeView extends View {
                     return new SeriesMenuView(getLocalStorage(), getModel(), getController());
                 case "4":
                     return new NoteMenuView(super.getLocalStorage(), super.getModel(), super.getController());
+                case "q":
+                    return null;
                 default:
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
             }

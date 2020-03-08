@@ -136,7 +136,6 @@ public class SerializableEventRepository extends SerializableRepository <Calenda
         ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
-            System.out.println(calendarEvent.getName());
             if (calendarEvent.getUserID().equals(userID) && calendarEvent.getSeriesID().equals(seriesID)) {
                 events.add(calendarEvent);
             }
@@ -176,7 +175,7 @@ public class SerializableEventRepository extends SerializableRepository <Calenda
         ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
-            if (calendarEvent.getTagIDs().contains(tagID) && calendarEvent.getUserID().equals(userID)) {
+            if (calendarEvent.getTagIDs() != null && calendarEvent.getTagIDs().contains(tagID) && calendarEvent.getUserID().equals(userID)) {
                 events.add(calendarEvent);
             }
         }
@@ -209,7 +208,7 @@ public class SerializableEventRepository extends SerializableRepository <Calenda
         ArrayList<CalendarEvent> calendarEvents = deserialize();
         List<CalendarEvent> events = new ArrayList<CalendarEvent>();
         for (CalendarEvent calendarEvent: calendarEvents) {
-            if (calendarEvent.getMemoIDs().contains(memoID) && calendarEvent.getUserID().equals(userID)) {
+            if (calendarEvent.getMemoIDs() != null && calendarEvent.getMemoIDs().contains(memoID) && calendarEvent.getUserID().equals(userID)) {
                 events.add(calendarEvent);
             }
         }

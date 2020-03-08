@@ -210,8 +210,8 @@ public class CommandLineController {
         return createListModel(this.useCaseManager.getEventsByMemoID(memoID, UserID));
     }
 
-   public CalendarEvent[] getEventsByTagName(String tagName, String userID){
-        return this.useCaseManager.getEventsByTagName(tagName, userID);
+   public ListModel getEventsByTagName(String tagName, String userID) {
+        return createListModel(this.useCaseManager.getEventsByTagName(tagName, userID));
     }
 
 

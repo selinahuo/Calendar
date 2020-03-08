@@ -1,10 +1,12 @@
 package view.views.notes;
 
 import controller.CommandLineController;
+import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 import view.views.HomeView;
 import view.views.View;
+import view.views.event.EventListView;
 
 import java.util.Scanner;
 
@@ -30,7 +32,10 @@ public class TagMenuView extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return new GetEventByTagView(super.getLocalStorage(), super.getModel(),super.getController());
+                    System.out.println("Please enter a tag name:");
+                    String tagName = input.nextLine();
+                    ListModel model = getController().getEventsByTagName(tagName, getLocalStorage().getUserID());
+                    return new EventListView(getLocalStorage(), model, getController());
                 case "2":
                     return new TagEventView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "~":

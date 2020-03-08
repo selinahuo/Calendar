@@ -26,7 +26,7 @@ public class SeriesMenuView extends View {
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);
-        super.printTitle("Event Menu");
+        super.printTitle("Series Menu");
         while (true) {
             inputPrompt();
             String selection = input.nextLine();

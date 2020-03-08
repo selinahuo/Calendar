@@ -8,7 +8,6 @@ import view.views.View;
 import java.util.Scanner;
 
 public class AttachMemoToEvent extends View{
-
     public AttachMemoToEvent(LocalStorage localStorage, ViewModel model, CommandLineController controller) {
         super(localStorage, model, controller);
     }
@@ -16,7 +15,7 @@ public class AttachMemoToEvent extends View{
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);
-        super.printTitle("Attach Memo to Event");
+        super.printTitle("Attach Memo to an Event");
         System.out.println("MemoID:");
         String memoID = input.nextLine();
         System.out.println("EventID:");
