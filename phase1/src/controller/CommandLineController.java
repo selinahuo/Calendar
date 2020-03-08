@@ -173,4 +173,8 @@ public class CommandLineController {
     public Alert[] getOverdueAlerts(String userID) {
         return this.useCaseManager.getOverdueAlerts(userID);
     }
+
+    public boolean acknowledgeAlert(String alertID, String userID) {
+        return this.useCaseManager.acknowledgeAlert(alertID, userID);
+    }
 }
