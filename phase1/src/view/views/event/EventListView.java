@@ -1,9 +1,12 @@
-package view.views;
+package view.views.event;
 
 import controller.CommandLineController;
 import controller.viewmodels.ListModel;
 import controller.viewmodels.SingularEventModel;
 import view.LocalStorage;
+import view.views.HomeView;
+import view.views.ListView;
+import view.views.View;
 
 import java.util.Scanner;
 

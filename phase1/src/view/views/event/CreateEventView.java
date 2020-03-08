@@ -1,8 +1,9 @@
-package view.views;
+package view.views.event;
 
 import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
+import view.views.View;
 
 import java.util.Scanner;
 

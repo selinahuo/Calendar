@@ -1,12 +1,13 @@
-package view.views;
+package view.views.series;
 
 import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
+import view.views.View;
 
 import java.util.Scanner;
 
-public class CreateSeriesFromExistingEventsView extends View{
+public class CreateSeriesFromExistingEventsView extends View {
     public CreateSeriesFromExistingEventsView(LocalStorage localStorage, ViewModel model, CommandLineController controller) {
         super(localStorage, model, controller);
     }

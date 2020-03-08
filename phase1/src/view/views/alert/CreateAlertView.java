@@ -1,12 +1,14 @@
-package view.views;
+package view.views.alert;
 
 import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
+import view.views.HomeView;
+import view.views.View;
 
 import java.util.Scanner;
 
-public class CreateAlertView extends View{
+public class CreateAlertView extends View {
     public CreateAlertView(LocalStorage localStorage, ViewModel model, CommandLineController controller) {
         super(localStorage, model, controller);
     }
