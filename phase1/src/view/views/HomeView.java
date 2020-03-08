@@ -3,6 +3,7 @@ package view.views;
 import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
+
 import view.views.alert.AlertMenuView;
 import view.views.event.EventMenuView;
 import view.views.series.SeriesMenuView;
