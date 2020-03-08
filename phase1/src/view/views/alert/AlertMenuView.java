@@ -4,6 +4,7 @@ import controller.CommandLineController;
 import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
+import view.views.HomeView;
 import view.views.View;
 import view.views.alert.CreateAlertView;
 
@@ -38,7 +39,7 @@ public class AlertMenuView extends View {
                 case "3":
                     return new CreateAlertView(getLocalStorage(), getModel(), getController());
                 case "~":
-                    return null;
+                    return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:
                     super.printInputError();
             }
