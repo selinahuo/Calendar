@@ -4,7 +4,6 @@ import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 import view.views.View;
-import view.views.event.EventMenuView;
 
 import java.util.Scanner;
 

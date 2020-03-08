@@ -15,7 +15,7 @@ public class GetEventByTagView extends View {
     }
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-        System.out.println("[1] View Events in the Tag name");
+        System.out.println("[1] Get Event by Tag name");
         System.out.println("[~] Go Home");
     }
 
@@ -40,6 +40,7 @@ public class GetEventByTagView extends View {
                         for(CalendarEvent event: events){
                             System.out.println(event);
                         }
+                        return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                     }
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());

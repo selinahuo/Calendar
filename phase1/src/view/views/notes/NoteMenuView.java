@@ -2,7 +2,6 @@ package view.views.notes;
 
 import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
-import entities.Memo;
 import view.LocalStorage;
 import view.views.HomeView;
 import view.views.View;
@@ -33,7 +32,7 @@ public class NoteMenuView extends View {
                 case "1":
                     return new MemoMenuView(super.getLocalStorage(), super.getModel(),super.getController());
                 case "2":
-                    return null;
+                    return new TagMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:

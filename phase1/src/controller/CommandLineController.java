@@ -170,6 +170,10 @@ public class CommandLineController {
         return false;
     }
 
+    public Alert[] getOverdueAlerts(String userID){
+        return this.useCaseManager.getOverdueAlerts(userID);
+    }
+
     public Memo[] getMemos(String userID){
         return this.useCaseManager.getMemos(userID);
     }

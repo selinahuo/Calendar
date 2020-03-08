@@ -41,6 +41,7 @@ public class GetEventByMemoID extends View {
                         for(CalendarEvent event: events){
                             System.out.println(event);
                         }
+                        return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                     }
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
