@@ -17,10 +17,10 @@ public class AlertMenuView extends View {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-        System.out.println("[1] Get Overdue Alert");
-        System.out.println("[2] Get Individual Alert");
+        System.out.println("[1] Get overdue alerts");
+//        System.out.println("[2] Get Individual Alert");
         System.out.println("[3] Create a new alert");
-        System.out.println("[4] Acknowledge Alert");
+        System.out.println("[4] Acknowledge an alert");
         System.out.println("[~] Go Home");
     }
 
@@ -42,7 +42,8 @@ public class AlertMenuView extends View {
                     }
                     break;
                 case "2":
-                    return null;
+                    System.out.println("Under construction");
+                    break;
                 case "3":
                     return new CreateAlertView(getLocalStorage(), getModel(), getController());
                 case "4":

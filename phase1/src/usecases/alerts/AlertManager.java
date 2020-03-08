@@ -124,7 +124,7 @@ class AlertManager implements IAlertManager {
             alert.acknowledge();
             return this.alertRepository.editAlertAcknowledge(alertID, alert.getAcknowledge());
         }
-        return true;
+        return false;
     }
 
     /**
@@ -197,22 +197,22 @@ class AlertManager implements IAlertManager {
 //        return this.alertRepository.editFrequencyAlerts(alertID, name, frequency);
 //    }
 
-    /**
-     * Get all Alerts that have an ID in a list of IDs
-     * @param id id of the desired Alert
-     * @return Alert that match the id
-     */
+//    /**
+//     * Get all Alerts that have an ID in a list of IDs
+//     * @param id id of the desired Alert
+//     * @return Alert that match the id
+//     */
 //    @Override
 //    public Alert getAlertByIDs(String id){
 //        return this.alertRepository.fetchAlertByID(id);
 //    }
 
-    /**
-     * Get a Alert that has an ID  and a matching name
-     * @param name Alert must match this name
-     * @param id id of this alert
-     * @return a matching Alert
-     */
+//    /**
+//     * Get a Alert that has an ID  and a matching name
+//     * @param name Alert must match this name
+//     * @param id id of this alert
+//     * @return a matching Alert
+//     */
 //    @Override
 //    public Alert getAlertByNameAndId(String name, String id) {
 //        return this.alertRepository.fetchAlertByNameAndUserID(name, id);
