@@ -32,13 +32,13 @@ public class MemoMenuView extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    return new GetMemoByUserIDView(getLocalStorage(), getModel(), getController());
                 case "2":
-                    return null;
+                    return new GetEventByMemoID(getLocalStorage(), getModel(), getController());
                 case "3":
-                    return null;
+                    return new CreateNewMemo(getLocalStorage(), getModel(), getController());
                 case "4":
-                    return null;
+                    return new AttachMemoToEvent(getLocalStorage(), getModel(), getController());
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:
