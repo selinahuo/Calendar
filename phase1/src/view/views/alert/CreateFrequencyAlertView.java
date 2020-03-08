@@ -22,16 +22,14 @@ public class CreateFrequencyAlertView extends View {
         String alertName = input.nextLine();
         System.out.println("Alert start time (YYYY-MM-DD-HH-MM):");
         String startTime = input.nextLine();
-        System.out.println("Alert frequency:");
+        System.out.println("Alert frequency (d - daily, w - weekly):");
         String frequency = input.nextLine();
-        System.out.println("User ID:");
-        String userID = input.nextLine();
-        boolean success = super.getController().CreateFrequencyAlert(eventID, alertName,startTime,frequency,userID);
+        boolean success = super.getController().CreateFrequencyAlert(eventID, alertName,startTime,frequency, getLocalStorage().getUserID());
         if (success) {
             System.out.println("Event was created successfully.");
         } else {
             super.printError("Something went wrong with frequency alert creation");
         }
-        return new CreateAlertView(super.getLocalStorage(), super.getModel(), super.getController());
+        return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
     }
 }

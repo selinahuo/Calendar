@@ -62,13 +62,13 @@ class AlertManager implements IAlertManager {
         while (start.before(end)) {
             GregorianCalendar currTime = (GregorianCalendar) start.clone();
             alertTimes.add(currTime);
-            if (frequency == "d"){
+            if (frequency.equals("d")){
                 start.add(Calendar.DAY_OF_MONTH, 1 );
             }
-            else if (frequency == "w") {
+            else if (frequency.equals("w")) {
                 start.add(Calendar.DAY_OF_MONTH, 7 );
             }
-            else if (frequency == "h") {
+            else {
                 start.add(Calendar.HOUR_OF_DAY, 1);
             }
         }

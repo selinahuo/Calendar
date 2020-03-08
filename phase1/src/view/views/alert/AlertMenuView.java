@@ -1,6 +1,7 @@
 package view.views.alert;
 
 import controller.CommandLineController;
+import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 import view.views.HomeView;
@@ -32,7 +33,14 @@ public class AlertMenuView extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return new GetOverdueAlertsView(getLocalStorage(),getModel(),getController());
+                    ListModel overdueModel = super.getController().getOverdueAlerts(getLocalStorage().getUserID());
+                    if (overdueModel != null) {
+                        return new AlertListView(getLocalStorage(), overdueModel, getController());
+                    }
+                    else {
+                        super.printError("Something went wrong.");
+                    }
+                    break;
                 case "2":
                     return null;
                 case "3":

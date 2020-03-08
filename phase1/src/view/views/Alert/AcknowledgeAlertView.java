@@ -20,10 +20,8 @@ public class AcknowledgeAlertView extends View {
         super.printTitle("Acknowledge Alert");
         System.out.println("Alert ID");
         String alertID = input.nextLine();
-        System.out.println("User ID");
-        String userID = input.nextLine();
 
-        boolean success = super.getController().acknowledgeAlert(alertID,userID);
+        boolean success = super.getController().acknowledgeAlert(alertID, getLocalStorage().getUserID());
         if (success) {
             System.out.println("Alert was acknowledged successfully.");
         } else {
