@@ -43,8 +43,8 @@ public class GetOverdueAlertsView extends ListView {
                     if (userID == null) {
                         super.printError("That user could not be found.");
                     } else {
-
-                        return new SingularEventView(getLocalStorage(), model, getController());
+                        return this.getModel()
+                        //return this.getController().getOverdueAlerts(userID);
                     }
                     break;
                 case "~":
