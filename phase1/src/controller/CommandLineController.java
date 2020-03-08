@@ -170,27 +170,27 @@ public class CommandLineController {
         return false;
     }
 
-    Memo[] getMemos(String userID){
+    public Memo[] getMemos(String userID){
         return this.useCaseManager.getMemos(userID);
     }
 
-    CalendarEvent[] getEventsByMemoID(String memoID, String UserID){
+    public CalendarEvent[] getEventsByMemoID(String memoID, String UserID){
         return this.useCaseManager.getEventsByMemoID(memoID, UserID);
     }
 
-    CalendarEvent[] getEventsByTagName(String tagName, String userID){
+   public CalendarEvent[] getEventsByTagName(String tagName, String userID){
         return this.useCaseManager.getEventsByTagName(tagName, userID);
     }
 
 
-    boolean createMemo(String name, String note, String userID){
+    public boolean createMemo(String name, String note, String userID){
         return this.useCaseManager.createMemo(name, note, userID);
     }
 
-    boolean attachMemoToEvent(String memoID, String eventID, String userID){
+    public boolean attachMemoToEvent(String memoID, String eventID, String userID){
         return this.useCaseManager.attachMemoToEvent(memoID,eventID,userID);
     }
-    boolean tagEvent(String eventID, String tagName, String userID){
+    public boolean tagEvent(String eventID, String tagName, String userID){
         return this.useCaseManager.tagEvent(eventID,tagName,userID);
     }
 }
