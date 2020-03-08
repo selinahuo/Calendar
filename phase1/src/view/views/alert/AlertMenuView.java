@@ -1,4 +1,4 @@
-package view.views.alert
+package view.views.alert;
 
 import controller.CommandLineController;
 import controller.viewmodels.ListModel;
