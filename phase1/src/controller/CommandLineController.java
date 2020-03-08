@@ -169,4 +169,8 @@ public class CommandLineController {
         }
         return false;
     }
+
+    public Alert[] getOverdueAlerts(String userID) {
+        return this.useCaseManager.getOverdueAlerts(userID);
+    }
 }
