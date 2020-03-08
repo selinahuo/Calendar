@@ -6,6 +6,7 @@ import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 import view.views.HomeView;
 import view.views.View;
+import view.views.alert.CreateAlertView;
 
 import java.util.Scanner;
 
@@ -32,11 +33,13 @@ public class AlertMenuView extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    return new GetOverdueAlertsView(getLocalStorage(),getModel(),getController());
                 case "2":
                     return null;
                 case "3":
                     return new CreateAlertView(getLocalStorage(), getModel(), getController());
+                case "4":
+                    return new AcknowledgeAlertView(getLocalStorage(),getModel(),getController());
                 case "~":
                     return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:

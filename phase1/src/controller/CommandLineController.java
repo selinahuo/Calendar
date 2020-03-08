@@ -104,6 +104,17 @@ public class CommandLineController {
         return listModel;
     }
 
+    private ListModel createListModelForAlerts(Alert[] alerts){
+        ListModel listModel = new ListModel();
+        ArrayList<String> eventStrings = new ArrayList<>();
+        for (Alert alert: alerts) {
+            String alertString = generateAlertString(alert);
+            eventStrings.add(alertString);
+        }
+        listModel.setList(eventStrings);
+        return listModel;
+    }
+
     private String generateEventString(CalendarEvent event) {
         if (event == null) {
             return "";
@@ -170,8 +181,9 @@ public class CommandLineController {
         return false;
     }
 
-    public Alert[] getOverdueAlerts(String userID) {
-        return this.useCaseManager.getOverdueAlerts(userID);
+    public ListModel getOverdueAlerts(String userID) {
+        Alert[] alerts = this.useCaseManager.getOverdueAlerts(userID);
+        return createListModelForAlerts(alerts);
     }
 
     public boolean acknowledgeAlert(String alertID, String userID) {

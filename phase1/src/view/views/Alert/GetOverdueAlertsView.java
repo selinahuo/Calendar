@@ -2,18 +2,18 @@ package view.views.alert;
 
 import controller.CommandLineController;
 import controller.viewmodels.ListModel;
-import controller.viewmodels.SingularEventModel;
+
+import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 import view.views.HomeView;
 import view.views.View;
-import view.views.ListView
-import view.views.event.SingularEventView;
+
 
 import java.awt.*;
 import java.util.Scanner;
 
-public class GetOverdueAlertsView extends ListView {
-    public GetOverdueAlertsView(LocalStorage localStorage, ListModel model, CommandLineController controller) {
+public class GetOverdueAlertsView extends View {
+    public GetOverdueAlertsView(LocalStorage localStorage, ViewModel model, CommandLineController controller) {
         super(localStorage, model, controller);
     }
 
@@ -28,9 +28,6 @@ public class GetOverdueAlertsView extends ListView {
         printTitle("Overdue Alerts");
         Scanner input = new Scanner(System.in);
 
-        for (String alert: getModel().getList()) {
-            System.out.println(alert);
-        }
         System.out.println("");
 
         while (true) {
@@ -43,8 +40,13 @@ public class GetOverdueAlertsView extends ListView {
                     if (userID == null) {
                         super.printError("That user could not be found.");
                     } else {
-                        return this.getModel()
-                        //return this.getController().getOverdueAlerts(userID);
+                        ListModel model = super.getController().getOverdueAlerts(userID);
+                        if(model == null){
+                            super.printError("Something went wrong.");
+                        }
+                        else {
+                            return new AlertMenuView(getLocalStorage(), model, getController());
+                        }
                     }
                     break;
                 case "~":
