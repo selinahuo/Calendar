@@ -30,7 +30,7 @@ public class GetEventByTagView extends View {
             switch(selection) {
                 case "1":
                     super.printTitle("Get Event by Tag name");
-                    System.out.println("Enter TagID:");
+                    System.out.println("Enter Tag name:");
                     String tagName = input.nextLine();
                     CalendarEvent[] events = super.getController().getEventsByTagName(tagName, super.getLocalStorage().getUserID());
                     if (events == null){
