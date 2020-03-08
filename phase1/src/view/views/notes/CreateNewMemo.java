@@ -21,7 +21,7 @@ public class CreateNewMemo extends View {
         String memoName = input.nextLine();
         System.out.println("New Note:");
         String memoNote = input.nextLine();
-        boolean success = super.getController().Memo(memoName, memoNote, getLocalStorage().getUserID());
+        boolean success = super.getController().createMemo(memoName, memoNote, getLocalStorage().getUserID());
         if (success) {
             System.out.println("Memo was created successfully.");
         } else {

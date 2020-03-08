@@ -4,8 +4,8 @@ import controller.CommandLineController;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 
-import view.views.alert.AlertMenuView;
 import view.views.event.EventMenuView;
+import view.views.notes.NoteMenuView;
 import view.views.series.SeriesMenuView;
 
 import java.util.Scanner;
@@ -34,14 +34,13 @@ public class HomeView extends View {
                 case "1":
                     return new EventMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "2":
-                    return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
+                    //return new AlertMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 case "3":
                     return new SeriesMenuView(getLocalStorage(), getModel(), getController());
                 case "4":
-                    System.out.println("Notes");
-                    break;
+                    return new NoteMenuView(super.getLocalStorage(), super.getModel(), super.getController());
                 default:
-                    super.printInputError();
+                    return new HomeView(super.getLocalStorage(), super.getModel(), super.getController());
             }
         }
     }
