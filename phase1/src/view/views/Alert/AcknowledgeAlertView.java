@@ -5,8 +5,6 @@ import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 import view.views.AlertMenuView;
 import view.views.View;
-import view.views.alert.AlertMenuView;
-import view.views.event.EventMenuView;
 
 import java.util.Scanner;
 
@@ -22,11 +20,11 @@ public class AcknowledgeAlertView extends View {
         Scanner input = new Scanner(System.in);
         super.printTitle("Acknowledge Alert");
         System.out.println("Alert ID");
-        String alerID = input.nextLine();
+        String alertID = input.nextLine();
         System.out.println("User ID");
         String userID = input.nextLine();
 
-        boolean success = super.getController().acknowledgeAlert(alerID,userID);
+        boolean success = super.getController().acknowledgeAlert(alertID,userID);
         if (success) {
             System.out.println("Alert was acknowledged successfully.");
         } else {
