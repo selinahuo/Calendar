@@ -45,7 +45,7 @@ public class GetOverdueAlertsView extends View {
                             super.printError("Something went wrong.");
                         }
                         else {
-                            return new AlertMenuView(getLocalStorage(), model, getController());
+                            return new AlertListView(getLocalStorage(), model, getController());
                         }
                     }
                     break;
