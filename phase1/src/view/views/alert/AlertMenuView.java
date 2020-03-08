@@ -1,11 +1,9 @@
 package view.views.alert;
 
 import controller.CommandLineController;
-import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import view.LocalStorage;
 import view.views.View;
-import view.views.alert.CreateAlertView;
 
 import java.util.Scanner;
 

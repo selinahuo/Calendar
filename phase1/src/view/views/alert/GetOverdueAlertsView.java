@@ -2,14 +2,12 @@ package view.views.alert;
 
 import controller.CommandLineController;
 import controller.viewmodels.ListModel;
-import controller.viewmodels.SingularEventModel;
 import view.LocalStorage;
 import view.views.HomeView;
 import view.views.View;
 import view.views.ListView
 import view.views.event.SingularEventView;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class GetOverdueAlertsView extends ListView {
