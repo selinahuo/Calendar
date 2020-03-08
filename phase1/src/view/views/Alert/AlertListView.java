@@ -27,8 +27,9 @@ public class AlertListView extends ListView {
         printTitle("Alert List");
         Scanner input = new Scanner(System.in);
 
-        for (String event : getModel().getList()) {
-            System.out.println(event);
+        //Loop through the model
+        for (String alert : getModel().getList()) {
+            System.out.println(alert);
         }
         System.out.println("");
 
