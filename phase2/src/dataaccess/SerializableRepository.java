@@ -49,7 +49,7 @@ public abstract class SerializableRepository<T> {
         return null;
     }
 
-    protected T fetchSingular(IFilter filter) {
+    protected T fetchSingular(IFilter<T> filter) {
         deserialize();
         for (T item : items) {
             if (filter.filter(item)) {
@@ -59,7 +59,7 @@ public abstract class SerializableRepository<T> {
         return null;
     }
 
-    protected ArrayList<T> fetchPlural(IFilter filter) {
+    protected ArrayList<T> fetchPlural(IFilter<T> filter) {
         deserialize();
         ArrayList<T> entities = new ArrayList<>();
         for (T item : items) {
