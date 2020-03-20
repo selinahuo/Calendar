@@ -23,7 +23,8 @@ public class CalendarEvent implements Serializable {
     private String seriesID;
     private String alertID;
 
-    public CalendarEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID, String calendarID) {
+    public CalendarEvent(String name, LocalDateTime start, LocalDateTime end, String location,
+                         String userID, String calendarID) {
         this.name = name;
         this.start = start;
         this.end = end;
