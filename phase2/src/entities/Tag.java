@@ -8,10 +8,10 @@ public class Tag implements Serializable {
     private int count;
     private String userID;
 
-    public Tag(String tagID, String name, int count, String userID) {
+    public Tag(String name, String tagID, String userID) {
         this.tagID = tagID;
         this.name = name;
-        this.count = count;
+        this.count = 0;
         this.userID = userID;
     }
 
@@ -43,5 +43,9 @@ public class Tag implements Serializable {
     public int removeCount(){
         this.count--;
         return this.count;
+    }
+
+    public void setTagID(String tagID) {
+        this.tagID = tagID;
     }
 }

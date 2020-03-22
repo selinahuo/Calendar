@@ -40,4 +40,8 @@ public class Memo implements Serializable {
     public void setUserID(String userID) {
         this.userID = userID;
     }
+
+    public void setMemoID(String memoID) {
+        this.memoID = memoID;
+    }
 }
