@@ -30,4 +30,6 @@ public class Series implements Serializable {
     public String getUserID() {
         return userID;
     }
+
+    public void setSeriesName(String seriesNewName) { this.seriesName = seriesNewName; }
 }
