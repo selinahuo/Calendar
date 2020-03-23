@@ -72,8 +72,8 @@ public class SeriesManager implements Observer {
         return this.repository.fetchSeriesBySeriesName(seriesName);
     }
 
-    public ArrayList<CalendarEvent> getSeriesByIDAndUserID(String seriesID, String userID){
-        return this.eventManager.getEventsBySeriesIDAndOwnerID(seriesID, userID);
+    public ArrayList<Series> getSeriesByIDAndUserID(String seriesID, String userID){
+        return this.repository.fetchSeriesBySeriesIDAndUserID(seriesID, userID);
     }
 
     // edit
