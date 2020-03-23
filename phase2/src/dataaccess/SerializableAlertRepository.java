@@ -50,9 +50,10 @@ public class SerializableAlertRepository extends SerializableRepository<Alert> i
         for (Alert alerts: alertsArr) {
             if (alerts.getAlertID().equals(alertID)) {
                 alerts.setAlertName(newName);
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -61,9 +62,10 @@ public class SerializableAlertRepository extends SerializableRepository<Alert> i
         for (Alert alerts: alertsArr) {
             if (alerts.getAlertID().equals(alertID)) {
                 alerts.setAlertID(newID);
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
