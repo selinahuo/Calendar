@@ -1,5 +1,6 @@
 package entities;
-
+import java.io.Serializable;
+import java.util.UUID;
 public class Calendar implements Serializable{
 
     private String calendarID = UUID.randomUUID().toString();
