@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
-class AlertManager implements IAlertManager {
+class AlertManager  {
     private IAlertRepository alertRepository;
     private IEventManager eventManager;
 
@@ -85,7 +85,7 @@ class AlertManager implements IAlertManager {
      * @param start
      * @return
      */
-    @Override
+
     public boolean createIndividualAlertOnEvent(String eventID, String alertName, GregorianCalendar start, String userID) {
         //create individual alert
         Alert alert = createIndividualAlert(eventID, alertName, userID, start);
@@ -103,7 +103,7 @@ class AlertManager implements IAlertManager {
      * @param frequency
      * @return
      */
-    @Override
+
     public boolean createFrequencyAlertOnEvent(String eventID, String alertName, String userID, GregorianCalendar startTime, String frequency) {
         // create frequency alert
         Alert alert = createFrequencyAlert(eventID, alertName, userID, startTime, frequency);
@@ -117,7 +117,7 @@ class AlertManager implements IAlertManager {
      * @param alertID
      * @param userID
      */
-    @Override
+
     public boolean acknowledgeAlert(String alertID, String userID) {
         Alert alert = this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
         if (alert != null) {
@@ -133,7 +133,7 @@ class AlertManager implements IAlertManager {
      * @param userID
      * @return
      */
-    @Override
+
     public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID){
         Alert[] alerts = this.alertRepository.fetchAlertByUserID(userID);
         ArrayList<Alert> alertsArr = new ArrayList<Alert>();
@@ -235,7 +235,7 @@ class AlertManager implements IAlertManager {
 //        return this.alertRepository.fetchFrequencyAlertByID(alertID);
 //    }
 
-    @Override
+
     public Alert getAlertByIDAndUserID(String alertID, String userID) {
         return this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
     }
