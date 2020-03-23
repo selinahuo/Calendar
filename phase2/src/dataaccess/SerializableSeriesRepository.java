@@ -1,9 +1,12 @@
 package dataaccess;
 
+import entities.Alert;
+import entities.CalendarEvent;
 import entities.Series;
 import usecases.series.ISeriesRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SerializableSeriesRepository extends SerializableRepository<Series> implements ISeriesRepository {
     public SerializableSeriesRepository(String serFile) {
@@ -19,25 +22,15 @@ public class SerializableSeriesRepository extends SerializableRepository<Series>
     }
 
     @Override
-    public Series fetchSeriesByUserID(String userID) {
-        ArrayList<Series> seriesArr = deserialize();
-        for (Series series: seriesArr){
-            if (series.getUserID().equals(userID)){
-                return series;
-            }
-        }
-        return null;
+    public ArrayList<Series> fetchSeriesByUserID(String userID) {
+        return fetchPlural((Series series) ->
+                series.getUserID() != null && series.getUserID().equals(userID));
     }
 
     @Override
-    public Series fetchSeriesBySeriesName(String seriesName) {
-        ArrayList<Series> seriesArr = deserialize();
-        for (Series series: seriesArr){
-            if (series.getSeriesName().equals(seriesName)){
-                return series;
-            }
-        }
-        return null;
+    public ArrayList<Series> fetchSeriesBySeriesName(String seriesName) {
+        return fetchPlural((Series series) ->
+                series.getSeriesName() != null && series.getSeriesName().equals(seriesName));
     }
 
     @Override

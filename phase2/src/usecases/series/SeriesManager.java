@@ -62,17 +62,16 @@ public class SeriesManager implements Observer {
         return times;
     }
 
-    // singular
-    public Series getSeriesByUserID(String userID){
+    // plural
+    public ArrayList<Series> getSeriesByUserID(String userID){
 
         return this.repository.fetchSeriesByUserID(userID);
     }
 
-    public Series getSeriesBySeriesName(String seriesName){
+    public ArrayList<Series> getSeriesBySeriesName(String seriesName){
         return this.repository.fetchSeriesBySeriesName(seriesName);
     }
 
-    // plural
     public ArrayList<CalendarEvent> getSeriesByIDAndUserID(String seriesID, String userID){
         return this.eventManager.getEventsBySeriesIDAndOwnerID(seriesID, userID);
     }

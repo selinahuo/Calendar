@@ -11,8 +11,8 @@ public interface ISeriesRepository {
     boolean saveSeries(Series series);
 
     // Fetch - singular
-    Series fetchSeriesByUserID(String userID);
-    Series fetchSeriesBySeriesName(String seriesName);
+    ArrayList<Series> fetchSeriesByUserID(String userID);
+    ArrayList<Series> fetchSeriesBySeriesName(String seriesName);
 
     // Edit
     boolean editSeriesName(String seriesID, String seriesNewName, String OwnerID);
