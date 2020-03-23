@@ -1,6 +1,7 @@
 package entities;
 import java.io.Serializable;
 import java.util.*;
+import java.time.LocalDateTime;
 
 /**
  * Class representing  a Calendar Alert
@@ -10,11 +11,11 @@ public class Alert implements Serializable {
     private String alertName;
     private Boolean totalAcknowledged;
     private String userID;
-    private ArrayList<GregorianCalendar> times = new ArrayList<GregorianCalendar>();
+    private ArrayList<LocalDateTime> times = new ArrayList<>();
     private List<Boolean> acknowledge = new ArrayList<Boolean>();
 
 
-    public Alert(String alertID, String alertName, String userID, GregorianCalendar startTime) {
+    public Alert(String alertID, String alertName, String userID, LocalDateTime startTime) {
         this.alertID = alertID;
         this.alertName = alertName;
         this.totalAcknowledged = false;
@@ -23,13 +24,13 @@ public class Alert implements Serializable {
         this.acknowledge.add(false);
     }
 
-    public Alert(String alertID, String alertName, String userID,  ArrayList<GregorianCalendar> alertTimes) {
+    public Alert(String alertID, String alertName, String userID,  ArrayList<LocalDateTime> alertTimes) {
         this.alertID = alertID;
         this.alertName = alertName;
         this.totalAcknowledged = false;
         this.userID = userID;
         this.times = alertTimes;
-        for(GregorianCalendar time : times) {
+        for(LocalDateTime time : times) {
             acknowledge.add(false);
         }
     }
@@ -50,7 +51,7 @@ public class Alert implements Serializable {
     }
     public String getUserID(){ return this.userID;}
 
-    public GregorianCalendar getNextRing(){
+    public LocalDateTime getNextRing(){
         if (this.totalAcknowledged) {
             return null;
         }
@@ -65,7 +66,7 @@ public class Alert implements Serializable {
         return null;
     }
 
-    public List<GregorianCalendar> getTimes(){
+    public List<LocalDateTime> getTimes(){
         return this.times;
     }
 

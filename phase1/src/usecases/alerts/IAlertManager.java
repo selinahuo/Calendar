@@ -1,7 +1,7 @@
 package usecases.alerts;
 
 import entities.Alert;
-
+import java.time.LocalDateTime;
 import entities.CalendarEvent;
 
 import java.util.ArrayList;
@@ -9,55 +9,13 @@ import java.util.GregorianCalendar;
 
 public interface IAlertManager {
 
-    /**
-     *
-     * @param eventID
-     * @param name
-     * @param startTime
-     * @param userID
-     * @return
-     */
-    public boolean createIndividualAlertOnEvent(String eventID, String alertName, GregorianCalendar startTime, String userID);
+    public boolean createIndividualAlertOnEvent(String eventID, String alertName, LocalDateTime start, String userID);
+    public boolean createFrequencyAlertOnEvent(String eventID, String alertName, String userID, LocalDateTime startTime, String frequency);
+    public boolean acknowledgeAlert(String alertID, String userID);
+    public ArrayList<Alert> getOverdueAlertsAfterDate(LocalDateTime date, String userID);
+    public Alert getAlertByIDAndUserID(String alertID, String userID);
+    public Alert[] getAlertByUserID(String userID);
+    public boolean editAlertName(String alertID, String name, String newName, String userID);
+    public boolean editAlertID(String alertID, String newID, String userID);
 
-    /**
-     *
-     * @param eventID
-     * @param name
-     * @param frequency
-     * @param userID
-     * @return
-     */
-//    public boolean createFrequencyAlert(String eventID, String name, ArrayList<GregorianCalendar> frequency, String userID);
-
-    boolean createFrequencyAlertOnEvent(String eventID, String alertName, String userID, GregorianCalendar startTime, String frequency);
-
-//    public boolean  editFrequencyAlerts(String alertID, String name,ArrayList<GregorianCalendar> frequency);
-
-
-//    public boolean  editIndividualAlert(String alertID, String name, GregorianCalendar newStart);
-
-//    public void acknowledgeIndividualAlert(String alertID, String userID);
-//    public void acknowledgeFrequencyAlert(String alertID, String userID);
-    public ArrayList<Alert> getOverdueAlertsAfterDate(GregorianCalendar date, String userID);
-
-    /**
-     * Get all Alerts that have an ID in a list of IDs
-     * @param id id of the desired Alert
-     * @return Alert that match the id
-     */
-//    Alert getAlertByIDs(String id);
-
-    /**
-     * Get a Alert that has an ID  and a matching name
-     * @param name Alert must match this name
-     * @param id id of this alert
-     * @return a matching Alert
-     */
-//    Alert getAlertByNameAndId(String name, String id);
-
-    //CalendarEvent getEventByAlertNameAndUserID(String alertName, String userID);
-
-    Alert getAlertByIDAndUserID(String alertID, String userID);
-
-    boolean acknowledgeAlert(String alertID, String userID);
 }
