@@ -1,13 +1,13 @@
 package entities;
 import java.io.Serializable;
 import java.util.UUID;
-public class Calendar implements Serializable{
+public class Calendars implements Serializable{
 
     private String calendarID = UUID.randomUUID().toString();
     private String ownerID;
     private String calendarName;
 
-    public Calendar(String userID, String calendarName) {
+    public Calendars(String userID, String calendarName) {
         this.ownerID = userID;
         this.calendarName = calendarName;
     }

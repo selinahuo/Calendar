@@ -1,11 +1,12 @@
 package dataaccess;
 
-import entities.Calendar;
+import entities.Alert;
+import entities.Calendars;
 import usecases.calendar.ICalendarRepository;
 
 import java.util.ArrayList;
 
-public class SerializableCalendarRepository extends SerializableRepository<Calendar> implements ICalendarRepository {
+public class SerializableCalendarRepository extends SerializableRepository<Calendars> implements ICalendarRepository {
 
 
     public SerializableCalendarRepository(String serFile) {
@@ -13,22 +14,35 @@ public class SerializableCalendarRepository extends SerializableRepository<Calen
     }
 
     @Override
-    public boolean saveCalendar(Calendar calendar) {
-        return false;
+    public boolean saveCalendar(Calendars calendar) {
+        ArrayList<Calendars> calendars = deserialize();
+        calendars.add(calendar);
+        serialize(calendars);
+        return true;
     }
 
     @Override
-    public Calendar fetchCalendarByCalendarID(String calendarID) {
-        return null;
+    public Calendars fetchCalendarByCalendarID(String calendarID) {
+        return fetchSingular((Calendars calendars) -> calendars.getCalendarID() != null
+                && calendars.getCalendarID().equals(calendarID));
     }
 
     @Override
-    public ArrayList<Calendar> fetchCalendarByOwnerID(String ownerID) {
-        return null;
+    public ArrayList<Calendars> fetchCalendarByOwnerID(String ownerID) {
+        return fetchPlural((Calendars calendars) -> calendars.getOwnerID() != null &&
+                calendars.getOwnerID().equals(ownerID));
     }
 
     @Override
     public boolean editCalendarName(String calendarID, String name) {
+
+        ArrayList<Calendars> calendarsArr = deserialize();
+        for (Calendars calendar: calendarsArr) {
+            if (calendar.getCalendarID().equals(calendarID)) {
+                calendar.setCalendarName(name);
+                return true;
+            }
+        }
         return false;
     }
 

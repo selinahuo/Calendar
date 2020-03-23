@@ -1,11 +1,8 @@
 package usecases.series;
 
-import entities.Calendar;
 import entities.CalendarEvent;
 import entities.Series;
-import org.omg.PortableInterceptor.LOCATION_FORWARD;
 import usecases.events.EventManager;
-import usecases.events.IEventDeletionObserver;
 
 import java.util.ArrayList;
 import java.util.Observable;
