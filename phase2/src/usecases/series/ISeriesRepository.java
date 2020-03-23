@@ -13,6 +13,7 @@ public interface ISeriesRepository {
     // Fetch - singular
     ArrayList<Series> fetchSeriesByUserID(String userID);
     ArrayList<Series> fetchSeriesBySeriesName(String seriesName);
+    ArrayList<Series> fetchSeriesBySeriesIDAndUserID(String seriesID, String userID);
 
     // Edit
     boolean editSeriesName(String seriesID, String seriesNewName, String OwnerID);

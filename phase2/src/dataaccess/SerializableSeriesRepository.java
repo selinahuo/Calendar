@@ -33,6 +33,12 @@ public class SerializableSeriesRepository extends SerializableRepository<Series>
                 series.getSeriesName() != null && series.getSeriesName().equals(seriesName));
     }
 
+    public ArrayList<Series> fetchSeriesBySeriesIDAndUserID(String seriesID, String userID){
+        return fetchPlural((Series series) ->
+                series.getSeriesID() != null && series.getSeriesID().equals(seriesID) &&
+                        series.getUserID() != null && series.getUserID().equals(userID)) ;
+    }
+
     @Override
     public boolean editSeriesName(String seriesID, String seriesNewName, String OwnerID) {
         ArrayList<Series> seriesArr = deserialize();
