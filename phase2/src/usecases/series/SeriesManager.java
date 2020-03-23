@@ -5,12 +5,15 @@ import entities.CalendarEvent;
 import entities.Series;
 import org.omg.PortableInterceptor.LOCATION_FORWARD;
 import usecases.events.EventManager;
+import usecases.events.IEventDeletionObserver;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.UUID;
 import java.time.LocalDateTime;
 
-public class SeriesManager {
+public class SeriesManager implements Observer {
     private ISeriesRepository repository;
     private EventManager eventManager;
 
@@ -78,7 +81,17 @@ public class SeriesManager {
     }
 
     // edit
-
+    boolean editSeriesName(String seriesID, String seriesNewName, String OwnerID){
+        return repository.editSeriesName(seriesID, seriesNewName, OwnerID);
+    }
     // delete
+    public boolean deleteSeries(String seriesID, String ownerID) {
+        return repository.deleteSeries(seriesID, ownerID);
+    }
 
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("series has changed");
+    }
 }

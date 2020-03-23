@@ -40,5 +40,22 @@ public class SerialiableSeriesRepository extends SerializableRepository<Series> 
         return null;
     }
 
+    @Override
+    public boolean editSeriesName(String seriesID, String seriesNewName, String OwnerID) {
+        ArrayList<Series> seriesArr = deserialize();
+        for (Series series: seriesArr){
+            if (series.getSeriesID().equals(seriesID)){
+                series.setSeriesName(seriesNewName);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deleteSeries(String seriesID, String ownerID) {
+        return false;
+    }
+
+
 }
 
