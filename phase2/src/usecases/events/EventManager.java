@@ -3,6 +3,7 @@ package usecases.events;
 import entities.CalendarEvent;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class EventManager {
     private IEventRepository repository;
@@ -31,6 +32,12 @@ public class EventManager {
     }
 
     // get - plural
+    public ArrayList<CalendarEvent> getEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
+        return repository.fetchEventsBySeriesIDAndOwnerID(seriesID, ownerID);
+    }
     // edit
+    public boolean editSeriesID(String eventID, String seriesID, String ownerID) {
+        return repository.editSeriesID(eventID, seriesID, ownerID);
+    }
     // delete
 }
