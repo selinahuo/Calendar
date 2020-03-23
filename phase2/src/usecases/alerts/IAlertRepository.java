@@ -1,6 +1,7 @@
 package usecases.alerts;
 import entities.Alert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public interface IAlertRepository {
     Alert fetchAlertByIDAndUserID(String alertID, String userID);
 
     //Fetch - plural- Alerts
-    Alert[] fetchAlertByUserID(String userID);
+    ArrayList<Alert> fetchAlertByUserID(String userID);
 
     //Edit - Alert
     boolean editAlertName(String alertID, String name, String newName, String userID);

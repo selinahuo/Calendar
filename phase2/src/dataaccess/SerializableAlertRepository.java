@@ -21,27 +21,15 @@ public class SerializableAlertRepository extends SerializableRepository<Alert> i
 
     @Override
     public Alert fetchAlertByIDAndUserID(String alertID, String userID) {
-        ArrayList<Alert> alerts = deserialize();
-        for (Alert alert: alerts) {
-            if (alert.getAlertID().equals(alertID) && alert.getUserID().equals(userID)) {
-                return alert;
-            }
-        }
-        return null;
+        return fetchSingular((Alert alert) -> alert.getAlertID() != null
+                && alert.getAlertID().equals(alertID)
+                && alert.getUserID().equals(userID));
     }
 
     @Override
-    public Alert[] fetchAlertByUserID(String userID) {
-        ArrayList<Alert> alerts = deserialize();
-        List<Alert> alertList = new ArrayList<>();
-        for (Alert alert: alerts) {
-            if (alert.getUserID().equals(userID)) {
-                alertList.add(alert);
-            }
-        }
-        Alert[] alertArray  = new Alert[alertList.size()];
-        alertList.toArray(alertArray);
-        return alertArray;
+    public ArrayList<Alert> fetchAlertByUserID(String userID) {
+        return fetchPlural((Alert alert) -> alert.getUserID() != null &&
+                alert.getUserID().equals(userID));
     }
 
     @Override
