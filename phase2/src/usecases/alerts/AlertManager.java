@@ -134,7 +134,7 @@ class AlertManager implements IAlertManager, IEventDeletionObserver {
      */
     @Override
     public ArrayList<Alert> getOverdueAlertsAfterDate(LocalDateTime date, String userID){
-        Alert[] alerts = this.alertRepository.fetchAlertByUserID(userID);
+        ArrayList<Alert> alerts = this.alertRepository.fetchAlertByUserID(userID);
         ArrayList<Alert> alertsArr = new ArrayList<Alert>();
         for (Alert alert: alerts) {
             LocalDateTime nextRing = alert.getNextRing();
@@ -159,7 +159,7 @@ class AlertManager implements IAlertManager, IEventDeletionObserver {
 
     // get - plural alerts
     @Override
-    public Alert[] getAlertByUserID(String userID) {
+    public ArrayList<Alert> getAlertByUserID(String userID) {
         return alertRepository.fetchAlertByUserID(userID);
     }
 
