@@ -5,8 +5,9 @@ import entities.User;
 import java.util.ArrayList;
 
 public interface IUserRepository {
-    User fetchUserByUsername(String username);
     boolean saveUser(User user);
+
+    User fetchUserByUsername(String username);
 
     ArrayList<User> fetchUsers();
 }
