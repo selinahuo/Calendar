@@ -10,7 +10,7 @@ public class SerialiableSeriesRepository extends SerializableRepository<Series> 
         super("series.ser");
     }
 
-
+    @Override
     public boolean saveSeries(Series series) {
         ArrayList<Series> seriesArr = deserialize();
         seriesArr.add(series);
@@ -18,21 +18,11 @@ public class SerialiableSeriesRepository extends SerializableRepository<Series> 
         return true;
     }
 
-    public Series fetchSeriesByIDAndUserID(String seriesID, String userID) {
+    @Override
+    public Series fetchSeriesByUserID(String userID) {
         ArrayList<Series> seriesArr = deserialize();
-        for (Series series: seriesArr) {
-            if (series.getSeriesID().equals(seriesID) && series.getUserID().equals(userID)) {
-                return series;
-            }
-        }
-        return null;
-    }
-
-
-    public Series fetchSeriesByNameAndUserID(String seriesName, String userID) {
-        ArrayList<Series> seriesArr = deserialize();
-        for (Series series: seriesArr) {
-            if (series.getSeriesName().equals(seriesName) && series.getUserID().equals(userID)) {
+        for (Series series: seriesArr){
+            if (series.getUserID().equals(userID)){
                 return series;
             }
         }
@@ -40,12 +30,13 @@ public class SerialiableSeriesRepository extends SerializableRepository<Series> 
     }
 
     @Override
-    public ArrayList<Series> fetchSeriesByUserID(String userID) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Series> fetchSeriesBySeriesName(String seriesName) {
+    public Series fetchSeriesBySeriesName(String seriesName) {
+        ArrayList<Series> seriesArr = deserialize();
+        for (Series series: seriesArr){
+            if (series.getSeriesName().equals(seriesName)){
+                return series;
+            }
+        }
         return null;
     }
 

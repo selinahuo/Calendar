@@ -63,12 +63,12 @@ public class SeriesManager {
     }
 
     // singular
-    public ArrayList<Series> getSeriesByUserID(String userID){
+    public Series getSeriesByUserID(String userID){
 
         return this.repository.fetchSeriesByUserID(userID);
     }
 
-    public ArrayList<Series> getSeriesBySeriesName(String seriesName){
+    public Series getSeriesBySeriesName(String seriesName){
         return this.repository.fetchSeriesBySeriesName(seriesName);
     }
 
