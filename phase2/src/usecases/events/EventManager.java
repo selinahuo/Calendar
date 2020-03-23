@@ -3,12 +3,19 @@ package usecases.events;
 import entities.CalendarEvent;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventManager {
     private IEventRepository repository;
+    private List<IEventDeletionObserver> observers = new ArrayList<>();
 
     public EventManager(IEventRepository repository) {
         this.repository = repository;
+    }
+
+    public void addObservers(IEventDeletionObserver deletionObserver) {
+        observers.add(deletionObserver);
     }
 
     // save
@@ -31,6 +38,23 @@ public class EventManager {
     }
 
     // get - plural
+    public ArrayList<CalendarEvent> getEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
+        return repository.fetchEventsBySeriesIDAndOwnerID(seriesID, ownerID);
+    }
+
     // edit
+    public boolean editSeriesID(String eventID, String seriesID, String ownerID) {
+        return repository.editSeriesID(eventID, seriesID, ownerID);
+    }
+
     // delete
+    public boolean deleteEvent(String eventID, String ownerID) {
+        boolean deleted = repository.deleteEvent(eventID, ownerID);
+        if (deleted) {
+            for (IEventDeletionObserver observer: observers) {
+                observer.handleEventDeletion(eventID);
+            }
+        }
+        return deleted;
+    }
 }

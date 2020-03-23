@@ -26,7 +26,7 @@ public interface IEventRepository {
 
     // Name
     ArrayList<CalendarEvent> fetchEventsByNameAndOwnerID(String name, String ownerID);
-    ArrayList<CalendarEvent> fetchEventsByNameAndCollaboratorID(String name, String ownerID);
+    ArrayList<CalendarEvent> fetchEventsByNameAndCollaboratorID(String name, String collaboratorID);
     ArrayList<CalendarEvent> fetchEventsByNameAndUserID(String name, String userID);
 
     // Date

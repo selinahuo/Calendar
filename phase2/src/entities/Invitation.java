@@ -11,7 +11,6 @@ public class Invitation implements Serializable {
     private String initialMessage;
     private String respondingMessage;
     private Boolean accept;
-    private Boolean acknowledged;
 
     public Invitation(String eventID, String inviterID, String inviteeID, String initialMessage) {
         this.eventID = eventID;
@@ -54,13 +53,5 @@ public class Invitation implements Serializable {
 
     public void setAccept(Boolean accept) {
         this.accept = accept;
-    }
-
-    public Boolean getAcknowledged() {
-        return acknowledged;
-    }
-
-    public void setAcknowledged(Boolean acknowledged) {
-        this.acknowledged = acknowledged;
     }
 }

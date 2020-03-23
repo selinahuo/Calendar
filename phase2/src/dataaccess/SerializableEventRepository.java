@@ -16,59 +16,84 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
 
     @Override
     public CalendarEvent fetchEventByEventID(String eventID) {
-        return fetchSingular((CalendarEvent event) -> {
-            return event.getEventID() != null && event.getEventID().equals(eventID);
-        });
+        return fetchSingular((CalendarEvent event) -> event.getEventID() != null && event.getEventID().equals(eventID));
     }
 
     @Override
     public CalendarEvent fetchEventByEventIDAndOwnerID(String eventID, String ownerID) {
-        return null;
+        return fetchSingular((CalendarEvent event) ->
+                event.getEventID() != null && event.getEventID().equals(eventID)
+                && event.getUserID() != null && event.getUserID().equals(ownerID));
     }
 
     @Override
     public CalendarEvent fetchEventByEventIDAndCollaboratorID(String eventID, String collaboratorID) {
-        return null;
+        return fetchSingular((CalendarEvent event) ->
+                event.getEventID() != null && event.getEventID().equals(eventID)
+                && event.getCollaborators() != null && event.getCollaborators().contains(collaboratorID));
     }
 
     @Override
     public CalendarEvent fetchEventByEventIDAndUserID(String eventID, String userID) {
-        return null;
+        return fetchSingular((CalendarEvent event) ->
+                event.getEventID() != null && event.getEventID().equals(eventID)
+                && ((event.getUserID() != null && event.getUserID().equals(userID))
+                    || (event.getCollaborators() != null && event.getCollaborators().contains(userID))
+                )
+        );
     }
 
     @Override
     public CalendarEvent fetchEventByAlertIDAndOwnerID(String alertID, String ownerID) {
-        return null;
+        return fetchSingular((CalendarEvent event) ->
+            event.getAlertID() != null && event.getAlertID().equals(alertID)
+            && event.getUserID() != null && event.getUserID().equals(ownerID)
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByOwnerID(String ownerID) {
-        return null;
+        return fetchPlural((CalendarEvent event) -> event.getUserID() != null && event.getUserID().equals(ownerID));
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByCollaboratorID(String collaboratorID) {
-        return null;
+        return fetchPlural((CalendarEvent event) ->
+            event.getCollaborators() != null && event.getCollaborators().contains(collaboratorID)
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByUserID(String userID) {
-        return null;
+        return fetchPlural((CalendarEvent event) ->
+                (event.getUserID() != null && event.getUserID().equals(userID))
+                || (event.getCollaborators() != null && event.getCollaborators().contains(userID))
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByNameAndOwnerID(String name, String ownerID) {
-        return null;
+        return fetchPlural((CalendarEvent event) ->
+                event.getName() != null && event.getName().equals(name)
+                && event.getUserID() != null && event.getUserID().equals(ownerID)
+        );
     }
 
     @Override
-    public ArrayList<CalendarEvent> fetchEventsByNameAndCollaboratorID(String name, String ownerID) {
-        return null;
+    public ArrayList<CalendarEvent> fetchEventsByNameAndCollaboratorID(String name, String collaboratorID) {
+        return fetchPlural((CalendarEvent event) ->
+                event.getName() != null && event.getName().equals(name)
+                && event.getCollaborators() != null && event.getCollaborators().contains(collaboratorID)
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByNameAndUserID(String name, String userID) {
-        return null;
+        return fetchPlural((CalendarEvent event) ->
+                event.getName() != null && event.getName().equals(name)
+                && ((event.getUserID() != null && event.getUserID().equals(userID))
+                    || (event.getCollaborators() != null && event.getCollaborators().contains(userID)))
+        );
     }
 
     @Override
