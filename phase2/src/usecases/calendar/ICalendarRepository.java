@@ -1,18 +1,18 @@
 package usecases.calendar;
 
-import entities.Calendar;
+import entities.Calendars;
 import java.util.ArrayList;
 
 public interface ICalendarRepository {
 
 
-    boolean saveCalendar(Calendar calendar);
+    boolean saveCalendar(Calendars calendar);
 
     //Fetch - singular
-    Calendar fetchCalendarByCalendarID(String calendarID);
+    Calendars fetchCalendarByCalendarID(String calendarID);
 
     // Fetch - plural
-    ArrayList<Calendar> fetchCalendarByOwnerID(String ownerID);
+    ArrayList<Calendars> fetchCalendarByOwnerID(String ownerID);
 
     //edit
     boolean editCalendarName(String calendarID, String name);

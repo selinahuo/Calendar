@@ -1,6 +1,6 @@
 package usecases.calendar;
 
-import entities.Calendar;
+import entities.Calendars;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class CalendarManager {
 
     // save
     public String createCalendar(String userID, String calendarName) {
-        Calendar calendar = new Calendar(userID, calendarName);
+        Calendars calendar = new Calendars(userID, calendarName);
         boolean success = repository.saveCalendar(calendar);
         if (success) {
             return calendar.getCalendarID();
@@ -24,12 +24,12 @@ public class CalendarManager {
     }
 
     // get - singular
-    public Calendar getCalendarByCalendarID(String calendarID) {
+    public Calendars getCalendarByCalendarID(String calendarID) {
         return repository.fetchCalendarByCalendarID(calendarID);
     }
 
     // get plural
-    public ArrayList<Calendar> getCalendarByOwnerID(String ownerID) {
+    public ArrayList<Calendars> getCalendarByOwnerID(String ownerID) {
         return repository.fetchCalendarByOwnerID(ownerID);
     }
 
