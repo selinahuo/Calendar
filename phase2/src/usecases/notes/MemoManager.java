@@ -30,37 +30,16 @@ public class MemoManager {
         return repository.fetchMemoByMemoIDAndOwnerID(memoID, ownerID);
     }
 
-    public Memo getMemoByMemoIDAndCollaboratorID(String memoID, String collaboratorID){
-        return repository.fetchMemoByMemoIDAndCollaboratorID(memoID, collaboratorID);
-    }
-
-    public Memo getMemoByMemoIDAndUserID(String memoID, String userID){
-        return repository.fetchMemoByMemoIDAndUserID(memoID, userID);
-    }
-
     // get - plural - Memos
     // Generic
     public ArrayList<Memo> getMemosByOwnerID(String ownerID){
         return repository.fetchMemosByOwnerID(ownerID);
     }
 
-    public ArrayList<Memo> getMemosByCollaboratorID(String collaboratorID){
-     return repository.fetchMemosByCollaboratorID(collaboratorID);
-    }
-
-    public ArrayList<Memo> getMemosByUserID(String userID){
-        return repository.fetchMemosByUserID(userID);
-    }
 
     // Name - Memos
     public ArrayList<Memo> getMemosByNameAndOwnerID(String name, String ownerID){
         return repository.fetchMemosByNameAndOwnerID(name, ownerID);
-    }
-    public ArrayList<Memo> getMemosByNameAndCollaboratorID(String name, String collaboratorID){
-        return repository.fetchMemosByNameAndCollaboratorID(name, collaboratorID);
-    }
-    public ArrayList<Memo> getMemosByNameAndUserID(String name, String userID){
-        return repository.fetchMemosByNameAndUserID(name, userID);
     }
 
     // edit - Memos
