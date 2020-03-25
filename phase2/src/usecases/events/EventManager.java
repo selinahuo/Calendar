@@ -38,6 +38,10 @@ public class EventManager {
     }
 
     // get - plural
+    public ArrayList<CalendarEvent> getEventsByNameAndUserID(String name, String userID) {
+        return repository.fetchEventsByNameAndUserID(name, userID);
+    }
+
     public ArrayList<CalendarEvent> getEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
         return repository.fetchEventsBySeriesIDAndOwnerID(seriesID, ownerID);
     }

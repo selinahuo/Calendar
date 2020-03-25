@@ -12,7 +12,7 @@ public interface ICalendarRepository {
     Calendars fetchCalendarByCalendarID(String calendarID);
 
     // Fetch - plural
-    ArrayList<Calendars> fetchCalendarByOwnerID(String ownerID);
+    ArrayList<Calendars> fetchCalendarsByOwnerID(String ownerID);
 
     //edit
     boolean editCalendarName(String calendarID, String name);

@@ -29,8 +29,8 @@ public class CalendarManager {
     }
 
     // get plural
-    public ArrayList<Calendars> getCalendarByOwnerID(String ownerID) {
-        return repository.fetchCalendarByOwnerID(ownerID);
+    public ArrayList<Calendars> getCalendarsByOwnerID(String ownerID) {
+        return repository.fetchCalendarsByOwnerID(ownerID);
     }
 
 }
