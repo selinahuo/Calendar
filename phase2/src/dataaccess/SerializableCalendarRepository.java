@@ -28,7 +28,7 @@ public class SerializableCalendarRepository extends SerializableRepository<Calen
     }
 
     @Override
-    public ArrayList<Calendars> fetchCalendarByOwnerID(String ownerID) {
+    public ArrayList<Calendars> fetchCalendarsByOwnerID(String ownerID) {
         return fetchPlural((Calendars calendars) -> calendars.getOwnerID() != null &&
                 calendars.getOwnerID().equals(ownerID));
     }

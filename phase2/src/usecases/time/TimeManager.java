@@ -32,6 +32,11 @@ public class TimeManager {
         time.plusDays(days);
     }
 
+    public void addWeeks(long weeks) {
+        changed = true;
+        time.plusWeeks(weeks);
+    }
+
     public void addMonths(long months) {
         changed = true;
         time.plusMonths(months);
