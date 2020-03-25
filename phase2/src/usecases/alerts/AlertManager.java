@@ -1,6 +1,7 @@
 package usecases.alerts;
 
 import entities.Alert;
+import entities.CalendarEvent;
 import usecases.events.IEventDeletionObserver;
 import java.time.LocalDateTime;
 import usecases.events.IEventManager;
@@ -147,8 +148,16 @@ class AlertManager implements IEventDeletionObserver {
         this.alertRepository.deleteAlertByEventID(eventID);
     }
 
-    // get - singular alert
+    public boolean deleteAlertByIDAndUserID(String alertID, String userID) {
+        if(this.alertRepository.deleteAlertByIDAndUserID(alertID, userID)) {
+            // update the event's alertID
+            this.eventManager.getEventByAlertIDAndUserID(alertID, userID).setAlertID(null);
+            return true;
+        }
+        return false;
+    }
 
+    // get - singular alert
     public Alert getAlertByIDAndUserID(String alertID, String userID) {
         return this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
     }
@@ -165,11 +174,19 @@ class AlertManager implements IEventDeletionObserver {
      return this.alertRepository.editAlertName(alertID, name, newName, userID);
     }
 
-
-   public  boolean editAlertID(String alertID, String newID, String userID){
-        return this.alertRepository.editAlertID(alertID, newID, userID);
+    public boolean editAlertTimeAsIndividual(String alertID, LocalDateTime individualTime) {
+        return this.alertRepository.editAlertTimeAsIndividual(alertID, individualTime);
     }
 
+    public boolean editAlertTimeAsFrequency(String eventID, LocalDateTime start, String frequency) {
+        // the updated alert would have the original alert's name
+        String originalAlertID = this.eventManager.getEventByID(eventID).getAlertID();
+        String originalAlertName = this.alertRepository.fetchAlertByID(originalAlertID).getAlertName();
+        // the updated alert would have the original alert's userID
+        String originalUserID = this.alertRepository.fetchAlertByID(originalAlertID).getUserID();
+        // create a new frequency alert and attach to the associated event.
+        return createIndividualAlertOnEvent(eventID, originalAlertName, start, originalUserID);
+    }
 
 
 //    @Override

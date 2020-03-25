@@ -1,6 +1,7 @@
 package usecases.alerts;
 import entities.Alert;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface IAlertRepository {
 
     //Fetch - singular- Alert
     Alert fetchAlertByIDAndUserID(String alertID, String userID);
-
+    Alert fetchAlertByID(String alertID);
     //Fetch - plural- Alerts
     ArrayList<Alert> fetchAlertByUserID(String userID);
 
@@ -23,9 +24,11 @@ public interface IAlertRepository {
 
     //Delete - Alert
     boolean deleteAlertByEventID(String eventID);
+    boolean deleteAlertByIDAndUserID(String alertID, String userID);
 
     //AcknowledgeAlert
     boolean editAlertAcknowledge(String alertID, List<Boolean> acknowledge);
+    boolean editAlertTimeAsIndividual(String alertID, LocalDateTime individualTime);
 }
 
 

@@ -88,4 +88,10 @@ public class Alert implements Serializable {
 
     }
 
+    public void setIndividualTime(LocalDateTime individualTime) {
+        if (this.times.size() == 1) {
+            this.times.set(0, individualTime);
+        }
+    }
+
 }

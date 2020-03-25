@@ -3,6 +3,7 @@ package dataaccess;
 import entities.Alert;
 import usecases.alerts.IAlertRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,12 @@ public class SerializableAlertRepository extends SerializableRepository<Alert> i
         return fetchSingular((Alert alert) -> alert.getAlertID() != null
                 && alert.getAlertID().equals(alertID)
                 && alert.getUserID().equals(userID));
+    }
+
+    @Override
+    public Alert fetchAlertByID(String alertID) {
+        return fetchSingular((Alert alert) -> alert.getUserID() != null
+                && alert.getAlertID().equals(alertID));
     }
 
     @Override
@@ -62,6 +69,10 @@ public class SerializableAlertRepository extends SerializableRepository<Alert> i
     }
 
     @Override
+    public boolean deleteAlertByIDAndUserID(String alertID, String userID){
+        return false; }
+
+    @Override
     public boolean editAlertAcknowledge(String alertID, List<Boolean> acknowledge) {
         ArrayList<Alert> alerts = deserialize();
         for (Alert alert: alerts) {
@@ -73,4 +84,17 @@ public class SerializableAlertRepository extends SerializableRepository<Alert> i
         }
         return false;
     }
+
+    @Override
+    public boolean editAlertTimeAsIndividual(String alertID, LocalDateTime individualTime) {
+        ArrayList<Alert> alertsArr = deserialize();
+        for (Alert alerts: alertsArr) {
+            if (alerts.getAlertID().equals(alertID)) {
+                alerts.setIndividualTime(individualTime);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
