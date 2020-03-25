@@ -21,7 +21,6 @@ public interface IMemoRepository {
     // edit - Memos
     boolean editMemoName(String memoID, String name, String newName, String OwnerID);
     boolean editMemoNote(String memoID, String note, String newNote, String OwnerID);
-    boolean editMemoID(String memoID, String newID, String OwnerID);
 
     // delete - Memo
     boolean deleteMemo(String memoID, String ownerID);

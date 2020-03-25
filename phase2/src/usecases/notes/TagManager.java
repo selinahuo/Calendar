@@ -1,7 +1,6 @@
 package usecases.notes;
 
 import entities.Tag;
-import entities.Memo;
 
 import java.util.ArrayList;
 
@@ -45,10 +44,6 @@ public class TagManager {
     // edit - Tags
     boolean editTagName(String tagID, String name, String newName, String OwnerID){
         return repository.editTagName(tagID, name, newName, OwnerID);
-    }
-
-    boolean editTagID(String tagID, String newID, String OwnerID){
-        return repository.editTagID(tagID, newID, OwnerID);
     }
 
     boolean editTagCountAdd(String tagID, String ownerID){

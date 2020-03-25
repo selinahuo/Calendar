@@ -68,17 +68,7 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
         return false;
     }
 
-    @Override
-    public boolean editMemoID(String memoID, String newID, String OwnerID) {
-        ArrayList<Memo> memosArr = deserialize();
-        for (Memo memos: memosArr) {
-            if (memos.getMemoID().equals(memoID)) {
-                memos.setMemoID(newID);
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     @Override
     public boolean deleteMemo(String memoID, String ownerID) { return false; }

@@ -3,21 +3,25 @@ package entities;
 import java.io.Serializable;
 
 public class Memo implements Serializable {
-    String note;
-    String name;
-    String memoID;
-    String userID;
+    private String note;
+    private String name;
+    private String memoID;
+    private String userID;
+    private int count;
 
     public Memo(String name, String note, String memoID, String userID) {
         this.name = name;
         this.note = note;
         this.memoID = memoID;
         this.userID = userID;
+        this.count = 1;
     }
 
     public String getNote() {
         return note;
     }
+
+    public int getCount() {return count;}
 
     public String getName() {
         return name;
@@ -41,7 +45,11 @@ public class Memo implements Serializable {
         this.userID = userID;
     }
 
-    public void setMemoID(String memoID) {
-        this.memoID = memoID;
+    public void addCount(){
+        this.count++;
+    }
+
+    public void removeCount(){
+        this.count--;
     }
 }

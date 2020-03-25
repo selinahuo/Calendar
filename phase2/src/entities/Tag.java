@@ -11,7 +11,7 @@ public class Tag implements Serializable {
     public Tag(String name, String tagID, String userID) {
         this.tagID = tagID;
         this.name = name;
-        this.count = 0;
+        this.count = 1;
         this.userID = userID;
     }
 
@@ -35,17 +35,12 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
-    public int addCount(){
+    public void addCount(){
         this.count++;
-        return this.count;
     }
 
-    public int removeCount(){
+    public void removeCount(){
         this.count--;
-        return this.count;
     }
 
-    public void setTagID(String tagID) {
-        this.tagID = tagID;
-    }
 }

@@ -56,17 +56,6 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
         return false;
     }
 
-    @Override
-    public boolean editTagID(String tagID, String newID, String ownerID) {
-        ArrayList<Tag> tagsArr = deserialize();
-        for (Tag tags: tagsArr) {
-            if (tags.getTagID().equals(tagID)) {
-                tags.setTagID(newID);
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Override
     public boolean editTagCountAdd(String tagID, String ownerID) {
