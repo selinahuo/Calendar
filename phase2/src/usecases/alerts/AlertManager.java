@@ -8,7 +8,7 @@ import usecases.events.IEventManager;
 import java.util.ArrayList;
 import java.util.UUID;
 
-class AlertManager implements IAlertManager, IEventDeletionObserver {
+class AlertManager implements IEventDeletionObserver {
     private IAlertRepository alertRepository;
     private IEventManager eventManager;
 
@@ -84,7 +84,6 @@ class AlertManager implements IAlertManager, IEventDeletionObserver {
      * @param start the alert time of the notification
      * @return True is successful
      */
-    @Override
     public boolean createIndividualAlertOnEvent(String eventID, String alertName, LocalDateTime start, String userID) {
         //create individual alert
         Alert alert = createIndividualAlert(eventID, alertName, userID, start);
@@ -102,7 +101,6 @@ class AlertManager implements IAlertManager, IEventDeletionObserver {
      * @param frequency the frequency of which the alert is repeating
      * @return True is successful
      */
-    @Override
     public boolean createFrequencyAlertOnEvent(String eventID, String alertName, String userID, LocalDateTime startTime, String frequency) {
         // create frequency alert
         Alert alert = createFrequencyAlert(eventID, alertName, userID, startTime, frequency);
@@ -116,7 +114,6 @@ class AlertManager implements IAlertManager, IEventDeletionObserver {
      * @param alertID the ID of this alert
      * @param userID the user associated with this alert
      */
-    @Override
     public boolean acknowledgeAlert(String alertID, String userID) {
         Alert alert = this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
         if (alert != null) {
@@ -132,7 +129,6 @@ class AlertManager implements IAlertManager, IEventDeletionObserver {
      * @param userID the user using this calendar
      * @return a list of alert that is overdue.
      */
-    @Override
     public ArrayList<Alert> getOverdueAlertsAfterDate(LocalDateTime date, String userID){
         ArrayList<Alert> alerts = this.alertRepository.fetchAlertByUserID(userID);
         ArrayList<Alert> alertsArr = new ArrayList<Alert>();
@@ -152,24 +148,24 @@ class AlertManager implements IAlertManager, IEventDeletionObserver {
     }
 
     // get - singular alert
-    @Override
+
     public Alert getAlertByIDAndUserID(String alertID, String userID) {
         return this.alertRepository.fetchAlertByIDAndUserID(alertID, userID);
     }
 
     // get - plural alerts
-    @Override
+
     public ArrayList<Alert> getAlertByUserID(String userID) {
         return alertRepository.fetchAlertByUserID(userID);
     }
 
     // edit - Alert
-    @Override
+
     public boolean editAlertName(String alertID, String name, String newName, String userID){
      return this.alertRepository.editAlertName(alertID, name, newName, userID);
     }
 
-    @Override
+
    public  boolean editAlertID(String alertID, String newID, String userID){
         return this.alertRepository.editAlertID(alertID, newID, userID);
     }
