@@ -1,6 +1,5 @@
 package dataaccess;
 
-import entities.Memo;
 import entities.Tag;
 import usecases.notes.ITagRepository;
 
@@ -75,6 +74,9 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
         for (Tag tags: tagsArr) {
             if (tags.getTagID().equals(tagID)) {
                 tags.removeCount();
+                if (tags.getCount() == 0){
+                    deleteTag(tags.getTagID(), tags.getUserID());
+                }
                 return true;
             }
         }

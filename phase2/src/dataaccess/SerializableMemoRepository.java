@@ -68,7 +68,33 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
         return false;
     }
 
+    @Override
+    public boolean editMemoCountAdd(String tagID, String ownerID) {
+        ArrayList<Memo> memosArr = deserialize();
+        for (Memo memos: memosArr) {
+            if (memos.getMemoID().equals(tagID)) {
+                memos.addCount();
+                return true;
+            }
+        }
+        return false;
+    }
 
+    @Override
+    public boolean editMemoCountRemove(String tagID, String ownerID) {
+        ArrayList<Memo> memosArr = deserialize();
+        for (Memo memos: memosArr) {
+            if (memos.getMemoID().equals(tagID)) {
+                memos.removeCount();
+                if (memos.getCount() == 0){
+                    deleteMemo(memos.getMemoID(), memos.getUserID());
+                }
+
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean deleteMemo(String memoID, String ownerID) { return false; }

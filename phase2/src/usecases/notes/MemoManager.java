@@ -51,6 +51,15 @@ public class MemoManager {
         return repository.editMemoNote(memoID, note, newNote, ownerID);
     }
 
+
+    boolean editMemoCountAdd(String memoID, String ownerID){
+        return repository.editMemoCountAdd(memoID, ownerID);
+    }
+
+    boolean editMemoCountRemove(String memoID, String ownerID){
+        return repository.editMemoCountRemove(memoID, ownerID);
+    }
+
     // delete - Memo
     boolean deleteMemo(String memoID, String ownerID){
         return repository.deleteMemo(memoID, ownerID);
