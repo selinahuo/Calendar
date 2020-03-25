@@ -17,9 +17,11 @@ public class AlertMenuView extends View {
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Get overdue alerts");
-//        System.out.println("[2] Get Individual Alert");
+        System.out.println("[2] Get Alert");
         System.out.println("[3] Create a new alert");
         System.out.println("[4] Acknowledge an alert");
+        System.out.println("[5] Edit an alert");
+        System.out.println("[6] Delete an alert");
         System.out.println("[~] Go Home");
     }
 
@@ -47,6 +49,13 @@ public class AlertMenuView extends View {
                     return new CreateAlertView(getLocalStorage(), getModel(), getController());
                 case "4":
                     return new AcknowledgeAlertView(getLocalStorage(), getModel(), getController());
+
+                case "5":
+                    System.out.println("click for edit alert ");
+                    break;
+                case "6":
+                    System.out.println("click for alert deletion");
+                    break;
                 case "~":
                     return new HomeView(getLocalStorage(), null, getController());
                 default:
@@ -54,10 +63,4 @@ public class AlertMenuView extends View {
             }
         }
     }
-
-    // getOverdueAlerts
-    //getIndividualAlert
-    //createIndividualAlertOnEvent
-    //createFrequencyAlertOnEvent
-    //acknowledgeAlert
 }
