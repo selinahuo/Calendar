@@ -2,7 +2,6 @@ package dataaccess;
 
 import entities.CalendarEvent;
 import entities.Memo;
-import entities.Tag;
 import usecases.events.EventManager;
 import usecases.notes.IMemoRepository;
 
