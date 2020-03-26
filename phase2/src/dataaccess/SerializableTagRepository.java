@@ -1,5 +1,7 @@
 package dataaccess;
 
+import usecases.events.EventManager;
+import entities.CalendarEvent;
 import entities.Tag;
 import usecases.notes.ITagRepository;
 
@@ -9,6 +11,7 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
         public SerializableTagRepository() {
             super("tags.ser");
         }
+        private EventManager eventManager;
 
     @Override
     public boolean saveTag(Tag tag) {
@@ -85,4 +88,18 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
 
     @Override
     public boolean deleteTag(String tagID, String ownerID) {return false;}
+
+    @Override
+    public ArrayList<CalendarEvent> fetchEventsByTagIDAndOwnerID(String tagID, String ownerID){
+        ArrayList<CalendarEvent> events =  eventManager.getEventsByOwnerID(ownerID);
+        ArrayList<CalendarEvent> newEvents = new ArrayList<>();
+        for (CalendarEvent event : events){
+            for (String id : event.getTagIDs()){
+                if (id.equals(tagID)){
+                    newEvents.add(event);
+                }
+            }
+        }
+        return newEvents;
+    }
 }

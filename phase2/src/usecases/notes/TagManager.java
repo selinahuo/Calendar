@@ -1,8 +1,10 @@
 package usecases.notes;
 
+import entities.CalendarEvent;
 import entities.Tag;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class TagManager {
@@ -57,5 +59,10 @@ public class TagManager {
     // delete - Tag
     boolean deleteTag(String tagID, String ownerID){
         return repository.deleteTag(tagID, ownerID);
+    }
+
+    //Events
+    public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID){
+        return repository.fetchEventsByTagIDAndOwnerID(tagID, ownerID);
     }
 }

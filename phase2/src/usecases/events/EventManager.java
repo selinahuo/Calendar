@@ -51,6 +51,10 @@ public class EventManager {
         return repository.editSeriesID(eventID, seriesID, ownerID);
     }
 
+    public ArrayList<CalendarEvent> getEventsByOwnerID(String ownerID){
+        return repository.fetchEventsByOwnerID(ownerID);
+    }
+
     // delete
     public boolean deleteEvent(String eventID, String ownerID) {
         boolean deleted = repository.deleteEvent(eventID, ownerID);

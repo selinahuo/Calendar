@@ -1,6 +1,9 @@
 package usecases.notes;
 
+import entities.CalendarEvent;
 import entities.Memo;
+import entities.Tag;
+import usecases.events.EventManager;
 
 import java.util.ArrayList;
 
@@ -63,5 +66,9 @@ public class MemoManager {
     // delete - Memo
     boolean deleteMemo(String memoID, String ownerID){
         return repository.deleteMemo(memoID, ownerID);
+    }
+
+    public ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String ownerID){
+        return repository.fetchEventsByMemoIDAndOwnerID(memoID, ownerID);
     }
 }

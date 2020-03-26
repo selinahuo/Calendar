@@ -1,5 +1,6 @@
 package usecases.notes;
 
+import entities.CalendarEvent;
 import entities.Tag;
 import java.util.ArrayList;
 
@@ -14,6 +15,9 @@ public interface ITagRepository {
     // Fetch - plural - Tags
     // Generic
     ArrayList<Tag> fetchTagsByOwnerID(String ownerID);
+
+    //Fetch events
+    ArrayList<CalendarEvent> fetchEventsByTagIDAndOwnerID(String tagID, String ownerID);
 
     // Name - Tags
     ArrayList<Tag> fetchTagsByNameAndOwnerID(String name, String ownerID);

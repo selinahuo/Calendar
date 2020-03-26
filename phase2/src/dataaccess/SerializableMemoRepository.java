@@ -1,6 +1,9 @@
 package dataaccess;
 
+import entities.CalendarEvent;
 import entities.Memo;
+import entities.Tag;
+import usecases.events.EventManager;
 import usecases.notes.IMemoRepository;
 
 import java.util.ArrayList;
@@ -9,6 +12,7 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
     public SerializableMemoRepository() {
         super("memos.ser");
     }
+    private EventManager eventManager;
 
     @Override
     public boolean saveMemo(Memo memo) {
@@ -98,4 +102,18 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
 
     @Override
     public boolean deleteMemo(String memoID, String ownerID) { return false; }
+
+    @Override
+    public ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String userID){
+        ArrayList<CalendarEvent> events =  eventManager.getEventsByOwnerID(userID);
+        ArrayList<CalendarEvent> newEvents = new ArrayList<>();
+        for (CalendarEvent event : events){
+            for (String id : event.getMemoIDs()){
+                if (id.equals(memoID)){
+                    newEvents.add(event);
+                }
+            }
+        }
+        return newEvents;
+    }
 }
