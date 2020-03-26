@@ -4,6 +4,7 @@ import usecases.events.EventManager;
 import entities.CalendarEvent;
 import entities.Tag;
 import usecases.notes.ITagRepository;
+import usecases.notes.TagManager;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
             super("tags.ser");
         }
         private EventManager eventManager;
+        private TagManager tagManager;
 
     @Override
     public boolean saveTag(Tag tag) {
@@ -88,6 +90,34 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
 
     @Override
     public boolean deleteTag(String tagID, String ownerID) {return false;}
+
+    @Override
+    public boolean addTagToEvent(String tagID, String eventID, String ownerID) {
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        ArrayList<String> ids = event.getTagIDs();
+        ids.add(tagID);
+        event.setTagIDs(ids);
+        tagManager.getTagByTagID(tagID).addCount();
+        return true;
+    }
+
+    @Override
+    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID) {
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        ArrayList<String> ids = event.getTagIDs();
+        ArrayList<String> newIDs = new ArrayList<>();
+        boolean removed = false;
+        for (String id : ids){
+            if (!id.equals(tagID)){
+                newIDs.add(id);
+            }else{
+                removed = true;
+                tagManager.getTagByTagID(tagID).removeCount();
+            }
+        }
+        event.setTagIDs(newIDs);
+        return removed;
+    }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByTagIDAndOwnerID(String tagID, String ownerID){

@@ -65,4 +65,12 @@ public class TagManager {
     public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID){
         return repository.fetchEventsByTagIDAndOwnerID(tagID, ownerID);
     }
+
+    // tag/untag tags
+    public boolean addTagToEvent(String tagID, String eventID, String ownerID){
+        return repository.addTagToEvent(tagID, eventID, ownerID);
+    }
+    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID){
+        return repository.removeTagFromEvent(tagID, eventID, ownerID);
+    }
 }

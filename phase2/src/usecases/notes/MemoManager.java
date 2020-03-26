@@ -71,4 +71,12 @@ public class MemoManager {
     public ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String ownerID){
         return repository.fetchEventsByMemoIDAndOwnerID(memoID, ownerID);
     }
+
+    // Add/remove memos
+    boolean addMemoToEvent(String memoID, String eventID, String ownerID){
+        return repository.addMemoToEvent(memoID, eventID, ownerID);
+    }
+    boolean removeMemoFromEvent(String memoID, String eventID, String ownerID){
+        return repository.removeMemoFromEvent(memoID, eventID, ownerID);
+    }
 }

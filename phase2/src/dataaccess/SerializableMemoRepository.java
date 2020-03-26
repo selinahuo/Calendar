@@ -4,6 +4,7 @@ import entities.CalendarEvent;
 import entities.Memo;
 import usecases.events.EventManager;
 import usecases.notes.IMemoRepository;
+import usecases.notes.MemoManager;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
         super("memos.ser");
     }
     private EventManager eventManager;
+    private MemoManager memoManager;
 
     @Override
     public boolean saveMemo(Memo memo) {
@@ -114,5 +116,33 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
             }
         }
         return newEvents;
+    }
+
+    @Override
+    public boolean addMemoToEvent(String memoID, String eventID, String ownerID) {
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        ArrayList<String> ids = event.getMemoIDs();
+        ids.add(memoID);
+        event.setMemoIDs(ids);
+        memoManager.getMemoByMemoID(memoID).addCount();
+        return true;
+    }
+
+    @Override
+    public boolean removeMemoFromEvent(String memoID, String eventID, String ownerID) {
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        ArrayList<String> ids = event.getMemoIDs();
+        ArrayList<String> newIDs = new ArrayList<>();
+        boolean removed = false;
+        for (String id : ids){
+            if (!id.equals(memoID)){
+                newIDs.add(id);
+            }else{
+                removed = true;
+                memoManager.getMemoByMemoID(memoID).removeCount();
+            }
+        }
+        event.setMemoIDs(newIDs);
+        return removed;
     }
 }
