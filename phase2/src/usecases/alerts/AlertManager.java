@@ -4,16 +4,16 @@ import entities.Alert;
 import entities.CalendarEvent;
 import usecases.events.IEventDeletionObserver;
 import java.time.LocalDateTime;
-import usecases.events.IEventManager;
+import usecases.events.EventManager;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 class AlertManager implements IEventDeletionObserver {
     private IAlertRepository alertRepository;
-    private IEventManager eventManager;
+    private EventManager eventManager;
 
-    public AlertManager(IAlertRepository repository, IEventManager eventManager){
+    public AlertManager(IAlertRepository repository, EventManager eventManager){
         this.alertRepository = repository;
         this.eventManager = eventManager;
     }
@@ -55,7 +55,7 @@ class AlertManager implements IEventDeletionObserver {
         // generate alertID
         String alertID = generateAlertID();
         // organize alertTimes
-        LocalDateTime end = this.eventManager.getEventByID(eventID).getEnd();
+        LocalDateTime end = this.eventManager.getEventByIDAndUserID(eventID, userID).getEnd();
         ArrayList<LocalDateTime> alertTimes = new ArrayList<>();
         LocalDateTime start = (LocalDateTime) startTime.plusHours(0);
 
@@ -89,7 +89,7 @@ class AlertManager implements IEventDeletionObserver {
         //create individual alert
         Alert alert = createIndividualAlert(eventID, alertName, userID, start);
         //update the event's alertID
-        this.eventManager.getEventByID(eventID).setAlertID(alert.getAlertID());
+        this.eventManager.getEventByIDAndUserID(eventID, userID).setAlertID(alert.getAlertID());
         return this.alertRepository.saveAlert(alert);
     }
 
@@ -106,7 +106,7 @@ class AlertManager implements IEventDeletionObserver {
         // create frequency alert
         Alert alert = createFrequencyAlert(eventID, alertName, userID, startTime, frequency);
         //update the event's alertID
-        this.eventManager.getEventByID(eventID).setAlertID(alert.getAlertID());
+        this.eventManager.getEventByIDAndUserID(eventID, userID).setAlertID(alert.getAlertID());
         return this.alertRepository.saveAlert(alert);
     }
 
@@ -151,7 +151,7 @@ class AlertManager implements IEventDeletionObserver {
     public boolean deleteAlertByIDAndUserID(String alertID, String userID) {
         if(this.alertRepository.deleteAlertByIDAndUserID(alertID, userID)) {
             // update the event's alertID
-            this.eventManager.getEventByAlertIDAndUserID(alertID, userID).setAlertID(null);
+            this.eventManager.getEventByAlertIDAndOwnerID(alertID, userID).setAlertID(null);
             return true;
         }
         return false;
@@ -178,9 +178,9 @@ class AlertManager implements IEventDeletionObserver {
         return this.alertRepository.editAlertTimeAsIndividual(alertID, individualTime);
     }
 
-    public boolean editAlertTimeAsFrequency(String eventID, LocalDateTime start, String frequency) {
+    public boolean editAlertTimeAsFrequency(String eventID, String userID, LocalDateTime start, String frequency) {
         // the updated alert would have the original alert's name
-        String originalAlertID = this.eventManager.getEventByID(eventID).getAlertID();
+        String originalAlertID = this.eventManager.getEventByIDAndUserID(eventID, userID).getAlertID();
         String originalAlertName = this.alertRepository.fetchAlertByID(originalAlertID).getAlertName();
         // the updated alert would have the original alert's userID
         String originalUserID = this.alertRepository.fetchAlertByID(originalAlertID).getUserID();
