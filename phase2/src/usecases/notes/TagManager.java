@@ -2,6 +2,7 @@ package usecases.notes;
 
 import entities.CalendarEvent;
 import entities.Tag;
+import usecases.events.EventManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +10,7 @@ import java.util.Calendar;
 
 public class TagManager {
     private ITagRepository repository;
+    private EventManager eventManager;
 
     public TagManager(ITagRepository repository) {
         this.repository = repository;
@@ -63,14 +65,41 @@ public class TagManager {
 
     //Events
     public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID){
-        return repository.fetchEventsByTagIDAndOwnerID(tagID, ownerID);
+        ArrayList<CalendarEvent> events =  eventManager.getEventsByOwnerID(ownerID);
+        ArrayList<CalendarEvent> newEvents = new ArrayList<>();
+        for (CalendarEvent event : events){
+            for (String id : event.getTagIDs()){
+                if (id.equals(tagID)){
+                    newEvents.add(event);
+                }
+            }
+        }
+        return newEvents;
     }
 
     // tag/untag tags
     public boolean addTagToEvent(String tagID, String eventID, String ownerID){
-        return repository.addTagToEvent(tagID, eventID, ownerID);
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        ArrayList<String> ids = event.getTagIDs();
+        ids.add(tagID);
+        event.setTagIDs(ids);
+        getTagByTagID(tagID).addCount();
+        return true;
     }
     public boolean removeTagFromEvent(String tagID, String eventID, String ownerID){
-        return repository.removeTagFromEvent(tagID, eventID, ownerID);
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        ArrayList<String> ids = event.getTagIDs();
+        ArrayList<String> newIDs = new ArrayList<>();
+        boolean removed = false;
+        for (String id : ids){
+            if (!id.equals(tagID)){
+                newIDs.add(id);
+            }else{
+                removed = true;
+                getTagByTagID(tagID).removeCount();
+            }
+        }
+        event.setTagIDs(newIDs);
+        return removed;
     }
 }

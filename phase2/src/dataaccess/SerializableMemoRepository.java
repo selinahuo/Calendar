@@ -103,46 +103,5 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
 
     @Override
     public boolean deleteMemo(String memoID, String ownerID) { return false; }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String userID){
-        ArrayList<CalendarEvent> events =  eventManager.getEventsByOwnerID(userID);
-        ArrayList<CalendarEvent> newEvents = new ArrayList<>();
-        for (CalendarEvent event : events){
-            for (String id : event.getMemoIDs()){
-                if (id.equals(memoID)){
-                    newEvents.add(event);
-                }
-            }
-        }
-        return newEvents;
-    }
-
-    @Override
-    public boolean addMemoToEvent(String memoID, String eventID, String ownerID) {
-        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
-        ArrayList<String> ids = event.getMemoIDs();
-        ids.add(memoID);
-        event.setMemoIDs(ids);
-        memoManager.getMemoByMemoID(memoID).addCount();
-        return true;
-    }
-
-    @Override
-    public boolean removeMemoFromEvent(String memoID, String eventID, String ownerID) {
-        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
-        ArrayList<String> ids = event.getMemoIDs();
-        ArrayList<String> newIDs = new ArrayList<>();
-        boolean removed = false;
-        for (String id : ids){
-            if (!id.equals(memoID)){
-                newIDs.add(id);
-            }else{
-                removed = true;
-                memoManager.getMemoByMemoID(memoID).removeCount();
-            }
-        }
-        event.setMemoIDs(newIDs);
-        return removed;
-    }
+    
 }
