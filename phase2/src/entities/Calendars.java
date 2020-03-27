@@ -1,11 +1,13 @@
 package entities;
+
 import java.io.Serializable;
 import java.util.UUID;
-public class Calendars implements Serializable{
 
+public class Calendars implements Serializable {
     private String calendarID = UUID.randomUUID().toString();
     private String ownerID;
     private String calendarName;
+    private int count;
 
     public Calendars(String userID, String calendarName) {
         this.ownerID = userID;
@@ -34,5 +36,23 @@ public class Calendars implements Serializable{
 
     public void setCalendarName(String calendarName) {
         this.calendarName = calendarName;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void addCount(){
+        this.count++;
+    }
+
+    public void removeCount(){
+        this.count--;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("ID: %s | Calendar: %s | Count: %d | User: %s",
+                getCalendarID(), getCalendarName(), getCount(), getOwnerID());
     }
 }

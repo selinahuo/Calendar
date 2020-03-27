@@ -193,6 +193,9 @@ public class EventManager {
     public boolean editTagIDs(String eventID, ArrayList<String> tagIDs, String ownerID) {
         return repository.editTagIDs(eventID, tagIDs, ownerID);
     }
+    public boolean editCalendarID(String eventID, String calendarID, String ownerID) {
+        return repository.editEventCalendarID(eventID, calendarID, ownerID);
+    }
 
     // delete -- might need to change
     public boolean deleteEvent(String eventID, String ownerID) {

@@ -25,7 +25,7 @@ public class Main {
         AlertManager alertManager = new AlertManager(alertRepository, eventManager);
 
         ICalendarRepository calendarRepository = new SerializableCalendarRepository();
-        CalendarManager calendarManager = new CalendarManager(calendarRepository);
+        CalendarManager calendarManager = new CalendarManager(calendarRepository, eventManager);
 
         IInvitationRepository invitationRepository = new SerializableInvitationRepository();
         InvitationManager invitationManager = new InvitationManager(invitationRepository);
@@ -44,6 +44,7 @@ public class Main {
         UserManager userManager = new UserManager(userRepository);
 
         eventManager.addObservers(alertManager);
+        eventManager.addObservers(calendarManager);
         eventManager.addObservers(invitationManager);
         eventManager.addObservers(memoManager);
         eventManager.addObservers(tagManager);

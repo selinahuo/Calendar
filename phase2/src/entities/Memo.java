@@ -54,7 +54,7 @@ public class Memo implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("ID: %s | %s: %s | Count: %d | User: %s",
+        return String.format("ID: %s | Memo: %s - %s | Count: %d | User: %s",
                 getMemoID(), getName(), getNote(), getCount(), getUserID());
     }
 }

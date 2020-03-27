@@ -43,4 +43,9 @@ public class Tag implements Serializable {
         this.count--;
     }
 
+    @Override
+    public String toString() {
+        return String.format("ID: %s | Tag: %s | Count: %d | User: %s",
+                getTagID(), getName(), getCount(), getUserID());
+    }
 }
