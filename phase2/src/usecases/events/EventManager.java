@@ -54,71 +54,36 @@ public class EventManager {
         return repository.fetchEventByAlertIDAndOwnerID(alertID, ownerID);
     }
 
-//    public String getEventDirections(String eventID) {
-//        CalendarEvent event = repository.fetchEventByEventID(eventID);
-//        if (event == null) {
-//            return null;
-//        }
-//        try {
-//            String url = "https://www.google.com/maps/dir//" + event.getLocation();
-//            String encodedURL = URLEncoder.encode( url, "UTF-8" );
-//            return encodedURL;
-//        } catch(Exception e) {
-//            return null;
-//        }
-//    }
-//    public String getEventWeather(String eventID) {
-//        CalendarEvent event = repository.fetchEventByEventID(eventID);
-//        if (event == null) {
-//            return null;
-//        }
-//        try {
-//            String url = "https://www.google.com/search?q=" + event.getLocation() + " weather";
-//            String encodedURL = URLEncoder.encode( url, "UTF-8" );
-//            return encodedURL;
-//        } catch(Exception e) {
-//            return null;
-//        }
-//    }
-//    public String getShareTwitterShareLink(String eventID) {
-//        CalendarEvent event = repository.fetchEventByEventID(eventID);
-//        if (event == null) {
-//            return null;
-//        }
-//        try {
-//            String eventString = String.format("%s @ %s from %s to %s.",
-//                    event.getName(),
-//                    event.getLocation(),
-//                    event.getStart().toString(),
-//                    event.getEnd().toString()
-//            );
-//            String url = "https://twitter.com/?status=" + eventString;
-//            String encodedURL = URLEncoder.encode( url, "UTF-8" );
-//            return encodedURL;
-//        } catch(Exception e) {
-//            return null;
-//        }
-//    }
-//
-//    public String getShareEMailShareLink(String eventID) {
-//        CalendarEvent event = repository.fetchEventByEventID(eventID);
-//        if (event == null) {
-//            return null;
-//        }
-//        try {
-//            String eventString = String.format("%s @ %s from %s to %s.",
-//                    event.getName(),
-//                    event.getLocation(),
-//                    event.getStart().toString(),
-//                    event.getEnd().toString()
-//            );
-//            String url = "mailto:?subject=" + eventString;
-//            String encodedURL = URLEncoder.encode( url, "UTF-8" );
-//            return encodedURL;
-//        } catch(Exception e) {
-//            return null;
-//        }
-//    }
+    public String getEventDirections(String eventID) {
+        CalendarEvent event = repository.fetchEventByEventID(eventID);
+        if (event == null) {
+            return null;
+        }
+        return EventLinkGenerator.getEventDirections(event);
+    }
+    public String getEventWeather(String eventID) {
+        CalendarEvent event = repository.fetchEventByEventID(eventID);
+        if (event == null) {
+            return null;
+        }
+        return EventLinkGenerator.getEventWeather(event);
+    }
+
+    public String getEventTwitterShare(String eventID) {
+        CalendarEvent event = repository.fetchEventByEventID(eventID);
+        if (event == null) {
+            return null;
+        }
+        return EventLinkGenerator.getEventTwitterShare(event);
+    }
+
+    public String getEventEmailShare(String eventID) {
+        CalendarEvent event = repository.fetchEventByEventID(eventID);
+        if (event == null) {
+            return null;
+        }
+        return EventLinkGenerator.getEventEmailShare(event);
+    }
 
     // get - plural
     public ArrayList<CalendarEvent> getEventsStartBeforeAndUserID(LocalDateTime start, String userID) {
