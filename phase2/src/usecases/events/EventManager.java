@@ -162,6 +162,12 @@ public class EventManager {
     public ArrayList<CalendarEvent> getEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
         return repository.fetchEventsBySeriesIDAndOwnerID(seriesID, ownerID);
     }
+    public ArrayList<CalendarEvent> getEventsByMemoIDAndOwnerID(String memoID, String ownerID) {
+        return repository.fetchEventsByMemoIDAndOwnerID(memoID, ownerID);
+    }
+    public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID) {
+        return repository.fetchEventsByTagIDAndOwnerID(tagID, ownerID);
+    }
 
     // edit
     public boolean editEventName(String eventID, String name, String ownerID) {
@@ -178,15 +184,23 @@ public class EventManager {
     public boolean editSeriesID(String eventID, String seriesID, String ownerID) {
         return repository.editSeriesID(eventID, seriesID, ownerID);
     }
+    public boolean editMemoID(String eventID, String memoID, String ownerID) {
+        return repository.editMemoID(eventID, memoID, ownerID);
+    }
+    public boolean editTagIDs(String eventID, ArrayList<String> tagIDs, String ownerID) {
+        return repository.editTagIDs(eventID, tagIDs, ownerID);
+    }
 
-    // delete
+    // delete -- might need to change
     public boolean deleteEvent(String eventID, String ownerID) {
-        boolean deleted = repository.deleteEvent(eventID, ownerID);
-        if (deleted) {
-            for (IEventDeletionObserver observer: observers) {
-                observer.handleEventDeletion(eventID);
-            }
+        CalendarEvent eventToDelete = repository.fetchEventByEventIDAndOwnerID(eventID, ownerID);
+        if (eventToDelete == null) {
+            return false;
         }
-        return deleted;
+        repository.deleteEvent(eventID, ownerID);
+        for (IEventDeletionObserver observer: observers) {
+            observer.handleEventDeletion(eventToDelete);
+        }
+        return true;
     }
 }

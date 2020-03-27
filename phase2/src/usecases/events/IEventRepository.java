@@ -62,7 +62,7 @@ public interface IEventRepository {
     boolean editEventCalendarID(String eventID, String calendarID, String ownerID);
     boolean editEventCollaborators(String eventID, ArrayList<String> collaborators, String ownerID);
     boolean editTagIDs(String eventID, ArrayList<String> tagIDs, String ownerID);
-    boolean editMemoIDs(String eventID, ArrayList<String> memoIDs, String ownerID);
+    boolean editMemoID(String eventID, String memoID, String ownerID);
     boolean editSeriesID(String eventID, String seriesID, String ownerID);
     boolean editAlertID(String eventID, String alertID, String ownerID);
 

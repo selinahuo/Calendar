@@ -50,14 +50,6 @@ public class TagManager {
         return repository.editTagName(tagID, name, newName, OwnerID);
     }
 
-    boolean editTagCountAdd(String tagID, String ownerID){
-        return repository.editTagCountAdd(tagID, ownerID);
-    }
-
-    boolean editTagCountRemove(String tagID, String ownerID){
-        return repository.editTagCountRemove(tagID, ownerID);
-    }
-
     // delete - Tag
     boolean deleteTag(String tagID, String ownerID){
         return repository.deleteTag(tagID, ownerID);
@@ -83,10 +75,12 @@ public class TagManager {
         ArrayList<String> ids = event.getTagIDs();
         ids.add(tagID);
         event.setTagIDs(ids);
+//        repository.editTagCountAdd()
+        // check if the tag is already in the list, add it before setting
         getTagByTagID(tagID).addCount();
         return true;
     }
-    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID){
+    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID) {
         CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
         ArrayList<String> ids = event.getTagIDs();
         ArrayList<String> newIDs = new ArrayList<>();

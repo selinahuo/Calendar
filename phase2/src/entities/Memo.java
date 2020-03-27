@@ -14,7 +14,7 @@ public class Memo implements Serializable {
         this.note = note;
         this.memoID = memoID;
         this.userID = userID;
-        this.count = 1;
+        this.count = 0;
     }
 
     public String getNote() {

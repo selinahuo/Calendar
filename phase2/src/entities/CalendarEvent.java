@@ -19,9 +19,9 @@ public class CalendarEvent implements Serializable {
     private String calendarID;
     private ArrayList<String> collaborators;
     private ArrayList<String> tagIDs;
-    private ArrayList<String> memoIDs;
-    private String seriesID;
-    private String alertID;
+    private String memoID = "";
+    private String seriesID = "";
+    private String alertID = "";
 
     public CalendarEvent(String name, LocalDateTime start, LocalDateTime end, String location,
                          String userID, String calendarID) {
@@ -35,7 +35,6 @@ public class CalendarEvent implements Serializable {
 
         this.collaborators = new ArrayList<>();
         this.tagIDs = new ArrayList<>();
-        this.memoIDs = new ArrayList<>();
     }
 
     public String getEventID() {
@@ -102,12 +101,12 @@ public class CalendarEvent implements Serializable {
         this.tagIDs = tagIDs;
     }
 
-    public ArrayList<String> getMemoIDs() {
-        return memoIDs;
+    public String getMemoID() {
+        return memoID;
     }
 
-    public void setMemoIDs(ArrayList<String> memoIDs) {
-        this.memoIDs = memoIDs;
+    public void setMemoIDs(String memoID) {
+        this.memoID = memoID;
     }
 
     public String getSeriesID() {

@@ -144,8 +144,11 @@ public class AlertManager implements IEventDeletionObserver {
 
     // delete alert
     @Override
-    public void handleEventDeletion(String eventID) {
-        this.alertRepository.deleteAlertByEventID(eventID);
+    public void handleEventDeletion(CalendarEvent event) {
+        String alertID = event.getAlertID();
+        if (alertID != null) {
+            alertRepository.deleteAlertByID(alertID);
+        }
     }
 
     public boolean deleteAlertByIDAndUserID(String alertID, String userID) {
