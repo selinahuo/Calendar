@@ -1,17 +1,17 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Tag implements Serializable {
-    private String tagID;
+    private String tagID = UUID.randomUUID().toString();
     private String name;
     private int count;
     private String userID;
 
-    public Tag(String name, String tagID, String userID) {
+    public Tag(String name, String userID) {
         this.tagID = tagID;
         this.name = name;
-        this.count = 0;
         this.userID = userID;
     }
 

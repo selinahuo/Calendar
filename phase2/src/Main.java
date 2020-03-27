@@ -31,11 +31,10 @@ public class Main {
         InvitationManager invitationManager = new InvitationManager(invitationRepository);
 
         IMemoRepository memoRepository = new SerializableMemoRepository();
-        // TODO need to be able to inject an EventManager
-        MemoManager memoManager = new MemoManager(memoRepository);
+        MemoManager memoManager = new MemoManager(memoRepository, eventManager);
+
         ITagRepository tagRepository = new SerializableTagRepository();
-        // TODO need to be able to inject an EventManager
-        TagManager tagManager = new TagManager(tagRepository);
+        TagManager tagManager = new TagManager(tagRepository, eventManager);
 
         ISeriesRepository seriesRepository = new SerializableSeriesRepository();
         SeriesManager seriesManager = new SeriesManager(seriesRepository, eventManager);
@@ -46,9 +45,8 @@ public class Main {
 
         eventManager.addObservers(alertManager);
         eventManager.addObservers(invitationManager);
-        // TODO notes manager need to implement event deletion
-//        eventManager.addObservers(memoManager);
-//        eventManager.addObservers(tagManager);
+        eventManager.addObservers(memoManager);
+        eventManager.addObservers(tagManager);
         // TODO series manager has to implement
 //        eventManager.addObservers(seriesManager);
     }

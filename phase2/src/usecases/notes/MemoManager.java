@@ -4,27 +4,25 @@ import entities.CalendarEvent;
 import entities.Memo;
 import entities.Tag;
 import usecases.events.EventManager;
+import usecases.events.IEventDeletionObserver;
 
 import java.util.ArrayList;
 
 
-public class MemoManager {
+public class MemoManager implements IEventDeletionObserver {
     private IMemoRepository repository;
     private EventManager eventManager;
 
-    public MemoManager(IMemoRepository repository) {
+    public MemoManager(IMemoRepository repository, EventManager eventManager) {
+        this.eventManager = eventManager;
         this.repository = repository;
     }
 
     // save - Memo
-    public String createMemo(String name, String note, String memoID, String userID) {
-        Memo memo = new Memo(name, note, memoID, userID);
-        boolean success = repository.saveMemo(memo);
-        if (success) {
-            return memo.getMemoID();
-        } else {
-            return null;
-        }
+    public String createMemo(String name, String note, String userID) {
+        Memo memo = new Memo(name, note, userID);
+        repository.saveMemo(memo);
+        return memo.getMemoID();
     }
 
     // get - singular - Memos
@@ -50,15 +48,15 @@ public class MemoManager {
     }
 
     // edit - Memos
-    boolean editMemoName(String memoID, String name, String newName, String ownerID){
-        return repository.editMemoName(memoID, name, newName, ownerID);
+    public boolean editMemoName(String memoID, String name, String ownerID){
+        return repository.editMemoName(memoID, name, ownerID);
     }
 
-    boolean editMemoNote(String memoID, String note, String newNote, String ownerID){
-        return repository.editMemoNote(memoID, note, newNote, ownerID);
+    public boolean editMemoNote(String memoID, String note, String ownerID){
+        return repository.editMemoNote(memoID, note, ownerID);
     }
 
-    boolean deleteMemo(String memoID, String ownerID) {
+    public boolean deleteMemo(String memoID, String ownerID) {
         Memo memo = repository.fetchMemoByMemoIDAndOwnerID(memoID, ownerID);
         if (memo.getCount() <= 0) {
             return repository.deleteMemo(memoID, ownerID);
@@ -91,5 +89,10 @@ public class MemoManager {
         eventManager.editMemoID(eventID, "", ownerID);
         repository.editMemoCountRemove(memoID, ownerID);
         return true;
+    }
+
+    @Override
+    public void handleEventDeletion(CalendarEvent event) {
+        repository.editMemoCountRemove(event.getMemoID(), event.getUserID());
     }
 }

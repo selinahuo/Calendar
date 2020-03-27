@@ -1,20 +1,19 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Memo implements Serializable {
     private String note;
     private String name;
-    private String memoID;
+    private String memoID = UUID.randomUUID().toString();
     private String userID;
     private int count;
 
-    public Memo(String name, String note, String memoID, String userID) {
+    public Memo(String name, String note, String userID) {
         this.name = name;
         this.note = note;
-        this.memoID = memoID;
         this.userID = userID;
-        this.count = 0;
     }
 
     public String getNote() {
@@ -51,5 +50,11 @@ public class Memo implements Serializable {
 
     public void removeCount(){
         this.count--;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("ID: %s | %s: %s | Count: %d | User: %s",
+                getMemoID(), getName(), getNote(), getCount(), getUserID());
     }
 }

@@ -50,6 +50,9 @@ public class EventManager {
     public CalendarEvent getEventByIDAndUserID(String eventID, String userID) {
         return repository.fetchEventByEventIDAndUserID(eventID, userID);
     }
+    public CalendarEvent getEventByIDAndOwnerID(String eventID, String ownerID) {
+        return repository.fetchEventByEventIDAndOwnerID(eventID, ownerID);
+    }
     public CalendarEvent getEventByAlertIDAndOwnerID(String alertID, String ownerID) {
         return repository.fetchEventByAlertIDAndOwnerID(alertID, ownerID);
     }

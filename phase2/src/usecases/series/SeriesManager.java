@@ -85,7 +85,6 @@ public class SeriesManager implements Observer {
         return repository.deleteSeries(seriesID, ownerID);
     }
 
-
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("series has changed");

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface IMemoRepository {
     // write - Memos
-    boolean saveMemo(Memo memo);
+    void saveMemo(Memo memo);
 
     // Fetch - singular - Memos
     Memo fetchMemoByMemoID(String memoID);
@@ -23,8 +23,8 @@ public interface IMemoRepository {
     ArrayList<Memo> fetchMemosByNameAndOwnerID(String name, String ownerID);
 
     // edit - Memos
-    boolean editMemoName(String memoID, String name, String newName, String OwnerID);
-    boolean editMemoNote(String memoID, String note, String newNote, String OwnerID);
+    boolean editMemoName(String memoID, String name, String ownerID);
+    boolean editMemoNote(String memoID, String note, String ownerID);
     boolean editMemoCountAdd(String memoID, String ownerID);
     boolean editMemoCountRemove(String memoID, String ownerID);
 
