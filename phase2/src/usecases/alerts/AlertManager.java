@@ -1,6 +1,7 @@
 package usecases.alerts;
 
 import entities.Alert;
+import entities.CalendarEvent;
 import usecases.events.IEventDeletionObserver;
 import java.time.LocalDateTime;
 import usecases.events.EventManager;
