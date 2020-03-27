@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class MemoManager {
     private IMemoRepository repository;
+    private EventManager eventManager;
 
     public MemoManager(IMemoRepository repository) {
         this.repository = repository;
@@ -69,14 +70,41 @@ public class MemoManager {
     }
 
     public ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String ownerID){
-        return repository.fetchEventsByMemoIDAndOwnerID(memoID, ownerID);
+        ArrayList<CalendarEvent> events =  eventManager.getEventsByOwnerID(ownerID);
+        ArrayList<CalendarEvent> newEvents = new ArrayList<>();
+        for (CalendarEvent event : events){
+            for (String id : event.getMemoIDs()){
+                if (id.equals(memoID)){
+                    newEvents.add(event);
+                }
+            }
+        }
+        return newEvents;
     }
 
     // Add/remove memos
     boolean addMemoToEvent(String memoID, String eventID, String ownerID){
-        return repository.addMemoToEvent(memoID, eventID, ownerID);
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        ArrayList<String> ids = event.getTagIDs();
+        ids.add(memoID);
+        event.setTagIDs(ids);
+        getMemoByMemoID(memoID).addCount();
+        return true;
     }
     boolean removeMemoFromEvent(String memoID, String eventID, String ownerID){
-        return repository.removeMemoFromEvent(memoID, eventID, ownerID);
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        ArrayList<String> ids = event.getMemoIDs();
+        ArrayList<String> newIDs = new ArrayList<>();
+        boolean removed = false;
+        for (String id : ids){
+            if (!id.equals(memoID)){
+                newIDs.add(id);
+            }else{
+                removed = true;
+                getMemoByMemoID(memoID).removeCount();
+            }
+        }
+        event.setMemoIDs(newIDs);
+        return removed;
     }
 }

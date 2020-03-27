@@ -31,10 +31,4 @@ public interface IMemoRepository {
     // delete - Memo
     boolean deleteMemo(String memoID, String ownerID);
 
-    ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String ownerID);
-
-    // Add/remove memos
-    boolean addMemoToEvent(String memoID, String eventID, String ownerID);
-    boolean removeMemoFromEvent(String memoID, String eventID, String ownerID);
-
 }

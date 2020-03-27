@@ -9,7 +9,7 @@ import usecases.events.EventManager;
 import java.util.ArrayList;
 import java.util.UUID;
 
-class AlertManager implements IEventDeletionObserver {
+public class AlertManager implements IEventDeletionObserver {
     private IAlertRepository alertRepository;
     private EventManager eventManager;
 
