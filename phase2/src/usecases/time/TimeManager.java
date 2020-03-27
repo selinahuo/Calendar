@@ -6,43 +6,44 @@ public class TimeManager {
     static private LocalDateTime time = LocalDateTime.now();
     static private boolean changed = false;
 
-    public LocalDateTime getTime() {
+    public static LocalDateTime getTime() {
         if (!changed) {
             time = LocalDateTime.now();
         }
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public static void setTime(LocalDateTime time) {
         changed = true;
-        this.time = time;
+        TimeManager.time = time;
     }
 
-    public void reset() {
+    public static void reset() {
         changed = false;
+        time = LocalDateTime.now();
     }
 
-    public void addHours(long hours) {
+    public static void addHours(long hours) {
         changed = true;
         time.plusHours(hours);
     }
 
-    public void addDays(long days) {
+    public static void addDays(long days) {
         changed = true;
         time.plusDays(days);
     }
 
-    public void addWeeks(long weeks) {
+    public static void addWeeks(long weeks) {
         changed = true;
         time.plusWeeks(weeks);
     }
 
-    public void addMonths(long months) {
+    public static void addMonths(long months) {
         changed = true;
         time.plusMonths(months);
     }
 
-    public void addYears(long years) {
+    public static void addYears(long years) {
         changed = true;
         time.plusYears(years);
     }

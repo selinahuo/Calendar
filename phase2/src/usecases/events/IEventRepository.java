@@ -30,10 +30,11 @@ public interface IEventRepository {
     ArrayList<CalendarEvent> fetchEventsByNameAndUserID(String name, String userID);
 
     // Date
+    ArrayList<CalendarEvent> fetchEventsStartBeforeAndUserID(LocalDateTime start, String userID);
     ArrayList<CalendarEvent> fetchEventsStartBeforeAndEndAfterAndUserID(LocalDateTime start, LocalDateTime end, String userID);
 
     ArrayList<CalendarEvent> fetchEventsStartAfterAndUserID(LocalDateTime after, String userID);
-    ArrayList<CalendarEvent> fetchEventsStartAfterAndStartBeforeAndUserID(LocalDateTime after, LocalDateTime before, String userID);
+    ArrayList<CalendarEvent> fetchEventsStartBeforeAndStartAfterAndUserID(LocalDateTime before, LocalDateTime after, String userID);
 
     ArrayList<CalendarEvent> fetchEventsEndBeforeAndUserID(LocalDateTime before, String userID);
 
