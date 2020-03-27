@@ -11,7 +11,7 @@ public class Tag implements Serializable {
     public Tag(String name, String tagID, String userID) {
         this.tagID = tagID;
         this.name = name;
-        this.count = 1;
+        this.count = 0;
         this.userID = userID;
     }
 

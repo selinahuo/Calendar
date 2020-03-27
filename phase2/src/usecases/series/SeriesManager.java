@@ -14,13 +14,13 @@ public class SeriesManager implements Observer {
     private ISeriesRepository repository;
     private EventManager eventManager;
 
-    SeriesManager(ISeriesRepository repository, EventManager eventManager) {
+    public SeriesManager(ISeriesRepository repository, EventManager eventManager) {
         this.repository = repository;
         this.eventManager = eventManager;
     }
 
     // save
-    boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID){
+    public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID){
         Series newSeries = new Series(UUID.randomUUID().toString(), seriesName, eventIDs.length, userID);
         this.repository.saveSeries(newSeries);
         for (String id : eventIDs) {
@@ -29,7 +29,7 @@ public class SeriesManager implements Observer {
         return true;
     }
 
-    boolean createSeriesFromEventFormula(String seriesName, LocalDateTime start, LocalDateTime end, String frequency, int numEvents, String userID){
+    public boolean createSeriesFromEventFormula(String seriesName, LocalDateTime start, LocalDateTime end, String frequency, int numEvents, String userID){
         Series newSeries = new Series(UUID.randomUUID().toString(), seriesName, numEvents, userID);
         ArrayList<LocalDateTime[]> times = getTimes(start, end, frequency, numEvents);
         for (LocalDateTime[] time : times) {

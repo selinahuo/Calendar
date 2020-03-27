@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SerializableSeriesRepository extends SerializableRepository<Series> implements ISeriesRepository {
-    public SerializableSeriesRepository(String serFile) {
+    public SerializableSeriesRepository() {
         super("series.ser");
     }
 
