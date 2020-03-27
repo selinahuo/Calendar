@@ -1,5 +1,6 @@
 package usecases.invitations;
 
+import entities.CalendarEvent;
 import entities.Invitation;
 import usecases.events.IEventDeletionObserver;
 
@@ -44,7 +45,7 @@ public class InvitationManager implements IEventDeletionObserver {
     }
 
     @Override
-    public void handleEventDeletion(String eventID) {
-        repository.deleteInvitationsByEventID(eventID);
+    public void handleEventDeletion(CalendarEvent event) {
+        repository.deleteInvitationsByEventID(event.getEventID());
     }
 }

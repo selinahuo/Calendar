@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class MemoManager {
     private IMemoRepository repository;
+    private EventManager eventManager;
 
     public MemoManager(IMemoRepository repository) {
         this.repository = repository;
@@ -39,10 +40,13 @@ public class MemoManager {
         return repository.fetchMemosByOwnerID(ownerID);
     }
 
-
     // Name - Memos
     public ArrayList<Memo> getMemosByNameAndOwnerID(String name, String ownerID){
         return repository.fetchMemosByNameAndOwnerID(name, ownerID);
+    }
+
+    public ArrayList<CalendarEvent> getEventsByMemoIDAndOwnerID(String memoID, String ownerID) {
+        return eventManager.getEventsByMemoIDAndOwnerID(memoID, ownerID);
     }
 
     // edit - Memos
@@ -54,29 +58,38 @@ public class MemoManager {
         return repository.editMemoNote(memoID, note, newNote, ownerID);
     }
 
-
-    boolean editMemoCountAdd(String memoID, String ownerID){
-        return repository.editMemoCountAdd(memoID, ownerID);
-    }
-
-    boolean editMemoCountRemove(String memoID, String ownerID){
-        return repository.editMemoCountRemove(memoID, ownerID);
-    }
-
-    // delete - Memo
-    boolean deleteMemo(String memoID, String ownerID){
-        return repository.deleteMemo(memoID, ownerID);
-    }
-
-    public ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String ownerID){
-        return repository.fetchEventsByMemoIDAndOwnerID(memoID, ownerID);
+    boolean deleteMemo(String memoID, String ownerID) {
+        Memo memo = repository.fetchMemoByMemoIDAndOwnerID(memoID, ownerID);
+        if (memo.getCount() <= 0) {
+            return repository.deleteMemo(memoID, ownerID);
+        }
+        return false;
     }
 
     // Add/remove memos
-    boolean addMemoToEvent(String memoID, String eventID, String ownerID){
-        return repository.addMemoToEvent(memoID, eventID, ownerID);
+    public boolean addMemoToEvent(String memoID, String eventID, String ownerID) {
+        Memo memo = repository.fetchMemoByMemoIDAndOwnerID(memoID, ownerID);
+        if (memo != null) {
+            boolean success = eventManager.editMemoID(eventID, memoID, ownerID);
+            if (success) {
+                repository.editMemoCountAdd(memoID, ownerID);
+            }
+            return success;
+        }
+        return false;
     }
-    boolean removeMemoFromEvent(String memoID, String eventID, String ownerID){
-        return repository.removeMemoFromEvent(memoID, eventID, ownerID);
+
+    public boolean removeMemoFromEvent(String eventID, String ownerID) {
+        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
+        if (event == null) {
+            return false;
+        }
+        String memoID = event.getMemoID();
+        if (memoID == "") {
+            return true;
+        }
+        eventManager.editMemoID(eventID, "", ownerID);
+        repository.editMemoCountRemove(memoID, ownerID);
+        return true;
     }
 }

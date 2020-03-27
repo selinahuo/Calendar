@@ -25,16 +25,10 @@ public interface IMemoRepository {
     // edit - Memos
     boolean editMemoName(String memoID, String name, String newName, String OwnerID);
     boolean editMemoNote(String memoID, String note, String newNote, String OwnerID);
-    boolean editMemoCountAdd(String tagID, String ownerID);
-    boolean editMemoCountRemove(String tagID, String ownerID);
+    boolean editMemoCountAdd(String memoID, String ownerID);
+    boolean editMemoCountRemove(String memoID, String ownerID);
 
     // delete - Memo
     boolean deleteMemo(String memoID, String ownerID);
-
-    ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String ownerID);
-
-    // Add/remove memos
-    boolean addMemoToEvent(String memoID, String eventID, String ownerID);
-    boolean removeMemoFromEvent(String memoID, String eventID, String ownerID);
 
 }

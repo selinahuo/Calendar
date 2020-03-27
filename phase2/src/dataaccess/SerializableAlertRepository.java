@@ -64,7 +64,7 @@ public class SerializableAlertRepository extends SerializableRepository<Alert> i
     }
 
     @Override
-    public boolean deleteAlertByEventID(String eventID){
+    public boolean deleteAlertByID(String alertID){
         return false;
     }
 

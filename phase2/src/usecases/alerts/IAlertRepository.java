@@ -23,7 +23,7 @@ public interface IAlertRepository {
     boolean editAlertID(String alertID, String newID, String userID);
 
     //Delete - Alert
-    boolean deleteAlertByEventID(String eventID);
+    boolean deleteAlertByID(String alertID);
     boolean deleteAlertByIDAndUserID(String alertID, String userID);
 
     //AcknowledgeAlert

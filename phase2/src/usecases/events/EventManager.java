@@ -54,71 +54,36 @@ public class EventManager {
         return repository.fetchEventByAlertIDAndOwnerID(alertID, ownerID);
     }
 
-//    public String getEventDirections(String eventID) {
-//        CalendarEvent event = repository.fetchEventByEventID(eventID);
-//        if (event == null) {
-//            return null;
-//        }
-//        try {
-//            String url = "https://www.google.com/maps/dir//" + event.getLocation();
-//            String encodedURL = URLEncoder.encode( url, "UTF-8" );
-//            return encodedURL;
-//        } catch(Exception e) {
-//            return null;
-//        }
-//    }
-//    public String getEventWeather(String eventID) {
-//        CalendarEvent event = repository.fetchEventByEventID(eventID);
-//        if (event == null) {
-//            return null;
-//        }
-//        try {
-//            String url = "https://www.google.com/search?q=" + event.getLocation() + " weather";
-//            String encodedURL = URLEncoder.encode( url, "UTF-8" );
-//            return encodedURL;
-//        } catch(Exception e) {
-//            return null;
-//        }
-//    }
-//    public String getShareTwitterShareLink(String eventID) {
-//        CalendarEvent event = repository.fetchEventByEventID(eventID);
-//        if (event == null) {
-//            return null;
-//        }
-//        try {
-//            String eventString = String.format("%s @ %s from %s to %s.",
-//                    event.getName(),
-//                    event.getLocation(),
-//                    event.getStart().toString(),
-//                    event.getEnd().toString()
-//            );
-//            String url = "https://twitter.com/?status=" + eventString;
-//            String encodedURL = URLEncoder.encode( url, "UTF-8" );
-//            return encodedURL;
-//        } catch(Exception e) {
-//            return null;
-//        }
-//    }
-//
-//    public String getShareEMailShareLink(String eventID) {
-//        CalendarEvent event = repository.fetchEventByEventID(eventID);
-//        if (event == null) {
-//            return null;
-//        }
-//        try {
-//            String eventString = String.format("%s @ %s from %s to %s.",
-//                    event.getName(),
-//                    event.getLocation(),
-//                    event.getStart().toString(),
-//                    event.getEnd().toString()
-//            );
-//            String url = "mailto:?subject=" + eventString;
-//            String encodedURL = URLEncoder.encode( url, "UTF-8" );
-//            return encodedURL;
-//        } catch(Exception e) {
-//            return null;
-//        }
-//    }
+    public String getEventDirections(String eventID) {
+        CalendarEvent event = repository.fetchEventByEventID(eventID);
+        if (event == null) {
+            return null;
+        }
+        return EventLinkGenerator.getEventDirections(event);
+    }
+    public String getEventWeather(String eventID) {
+        CalendarEvent event = repository.fetchEventByEventID(eventID);
+        if (event == null) {
+            return null;
+        }
+        return EventLinkGenerator.getEventWeather(event);
+    }
+
+    public String getEventTwitterShare(String eventID) {
+        CalendarEvent event = repository.fetchEventByEventID(eventID);
+        if (event == null) {
+            return null;
+        }
+        return EventLinkGenerator.getEventTwitterShare(event);
+    }
+
+    public String getEventEmailShare(String eventID) {
+        CalendarEvent event = repository.fetchEventByEventID(eventID);
+        if (event == null) {
+            return null;
+        }
+        return EventLinkGenerator.getEventEmailShare(event);
+    }
 
     // get - plural
     public ArrayList<CalendarEvent> getEventsStartBeforeAndUserID(LocalDateTime start, String userID) {
@@ -197,6 +162,12 @@ public class EventManager {
     public ArrayList<CalendarEvent> getEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
         return repository.fetchEventsBySeriesIDAndOwnerID(seriesID, ownerID);
     }
+    public ArrayList<CalendarEvent> getEventsByMemoIDAndOwnerID(String memoID, String ownerID) {
+        return repository.fetchEventsByMemoIDAndOwnerID(memoID, ownerID);
+    }
+    public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID) {
+        return repository.fetchEventsByTagIDAndOwnerID(tagID, ownerID);
+    }
 
     // edit
     public boolean editEventName(String eventID, String name, String ownerID) {
@@ -213,15 +184,23 @@ public class EventManager {
     public boolean editSeriesID(String eventID, String seriesID, String ownerID) {
         return repository.editSeriesID(eventID, seriesID, ownerID);
     }
+    public boolean editMemoID(String eventID, String memoID, String ownerID) {
+        return repository.editMemoID(eventID, memoID, ownerID);
+    }
+    public boolean editTagIDs(String eventID, ArrayList<String> tagIDs, String ownerID) {
+        return repository.editTagIDs(eventID, tagIDs, ownerID);
+    }
 
-    // delete
+    // delete -- might need to change
     public boolean deleteEvent(String eventID, String ownerID) {
-        boolean deleted = repository.deleteEvent(eventID, ownerID);
-        if (deleted) {
-            for (IEventDeletionObserver observer: observers) {
-                observer.handleEventDeletion(eventID);
-            }
+        CalendarEvent eventToDelete = repository.fetchEventByEventIDAndOwnerID(eventID, ownerID);
+        if (eventToDelete == null) {
+            return false;
         }
-        return deleted;
+        repository.deleteEvent(eventID, ownerID);
+        for (IEventDeletionObserver observer: observers) {
+            observer.handleEventDeletion(eventToDelete);
+        }
+        return true;
     }
 }

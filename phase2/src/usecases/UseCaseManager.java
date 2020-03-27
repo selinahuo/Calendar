@@ -82,6 +82,22 @@ public class UseCaseManager {
         return null;
     }
 
+    public String getEventDirections(String eventID) {
+        return eventManager.getEventDirections(eventID);
+    }
+
+    public String getEventWeather(String eventID) {
+        return eventManager.getEventWeather(eventID);
+    }
+
+    public String getEventTwitterShare(String eventID) {
+        return eventManager.getEventTwitterShare(eventID);
+    }
+
+    public String getEventEmailShare(String eventID) {
+        return eventManager.getEventEmailShare(eventID);
+    }
+
     public ArrayList<CalendarEvent> getEventsByNameAndUserID(String name, String userID) {
         return eventManager.getEventsByNameAndUserID(name, userID);
     }

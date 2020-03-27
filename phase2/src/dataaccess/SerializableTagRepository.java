@@ -12,7 +12,6 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
         public SerializableTagRepository() {
             super("tags.ser");
         }
-        private EventManager eventManager;
         private TagManager tagManager;
 
     @Override
@@ -91,45 +90,4 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
     @Override
     public boolean deleteTag(String tagID, String ownerID) {return false;}
 
-    @Override
-    public boolean addTagToEvent(String tagID, String eventID, String ownerID) {
-        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
-        ArrayList<String> ids = event.getTagIDs();
-        ids.add(tagID);
-        event.setTagIDs(ids);
-        tagManager.getTagByTagID(tagID).addCount();
-        return true;
-    }
-
-    @Override
-    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID) {
-        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
-        ArrayList<String> ids = event.getTagIDs();
-        ArrayList<String> newIDs = new ArrayList<>();
-        boolean removed = false;
-        for (String id : ids){
-            if (!id.equals(tagID)){
-                newIDs.add(id);
-            }else{
-                removed = true;
-                tagManager.getTagByTagID(tagID).removeCount();
-            }
-        }
-        event.setTagIDs(newIDs);
-        return removed;
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByTagIDAndOwnerID(String tagID, String ownerID){
-        ArrayList<CalendarEvent> events =  eventManager.getEventsByOwnerID(ownerID);
-        ArrayList<CalendarEvent> newEvents = new ArrayList<>();
-        for (CalendarEvent event : events){
-            for (String id : event.getTagIDs()){
-                if (id.equals(tagID)){
-                    newEvents.add(event);
-                }
-            }
-        }
-        return newEvents;
-    }
 }

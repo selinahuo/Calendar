@@ -16,9 +16,6 @@ public interface ITagRepository {
     // Generic
     ArrayList<Tag> fetchTagsByOwnerID(String ownerID);
 
-    //Fetch events
-    ArrayList<CalendarEvent> fetchEventsByTagIDAndOwnerID(String tagID, String ownerID);
-
     // Name - Tags
     ArrayList<Tag> fetchTagsByNameAndOwnerID(String name, String ownerID);
 
@@ -30,7 +27,4 @@ public interface ITagRepository {
     // delete - Tag
     boolean deleteTag(String tagID, String ownerID);
 
-    // tag/untag tags
-    boolean addTagToEvent(String tagID, String eventID, String ownerID);
-    boolean removeTagFromEvent(String tagID, String eventID, String ownerID);
 }
