@@ -20,6 +20,15 @@ public class Controller {
     public ListModel getEventsByName(String name, String userID) {
         return EventAdapter.createEventListModel(useCaseManager.getEventsByNameAndUserID(name, userID));
     }
+    public ListModel getPastEvents(String userID) {
+        return EventAdapter.createEventListModel(useCaseManager.getPastEvents(userID));
+    }
+    public ListModel getCurrentEvents(String userID) {
+        return EventAdapter.createEventListModel(useCaseManager.getCurrentEvents(userID));
+    }
+    public ListModel getFutureEvents(String userID) {
+        return EventAdapter.createEventListModel(useCaseManager.getFutureEvents(userID));
+    }
 
     // INVITATIONS
 

@@ -107,7 +107,6 @@ public class UseCaseManager {
         LocalDateTime now = TimeManager.getTime();
         return eventManager.getEventsStartBeforeAndEndAfterAndUserID(now, now, userID);
     }
-
     public ArrayList<CalendarEvent> getFutureEvents(String userID) {
         LocalDateTime now = TimeManager.getTime();
         return eventManager.getEventsStartAfterAndUserID(now, userID);

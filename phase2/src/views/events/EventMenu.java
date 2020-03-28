@@ -43,8 +43,21 @@ public class EventMenu extends View {
                     ListModel nameModel = getController().getEventsByName(eventName, getLocalStorage().getUserID());
                     return new EventList(getLocalStorage(), nameModel, getController());
                 case "4":
-                    // TODO Past, current, future events
-                    return null;
+                    System.out.println("Choose [p]ast/[f]uture (or any value for current events):");
+                    String relativeTime = input.nextLine();
+                    if (relativeTime.equals("p")) {
+                        ListModel pastEvents = getController().getPastEvents(getLocalStorage().getUserID());
+                        printTitle("Past Events");
+                        return new EventList(getLocalStorage(), pastEvents, getController());
+                    } else if (relativeTime.equals("f")) {
+                        ListModel futureEvents = getController().getFutureEvents(getLocalStorage().getUserID());
+                        printTitle("Future Events");
+                        return new EventList(getLocalStorage(), futureEvents, getController());
+                    } else {
+                        ListModel currentEvents = getController().getCurrentEvents(getLocalStorage().getUserID());
+                        printTitle("Current Events");
+                        return new EventList(getLocalStorage(), currentEvents, getController());
+                    }
                 case "5":
                     // TODO using time frame
                     return null;
