@@ -16,7 +16,6 @@ public class Alert implements Serializable {
     private ArrayList<LocalDateTime> times = new ArrayList<>();
     private ArrayList<Boolean> acknowledge = new ArrayList<Boolean>();
 
-
     public Alert(String alertName, String userID, LocalDateTime startTime) {
         this.alertName = alertName;
         this.totalAcknowledged = false;
@@ -50,10 +49,6 @@ public class Alert implements Serializable {
     public Boolean getTotalAcknowledged() {return this.totalAcknowledged;}
 
     public void setTotalAcknowledged(Boolean totalAcknowledged) { this.totalAcknowledged = totalAcknowledged; }
-
-    public void setAcknowledged() {
-        this.totalAcknowledged = !this.totalAcknowledged;
-    }
 
     public String getUserID(){ return this.userID;}
 
