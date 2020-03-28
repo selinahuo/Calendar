@@ -3,14 +3,12 @@ package usecases.series;
 import entities.CalendarEvent;
 import entities.Series;
 import usecases.events.EventManager;
+import usecases.events.IEventDeletionObserver;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.UUID;
 import java.time.LocalDateTime;
 
-public class SeriesManager implements Observer {
+public class SeriesManager implements IEventDeletionObserver {
     private ISeriesRepository repository;
     private EventManager eventManager;
 
@@ -21,21 +19,26 @@ public class SeriesManager implements Observer {
 
     // save
     public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID){
-        Series newSeries = new Series(UUID.randomUUID().toString(), seriesName, eventIDs.length, userID);
-        this.repository.saveSeries(newSeries);
+        Series newSeries = new Series(seriesName, 0, userID);
+        repository.saveSeries(newSeries);
+        int count = 0;
         for (String id : eventIDs) {
-            this.eventManager.editSeriesID(id, newSeries.getSeriesID(), userID);
+            boolean success = eventManager.editSeriesID(id, newSeries.getSeriesID(), userID);
+            if (success) {
+                count++;
+            }
         }
+        repository.editSeriesEventCount(newSeries.getSeriesID(), count, userID);
         return true;
     }
 
     public boolean createSeriesFromEventFormula(String seriesName, LocalDateTime start, LocalDateTime end, String frequency, int numEvents, String userID){
-        Series newSeries = new Series(UUID.randomUUID().toString(), seriesName, numEvents, userID);
+        Series newSeries = new Series(seriesName, numEvents, userID);
         ArrayList<LocalDateTime[]> times = getTimes(start, end, frequency, numEvents);
         for (LocalDateTime[] time : times) {
-            this.eventManager.createEvent("", time[0], time[1], "", userID, null);
+            eventManager.createEvent("", time[0], time[1], "", userID, "");
         }
-        this.repository.saveSeries(newSeries);
+        repository.saveSeries(newSeries);
         return true;
     }
 
@@ -47,16 +50,16 @@ public class SeriesManager implements Observer {
             daysToAdd = 7;
         }
         ArrayList<LocalDateTime[]> times = new ArrayList<>();
-        LocalDateTime startTime = start.plusHours(0);
-        LocalDateTime endTime = end.plusHours(0);
+        LocalDateTime startTime = LocalDateTime.from(start);
+        LocalDateTime endTime = LocalDateTime.from(end);
         int i = 0;
         while (i < numEvents) {
-            LocalDateTime startClone = startTime.plusHours(0);
-            LocalDateTime endClone = endTime.plusHours(0);
+            LocalDateTime startClone = LocalDateTime.from(startTime);
+            LocalDateTime endClone = LocalDateTime.from(endTime);
             LocalDateTime[] timeArray = {startClone, endClone};
             times.add(timeArray);
-            startTime.plusDays(daysToAdd);
-            endTime.plusDays(daysToAdd);
+            startTime = startTime.plusDays(daysToAdd);
+            endTime = endTime.plusDays(daysToAdd);
             i++;
         }
         return times;
@@ -64,29 +67,27 @@ public class SeriesManager implements Observer {
 
     // plural
     public ArrayList<Series> getSeriesByUserID(String userID){
-
-        return this.repository.fetchSeriesByUserID(userID);
+        return repository.fetchSeriesByUserID(userID);
     }
 
-    public ArrayList<Series> getSeriesBySeriesName(String seriesName){
-        return this.repository.fetchSeriesBySeriesName(seriesName);
-    }
-
-    public ArrayList<Series> getSeriesByIDAndUserID(String seriesID, String userID){
-        return this.repository.fetchSeriesBySeriesIDAndUserID(seriesID, userID);
+    public ArrayList<Series> getSeriesBySeriesName(String seriesName, String userID){
+        return repository.fetchSeriesBySeriesNameAndUserID(seriesName, userID);
     }
 
     // edit
-    boolean editSeriesName(String seriesID, String seriesNewName, String OwnerID){
-        return repository.editSeriesName(seriesID, seriesNewName, OwnerID);
-    }
-    // delete
-    public boolean deleteSeries(String seriesID, String ownerID) {
-        return repository.deleteSeries(seriesID, ownerID);
+    public boolean editSeriesName(String seriesID, String seriesName, String OwnerID){
+        return repository.editSeriesName(seriesID, seriesName, OwnerID);
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("series has changed");
+    public void handleEventDeletion(CalendarEvent event) {
+        Series series = repository.fetchSeriesBySeriesIDAndUserID(event.getSeriesID(), event.getUserID());
+        if (series != null) {
+            if (series.getEventCount() <= 1) {
+                repository.deleteSeries(event.getSeriesID(), event.getUserID());
+            } else {
+                repository.editSeriesEventCountRemove(event.getSeriesID(), event.getUserID());
+            }
+        }
     }
 }

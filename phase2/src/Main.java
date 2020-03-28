@@ -16,6 +16,8 @@ import usecases.series.SeriesManager;
 import usecases.users.IUserRepository;
 import usecases.users.UserManager;
 
+import java.time.LocalDateTime;
+
 public class Main {
     public static void main(String[] args) {
         IEventRepository eventRepository = new SerializableEventRepository();
@@ -48,7 +50,6 @@ public class Main {
         eventManager.addObservers(invitationManager);
         eventManager.addObservers(memoManager);
         eventManager.addObservers(tagManager);
-        // TODO series manager has to implement
-//        eventManager.addObservers(seriesManager);
+        eventManager.addObservers(seriesManager);
     }
 }

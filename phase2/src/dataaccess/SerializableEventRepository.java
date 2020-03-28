@@ -10,8 +10,8 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
     public SerializableEventRepository() { super("events.ser"); }
 
     @Override
-    public boolean saveEvent(CalendarEvent event) {
-        return false;
+    public void saveEvent(CalendarEvent event) {
+        saveItem(event);
     }
 
     @Override

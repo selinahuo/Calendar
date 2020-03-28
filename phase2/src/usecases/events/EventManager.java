@@ -30,12 +30,8 @@ public class EventManager {
     // save
     public String createEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID, String calendarID) {
         CalendarEvent event = new CalendarEvent(name, start, end, location, userID, calendarID);
-        boolean success = repository.saveEvent(event);
-        if (success) {
-            return event.getEventID();
-        } else {
-            return null;
-        }
+        repository.saveEvent(event);
+        return event.getEventID();
     }
 
     public String createEventByFirstWeekDay(String name, int year, Month month, DayOfWeek weekDay, String location, String userID, String calendarID) {

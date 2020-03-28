@@ -40,6 +40,7 @@ public abstract class SerializableRepository<T> {
             return this.items;
         } catch(IOException ioe) {
             try {
+                System.out.println(this.getClass().getName());
                 serialize(this.items);
                 return deserialize();
             } catch(Exception e) {
