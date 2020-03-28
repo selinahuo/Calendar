@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public class Invitation implements Serializable {
-    private String invitationID = UUID.randomUUID().toString();
+    private final String invitationID = UUID.randomUUID().toString();
     private String eventID;
     private String inviterID;
     private String inviteeID;

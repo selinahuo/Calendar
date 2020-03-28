@@ -1,6 +1,6 @@
 package dataaccess;
 
-import entities.Alert;
+import entities.CalendarEvent;
 import entities.Calendars;
 import usecases.calendar.ICalendarRepository;
 
@@ -48,6 +48,31 @@ public class SerializableCalendarRepository extends SerializableRepository<Calen
                 (Calendars c) -> c.getCalendarID().equals(calendarID) && c.getOwnerID().equals(ownerID),
                 Calendars::removeCount
         );
+    }
+
+    @Override
+    public boolean moveEventToCalendarByCalendarID(CalendarEvent Event, String calendarID) {
+        return false;
+    }
+
+    @Override
+    public boolean moveEventToCalendarByCalendarName(CalendarEvent Event, String name) {
+        return false;
+    }
+
+    @Override
+    public boolean removeEventFromCalendarByCalendarID(CalendarEvent Event, String calendarID) {
+        return false;
+    }
+
+    @Override
+    public boolean removeEventFromCalendarByCalendarName(CalendarEvent Event, String name) {
+        return false;
+    }
+
+    @Override
+    public boolean getEvents(String calendarID) {
+        return false;
     }
 
     @Override

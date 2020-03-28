@@ -9,7 +9,7 @@ import java.util.UUID;
  * Class representing  a Calendar Alert
  */
 public class Alert implements Serializable {
-    private String alertID = UUID.randomUUID().toString();
+    private final String alertID = UUID.randomUUID().toString();
     private String alertName;
     private Boolean totalAcknowledged;
     private String userID;
