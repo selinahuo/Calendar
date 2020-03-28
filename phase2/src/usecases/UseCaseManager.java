@@ -59,26 +59,26 @@ public class UseCaseManager {
     }
 
     public Sextuple<CalendarEvent, ArrayList<Memo>, ArrayList<Tag>, Alert, Calendars, Series> getSingularEvent(String eventID, String userID) {
-        CalendarEvent event = this.eventManager.getEventByIDAndUserID(eventID, userID);
-        if (event != null) {
-            Alert alert = null;
-            ArrayList<Memo> memo = null;
-            ArrayList<Tag> tag = null;
-            Series series = null;
-            if (event.getAlertID() != null && event.getUserID().equals(userID)) {
-//                alert = this.alertManager.getAlertByIDAndUserID(event.getAlertID(), userID);
-            }
-            if (event.getMemoIDs() != null && event.getMemoIDs().size() != 0) {
-                memo = this.noteManager.getMemoById(event.getMemoIDs().get(0));
-            }
-            if (event.getTagIDs() != null && event.getTagIDs().size() != 0) {
-                tag = this.noteManager.getTagByID(event.getTagIDs().get(0));
-            }
-            if (event.getSeriesID() != null && !event.getSeriesID().equals("")) {
-                series = this.seriesManager.getSeriesByIDAndUserID(event.getSeriesID(), userID);
-            }
-            return new Quintuple<CalendarEvent, Alert, Memo, Tag, Series>(event, alert, memo, tag, series);
-        }
+//        CalendarEvent event = this.eventManager.getEventByIDAndUserID(eventID, userID);
+//        if (event != null) {
+//            Alert alert = null;
+//            ArrayList<Memo> memo = null;
+//            ArrayList<Tag> tag = null;
+//            Series series = null;
+//            if (event.getAlertID() != null && event.getUserID().equals(userID)) {
+////                alert = this.alertManager.getAlertByIDAndUserID(event.getAlertID(), userID);
+//            }
+//            if (event.getMemoIDs() != null && event.getMemoIDs().size() != 0) {
+//                memo = this.noteManager.getMemoById(event.getMemoIDs().get(0));
+//            }
+//            if (event.getTagIDs() != null && event.getTagIDs().size() != 0) {
+//                tag = this.noteManager.getTagByID(event.getTagIDs().get(0));
+//            }
+//            if (event.getSeriesID() != null && !event.getSeriesID().equals("")) {
+//                series = this.seriesManager.getSeriesByIDAndUserID(event.getSeriesID(), userID);
+//            }
+//            return new Quintuple<CalendarEvent, Alert, Memo, Tag, Series>(event, alert, memo, tag, series);
+//        }
         return null;
     }
 

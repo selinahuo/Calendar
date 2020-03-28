@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface IEventRepository {
     // write
-    boolean saveEvent(CalendarEvent event);
+    void saveEvent(CalendarEvent event);
 
     // Fetch - singular
     CalendarEvent fetchEventByEventID(String eventID);

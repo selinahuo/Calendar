@@ -3,32 +3,32 @@ package usecases.notes;
 import entities.CalendarEvent;
 import entities.Tag;
 import usecases.events.EventManager;
+import usecases.events.IEventDeletionObserver;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class TagManager {
+public class TagManager implements IEventDeletionObserver {
     private ITagRepository repository;
     private EventManager eventManager;
 
-    public TagManager(ITagRepository repository) {
+    public TagManager(ITagRepository repository, EventManager eventManager) {
         this.repository = repository;
+        this.eventManager = eventManager;
     }
 
     // save - Tag
-    public String createTag(String tagID, String name, String userID) {
-        Tag tag = new Tag(name, tagID, userID);
-        boolean success = repository.saveTag(tag);
-        if (success) {
-            return tag.getTagID();
-        } else {
-            return null;
-        }
+    public String createTag(String name, String userID) {
+        Tag tag = new Tag(name, userID);
+        repository.saveTag(tag);
+        return tag.getTagID();
     }
 
     // get - singular - Tags
-    public Tag getTagByTagID(String tagID) {return repository.fetchTagByTagID(tagID);}
+    public Tag getTagByTagID(String tagID) {
+        return repository.fetchTagByTagID(tagID);
+    }
 
     public Tag getTagByTagIDAndOwnerID(String tagID, String ownerID){
         return repository.fetchTagByTagIDAndOwnerID(tagID, ownerID);
@@ -46,54 +46,60 @@ public class TagManager {
     }
 
     // edit - Tags
-    boolean editTagName(String tagID, String name, String newName, String OwnerID){
-        return repository.editTagName(tagID, name, newName, OwnerID);
+    boolean editTagName(String tagID, String name, String OwnerID){
+        return repository.editTagName(tagID, name, OwnerID);
     }
 
     // delete - Tag
-    boolean deleteTag(String tagID, String ownerID){
-        return repository.deleteTag(tagID, ownerID);
+    boolean deleteTag(String tagID, String ownerID) {
+        Tag tag = repository.fetchTagByTagIDAndOwnerID(tagID, ownerID);
+        if (tag.getCount() <= 0) {
+            return repository.deleteTag(tagID, ownerID);
+        }
+        return false;
     }
 
     //Events
-    public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID){
-        ArrayList<CalendarEvent> events =  eventManager.getEventsByOwnerID(ownerID);
-        ArrayList<CalendarEvent> newEvents = new ArrayList<>();
-        for (CalendarEvent event : events){
-            for (String id : event.getTagIDs()){
-                if (id.equals(tagID)){
-                    newEvents.add(event);
-                }
-            }
-        }
-        return newEvents;
+    public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID) {
+        return eventManager.getEventsByTagIDAndOwnerID(tagID, ownerID);
     }
 
     // tag/untag tags
-    public boolean addTagToEvent(String tagID, String eventID, String ownerID){
-        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
-        ArrayList<String> ids = event.getTagIDs();
-        ids.add(tagID);
-        event.setTagIDs(ids);
-//        repository.editTagCountAdd()
-        // check if the tag is already in the list, add it before setting
-        getTagByTagID(tagID).addCount();
-        return true;
-    }
-    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID) {
-        CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);
-        ArrayList<String> ids = event.getTagIDs();
-        ArrayList<String> newIDs = new ArrayList<>();
-        boolean removed = false;
-        for (String id : ids){
-            if (!id.equals(tagID)){
-                newIDs.add(id);
-            }else{
-                removed = true;
-                getTagByTagID(tagID).removeCount();
+    public boolean addTagToEvent(String tagID, String eventID, String ownerID) {
+        Tag tag = repository.fetchTagByTagIDAndOwnerID(tagID, ownerID);
+        CalendarEvent event = eventManager.getEventByIDAndOwnerID(eventID, ownerID);
+        if (tag != null && event != null) {
+            ArrayList<String> tags = event.getTagIDs();
+            if (!tags.contains(tagID)) {
+                tags.add(tagID);
+                eventManager.editTagIDs(eventID, tags, ownerID);
+                repository.editTagCountAdd(tagID, ownerID);
             }
+            return true;
         }
-        event.setTagIDs(newIDs);
-        return removed;
+        return false;
+    }
+
+    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID) {
+        Tag tag = repository.fetchTagByTagIDAndOwnerID(tagID, ownerID);
+        CalendarEvent event = eventManager.getEventByIDAndOwnerID(eventID, ownerID);
+        if (tag != null && event != null) {
+            ArrayList<String> tags = event.getTagIDs();
+            if (tags.contains(tagID)) {
+                tags.remove(tagID);
+                eventManager.editTagIDs(eventID, tags, ownerID);
+                repository.editTagCountRemove(tagID, ownerID);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void handleEventDeletion(CalendarEvent event) {
+        String ownerID = event.getUserID();
+        for (String tagID : event.getTagIDs()) {
+            repository.editTagCountRemove(tagID, ownerID);
+        }
     }
 }

@@ -7,47 +7,51 @@ import usecases.calendar.ICalendarRepository;
 import java.util.ArrayList;
 
 public class SerializableCalendarRepository extends SerializableRepository<Calendars> implements ICalendarRepository {
-
-
-    public SerializableCalendarRepository(String serFile) {
-        super("calendars.ser");
+    public SerializableCalendarRepository() {
+        super("./calendars.ser");
     }
 
     @Override
-    public boolean saveCalendar(Calendars calendar) {
-        ArrayList<Calendars> calendars = deserialize();
-        calendars.add(calendar);
-        serialize(calendars);
-        return true;
+    public void saveCalendar(Calendars calendar) {
+        saveItem(calendar);
     }
 
     @Override
-    public Calendars fetchCalendarByCalendarID(String calendarID) {
-        return fetchSingular((Calendars calendars) -> calendars.getCalendarID() != null
-                && calendars.getCalendarID().equals(calendarID));
+    public Calendars fetchCalendarByCalendarIDAndOwnerID(String calendarID, String ownerID) {
+        return fetchSingular((Calendars c) -> c.getCalendarID().equals(calendarID) && c.getOwnerID().equals(ownerID));
     }
 
     @Override
     public ArrayList<Calendars> fetchCalendarsByOwnerID(String ownerID) {
-        return fetchPlural((Calendars calendars) -> calendars.getOwnerID() != null &&
-                calendars.getOwnerID().equals(ownerID));
+        return fetchPlural((Calendars c) -> c.getOwnerID().equals(ownerID));
     }
 
     @Override
-    public boolean editCalendarName(String calendarID, String name) {
+    public boolean editCalendarName(String calendarID, String name, String ownerID) {
+        return editSingular(
+                (Calendars c) -> c.getCalendarID().equals(calendarID) && c.getOwnerID().equals(ownerID),
+                (Calendars c) -> c.setCalendarName(name)
+        );
+    }
 
-        ArrayList<Calendars> calendarsArr = deserialize();
-        for (Calendars calendar: calendarsArr) {
-            if (calendar.getCalendarID().equals(calendarID)) {
-                calendar.setCalendarName(name);
-                return true;
-            }
-        }
-        return false;
+    @Override
+    public boolean editCalendarCountAdd(String calendarID, String ownerID) {
+        return editSingular(
+                (Calendars c) -> c.getCalendarID().equals(calendarID) && c.getOwnerID().equals(ownerID),
+                Calendars::addCount
+        );
+    }
+
+    @Override
+    public boolean editCalendarCountRemove(String calendarID, String ownerID) {
+        return editSingular(
+                (Calendars c) -> c.getCalendarID().equals(calendarID) && c.getOwnerID().equals(ownerID),
+                Calendars::removeCount
+        );
     }
 
     @Override
     public boolean deleteCalendar(String calendarID) {
-        return false;
+        return deleteSingular((Calendars c) -> c.getCalendarID().equals(calendarID));
     }
 }

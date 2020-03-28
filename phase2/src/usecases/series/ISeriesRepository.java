@@ -8,17 +8,18 @@ import java.util.ArrayList;
 public interface ISeriesRepository {
 
     // Save
-    boolean saveSeries(Series series);
+    void saveSeries(Series series);
 
-    // Fetch - singular
+    // Fetch
     ArrayList<Series> fetchSeriesByUserID(String userID);
-    ArrayList<Series> fetchSeriesBySeriesName(String seriesName);
-    ArrayList<Series> fetchSeriesBySeriesIDAndUserID(String seriesID, String userID);
+    ArrayList<Series> fetchSeriesBySeriesNameAndUserID(String seriesName, String userID);
+    Series fetchSeriesBySeriesIDAndUserID(String seriesID, String userID);
 
     // Edit
-    boolean editSeriesName(String seriesID, String seriesNewName, String OwnerID);
+    boolean editSeriesName(String seriesID, String seriesName, String OwnerID);
+    boolean editSeriesEventCount(String seriesID, int eventCount, String ownerID);
+    boolean editSeriesEventCountRemove(String seriesID, String ownerID);
 
     // Delete
     boolean deleteSeries(String seriesID, String ownerID);
-
 }

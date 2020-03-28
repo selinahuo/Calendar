@@ -124,4 +124,10 @@ public class CalendarEvent implements Serializable {
     public void setAlertID(String alertID) {
         this.alertID = alertID;
     }
+
+    @Override
+    public String toString() {
+        return String.format("ID: %s | Event: %s | User: %s",
+                getEventID(), getName(), getUserID());
+    }
 }

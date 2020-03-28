@@ -10,8 +10,8 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
     public SerializableEventRepository() { super("events.ser"); }
 
     @Override
-    public boolean saveEvent(CalendarEvent event) {
-        return false;
+    public void saveEvent(CalendarEvent event) {
+        saveItem(event);
     }
 
     @Override
@@ -97,6 +97,11 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
     }
 
     @Override
+    public ArrayList<CalendarEvent> fetchEventsStartBeforeAndUserID(LocalDateTime start, String userID) {
+        return null;
+    }
+
+    @Override
     public ArrayList<CalendarEvent> fetchEventsStartBeforeAndEndAfterAndUserID(LocalDateTime start, LocalDateTime end, String userID) {
         return null;
     }
@@ -107,7 +112,7 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
     }
 
     @Override
-    public ArrayList<CalendarEvent> fetchEventsStartAfterAndStartBeforeAndUserID(LocalDateTime after, LocalDateTime before, String userID) {
+    public ArrayList<CalendarEvent> fetchEventsStartBeforeAndStartAfterAndUserID(LocalDateTime before, LocalDateTime after, String userID) {
         return null;
     }
 
@@ -192,7 +197,7 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
     }
 
     @Override
-    public boolean editMemoIDs(String eventID, ArrayList<String> memoIDs, String ownerID) {
+    public boolean editMemoID(String eventID, String memoID, String ownerID) {
         return false;
     }
 
@@ -203,7 +208,10 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
 
     @Override
     public boolean editAlertID(String eventID, String alertID, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setAlertID(alertID)
+        );
     }
 
     @Override

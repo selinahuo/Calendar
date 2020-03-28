@@ -1,107 +1,76 @@
 package dataaccess;
 
-import entities.CalendarEvent;
 import entities.Memo;
-import usecases.events.EventManager;
+import entities.Tag;
 import usecases.notes.IMemoRepository;
-import usecases.notes.MemoManager;
 
 import java.util.ArrayList;
 
 public class SerializableMemoRepository extends SerializableRepository<Memo> implements IMemoRepository {
     public SerializableMemoRepository() {
-        super("memos.ser");
+        super("./memos.ser");
     }
-    private EventManager eventManager;
-    private MemoManager memoManager;
 
     @Override
-    public boolean saveMemo(Memo memo) {
-        ArrayList<Memo> memos = deserialize();
-        memos.add(memo);
-        serialize(memos);
-        return true;
+    public void saveMemo(Memo memo) {
+        saveItem(memo);
     }
 
     @Override
     public Memo fetchMemoByMemoID(String memoID) {
-        return fetchSingular((Memo memo) -> memo.getMemoID() != null && memo.getMemoID().equals(memoID));
+        return fetchSingular((Memo memo) -> memo.getMemoID().equals(memoID));
 
     }
 
     @Override
     public Memo fetchMemoByMemoIDAndOwnerID(String memoID, String ownerID) {
-        return fetchSingular((Memo memo) ->
-                memo.getMemoID() != null && memo.getMemoID().equals(memoID)
-                        && memo.getUserID() != null && memo.getUserID().equals(ownerID));
+        return fetchSingular((Memo memo) -> memo.getMemoID().equals(memoID) && memo.getUserID().equals(ownerID));
     }
 
     @Override
     public ArrayList<Memo> fetchMemosByOwnerID(String ownerID) {
-        return fetchPlural((Memo memo) -> memo.getUserID() != null && memo.getUserID().equals(ownerID));
+        return fetchPlural((Memo memo) -> memo.getUserID().equals(ownerID));
     }
 
     @Override
     public ArrayList<Memo> fetchMemosByNameAndOwnerID(String name, String ownerID) {
-        return fetchPlural((Memo memo) ->
-                memo.getName() != null && memo.getName().equals(name)
-                        && memo.getUserID() != null && memo.getUserID().equals(ownerID)
+        return fetchPlural((Memo memo) -> memo.getName().equals(name) && memo.getUserID().equals(ownerID));
+    }
+
+    @Override
+    public boolean editMemoName(String memoID, String name, String ownerID) {
+        return editSingular(
+                (Memo memo) -> memo.getMemoID().equals(memoID) && memo.getUserID().equals(ownerID),
+                (Memo memo) -> memo.setName(name)
         );
     }
 
     @Override
-    public boolean editMemoName(String memoID, String name, String newName, String OwnerID) {
-        ArrayList<Memo> memosArr = deserialize();
-        for (Memo memos: memosArr) {
-            if (memos.getMemoID().equals(memoID)) {
-                memos.setName(newName);
-                return true;
-            }
-        }
-        return false;
+    public boolean editMemoNote(String memoID, String note, String ownerID) {
+        return editSingular(
+                (Memo memo) -> memo.getMemoID().equals(memoID) && memo.getUserID().equals(ownerID),
+                (Memo memo) -> memo.setNote(note)
+        );
     }
 
     @Override
-    public boolean editMemoNote(String memoID, String note, String newNote, String OwnerID) {
-        ArrayList<Memo> memosArr = deserialize();
-        for (Memo memos: memosArr) {
-            if (memos.getMemoID().equals(memoID)) {
-                memos.setNote(newNote);
-                return true;
-            }
-        }
-        return false;
+    public boolean editMemoCountAdd(String memoID, String ownerID) {
+        return editSingular(
+                (Memo memo) -> memo.getMemoID().equals(memoID) && memo.getUserID().equals(ownerID),
+                Memo::addCount
+        );
     }
 
     @Override
-    public boolean editMemoCountAdd(String tagID, String ownerID) {
-        ArrayList<Memo> memosArr = deserialize();
-        for (Memo memos: memosArr) {
-            if (memos.getMemoID().equals(tagID)) {
-                memos.addCount();
-                return true;
-            }
-        }
-        return false;
+    public boolean editMemoCountRemove(String memoID, String ownerID) {
+        return editSingular(
+                (Memo memo) -> memo.getMemoID().equals(memoID) && memo.getUserID().equals(ownerID),
+                Memo::removeCount
+        );
     }
 
     @Override
-    public boolean editMemoCountRemove(String tagID, String ownerID) {
-        ArrayList<Memo> memosArr = deserialize();
-        for (Memo memos: memosArr) {
-            if (memos.getMemoID().equals(tagID)) {
-                memos.removeCount();
-                if (memos.getCount() == 0){
-                    deleteMemo(memos.getMemoID(), memos.getUserID());
-                }
-
-                return true;
-            }
-        }
-        return false;
+    public boolean deleteMemo(String memoID, String ownerID) {
+        return deleteSingular((Memo memo) -> memo.getMemoID().equals(memoID) && memo.getUserID().equals(ownerID));
     }
-
-    @Override
-    public boolean deleteMemo(String memoID, String ownerID) { return false; }
-    
 }

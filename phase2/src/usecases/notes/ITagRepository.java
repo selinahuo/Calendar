@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface ITagRepository {
     // write - Tags
-    boolean saveTag(Tag tag);
+    void saveTag(Tag tag);
 
     // Fetch - singular - Tags
     Tag fetchTagByTagID(String tagID);
@@ -20,7 +20,7 @@ public interface ITagRepository {
     ArrayList<Tag> fetchTagsByNameAndOwnerID(String name, String ownerID);
 
     // edit - Tags
-    boolean editTagName(String tagID, String name, String newName, String ownerID);
+    boolean editTagName(String tagID, String name, String ownerID);
     boolean editTagCountAdd(String tagID, String ownerID);
     boolean editTagCountRemove(String tagID, String ownerID);
 

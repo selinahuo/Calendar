@@ -12,6 +12,10 @@ public abstract class SerializableRepository<T> {
         this.serFile = serFile;
     }
 
+    protected void serialize() {
+        serialize(items);
+    }
+
     protected void serialize(ArrayList<T> items) {
         try {
             this.items = items;
@@ -49,6 +53,12 @@ public abstract class SerializableRepository<T> {
         return null;
     }
 
+    protected void saveItem(T item) {
+        deserialize();
+        items.add(item);
+        serialize();
+    }
+
     protected T fetchSingular(IFilter<T> filter) {
         deserialize();
         for (T item : items) {
@@ -68,5 +78,25 @@ public abstract class SerializableRepository<T> {
             }
         }
         return entities;
+    }
+
+    protected boolean editSingular(IFilter<T> filter, IEdit<T> edit) {
+        T itemToEdit = fetchSingular(filter);
+        if (itemToEdit != null) {
+            edit.edit(itemToEdit);
+            serialize();
+            return true;
+        }
+        return false;
+    }
+
+    protected boolean deleteSingular(IFilter<T> filter) {
+        T itemToDelete = fetchSingular(filter);
+        if (itemToDelete != null) {
+            items.remove(itemToDelete);
+            serialize();
+            return true;
+        }
+        return false;
     }
 }

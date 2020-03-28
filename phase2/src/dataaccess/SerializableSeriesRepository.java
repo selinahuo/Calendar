@@ -1,7 +1,5 @@
 package dataaccess;
 
-import entities.Alert;
-import entities.CalendarEvent;
 import entities.Series;
 import usecases.series.ISeriesRepository;
 
@@ -9,52 +7,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SerializableSeriesRepository extends SerializableRepository<Series> implements ISeriesRepository {
-    public SerializableSeriesRepository(String serFile) {
-        super("series.ser");
+    public SerializableSeriesRepository() {
+        super("./series.ser");
     }
 
     @Override
-    public boolean saveSeries(Series series) {
-        ArrayList<Series> seriesArr = deserialize();
-        seriesArr.add(series);
-        serialize(seriesArr);
-        return true;
+    public void saveSeries(Series series) {
+        saveItem(series);
     }
 
     @Override
     public ArrayList<Series> fetchSeriesByUserID(String userID) {
-        return fetchPlural((Series series) ->
-                series.getUserID() != null && series.getUserID().equals(userID));
+        return fetchPlural((Series s) -> s.getUserID().equals(userID));
     }
 
     @Override
-    public ArrayList<Series> fetchSeriesBySeriesName(String seriesName) {
-        return fetchPlural((Series series) ->
-                series.getSeriesName() != null && series.getSeriesName().equals(seriesName));
-    }
-
-    public ArrayList<Series> fetchSeriesBySeriesIDAndUserID(String seriesID, String userID){
-        return fetchPlural((Series series) ->
-                series.getSeriesID() != null && series.getSeriesID().equals(seriesID) &&
-                        series.getUserID() != null && series.getUserID().equals(userID)) ;
+    public ArrayList<Series> fetchSeriesBySeriesNameAndUserID(String seriesName, String userID) {
+        return fetchPlural((Series s) -> s.getUserID().equals(userID) && s.getSeriesName().equals(seriesName));
     }
 
     @Override
-    public boolean editSeriesName(String seriesID, String seriesNewName, String OwnerID) {
-        ArrayList<Series> seriesArr = deserialize();
-        for (Series series: seriesArr){
-            if (series.getSeriesID().equals(seriesID)){
-                series.setSeriesName(seriesNewName);
-            }
-        }
-        return true;
+    public Series fetchSeriesBySeriesIDAndUserID(String seriesID, String userID) {
+        return fetchSingular((Series s) -> s.getUserID().equals(userID) && s.getSeriesID().equals(seriesID));
+    }
+
+    @Override
+    public boolean editSeriesName(String seriesID, String seriesName, String ownerID) {
+        return editSingular(
+                (Series s) -> s.getSeriesID().equals(seriesID) && s.getUserID().equals(ownerID),
+                (Series s) -> s.setSeriesName(seriesName)
+        );
+    }
+
+    @Override
+    public boolean editSeriesEventCount(String seriesID, int eventCount, String ownerID) {
+        return editSingular(
+                (Series s) -> s.getSeriesID().equals(seriesID) && s.getUserID().equals(ownerID),
+                (Series s) -> s.setEventCount(eventCount)
+        );
+    }
+
+    @Override
+    public boolean editSeriesEventCountRemove(String seriesID, String ownerID) {
+        return editSingular(
+                (Series s) -> s.getSeriesID().equals(seriesID) && s.getUserID().equals(ownerID),
+                Series::editEventCountRemove
+        );
     }
 
     @Override
     public boolean deleteSeries(String seriesID, String ownerID) {
-        return false;
+        return deleteSingular((Series s) -> s.getSeriesID().equals(seriesID) && s.getUserID().equals(ownerID));
     }
-
-
 }
 
