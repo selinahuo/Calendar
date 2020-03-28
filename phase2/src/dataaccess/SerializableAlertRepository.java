@@ -1,11 +1,9 @@
 package dataaccess;
-
 import entities.Alert;
 import usecases.alerts.IAlertRepository;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class SerializableAlertRepository extends SerializableRepository<Alert> implements IAlertRepository {
     public SerializableAlertRepository() {

@@ -1,25 +1,32 @@
 package usecases.alerts;
-
 import entities.Alert;
 import entities.CalendarEvent;
 import usecases.events.IEventDeletionObserver;
 import java.time.LocalDateTime;
 import usecases.events.EventManager;
-
 import java.util.ArrayList;
-import java.util.UUID;
 
+/**
+ * A class that is responsible for the creation, deletion and modification of alert instances in the Calendar program.
+ */
 public class AlertManager implements IEventDeletionObserver {
     private IAlertRepository alertRepository;
     private EventManager eventManager;
 
+    /**
+     * Constructor for AlertManager.
+     *
+     * @param repository the repository associated with Alert
+     * @param eventManager the eventManager of the calendar events that the alerts are associated to
+     */
     public AlertManager(IAlertRepository repository, EventManager eventManager){
         this.alertRepository = repository;
         this.eventManager = eventManager;
     }
 
     /**
-     * Create an Individual Alert
+     * Create an Individual Alert.
+     *
      * @param eventID the eventID of the event associated with this alert
      * @param alertName the name of this alert
      * @param userID the user that this alert will notify
@@ -38,7 +45,8 @@ public class AlertManager implements IEventDeletionObserver {
 
 
     /**
-     * Create a Frequency Alert
+     * Create a Frequency Alert.
+     *
      * @param eventID the eventID of the event associated with this alert
      * @param alertName the name of this alert
      * @param userID the user that this alert will notify
@@ -76,7 +84,8 @@ public class AlertManager implements IEventDeletionObserver {
     }
 
     /**
-     * attach this alert to the associated event
+     * Create an alert and attach this alert to the associated event.
+     *
      * @param eventID the ID of the event that is associated with this alert
      * @param alertName the name of this alert
      * @param userID the user that will be modified
@@ -97,7 +106,8 @@ public class AlertManager implements IEventDeletionObserver {
     }
 
     /**
-     * Acknowledge the alert time has passed
+     * Acknowledge the alert time has passed.
+     *
      * @param alertID the ID of this alert
      * @param userID the user associated with this alert
      */
@@ -113,7 +123,8 @@ public class AlertManager implements IEventDeletionObserver {
     }
 
     /**
-     * acknowledge alert if passed date
+     * Acknowledge alert if passed date.
+     *
      * @param date time
      * @param userID the user using this calendar
      * @return a list of alert that is overdue.
@@ -130,6 +141,13 @@ public class AlertManager implements IEventDeletionObserver {
         return  alertsArr;
     }
 
+    /**
+     * Delete alert by alertID and userID of user that this alert originally notifies.
+     *
+     * @param alertID the alertID of this alert
+     * @param userID userID of user that this alert originally notifies
+     * @return true if deletion is successful
+     */
     public boolean deleteAlertByIDAndUserID(String alertID, String userID) {
         if(alertRepository.deleteAlert(alertID, userID)) {
             // update the event's alertID
@@ -140,21 +158,52 @@ public class AlertManager implements IEventDeletionObserver {
     }
 
     // get - singular alert
+
+    /**
+     * Retrieve alert by alertID and userID of the user that this alertID is associated.
+     *
+     * @param alertID the alertID of this alert
+     * @param userID userID of the user that this alertID is associated
+     * @return the desired alert
+     */
     public Alert getAlertByIDAndUserID(String alertID, String userID) {
         return alertRepository.fetchAlertByIDAndUserID(alertID, userID);
     }
 
     // get - plural alerts
 
+    /**
+     * Retrieve all alerts that will notify this user.
+     *
+     * @param userID userID of the respected user
+     * @return list of alerts
+     */
     public ArrayList<Alert> getAlertByUserID(String userID) {
         return alertRepository.fetchAlertByUserID(userID);
     }
 
     // edit - Alert
+
+    /**
+     * Edit the alert's name.
+     *
+     * @param alertID the alertID of this alert
+     * @param name the new name of this alert
+     * @param userID the userID of the user that is associated with this alert
+     * @return true is modification is successful
+     */
     public boolean editAlertName(String alertID, String name, String userID){
         return alertRepository.editAlertName(alertID, name, userID);
     }
 
+    /**
+     * Modify this individual alert's alert time.
+     *
+     * @param alertID the alertID of this alert
+     * @param time the new alert time
+     * @param userID the userID of the user that is associated with this alert
+     * @return true is modification is successful
+     */
     public boolean editAlertTimeAsIndividual(String alertID, LocalDateTime time, String userID) {
         if (alertRepository.editTotalAcknowledged(alertID, false, userID)) {
             ArrayList<Boolean> acknowledge = new ArrayList<>();
