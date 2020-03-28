@@ -11,17 +11,17 @@ public class SerializableUserRepository extends SerializableRepository<User> imp
     }
 
     @Override
-    public boolean saveUser(User user) {
-        return false;
+    public void saveUser(User user) {
+        saveItem(user);
     }
 
     @Override
     public User fetchUserByUsername(String username) {
-        return null;
+        return fetchSingular((User u) -> u.getUsername().equals(username));
     }
 
     @Override
     public ArrayList<User> fetchUsers() {
-        return null;
+        return fetchPlural((User u) -> true);
     }
 }

@@ -99,4 +99,12 @@ public abstract class SerializableRepository<T> {
         }
         return false;
     }
+
+    protected void deletePlural(IFilter<T> filter) {
+        ArrayList<T> itemsToDelete = fetchPlural(filter);
+        for (T item : itemsToDelete) {
+            items.remove(item);
+            serialize();
+        }
+    }
 }

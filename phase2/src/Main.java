@@ -1,4 +1,6 @@
+import controller.Controller;
 import dataaccess.*;
+import usecases.UseCaseManager;
 import usecases.alerts.AlertManager;
 import usecases.alerts.IAlertRepository;
 import usecases.calendar.CalendarManager;
@@ -15,6 +17,7 @@ import usecases.series.ISeriesRepository;
 import usecases.series.SeriesManager;
 import usecases.users.IUserRepository;
 import usecases.users.UserManager;
+import views.ViewManager;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +33,7 @@ public class Main {
         CalendarManager calendarManager = new CalendarManager(calendarRepository, eventManager);
 
         IInvitationRepository invitationRepository = new SerializableInvitationRepository();
-        InvitationManager invitationManager = new InvitationManager(invitationRepository);
+        InvitationManager invitationManager = new InvitationManager(invitationRepository, eventManager);
 
         IMemoRepository memoRepository = new SerializableMemoRepository();
         MemoManager memoManager = new MemoManager(memoRepository, eventManager);
@@ -51,5 +54,11 @@ public class Main {
         eventManager.addObservers(memoManager);
         eventManager.addObservers(tagManager);
         eventManager.addObservers(seriesManager);
+
+        UseCaseManager useCaseManager = new UseCaseManager(alertManager, calendarManager, eventManager, invitationManager, memoManager, tagManager, seriesManager, userManager);
+        Controller controller = new Controller(useCaseManager);
+
+        ViewManager vm = new ViewManager(controller);
+        vm.run();
     }
 }

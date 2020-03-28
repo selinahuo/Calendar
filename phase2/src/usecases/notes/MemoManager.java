@@ -43,10 +43,6 @@ public class MemoManager implements IEventDeletionObserver {
         return repository.fetchMemosByNameAndOwnerID(name, ownerID);
     }
 
-    public ArrayList<CalendarEvent> getEventsByMemoIDAndOwnerID(String memoID, String ownerID) {
-        return eventManager.getEventsByMemoIDAndOwnerID(memoID, ownerID);
-    }
-
     // edit - Memos
     public boolean editMemoName(String memoID, String name, String ownerID){
         return repository.editMemoName(memoID, name, ownerID);

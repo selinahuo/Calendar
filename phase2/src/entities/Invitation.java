@@ -54,4 +54,10 @@ public class Invitation implements Serializable {
     public void setAccept(Boolean accept) {
         this.accept = accept;
     }
+
+    @Override
+    public String toString() {
+        return String.format("ID: %s | Invitation for: %s | From: %s | To: %s ",
+                getInvitationID(), getEventID(), getInviterID(), getInviteeID());
+    }
 }
