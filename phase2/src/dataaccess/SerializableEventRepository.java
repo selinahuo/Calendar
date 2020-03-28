@@ -208,7 +208,10 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
 
     @Override
     public boolean editAlertID(String eventID, String alertID, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setAlertID(alertID)
+        );
     }
 
     @Override

@@ -10,25 +10,21 @@ import java.util.List;
  */
 public interface IAlertRepository {
     //write - Alerts
-    boolean saveAlert(Alert alert);
+    void saveAlert(Alert alert);
 
     //Fetch - singular- Alert
     Alert fetchAlertByIDAndUserID(String alertID, String userID);
-    Alert fetchAlertByID(String alertID);
     //Fetch - plural- Alerts
     ArrayList<Alert> fetchAlertByUserID(String userID);
 
     //Edit - Alert
-    boolean editAlertName(String alertID, String name, String newName, String userID);
-    boolean editAlertID(String alertID, String newID, String userID);
+    boolean editAlertName(String alertID, String name, String userID);
+    boolean editTotalAcknowledged(String alertID, Boolean totalAcknowledged, String userID);
+    boolean editAcknowledge(String alertID, ArrayList<Boolean> acknowledge, String userID);
+    boolean editTimes(String alertID, ArrayList<LocalDateTime> times, String userID);
 
     //Delete - Alert
-    boolean deleteAlertByID(String alertID);
-    boolean deleteAlertByIDAndUserID(String alertID, String userID);
-
-    //AcknowledgeAlert
-    boolean editAlertAcknowledge(String alertID, List<Boolean> acknowledge);
-    boolean editAlertTimeAsIndividual(String alertID, LocalDateTime individualTime);
+    boolean deleteAlert(String alertID, String userID);
 }
 
 

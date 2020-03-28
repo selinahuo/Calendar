@@ -1,22 +1,23 @@
 package entities;
+
 import java.io.Serializable;
-import java.util.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Class representing  a Calendar Alert
  */
 public class Alert implements Serializable {
-    private String alertID;
+    private String alertID = UUID.randomUUID().toString();
     private String alertName;
     private Boolean totalAcknowledged;
     private String userID;
     private ArrayList<LocalDateTime> times = new ArrayList<>();
-    private List<Boolean> acknowledge = new ArrayList<Boolean>();
+    private ArrayList<Boolean> acknowledge = new ArrayList<Boolean>();
 
 
-    public Alert(String alertID, String alertName, String userID, LocalDateTime startTime) {
-        this.alertID = alertID;
+    public Alert(String alertName, String userID, LocalDateTime startTime) {
         this.alertName = alertName;
         this.totalAcknowledged = false;
         this.userID = userID;
@@ -24,8 +25,7 @@ public class Alert implements Serializable {
         this.acknowledge.add(false);
     }
 
-    public Alert(String alertID, String alertName, String userID,  ArrayList<LocalDateTime> alertTimes) {
-        this.alertID = alertID;
+    public Alert(String alertName, String userID,  ArrayList<LocalDateTime> alertTimes) {
         this.alertName = alertName;
         this.totalAcknowledged = false;
         this.userID = userID;
@@ -38,18 +38,40 @@ public class Alert implements Serializable {
     public String getAlertID() {
         return alertID;
     }
-    public void setAlertID(String newAlertID) {this.alertID = newAlertID;}
+
     public String getAlertName() {
         return alertName;
     }
+
     public void setAlertName(String newName) {
         this.alertName = newName;
     }
+
     public Boolean getTotalAcknowledged() {return this.totalAcknowledged;}
+
+    public void setTotalAcknowledged(Boolean totalAcknowledged) { this.totalAcknowledged = totalAcknowledged; }
+
     public void setAcknowledged() {
         this.totalAcknowledged = !this.totalAcknowledged;
     }
+
     public String getUserID(){ return this.userID;}
+
+    public ArrayList<LocalDateTime> getTimes(){
+        return this.times;
+    }
+
+    public void setTimes(ArrayList<LocalDateTime> times) {
+        this.times = times;
+    }
+
+    public ArrayList<Boolean> getAcknowledge(){
+        return this.acknowledge;
+    }
+
+    public void setAcknowledge(ArrayList<Boolean> acknowledge) {
+        this.acknowledge = acknowledge;
+    }
 
     public LocalDateTime getNextRing(){
         if (this.totalAcknowledged) {
@@ -66,17 +88,6 @@ public class Alert implements Serializable {
         return null;
     }
 
-    public List<LocalDateTime> getTimes(){
-        return this.times;
-    }
-
-    public List<Boolean> getAcknowledge(){
-        return this.acknowledge;
-    }
-    public void setAcknowledge(List<Boolean> acknowledge) {
-        this.acknowledge = acknowledge;
-    }
-
     public void acknowledge(){
         if (!this.totalAcknowledged) {
             int i = 0;
@@ -84,14 +95,15 @@ public class Alert implements Serializable {
                 i++;
             }
             this.getAcknowledge().set(i, true);
-        }
-
-    }
-
-    public void setIndividualTime(LocalDateTime individualTime) {
-        if (this.times.size() == 1) {
-            this.times.set(0, individualTime);
+            if (i >= acknowledge.size() - 1) {
+                totalAcknowledged = true;
+            }
         }
     }
 
+    @Override
+    public String toString() {
+        return String.format("ID: %s | Alert: %s | Next Ring: %s | User: %s",
+                getAlertID(), getAlertName(), getNextRing(), getUserID());
+    }
 }
