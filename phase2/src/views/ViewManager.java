@@ -1,7 +1,7 @@
 package views;
 
 import controller.Controller;
-import views.auth.AuthMenu;
+import views.general.AuthMenu;
 
 public class ViewManager {
     private Controller controller;

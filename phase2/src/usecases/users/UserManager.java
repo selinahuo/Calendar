@@ -29,7 +29,7 @@ public class UserManager {
         return true;
     }
 
-    public ArrayList<User> fetchUsers() {
+    public ArrayList<User> getUsers() {
         return repository.fetchUsers();
     }
 }

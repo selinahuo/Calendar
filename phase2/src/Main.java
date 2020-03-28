@@ -58,6 +58,13 @@ public class Main {
         UseCaseManager useCaseManager = new UseCaseManager(alertManager, calendarManager, eventManager, invitationManager, memoManager, tagManager, seriesManager, userManager);
         Controller controller = new Controller(useCaseManager);
 
+//        eventManager.createEvent("Event", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Place", "8bd203c4-1951-48e2-8919-cf9ba88bb6d9", "");
+//        alertManager.createIndividualAlert("ec21ebcb-2ff3-4b5f-aebf-992d60ffd7b5", "Alert", LocalDateTime.now(), "8bd203c4-1951-48e2-8919-cf9ba88bb6d9");
+//        calendarManager.createCalendar("8bd203c4-1951-48e2-8919-cf9ba88bb6d9", "Calendar");
+//        memoManager.createMemo("Memo", "Memo content", "8bd203c4-1951-48e2-8919-cf9ba88bb6d9");
+//        tagManager.createTag("Tag", "8bd203c4-1951-48e2-8919-cf9ba88bb6d9");
+//        seriesManager.createSeriesFromEventFormula("236 Lecture", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "w", 2, "8bd203c4-1951-48e2-8919-cf9ba88bb6d9");
+
         ViewManager vm = new ViewManager(controller);
         vm.run();
     }

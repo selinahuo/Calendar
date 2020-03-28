@@ -1,4 +1,4 @@
-package views.auth;
+package views.general;
 
 import controller.Controller;
 import controller.viewmodels.ViewModel;
@@ -25,11 +25,11 @@ public class Login extends View {
 
         if (userID == null) {
             printError("Login failed.");
-            return new AuthMenu(getLocalStorage(), getModel(), getController());
+            return new AuthMenu(getLocalStorage(), null, getController());
         }
 
         getLocalStorage().setUserID(userID);
         System.out.println("Login successful.");
-        return null;
+        return new MainMenu(getLocalStorage(), null, getController());
     }
 }

@@ -1,4 +1,4 @@
-package views.auth;
+package views.general;
 
 import controller.Controller;
 import controller.viewmodels.ViewModel;
@@ -29,6 +29,6 @@ public class CreateUser extends View {
             printError("That username is already in use, please choose another username.");
         }
 
-        return new AuthMenu(getLocalStorage(), getModel(), getController());
+        return new AuthMenu(getLocalStorage(), null, getController());
     }
 }
