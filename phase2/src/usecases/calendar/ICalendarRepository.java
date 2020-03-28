@@ -22,9 +22,11 @@ public interface ICalendarRepository {
 
     boolean moveEventToCalendarByCalendarName(CalendarEvent Event, String name);
 
-    boolean removeEventToCalendarByCalendarID(CalendarEvent Event, String calendarID);
+    boolean removeEventFromCalendarByCalendarID(CalendarEvent Event, String calendarID);
 
-    boolean removeEventToCalendarByCalendarName(CalendarEvent Event, String name);
+    boolean removeEventFromCalendarByCalendarName(CalendarEvent Event, String name);
+
+    boolean getEvents(String calendarID);
 
     //Delete
     boolean deleteCalendar(String calendarID);
