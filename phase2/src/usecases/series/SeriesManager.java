@@ -75,8 +75,8 @@ public class SeriesManager implements IEventDeletionObserver {
     }
 
     // edit
-    public boolean editSeriesName(String seriesID, String seriesName, String OwnerID){
-        return repository.editSeriesName(seriesID, seriesName, OwnerID);
+    public boolean editSeriesName(String seriesID, String seriesName, String userID){
+        return repository.editSeriesName(seriesID, seriesName, userID);
     }
 
     @Override

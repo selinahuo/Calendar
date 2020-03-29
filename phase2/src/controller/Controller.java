@@ -1,9 +1,13 @@
 package controller;
 
 import controller.viewmodels.ListModel;
+import entities.Series;
 import jdk.nashorn.internal.objects.Global;
 import usecases.UseCaseManager;
 import usecases.time.TimeManager;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Controller {
     private UseCaseManager useCaseManager;
@@ -35,6 +39,24 @@ public class Controller {
     // NOTES
 
     // SERIES
+    public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {
+        return useCaseManager.createSeriesByCombiningEvents(seriesName, eventIDs, userID);
+    }
+
+    public boolean createSeriesFromEventFormula(String seriesName, LocalDateTime start, LocalDateTime end, String frequency, int numEvents, String userID) {
+        return useCaseManager.createSeriesFromEventFormula(seriesName, start, end, frequency, numEvents, userID);
+    }
+
+    public ArrayList<Series> getSeriesByUserID(String userID) {
+        return useCaseManager.getSeriesByUserID(userID);
+    }
+    public ArrayList<Series> getSeriesBySeriesName(String seriesName, String userID) {
+        return useCaseManager.getSeriesBySeriesName(seriesName, userID);
+    }
+
+    public boolean editSeriesName(String seriesID, String seriesName, String userID){
+        return useCaseManager.editSeriesName(seriesID, seriesName, userID);
+    }
 
     // TIME
     public String getTime() {

@@ -146,6 +146,25 @@ public class UseCaseManager {
     // NOTES
 
     // SERIES
+    public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {
+        return seriesManager.createSeriesByCombiningEvents(seriesName, eventIDs, userID);
+    }
+
+    public boolean createSeriesFromEventFormula(String seriesName, LocalDateTime start, LocalDateTime end, String frequency, int numEvents, String userID) {
+        return seriesManager.createSeriesFromEventFormula(seriesName, start, end, frequency, numEvents, userID);
+    }
+
+    public ArrayList<Series> getSeriesByUserID(String userID) {
+        return seriesManager.getSeriesByUserID(userID);
+    }
+
+    public ArrayList<Series> getSeriesBySeriesName(String seriesName, String userID) {
+        return seriesManager.getSeriesBySeriesName(seriesName, userID);
+    }
+
+    public boolean editSeriesName(String seriesID, String seriesName, String userID){
+        return seriesManager.editSeriesName(seriesID, seriesName, userID);
+    }
 
     // TIME
     public LocalDateTime getTime() {
