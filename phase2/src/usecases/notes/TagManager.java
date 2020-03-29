@@ -59,11 +59,6 @@ public class TagManager implements IEventDeletionObserver {
         return false;
     }
 
-    //Events
-    public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID) {
-        return eventManager.getEventsByTagIDAndOwnerID(tagID, ownerID);
-    }
-
     // tag/untag tags
     public boolean addTagToEvent(String tagID, String eventID, String ownerID) {
         Tag tag = repository.fetchTagByTagIDAndOwnerID(tagID, ownerID);

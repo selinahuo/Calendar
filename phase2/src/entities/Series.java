@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public class Series implements Serializable {
-    private String seriesID = UUID.randomUUID().toString();
+    private final String seriesID = UUID.randomUUID().toString();
     private String seriesName;
     private int eventCount;
     private String userID;

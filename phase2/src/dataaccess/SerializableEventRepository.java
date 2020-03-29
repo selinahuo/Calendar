@@ -5,9 +5,23 @@ import usecases.events.IEventRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class SerializableEventRepository extends SerializableRepository<CalendarEvent> implements IEventRepository {
     public SerializableEventRepository() { super("events.ser"); }
+
+    private class SortAscendingDate implements Comparator<CalendarEvent> {
+        @Override
+        public int compare(CalendarEvent o1, CalendarEvent o2) {
+            return o1.getStart().compareTo(o2.getStart());
+        }
+    }
+
+    private ArrayList<CalendarEvent> fetchSortedPlural(IFilter<CalendarEvent> filter) {
+        ArrayList<CalendarEvent> events = fetchPlural(filter);
+        events.sort(new SortAscendingDate());
+        return events;
+    }
 
     @Override
     public void saveEvent(CalendarEvent event) {
@@ -16,195 +30,166 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
 
     @Override
     public CalendarEvent fetchEventByEventID(String eventID) {
-        return fetchSingular((CalendarEvent event) -> event.getEventID() != null && event.getEventID().equals(eventID));
+        return fetchSingular((CalendarEvent e) -> e.getEventID().equals(eventID));
     }
 
     @Override
     public CalendarEvent fetchEventByEventIDAndOwnerID(String eventID, String ownerID) {
-        return fetchSingular((CalendarEvent event) ->
-                event.getEventID() != null && event.getEventID().equals(eventID)
-                && event.getUserID() != null && event.getUserID().equals(ownerID));
-    }
-
-    @Override
-    public CalendarEvent fetchEventByEventIDAndCollaboratorID(String eventID, String collaboratorID) {
-        return fetchSingular((CalendarEvent event) ->
-                event.getEventID() != null && event.getEventID().equals(eventID)
-                && event.getCollaborators() != null && event.getCollaborators().contains(collaboratorID));
+        return fetchSingular((CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID));
     }
 
     @Override
     public CalendarEvent fetchEventByEventIDAndUserID(String eventID, String userID) {
-        return fetchSingular((CalendarEvent event) ->
-                event.getEventID() != null && event.getEventID().equals(eventID)
-                && ((event.getUserID() != null && event.getUserID().equals(userID))
-                    || (event.getCollaborators() != null && event.getCollaborators().contains(userID))
-                )
+        return fetchSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
         );
     }
 
     @Override
     public CalendarEvent fetchEventByAlertIDAndOwnerID(String alertID, String ownerID) {
-        return fetchSingular((CalendarEvent event) ->
-            event.getAlertID() != null && event.getAlertID().equals(alertID)
-            && event.getUserID() != null && event.getUserID().equals(ownerID)
-        );
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByOwnerID(String ownerID) {
-        return fetchPlural((CalendarEvent event) -> event.getUserID() != null && event.getUserID().equals(ownerID));
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByCollaboratorID(String collaboratorID) {
-        return fetchPlural((CalendarEvent event) ->
-            event.getCollaborators() != null && event.getCollaborators().contains(collaboratorID)
-        );
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByUserID(String userID) {
-        return fetchPlural((CalendarEvent event) ->
-                (event.getUserID() != null && event.getUserID().equals(userID))
-                || (event.getCollaborators() != null && event.getCollaborators().contains(userID))
-        );
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByNameAndOwnerID(String name, String ownerID) {
-        return fetchPlural((CalendarEvent event) ->
-                event.getName() != null && event.getName().equals(name)
-                && event.getUserID() != null && event.getUserID().equals(ownerID)
-        );
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByNameAndCollaboratorID(String name, String collaboratorID) {
-        return fetchPlural((CalendarEvent event) ->
-                event.getName() != null && event.getName().equals(name)
-                && event.getCollaborators() != null && event.getCollaborators().contains(collaboratorID)
+        return fetchSingular(
+                (CalendarEvent e) -> e.getAlertID().equals(alertID) && e.getUserID().equals(ownerID)
         );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByNameAndUserID(String name, String userID) {
-        return fetchPlural((CalendarEvent event) ->
-                event.getName() != null && event.getName().equals(name)
-                && ((event.getUserID() != null && event.getUserID().equals(userID))
-                    || (event.getCollaborators() != null && event.getCollaborators().contains(userID)))
+        return fetchSortedPlural(
+                (CalendarEvent e) -> e.getName().equals(name) && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
         );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsStartBeforeAndUserID(LocalDateTime start, String userID) {
-        return null;
+        return fetchSortedPlural(
+                (CalendarEvent e) -> e.getStart().isBefore(start) && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsStartBeforeAndEndAfterAndUserID(LocalDateTime start, LocalDateTime end, String userID) {
-        return null;
+        return fetchSortedPlural(
+                (CalendarEvent e) ->
+                        e.getStart().isBefore(start)
+                        && e.getEnd().isAfter(end)
+                        && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsStartAfterAndUserID(LocalDateTime after, String userID) {
-        return null;
+        return fetchSortedPlural(
+                (CalendarEvent e) -> e.getStart().isAfter(after) && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsStartBeforeAndStartAfterAndUserID(LocalDateTime before, LocalDateTime after, String userID) {
-        return null;
+        return fetchSortedPlural(
+                (CalendarEvent e) ->
+                        e.getStart().isBefore(before)
+                        && e.getStart().isAfter(after)
+                        && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
+        );
     }
 
     @Override
-    public ArrayList<CalendarEvent> fetchEventsEndBeforeAndUserID(LocalDateTime before, String userID) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByCalendarID(String calendarID) {
-        return null;
+    public ArrayList<CalendarEvent> fetchEventsByCalendarIDAndOwnerID(String calendarID, String ownerID) {
+        return fetchSortedPlural(
+                (CalendarEvent e) -> e.getCalendarID().equals(calendarID) && e.getUserID().equals(ownerID)
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByTagIDAndOwnerID(String tagID, String ownerID) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByTagIDAndCollaboratorID(String tagID, String collaboratorID) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByTagIDAndUserID(String tagID, String userID) {
-        return null;
+        return fetchSortedPlural(
+                (CalendarEvent e) -> e.getTagIDs().contains(tagID) && e.getUserID().equals(ownerID)
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByMemoIDAndOwnerID(String memoID, String ownerID) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByMemoIDAndCollaboratorID(String memoID, String collaboratorID) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<CalendarEvent> fetchEventsByMemoIDAndUserID(String memoID, String userID) {
-        return null;
+        return fetchSortedPlural(
+                (CalendarEvent e) -> e.getMemoID().equals(memoID) && e.getUserID().equals(ownerID)
+        );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
-        return null;
+        return fetchSortedPlural(
+                (CalendarEvent e) -> e.getSeriesID().equals(seriesID) && e.getUserID().equals(ownerID)
+        );
     }
 
     @Override
     public boolean editEventName(String eventID, String name, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setName(name)
+        );
     }
 
     @Override
     public boolean editEventStart(String eventID, LocalDateTime start, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setStart(start)
+        );
     }
 
     @Override
     public boolean editEventEnd(String eventID, LocalDateTime end, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setEnd(end)
+        );
     }
 
+
     @Override
-    public boolean editEventLocation(String eventID, String Location, String ownerID) {
-        return false;
+    public boolean editEventLocation(String eventID, String location, String ownerID) {
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setLocation(location)
+        );
     }
+
 
     @Override
     public boolean editEventCalendarID(String eventID, String calendarID, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setCalendarID(calendarID)
+        );
     }
 
-    @Override
-    public boolean editEventCollaborators(String eventID, ArrayList<String> collaborators, String ownerID) {
-        return false;
-    }
 
     @Override
     public boolean editTagIDs(String eventID, ArrayList<String> tagIDs, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setTagIDs(tagIDs)
+        );
     }
+
 
     @Override
     public boolean editMemoID(String eventID, String memoID, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setMemoID(memoID)
+        );
     }
+
 
     @Override
     public boolean editSeriesID(String eventID, String seriesID, String ownerID) {
-        return false;
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID),
+                (CalendarEvent e) -> e.setSeriesID(seriesID)
+        );
     }
+
 
     @Override
     public boolean editAlertID(String eventID, String alertID, String ownerID) {
@@ -215,7 +200,15 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
     }
 
     @Override
+    public boolean addCollaborator(String eventID, String collaboratorID) {
+        return editSingular(
+                (CalendarEvent e) -> e.getEventID().equals(eventID) && !e.getCollaborators().contains(collaboratorID),
+                (CalendarEvent e) -> e.addCollaborator(collaboratorID)
+        );
+    }
+
+    @Override
     public boolean deleteEvent(String eventID, String ownerID) {
-        return false;
+        return deleteSingular((CalendarEvent e) -> e.getEventID().equals(eventID) && e.getUserID().equals(ownerID));
     }
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
  * A class that represents a CalendarEvent
  */
 public class CalendarEvent implements Serializable {
-    private String eventID = UUID.randomUUID().toString();
+    private final String eventID = UUID.randomUUID().toString();
     private String name;
     private LocalDateTime start;
     private LocalDateTime end;
@@ -89,8 +89,8 @@ public class CalendarEvent implements Serializable {
         return collaborators;
     }
 
-    public void setCollaborators(ArrayList<String> collaborators) {
-        this.collaborators = collaborators;
+    public void addCollaborator(String collaboratorID) {
+        collaborators.add(collaboratorID);
     }
 
     public ArrayList<String> getTagIDs() {
@@ -105,7 +105,7 @@ public class CalendarEvent implements Serializable {
         return memoID;
     }
 
-    public void setMemoIDs(String memoID) {
+    public void setMemoID(String memoID) {
         this.memoID = memoID;
     }
 

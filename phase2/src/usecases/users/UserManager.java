@@ -25,10 +25,11 @@ public class UserManager {
             return false;
         }
         User user =  new User(username, password);
-        return repository.saveUser(user);
+        repository.saveUser(user);
+        return true;
     }
 
-    public ArrayList<User> fetchUsers() {
+    public ArrayList<User> getUsers() {
         return repository.fetchUsers();
     }
 }

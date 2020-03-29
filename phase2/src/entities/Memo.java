@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Memo implements Serializable {
     private String note;
     private String name;
-    private String memoID = UUID.randomUUID().toString();
+    private final String memoID = UUID.randomUUID().toString();
     private String userID;
     private int count;
 

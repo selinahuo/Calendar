@@ -42,14 +42,11 @@ public class UseCaseManager {
         this.userManager = userManager;
     }
 
-    public String loginUser(String username, String password) {
-        return userManager.authenticateUser(username, password);
-    }
+    // ALERTS
 
-    public boolean createUser(String username, String password) {
-        return userManager.createUser(username, password);
-    }
+    // CALENDARS
 
+    // EVENTS
     public String createEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID, String calendarID) {
         return eventManager.createEvent(name, start, end, location, userID, calendarID);
     }
@@ -110,7 +107,6 @@ public class UseCaseManager {
         LocalDateTime now = TimeManager.getTime();
         return eventManager.getEventsStartBeforeAndEndAfterAndUserID(now, now, userID);
     }
-
     public ArrayList<CalendarEvent> getFutureEvents(String userID) {
         LocalDateTime now = TimeManager.getTime();
         return eventManager.getEventsStartAfterAndUserID(now, userID);
@@ -143,5 +139,33 @@ public class UseCaseManager {
 
     public boolean deleteEvent(String eventID, String ownerID) {
         return eventManager.deleteEvent(eventID, ownerID);
+    }
+
+    // INVITATIONS
+
+    // NOTES
+
+    // SERIES
+
+    // TIME
+    public LocalDateTime getTime() {
+        return TimeManager.getTime();
+    }
+    public void setTime(LocalDateTime time) {
+        TimeManager.setTime(time);
+    }
+    public void resetTime() {
+        TimeManager.reset();
+    }
+
+    // USERS
+    public String loginUser(String username, String password) {
+        return userManager.authenticateUser(username, password);
+    }
+    public boolean createUser(String username, String password) {
+        return userManager.createUser(username, password);
+    }
+    public ArrayList<User> getUsers() {
+        return userManager.getUsers();
     }
 }

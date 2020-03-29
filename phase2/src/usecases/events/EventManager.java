@@ -3,16 +3,12 @@ package usecases.events;
 import dataclasses.Tuple;
 import entities.CalendarEvent;
 
-import java.lang.reflect.Array;
-import java.net.URLEncoder;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import static java.time.temporal.TemporalAdjusters.firstInMonth;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class EventManager {
@@ -49,9 +45,12 @@ public class EventManager {
     public CalendarEvent getEventByIDAndOwnerID(String eventID, String ownerID) {
         return repository.fetchEventByEventIDAndOwnerID(eventID, ownerID);
     }
+
     public CalendarEvent getEventByAlertIDAndOwnerID(String alertID, String ownerID) {
         return repository.fetchEventByAlertIDAndOwnerID(alertID, ownerID);
     }
+
+    // event singular operations
 
     public String getEventDirections(String eventID) {
         CalendarEvent event = repository.fetchEventByEventID(eventID);
@@ -67,7 +66,6 @@ public class EventManager {
         }
         return EventLinkGenerator.getEventWeather(event);
     }
-
     public String getEventTwitterShare(String eventID) {
         CalendarEvent event = repository.fetchEventByEventID(eventID);
         if (event == null) {
@@ -75,7 +73,6 @@ public class EventManager {
         }
         return EventLinkGenerator.getEventTwitterShare(event);
     }
-
     public String getEventEmailShare(String eventID) {
         CalendarEvent event = repository.fetchEventByEventID(eventID);
         if (event == null) {
@@ -94,9 +91,6 @@ public class EventManager {
     public ArrayList<CalendarEvent> getEventsStartAfterAndUserID(LocalDateTime after, String userID) {
         return repository.fetchEventsStartAfterAndUserID(after, userID);
     }
-    public ArrayList<CalendarEvent> getEventsByOwnerID(String ownerID){
-        return repository.fetchEventsByOwnerID(ownerID);
-    }
 
     public Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> getEventsByHourAndUserID(LocalDate date, int hour, String userID) {
         LocalDateTime hourStart = date.atTime(hour, 0);
@@ -109,7 +103,6 @@ public class EventManager {
         events.add(hourEvents);
         return new Tuple<>(times, events);
     }
-
     public Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> getEventsByDayAndUserID(LocalDate date, String userID) {
         LocalDateTime dayStart = date.atTime(0, 0);
         LocalDateTime dayEnd = LocalDateTime.from(dayStart).plusDays(1);
@@ -121,7 +114,6 @@ public class EventManager {
         events.add(dayEvents);
         return new Tuple<>(times, events);
     }
-
     public Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> getEventsByWeekAndUserID(LocalDate date, String userID) {
         LocalDateTime dayStart = date.atTime(0, 0);
         LocalDateTime dayEnd = LocalDateTime.from(dayStart).plusDays(1);
@@ -136,7 +128,6 @@ public class EventManager {
         }
         return new Tuple<>(times, events);
     }
-
     public Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> getEventsByMonthAndUserID(int year, Month month, String userID) {
         LocalDate day = LocalDate.of(year, month, 1);
         LocalDateTime dayStart = day.atStartOfDay();
@@ -155,6 +146,7 @@ public class EventManager {
         }
         return new Tuple<>(times, events);
     }
+
     public ArrayList<CalendarEvent> getEventsByNameAndUserID(String name, String userID) {
         return repository.fetchEventsByNameAndUserID(name, userID);
     }
@@ -166,6 +158,9 @@ public class EventManager {
     }
     public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID) {
         return repository.fetchEventsByTagIDAndOwnerID(tagID, ownerID);
+    }
+    public ArrayList<CalendarEvent> getEventsByCalendarIDAndOwnerID(String calendarID, String ownerID) {
+        return repository.fetchEventsByCalendarIDAndOwnerID(calendarID, ownerID);
     }
 
     // edit
@@ -195,8 +190,11 @@ public class EventManager {
     public boolean editAlertID(String eventID, String alertID, String ownerID) {
         return repository.editAlertID(eventID, alertID, ownerID);
     }
+    public boolean addCollaborator(String eventID, String collaboratorID) {
+        return repository.addCollaborator(eventID, collaboratorID);
+    }
 
-    // delete -- might need to change
+    // delete
     public boolean deleteEvent(String eventID, String ownerID) {
         CalendarEvent eventToDelete = repository.fetchEventByEventIDAndOwnerID(eventID, ownerID);
         if (eventToDelete == null) {

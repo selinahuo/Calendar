@@ -11,42 +11,50 @@ public class SerializableInvitationRepository extends SerializableRepository<Inv
     }
 
     @Override
-    public boolean saveInvitation(Invitation invitation) {
-        return false;
+    public void saveInvitation(Invitation invitation) {
+        saveItem(invitation);
     }
 
     @Override
-    public boolean editInvitationRespondingMessage(String invitationID, String respondingMessage) {
-        return false;
+    public boolean editInvitationRespondingMessage(String invitationID, String respondingMessage, String userID) {
+        return editSingular(
+                (Invitation i) -> i.getInvitationID().equals(invitationID) && i.getInviteeID().equals(userID),
+                (Invitation i) -> i.setRespondingMessage(respondingMessage)
+        );
     }
 
     @Override
-    public boolean editAccept(String invitationID, Boolean accept) {
-        return false;
+    public boolean editAccept(String invitationID, Boolean accept, String userID) {
+        return editSingular(
+                (Invitation i) -> i.getInvitationID().equals(invitationID) && i.getInviteeID().equals(userID),
+                (Invitation i) -> i.setAccept(accept)
+        );
     }
 
     @Override
-    public Invitation fetchInvitationByUserID(String invitationID, String userID) {
-        return null;
+    public Invitation fetchInvitationByIDAndUserID(String invitationID, String userID) {
+        return fetchSingular(
+                (Invitation i) -> i.getInvitationID().equals(invitationID) && (i.getInviterID().equals(userID) || i.getInviteeID().equals(userID))
+        );
     }
 
     @Override
     public ArrayList<Invitation> fetchInvitationsByInviterID(String inviterID) {
-        return null;
+        return fetchPlural((Invitation i) -> i.getInviterID().equals(inviterID));
     }
 
     @Override
     public ArrayList<Invitation> fetchInvitationsByInviteeID(String inviteeID) {
-        return null;
+        return fetchPlural((Invitation i) -> i.getInviteeID().equals(inviteeID));
     }
 
     @Override
     public boolean deleteInvitation(String invitationID, String inviterID) {
-        return false;
+        return deleteSingular((Invitation i) -> i.getInvitationID().equals(invitationID) && i.getInviterID().equals(inviterID));
     }
 
     @Override
-    public boolean deleteInvitationsByEventID(String eventID) {
-        return false;
+    public void deleteInvitationsByEventID(String eventID) {
+        deletePlural((Invitation i) -> i.getEventID().equals(eventID));
     }
 }

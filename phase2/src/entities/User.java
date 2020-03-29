@@ -7,7 +7,7 @@ import java.util.UUID;
  * Class representing an User
  */
 public class User implements Serializable {
-    private String userID = UUID.randomUUID().toString();
+    private final String userID = UUID.randomUUID().toString();
     private String username;
     private String password;
 

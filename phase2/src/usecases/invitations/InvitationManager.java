@@ -2,29 +2,29 @@ package usecases.invitations;
 
 import entities.CalendarEvent;
 import entities.Invitation;
+import usecases.events.EventManager;
 import usecases.events.IEventDeletionObserver;
 
 import java.util.ArrayList;
 
 public class InvitationManager implements IEventDeletionObserver {
     private IInvitationRepository repository;
+    private EventManager eventManager;
 
-    public InvitationManager(IInvitationRepository repository) {
+    public InvitationManager(IInvitationRepository repository, EventManager eventManager) {
         this.repository = repository;
+        this.eventManager = eventManager;
     }
 
     public String createInvitation(String eventID, String inviterID, String inviteeID, String initialMessage) {
         Invitation invitation = new Invitation(eventID, inviterID, inviteeID, initialMessage);
-        boolean trySave = repository.saveInvitation(invitation);
-        if (trySave) {
-            return invitation.getInvitationID();
-        } else {
-            return null;
-        }
+        repository.saveInvitation(invitation);
+        return invitation.getInvitationID();
     }
 
-    public Invitation getInvitationByUserID(String invitationID, String userID) {
-        return repository.fetchInvitationByUserID(invitationID, userID);
+    // Create singular
+    public Invitation getInvitationByIDAndUserID(String invitationID, String userID) {
+        return repository.fetchInvitationByIDAndUserID(invitationID, userID);
     }
 
     public ArrayList<Invitation> getInvitationsByInviterID(String inviterID) {
@@ -35,12 +35,18 @@ public class InvitationManager implements IEventDeletionObserver {
         return repository.fetchInvitationsByInviteeID(inviteeID);
     }
 
-    boolean acceptInvitation(String invitationID, String respondingMessage, Boolean accept) {
-        return repository.editInvitationRespondingMessage(invitationID, respondingMessage)
-                && repository.editAccept(invitationID, accept);
+    public boolean acceptInvitation(String invitationID, String respondingMessage, Boolean accept, String userID) {
+        Invitation invitation = repository.fetchInvitationByIDAndUserID(invitationID, userID);
+        if (repository.editInvitationRespondingMessage(invitationID, respondingMessage, userID)) {
+            if (accept) {
+                eventManager.addCollaborator(invitation.getEventID(), userID);
+            }
+            return repository.editAccept(invitationID, accept, userID);
+        }
+        return false;
     }
 
-    boolean deleteInvitation(String invitationID, String inviterID) {
+    public boolean deleteInvitation(String invitationID, String inviterID) {
         return repository.deleteInvitation(invitationID, inviterID);
     }
 
