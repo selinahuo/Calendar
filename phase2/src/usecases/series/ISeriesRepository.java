@@ -20,4 +20,7 @@ public interface ISeriesRepository {
     boolean editSeriesEventCount(String seriesID, int eventCount, String ownerID);
     boolean editSeriesEventCountRemove(String seriesID, String ownerID);
 
+    // Delete
+    boolean deleteSeries(String seriesID, String ownerID);
+
 }

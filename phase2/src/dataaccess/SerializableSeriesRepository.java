@@ -55,5 +55,10 @@ public class SerializableSeriesRepository extends SerializableRepository<Series>
         );
     }
 
+    @Override
+    public boolean deleteSeries(String seriesID, String ownerID) {
+        return deleteSingular((Series s) -> s.getSeriesID().equals(seriesID) && s.getUserID().equals(ownerID));
+    }
+
 }
 
