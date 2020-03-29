@@ -68,7 +68,7 @@ public class MemoManager implements IEventDeletionObserver {
     }
 
     /**
-     * Retrieve memos by their names and
+     * Retrieve a memo by its name and ownerID
      *
      * @param name the name of this memo.
      * @param ownerID the ID of the owner of the memo
@@ -77,7 +77,6 @@ public class MemoManager implements IEventDeletionObserver {
     public Memo getMemoByNameAndOwnerID(String name, String ownerID){
         return repository.fetchMemoByNameAndOwnerID(name, ownerID);
     }
-    //DO I EVEN NEED THIS???^^^^ OR JUST CHANGE IT TO RETURN A STRING INSTEAD
 
     /**
      * Retrieve a list of events which contain a specific memo.
