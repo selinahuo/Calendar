@@ -5,6 +5,7 @@ import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
 import views.events.EventMenu;
+import views.series.SeriesMenu;
 import views.time.TimeMenu;
 import views.users.UserMenu;
 
@@ -50,8 +51,7 @@ public class MainMenu extends View {
                     // TODO notes menu
                     return null;
                 case "6":
-                    // TODO series menu
-                    return null;
+                    return new SeriesMenu(getLocalStorage(), null, getController());
                 case "7":
                     return new TimeMenu(getLocalStorage(), null, getController());
                 case "8":
