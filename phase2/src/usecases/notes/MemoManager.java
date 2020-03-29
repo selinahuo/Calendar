@@ -74,8 +74,8 @@ public class MemoManager implements IEventDeletionObserver {
      * @param ownerID the ID of the owner of the memo
      * @return the desired memo.
      */
-    public ArrayList<Memo> getMemosByNameAndOwnerID(String name, String ownerID){
-        return repository.fetchMemosByNameAndOwnerID(name, ownerID);
+    public Memo getMemoByNameAndOwnerID(String name, String ownerID){
+        return repository.fetchMemoByNameAndOwnerID(name, ownerID);
     }
     //DO I EVEN NEED THIS???^^^^ OR JUST CHANGE IT TO RETURN A STRING INSTEAD
 

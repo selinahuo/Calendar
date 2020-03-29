@@ -33,8 +33,8 @@ public class SerializableMemoRepository extends SerializableRepository<Memo> imp
     }
 
     @Override
-    public ArrayList<Memo> fetchMemosByNameAndOwnerID(String name, String ownerID) {
-        return fetchPlural((Memo memo) -> memo.getName().equals(name) && memo.getUserID().equals(ownerID));
+    public Memo fetchMemoByNameAndOwnerID(String name, String ownerID) {
+        return fetchSingular((Memo memo) -> memo.getName().equals(name) && memo.getUserID().equals(ownerID));
     }
 
     @Override

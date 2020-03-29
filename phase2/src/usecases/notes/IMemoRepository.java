@@ -20,7 +20,7 @@ public interface IMemoRepository {
     ArrayList<Memo> fetchMemosByOwnerID(String ownerID);
 
     // Name - Memos
-    ArrayList<Memo> fetchMemosByNameAndOwnerID(String name, String ownerID);
+    Memo fetchMemoByNameAndOwnerID(String name, String ownerID);
 
     // edit - Memos
     boolean editMemoName(String memoID, String name, String ownerID);
