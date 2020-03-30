@@ -16,8 +16,8 @@ public class MemoManager implements IEventDeletionObserver {
     /**
      * Constructor for MemoManager.
      *
-     * @param repository the repository associated with Alert
-     * @param eventManager the eventManager of the calendar events that the alerts are associated to
+     * @param repository the repository associated with Memo
+     * @param eventManager the eventManager of the calendar events that the memos are associated to
      */
     public MemoManager(IMemoRepository repository, EventManager eventManager) {
         this.eventManager = eventManager;
@@ -25,7 +25,7 @@ public class MemoManager implements IEventDeletionObserver {
     }
 
     /**
-     * Create an Individual Alert.
+     * Create an Individual Memo.
      *
      * @param name the name of this alert
      * @param note the message associated with

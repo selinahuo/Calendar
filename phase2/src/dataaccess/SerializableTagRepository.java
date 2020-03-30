@@ -31,7 +31,7 @@ public class SerializableTagRepository extends SerializableRepository<Tag> imple
     }
 
     @Override
-    public ArrayList<Tag> fetchTagsByNameAndOwnerID(String name, String ownerID) {
+    public ArrayList<Tag> fetchTagByNameAndOwnerID(String name, String ownerID) {
         return fetchPlural((Tag tag) -> tag.getName().equals(name) && tag.getUserID().equals(ownerID));
     }
 

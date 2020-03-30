@@ -17,7 +17,7 @@ public class Memo implements Serializable {
      * Constructor of an individual alert instance.
      *
      * @param name the name of this memo
-     * @param userID the userID of the user that is associated with this alert
+     * @param userID the userID of the user that is associated with this memo
      * @param note the description of this memo
      */
     public Memo(String name, String note, String userID) {
@@ -43,7 +43,7 @@ public class Memo implements Serializable {
     public int getCount() {return count;}
 
     /**
-     * A public method that returns this memo's name.
+     * A public method that returns this memo's name.z
      *
      * @return a String representation of the memo's name.
      */
@@ -95,14 +95,14 @@ public class Memo implements Serializable {
     }
 
     /**
-     * A public method that increments the count of users associated with this memeo
+     * A public method that increments the count of users associated with this memo
      */
     public void addCount(){
         this.count++;
     }
 
     /**
-     * A public method that decrements the count of users associated with this memeo
+     * A public method that decrements the count of users associated with this memo
      */
     public void removeCount(){
         this.count--;

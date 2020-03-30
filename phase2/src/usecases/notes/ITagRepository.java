@@ -17,7 +17,7 @@ public interface ITagRepository {
     ArrayList<Tag> fetchTagsByOwnerID(String ownerID);
 
     // Name - Tags
-    ArrayList<Tag> fetchTagsByNameAndOwnerID(String name, String ownerID);
+    ArrayList<Tag> fetchTagByNameAndOwnerID(String name, String ownerID);
 
     // edit - Tags
     boolean editTagName(String tagID, String name, String ownerID);
