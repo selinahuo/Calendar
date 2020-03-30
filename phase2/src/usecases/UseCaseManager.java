@@ -45,6 +45,29 @@ public class UseCaseManager {
     // ALERTS
 
     // CALENDARS
+    public String createCalendar(String userID, String calendarName) {
+        return calendarManager.createCalendar(userID, calendarName);
+    }
+
+    public ArrayList<Calendars> getCalendarsByOwnerID(String ownerID) {
+        return calendarManager.getCalendarsByOwnerID(ownerID);
+    }
+
+    public boolean editCalendarName(String calendarID, String newName, String ownerID) {
+        return calendarManager.editCalendarName(calendarID, newName, ownerID);
+    }
+
+    public boolean addEventToCalendar(String eventID, String calendarID, String ownerID) {
+        return calendarManager.addEventToCalendar(eventID, calendarID, ownerID);
+    }
+
+    public boolean removeEventFromCalendar(String eventID, String ownerID) {
+        return calendarManager.removeEventFromCalendar(eventID, ownerID);
+    }
+
+    public boolean deleteCalendar(String calendarID, String ownerID) {
+        return calendarManager.deleteCalendar(calendarID, ownerID);
+    }
 
     // EVENTS
     public String createEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID, String calendarID) {
