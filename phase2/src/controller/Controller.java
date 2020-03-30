@@ -1,7 +1,10 @@
 package controller;
 
 import controller.viewmodels.ListModel;
+import entities.CalendarEvent;
+import entities.Memo;
 import entities.Series;
+import entities.Tag;
 import jdk.nashorn.internal.objects.Global;
 import usecases.UseCaseManager;
 import usecases.time.TimeManager;
@@ -34,9 +37,35 @@ public class Controller {
         return EventAdapter.createEventListModel(useCaseManager.getFutureEvents(userID));
     }
 
+
     // INVITATIONS
 
     // NOTES
+    public ListModel getEventsByMemoIDAndOwnerID(String memoID, String ownerID){
+        return EventAdapter.createEventListModel(useCaseManager.getEventsByMemoIDAndOwnerID(memoID, ownerID));
+    }
+
+    public Memo getMemoByNameAndOwnerID(String name, String ownerID){
+        return useCaseManager.getMemoByNameAndOwnerID(name, ownerID);
+    }
+
+    public ListModel getMemosByOwnerID(String ownerID){
+        return NoteAdapter.createMemoListModel(useCaseManager.getMemosByOwnerID(ownerID));
+    }
+
+    public boolean editMemoName(String memoID, String name, String ownerID){
+        return useCaseManager.editMemoName(memoID, name, ownerID);
+    }
+
+    public boolean editMemoNote(String memoID, String note, String ownerID){
+        return useCaseManager.editMemoNote(memoID, note, ownerID);
+    }
+    public boolean addMemoToEvent(String memoID, String eventID, String ownerID){
+        return useCaseManager.addMemoToEvent(memoID, eventID, ownerID);
+    }
+    public ListModel getTagsByOwnerID(String ownerID){
+        return NoteAdapter.createTagListModel(useCaseManager.getTagsByOwnerID(ownerID));
+    }
 
     // SERIES
     public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {

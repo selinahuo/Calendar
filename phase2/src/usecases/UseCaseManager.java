@@ -144,6 +144,31 @@ public class UseCaseManager {
     // INVITATIONS
 
     // NOTES
+    public ArrayList<CalendarEvent> getEventsByMemoIDAndOwnerID(String memoID, String ownerID){
+        return memoManager.getEventsByMemoIDAndOwnerID(memoID, ownerID);
+    }
+
+    public Memo getMemoByNameAndOwnerID(String name, String ownerID){
+        return  memoManager.getMemoByNameAndOwnerID(name, ownerID);
+    }
+
+    public ArrayList<Memo> getMemosByOwnerID(String ownerID){
+        return memoManager.getMemosByOwnerID(ownerID);
+    }
+
+    public boolean editMemoName(String memoID, String name, String ownerID){
+        return memoManager.editMemoName(memoID, name, ownerID);
+    }
+    public boolean editMemoNote(String memoID, String note, String ownerID){
+        return memoManager.editMemoNote(memoID, note, ownerID);
+    }
+
+    public boolean addMemoToEvent(String memoID, String eventID, String ownerID){
+        return memoManager.addMemoToEvent(memoID, eventID, ownerID);
+    }
+    public ArrayList<Tag> getTagsByOwnerID(String ownerID){
+        return tagManager.getTagsByOwnerID(ownerID);
+    }
 
     // SERIES
     public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {

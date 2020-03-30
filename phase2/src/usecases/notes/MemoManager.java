@@ -83,7 +83,7 @@ public class MemoManager implements IEventDeletionObserver {
      *
      * @param memoID the ID of the memo
      * @param ownerID the ID of the user who owns the memo.
-     * @return thhe list of desired events.
+     * @return the list of desired events.
      */
     public ArrayList<CalendarEvent> getEventsByMemoIDAndOwnerID(String memoID, String ownerID) {
         return eventManager.getEventsByMemoIDAndOwnerID(memoID, ownerID);
