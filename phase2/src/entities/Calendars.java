@@ -65,18 +65,32 @@ public class Calendars implements Serializable {
         this.calendarName = calendarName;
     }
 
+    /**
+     * A public method that returns the count of the events that belong to this calendar.
+     *
+     * @return int representation of the count of the events that belong to this calendar.
+     */
     public int getCount() {
         return count;
     }
 
+    /**
+     * A public method that is called when an event is being added to this calendar.
+     */
     public void addCount(){
         this.count++;
     }
 
+    /**
+     * A public method that is called when an event is being removed from this calendar.
+     */
     public void removeCount(){
         this.count--;
     }
 
+    /**
+     * A public method returns a string representation of this calendar.
+     */
     @Override
     public String toString() {
         return String.format("ID: %s | Calendar: %s | Count: %d | User: %s",
