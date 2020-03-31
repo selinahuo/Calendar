@@ -6,6 +6,7 @@ import views.LocalStorage;
 import views.View;
 import views.alerts.AlertMenu;
 import views.events.EventMenu;
+import views.notes.NoteMenu;
 import views.series.SeriesMenu;
 import views.time.TimeMenu;
 import views.users.UserMenu;
@@ -48,8 +49,7 @@ public class MainMenu extends View {
                 case "4":
                     return null;
                 case "5":
-                    // TODO notes menu
-                    return null;
+                    return new NoteMenu(getLocalStorage(), null, getController());
                 case "6":
                     return new SeriesMenu(getLocalStorage(), null, getController());
                 case "7":

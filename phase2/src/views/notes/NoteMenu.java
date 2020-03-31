@@ -3,11 +3,9 @@ package views.notes;
 import controller.Controller;
 import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
-import entities.Memo;
 import views.LocalStorage;
 import views.View;
 import views.events.EventList;
-import views.notes.NoteList;
 import views.general.MainMenu;
 
 import java.util.Scanner;
@@ -32,7 +30,7 @@ public class NoteMenu extends View {
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);
-        printTitle("User Menu");
+        printTitle("Note Menu");
         String userID = getLocalStorage().getUserID();
         while (true) {
             inputPrompt();
@@ -47,7 +45,7 @@ public class NoteMenu extends View {
                     return new EventList(getLocalStorage(), eventModel, getController());
                 case "3":
                     ListModel allMemos = getController().getMemosByOwnerID(userID);
-                    return new NoteList(getLocalStorage(), allMemos, getController());
+                    return new MemoList(getLocalStorage(), allMemos, getController());
                 case "4":
                     /*
                     System.out.println("Enter memo name:");
@@ -121,7 +119,7 @@ public class NoteMenu extends View {
                      */
                 case "6":
                     ListModel allTags = getController().getTagsByOwnerID(userID);
-                    return new NoteList(getLocalStorage(), allTags, getController());
+                    return new TagList(getLocalStorage(), allTags, getController());
                 case "~":
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
