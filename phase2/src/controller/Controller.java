@@ -2,12 +2,8 @@ package controller;
 
 import controller.viewmodels.ListModel;
 import controller.viewmodels.SingularInvitationModel;
-import controller.viewmodels.SingularModel;
 import entities.*;
-import jdk.nashorn.internal.objects.Global;
 import usecases.UseCaseManager;
-import usecases.time.TimeManager;
-import views.SingularView;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,7 +16,12 @@ public class Controller {
     }
 
     // ALERTS
-
+    public ListModel getAlertsByUserID(String userID) {
+        return AlertAdapter.createAlertListModel(useCaseManager.getAlertsByUserID(userID));
+    }
+    public ListModel getOverdueAlerts(String userID) {
+        return AlertAdapter.createAlertListModel(useCaseManager.getOverdueAlerts(userID));
+    }
     // CALENDARS
     public ListModel getCalendarsByUserID(String ownerID){
         return CalendarAdapter.createCalendarListModel(useCaseManager.getCalendarsByOwnerID(ownerID));

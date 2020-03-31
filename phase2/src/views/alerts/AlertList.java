@@ -1,29 +1,27 @@
-package views.notes;
-
+package views.alerts;
 import controller.Controller;
 import controller.viewmodels.ListModel;
 import views.ListView;
 import views.LocalStorage;
 import views.View;
+import views.alerts.AlertMenu;
 import views.events.EventMenu;
 
 import java.util.Scanner;
 
-public class NoteList extends ListView {
-
-    public NoteList(LocalStorage localStorage, ListModel model, Controller controller) {
+public class AlertList extends ListView {
+    public AlertList(LocalStorage localStorage, ListModel model, Controller controller) {
         super(localStorage, model, controller);
     }
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-//        System.out.println("[1] View individual event");
-        System.out.println("[~] Back to event menu");
+        System.out.println("[~] Back to Alert menu");
     }
 
     @Override
     public View run() {
-        printTitle("Event List");
+        printTitle("Alert List");
         Scanner input = new Scanner(System.in);
 
         printList();
@@ -31,11 +29,11 @@ public class NoteList extends ListView {
         while (true) {
             inputPrompt();
             String selection = input.nextLine();
-            switch(selection) {
+            switch (selection) {
                 case "1":
                     return null;
                 case "~":
-                    return new NoteMenu(getLocalStorage(), null, getController());
+                    return new AlertMenu(getLocalStorage(), null, getController());
                 default:
                     super.printInputError();
             }
