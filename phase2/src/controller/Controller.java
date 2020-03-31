@@ -20,7 +20,9 @@ public class Controller {
     }
 
     // ALERTS
-
+    public ListModel getAlertsByUserID(String userID) {
+        return AlertAdapter.createAlertListModel(useCaseManager.getAlertsByUserID(userID));
+    }
     // CALENDARS
     public ListModel getCalendarsByUserID(String ownerID){
         return CalendarAdapter.createCalendarListModel(useCaseManager.getCalendarsByOwnerID(ownerID));
