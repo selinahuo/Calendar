@@ -16,8 +16,8 @@ public class TagList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-//        System.out.println("[1] View individual note");
-        System.out.println("[~] Back to Tag menu");
+//        System.out.println("[1] View individual tag");
+        System.out.println("[~] Back to Note menu");
     }
 
     @Override
