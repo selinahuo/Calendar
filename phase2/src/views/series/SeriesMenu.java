@@ -17,15 +17,16 @@ public class SeriesMenu extends View {
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Create series");
-        System.out.println("[2] Get series");
-        System.out.println("[3] Edit series");
+        System.out.println("[2] Get my series");
+        System.out.println("[3] Get my series by name");
+        System.out.println("[4] Edit series");
         System.out.println("[~] Return to main menu");
     }
 
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);
-        printTitle("User Menu");
+        printTitle("Series Menu");
         while (true) {
             inputPrompt();
             String selection = input.nextLine();
@@ -35,6 +36,8 @@ public class SeriesMenu extends View {
                 case "2":
                     return new GetSeriesView(getLocalStorage(), null, getController());
                 case "3":
+                    return null;
+                case "4":
                     return null;
                 case "~":
                     return new MainMenu(getLocalStorage(), null, getController());

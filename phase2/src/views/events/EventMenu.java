@@ -28,7 +28,7 @@ public class EventMenu extends View {
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);
-        printTitle("User Menu");
+        printTitle("Event Menu");
         while (true) {
             inputPrompt();
             String selection = input.nextLine();

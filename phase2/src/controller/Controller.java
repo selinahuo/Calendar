@@ -1,13 +1,9 @@
 package controller;
 
 import controller.viewmodels.ListModel;
-import entities.CalendarEvent;
-import entities.Memo;
-import entities.Series;
-import entities.Tag;
-import jdk.nashorn.internal.objects.Global;
+import controller.viewmodels.SingularInvitationModel;
+import entities.*;
 import usecases.UseCaseManager;
-import usecases.time.TimeManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,6 +18,9 @@ public class Controller {
     // ALERTS
     public ListModel getAlertsByUserID(String userID) {
         return AlertAdapter.createAlertListModel(useCaseManager.getAlertsByUserID(userID));
+    }
+    public ListModel getOverdueAlerts(String userID) {
+        return AlertAdapter.createAlertListModel(useCaseManager.getOverdueAlerts(userID));
     }
     // CALENDARS
     public ListModel getCalendarsByUserID(String ownerID){
@@ -44,6 +43,21 @@ public class Controller {
 
 
     // INVITATIONS
+    public ListModel getIncomingInvitations(String userID) {
+        return InvitationAdapter.createInvitationListModel(useCaseManager.getIncomingInvitations(userID));
+    }
+    public ListModel getOutgoingInvitations(String userID) {
+        return InvitationAdapter.createInvitationListModel(useCaseManager.getOutgoingInvitations(userID));
+    }
+    public SingularInvitationModel getSingularInvitation(String invitationID, String userID) {
+        return InvitationAdapter.createInvitationSingularModel(useCaseManager.getInvitation(invitationID, userID));
+    }
+    public boolean acceptInvitation(String invitationID, String respondingMessage, Boolean accept, String userID) {
+        return useCaseManager.acceptInvitation(invitationID, respondingMessage, accept, userID);
+    }
+    public boolean deleteInvitation(String invitationID, String userID) {
+        return useCaseManager.deleteInvitation(invitationID, userID);
+    }
 
     // NOTES
     public ListModel getEventsByMemoIDAndOwnerID(String memoID, String ownerID){

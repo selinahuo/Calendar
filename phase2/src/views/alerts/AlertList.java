@@ -16,7 +16,7 @@ public class AlertList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-        System.out.println("[~] Back to Calendar menu");
+        System.out.println("[~] Back to Alert menu");
     }
 
     @Override

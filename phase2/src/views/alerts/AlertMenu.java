@@ -22,6 +22,7 @@ public class AlertMenu extends View{
         System.out.println("[3] Create a new Alert");
         System.out.println("[4] Acknowledge Alert");
         System.out.println("[5] Edit an Alert");
+        System.out.println("[6] Delete an Alert");
         System.out.println("[~] Return to main menu");
     }
 
@@ -34,10 +35,14 @@ public class AlertMenu extends View{
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    ListModel overdueModel = getController().getOverdueAlerts(getLocalStorage().getUserID());
+                    if (overdueModel != null) {
+                        return new AlertList(getLocalStorage(), overdueModel, getController());
+                    }
+                    else {
+                        super.printError("Oops, Something went wrong.");
+                    }
                 case "2":
-                    System.out.println("Enter user name");
-                    String userName = input.nextLine();
                     ListModel alertModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
                     return new AlertList(getLocalStorage(), alertModel, getController());
                 case "3":
@@ -45,6 +50,8 @@ public class AlertMenu extends View{
                 case "4":
                     return null;
                 case "5":
+                    return null;
+                case "6":
                     return null;
                 case "~":
                     return new MainMenu(getLocalStorage(), null, getController());

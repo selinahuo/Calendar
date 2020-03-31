@@ -14,7 +14,6 @@ import usecases.series.SeriesManager;
 import usecases.time.TimeManager;
 import usecases.users.UserManager;
 
-import java.lang.reflect.Array;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,6 +44,11 @@ public class UseCaseManager {
     // ALERTS
     public ArrayList<Alert> getAlertsByUserID(String userID) {
         return alertManager.getAlertByUserID(userID);
+    }
+
+    public ArrayList<Alert> getOverdueAlerts(String userID){
+        LocalDateTime now = TimeManager.getTime();
+        return alertManager.getOverdueAlertsAfterDate(now, userID);
     }
     // CALENDARS
     public String createCalendar(String userID, String calendarName) {
@@ -167,6 +171,21 @@ public class UseCaseManager {
     }
 
     // INVITATIONS
+    public ArrayList<Invitation> getIncomingInvitations(String inviteeID) {
+        return invitationManager.getInvitationsByInviteeID(inviteeID);
+    }
+    public ArrayList<Invitation> getOutgoingInvitations(String inviterID) {
+        return invitationManager.getInvitationsByInviterID(inviterID);
+    }
+    public Invitation getInvitation(String invitationID, String userID) {
+        return invitationManager.getInvitationByIDAndUserID(invitationID, userID);
+    }
+    public boolean acceptInvitation(String invitationID, String respondingMessage, Boolean accept, String userID) {
+        return invitationManager.acceptInvitation(invitationID, respondingMessage, accept, userID);
+    }
+    public boolean deleteInvitation(String invitationID, String userID) {
+        return invitationManager.deleteInvitation(invitationID, userID);
+    }
 
     // NOTES
     public ArrayList<CalendarEvent> getEventsByMemoIDAndOwnerID(String memoID, String ownerID){

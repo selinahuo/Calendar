@@ -65,6 +65,11 @@ public class SeriesManager implements IEventDeletionObserver {
         return times;
     }
 
+    // singular
+    public Series getSeriesBySeriesIDAndUserID(String seriesID, String userID){
+        return repository.fetchSeriesBySeriesIDAndUserID(seriesID, userID);
+    }
+
     // plural
     public ArrayList<Series> getSeriesByUserID(String userID){
         return repository.fetchSeriesByUserID(userID);
@@ -73,6 +78,7 @@ public class SeriesManager implements IEventDeletionObserver {
     public ArrayList<Series> getSeriesBySeriesName(String seriesName, String userID){
         return repository.fetchSeriesBySeriesNameAndUserID(seriesName, userID);
     }
+
 
     // edit
     public boolean editSeriesName(String seriesID, String seriesName, String userID){
