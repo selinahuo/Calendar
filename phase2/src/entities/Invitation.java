@@ -9,7 +9,7 @@ public class Invitation implements Serializable {
     private String inviterID;
     private String inviteeID;
     private String initialMessage;
-    private String respondingMessage;
+    private String respondingMessage = "";
     private Boolean accept;
 
     public Invitation(String eventID, String inviterID, String inviteeID, String initialMessage) {
