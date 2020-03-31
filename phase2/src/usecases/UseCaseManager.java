@@ -43,7 +43,9 @@ public class UseCaseManager {
     }
 
     // ALERTS
-
+    public ArrayList<Alert> getAlertsByUserID(String userID) {
+        return alertManager.getAlertByUserID(userID);
+    }
     // CALENDARS
     public String createCalendar(String userID, String calendarName) {
         return calendarManager.createCalendar(userID, calendarName);
