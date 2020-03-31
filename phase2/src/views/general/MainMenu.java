@@ -4,6 +4,7 @@ import controller.Controller;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
+import views.alerts.AlertMenu;
 import views.events.EventMenu;
 import views.series.SeriesMenu;
 import views.time.TimeMenu;
@@ -38,8 +39,7 @@ public class MainMenu extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    // TODO Alerts menu
-                    return null;
+                    return new AlertMenu(getLocalStorage(),null, getController());
                 case "2":
                     // TODO Calendars Menu
                     return null;

@@ -46,6 +46,11 @@ public class UseCaseManager {
     public ArrayList<Alert> getAlertsByUserID(String userID) {
         return alertManager.getAlertByUserID(userID);
     }
+
+    public ArrayList<Alert> getOverdueAlerts(String userID){
+        LocalDateTime now = TimeManager.getTime();
+        return alertManager.getOverdueAlertsAfterDate(now, userID);
+    }
     // CALENDARS
     public String createCalendar(String userID, String calendarName) {
         return calendarManager.createCalendar(userID, calendarName);

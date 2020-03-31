@@ -8,6 +8,7 @@ import entities.Tag;
 import jdk.nashorn.internal.objects.Global;
 import usecases.UseCaseManager;
 import usecases.time.TimeManager;
+import views.LocalStorage;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class Controller {
     // ALERTS
     public ListModel getAlertsByUserID(String userID) {
         return AlertAdapter.createAlertListModel(useCaseManager.getAlertsByUserID(userID));
+    }
+    public ListModel getOverdueAlerts(String userID) {
+        return AlertAdapter.createAlertListModel(useCaseManager.getOverdueAlerts(userID));
     }
     // CALENDARS
     public ListModel getCalendarsByUserID(String ownerID){
