@@ -2,6 +2,7 @@ package views.invitations;
 
 import controller.Controller;
 import controller.viewmodels.ListModel;
+import controller.viewmodels.SingularInvitationModel;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
@@ -19,6 +20,7 @@ public class InvitationMenu extends View {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] List incoming invitations");
         System.out.println("[2] List outgoing invitations");
+        System.out.println("[3] Invite User to Event");
         System.out.println("[~] Return to main menu");
     }
 
@@ -39,8 +41,19 @@ public class InvitationMenu extends View {
                     System.out.println("");
                     return new InvitationList(getLocalStorage(), outgoingModel, getController());
                 case "3":
-                    // TODO invite a user to an event
-                    return null;
+                    System.out.println("Please enter event ID of the invitation:");
+                    String eventID = input.nextLine();
+                    System.out.println("Please enter the ID of the user you will invite:");
+                    String inviteeID = input.nextLine();
+                    System.out.println("Please enter your message:");
+                    String message = input.nextLine();
+                    String invitationID = getController().createInvitation(eventID, getLocalStorage().getUserID(), inviteeID, message);
+                    if (invitationID == null) {
+                        printError("Something went wrong creating the invitation.");
+                        break;
+                    }
+                    SingularInvitationModel newInvitation = getController().getSingularInvitation(invitationID, getLocalStorage().getUserID());
+                    return new SingularInvitation(getLocalStorage(), newInvitation, getController());
                 case "~":
                     System.out.println("");
                     return new MainMenu(getLocalStorage(), null, getController());
