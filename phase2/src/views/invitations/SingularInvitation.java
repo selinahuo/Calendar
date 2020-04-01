@@ -28,7 +28,7 @@ public class SingularInvitation extends SingularView {
             System.out.println("[1] Delete invitation");
         } else if (getModel().getAccept() == null) {
             System.out.println("[a] Accept invitation");
-            System.out.println("[r] Decline invitation");
+            System.out.println("[d] Decline invitation");
         }
         System.out.println("[~] Return to invitation menu");
     }
@@ -77,6 +77,7 @@ public class SingularInvitation extends SingularView {
                     printInputError();
                     break;
                 case "~":
+                    System.out.println("");
                     return new InvitationMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();

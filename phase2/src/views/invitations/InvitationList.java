@@ -39,8 +39,10 @@ public class InvitationList extends ListView {
                         printError("Invitation could not be found.");
                         break;
                     }
+                    System.out.println("");
                     return new SingularInvitation(getLocalStorage(), invModel, getController());
                 case "~":
+                    System.out.println("");
                     return new InvitationMenu(getLocalStorage(), null, getController());
                 default:
                     super.printInputError();

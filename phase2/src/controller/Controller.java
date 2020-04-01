@@ -77,6 +77,14 @@ public class Controller {
     }
 
     // EVENTS
+    public String createEvent(String name, String start, String end, String location, String userID, String calendarID) {
+        return useCaseManager.createEvent(name, GlobalAdapter.stringToDate(start), GlobalAdapter.stringToDate(end),
+                location, userID, calendarID);
+    }
+    public String createHolidayEvent(String name, int year, int month, String weekDay, String location, String userID, String calendarID) {
+        return useCaseManager.createEventByFirstWeekDay(name, year, GlobalAdapter.intToMonth(month),
+                GlobalAdapter.stringToWeekDay(weekDay), location, userID, calendarID);
+    }
     public ListModel getEventsByName(String name, String userID) {
         return EventAdapter.createEventListModel(useCaseManager.getEventsByNameAndUserID(name, userID));
     }
