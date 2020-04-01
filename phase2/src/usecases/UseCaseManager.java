@@ -76,6 +76,10 @@ public class UseCaseManager {
         return alertManager.getAlertByIDAndUserID(alertID, userID);
     }
 
+    public boolean deleteAlertByID(String alertID, String userID){
+        return alertManager.deleteAlertByIDAndUserID(alertID, userID);
+    }
+
 
     // CALENDARS
     public String createCalendar(String userID, String calendarName) {

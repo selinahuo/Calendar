@@ -5,6 +5,7 @@ import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
+import views.calendars.CalendarMenu;
 import views.events.EventList;
 import views.general.MainMenu;
 
@@ -41,6 +42,7 @@ public class AlertMenu extends View{
                     }
                     else {
                         super.printError("Oops, Something went wrong.");
+                        new AlertMenu(getLocalStorage(),getModel(),getController());
                     }
                 case "2":
                     ListModel alertModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
@@ -56,11 +58,19 @@ public class AlertMenu extends View{
                     } else {
                         printError("Something went wrong, did NOT acknowledge the given alert.");
                     }
-                    return new MainMenu(getLocalStorage(), null, getController());
+                    return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "5":
                     return new EditAlertView(getLocalStorage(), getModel(),getController());
                 case "6":
-                    return null;
+                    System.out.println("Please enter the ID of the alert you would like to delete: ");
+                    String deleteAlertID = input.nextLine();
+                    boolean deleted = getController().deleteAlertByID(deleteAlertID, getLocalStorage().getUserID());
+                    if (deleted){
+                        System.out.println("The Alert is being deleted:");
+                    } else {
+                        System.out.println("The Alert deletion was not complete");
+                    }
+                    return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "~":
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
