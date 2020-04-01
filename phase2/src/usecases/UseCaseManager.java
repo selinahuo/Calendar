@@ -208,6 +208,12 @@ public class UseCaseManager {
     public Memo getMemoByNameAndOwnerID(String name, String ownerID){
         return  memoManager.getMemoByNameAndOwnerID(name, ownerID);
     }
+    public String createMemo(String name, String note, String userID){
+        return memoManager.createMemo(name, note, userID);
+    }
+    public String createTag(String name, String userID){
+        return tagManager.createTag(name, userID);
+    }
 
     public ArrayList<Memo> getMemosByOwnerID(String ownerID){
         return memoManager.getMemosByOwnerID(ownerID);
@@ -226,6 +232,13 @@ public class UseCaseManager {
     public ArrayList<Tag> getTagsByOwnerID(String ownerID){
         return tagManager.getTagsByOwnerID(ownerID);
     }
+    public boolean removeMemoFromEvent(String eventID, String ownerID){
+        return memoManager.removeMemoFromEvent(eventID, ownerID);
+    }
+    public boolean addTagToEvent(String tagID, String eventID, String ownerID){
+        return tagManager.addTagToEvent(tagID, eventID, ownerID);
+    }
+
 
     // SERIES
     public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {

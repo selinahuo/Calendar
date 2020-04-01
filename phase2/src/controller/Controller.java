@@ -79,6 +79,9 @@ public class Controller {
     public ListModel getEventsByMemoIDAndOwnerID(String memoID, String ownerID){
         return EventAdapter.createEventListModel(useCaseManager.getEventsByMemoIDAndOwnerID(memoID, ownerID));
     }
+    public ArrayList<CalendarEvent> getEventsArrayListByMemoIDAndOwnerID(String memoID, String ownerID){
+        return useCaseManager.getEventsByMemoIDAndOwnerID(memoID, ownerID);
+    }
 
     public Memo getMemoByNameAndOwnerID(String name, String ownerID){
         return useCaseManager.getMemoByNameAndOwnerID(name, ownerID);
@@ -100,6 +103,18 @@ public class Controller {
     }
     public ListModel getTagsByOwnerID(String ownerID){
         return NoteAdapter.createTagListModel(useCaseManager.getTagsByOwnerID(ownerID));
+    }
+    public String createMemo(String name, String note, String userID){
+        return useCaseManager.createMemo(name, note, userID);
+    }
+    public String createTag(String name, String userID){
+        return useCaseManager.createTag(name, userID);
+    }
+    public boolean removeMemoFromEvent(String eventID, String ownerID){
+        return useCaseManager.removeMemoFromEvent(eventID, ownerID);
+    }
+    public boolean addTagToEvent(String tagID, String eventID, String ownerID){
+        return useCaseManager.addTagToEvent(tagID, eventID, ownerID);
     }
 
     // SERIES

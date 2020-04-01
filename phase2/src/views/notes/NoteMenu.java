@@ -23,7 +23,8 @@ public class NoteMenu extends View {
         System.out.println("[3] List all memos");
         System.out.println("[4] Edit a memo");
         System.out.println("[5] Add/remove a memo from an event");
-        System.out.println("[6] List all tags");
+        System.out.println("[6] Create tag");
+        System.out.println("[7] List all tags");
         System.out.println("[~] Return to main menu");
     }
 
@@ -37,7 +38,22 @@ public class NoteMenu extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    System.out.println("Please enter the name of the memo:");
+                    String name = input.nextLine();
+                    System.out.println("Please enter the memo's note:");
+                    String memoNote = input.nextLine();
+                    System.out.println("Please enter the ID of the event it will be attached to:");
+                    String eventID = input.nextLine();
+                    String memoID = getController().createMemo(name, memoNote, userID);
+                    if (memoID == null) {
+                        printError("Something went wrong creating the memo.");
+                        break;
+                    }
+                    boolean var = getController().addMemoToEvent(memoID, eventID, userID);
+                    if (!var){
+                        System.out.println("Something went wrong adding the memo to the event.");
+                    }
+                    return new NoteMenu(getLocalStorage(), null, getController());
                 case "2":
                     System.out.println("Enter memo name:");
                     String memoName = input.nextLine();
@@ -47,20 +63,18 @@ public class NoteMenu extends View {
                     ListModel allMemos = getController().getMemosByOwnerID(userID);
                     return new MemoList(getLocalStorage(), allMemos, getController());
                 case "4":
-                    /*
-                    System.out.println("Enter memo name:");
-                    String memoName1 = input.nextLine();
-                    String memoID = getController().getMemoByNameAndOwnerID(memoName1, userID).getMemoID();
+                    System.out.println("Enter memo ID:");
+                    String memoID1 = input.nextLine();
                     System.out.println("Please select one of the following choices by entering a number:");
                     System.out.println("[1] Edit name");
                     System.out.println("[2] Edit note");
-                    System.out.println("[~] Return to main menu");
+                    System.out.println("[~] Return to memo menu");
                     String response = input.nextLine();
                     switch(response) {
                         case "1":
                             System.out.println("Enter new memo name:");
                             String newMemoName = input.nextLine();
-                            boolean changed = getController().editMemoName(memoID, newMemoName, userID);
+                            boolean changed = getController().editMemoName(memoID1, newMemoName, userID);
                             if (changed) {
                                 System.out.println("The name has successfully been changed.");
                             } else {
@@ -69,61 +83,68 @@ public class NoteMenu extends View {
                         case "2":
                             System.out.println("Enter new memo note:");
                             String newMemoNote = input.nextLine();
-                            boolean changed1 = getController().editMemoNote(memoID, memoName1, userID);
+                            boolean changed1 = getController().editMemoNote(memoID1, newMemoNote, userID);
                             if (changed1) {
                                 System.out.println("The note has successfully been changed.");
                             } else {
                                 System.out.println("An error occurred, the note was not changed.");
                             }
-                        case"~":
-                            return new MainMenu(getLocalStorage(), null, getController());
+                        case "~":
+                            return new NoteMenu(getLocalStorage(), null, getController());
                         default:
                             printInputError();
                     }
-                     */
                 case "5":
-                    /*
-                    System.out.println("Enter memo name:");
-                    String memoName2 = input.nextLine();
-                    String memoID2 = getController().getMemoByNameAndOwnerID(memoName2, userID).getMemoID();
+                    System.out.println("Enter memo ID:");
+                    String memoID2 = input.nextLine();
                     System.out.println("Please select one of the following choices by entering a number:");
                     System.out.println("[1] Add to event");
                     System.out.println("[2] Remove from event");
-                    System.out.println("[~] Return to main menu");
+                    System.out.println("[~] Return to memo menu");
                     String answer = input.nextLine();
                     switch(answer) {
                         case "1":
-                            System.out.println("Enter event name:");
-                            String eventName = input.nextLine();
-                            String eventID = getController().getEventByNameAndOwnerID(eventName, userID).getEventID();
-                            boolean changed = getController().addMemoToEvent(userID, eventID, userID);
+                            System.out.println("Enter event ID:");
+                            String eventID1 = input.nextLine();
+                            boolean changed = getController().addMemoToEvent(memoID2, eventID1, userID);
                             if (changed) {
                                 System.out.println("The memo was successfully added to the event.");
                             } else {
                                 System.out.println("An error occurred, the memo was not added to the event.");
                             }
                         case "2":
-                            System.out.println("Enter new memo note:");
-                            String newMemoNote = input.nextLine();
-                            boolean changed1 = getController().editMemoNote(memoID, memoName1, userID);
+                            //removes the memo no matter what it is
+                            System.out.println("Enter Event ID:");
+                            String eventID2 = input.nextLine();
+                            boolean changed1 = getController().removeMemoFromEvent(eventID2, userID);
                             if (changed1) {
-                                System.out.println("The note has successfully been changed.");
+                                System.out.println("The note has successfully been removed.");
                             } else {
-                                System.out.println("An error occurred, the note was not changed.");
+                                System.out.println("An error occurred, the memo was not removed.");
                             }
-                        case"~":
+                        case "6":
+                            System.out.println("Please enter the name of the tag:");
+                            String tagName = input.nextLine();
+                            System.out.println("Please enter the ID of the event it will be attached to:");
+                            String tagEventID = input.nextLine();
+                            String tagID = getController().createTag(tagName, userID);
+                            if (tagID == null) {
+                                printError("Something went wrong creating the tag.");
+                                break;
+                            }
+                            boolean var1 = getController().addTagToEvent(tagID, tagEventID, userID);
+                            if (!var1) {
+                                System.out.println("Something went wrong adding the tag to the event.");
+                            }
+                            return new NoteMenu(getLocalStorage(), null, getController());
+                        case "7":
+                            ListModel allTags = getController().getTagsByOwnerID(userID);
+                            return new TagList(getLocalStorage(), allTags, getController());
+                        case "~":
                             return new MainMenu(getLocalStorage(), null, getController());
                         default:
                             printInputError();
-
-                     */
-                case "6":
-                    ListModel allTags = getController().getTagsByOwnerID(userID);
-                    return new TagList(getLocalStorage(), allTags, getController());
-                case "~":
-                    return new MainMenu(getLocalStorage(), null, getController());
-                default:
-                    printInputError();
+                    }
             }
         }
     }
