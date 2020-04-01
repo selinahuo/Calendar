@@ -52,7 +52,7 @@ public class CreateAlertView extends View {
                     int minute = input.nextInt();
                     input.nextLine();
                     System.out.println("");
-                    LocalDateTime alertTime = getController().alertTimeFromInterger(year,month,day,hour,minute);
+                    LocalDateTime alertTime = getController().alertTimeFromInteger(year,month,day,hour,minute);
                     // Creating the alert
                     System.out.println(getController().createIndividualAlert(eventID, alertName, alertTime, getLocalStorage().getUserID()));
                 case "2":
@@ -79,7 +79,7 @@ public class CreateAlertView extends View {
                     int frequencyMinute = input.nextInt();
                     input.nextLine();
                     System.out.println("");
-                    LocalDateTime startTime = getController().alertTimeFromInterger(frequencyYear,frequencyMonth,
+                    LocalDateTime startTime = getController().alertTimeFromInteger(frequencyYear,frequencyMonth,
                             frequencyDay,frequencyHour,frequencyMinute);
                     // Creating the alert
                     System.out.println(getController().createFrequencyAlert(frequencyEventID, frequencyAlertName,
