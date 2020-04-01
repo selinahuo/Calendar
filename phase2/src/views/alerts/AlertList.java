@@ -16,6 +16,9 @@ public class AlertList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
+        System.out.println("[1] Acknowledge an Alert");
+        System.out.println("[2] Edit Alert");
+        System.out.println("[3] Delete Alert");
         System.out.println("[~] Back to Alert menu");
     }
 
@@ -31,9 +34,29 @@ public class AlertList extends ListView {
             String selection = input.nextLine();
             switch (selection) {
                 case "1":
-                    return null;
+                    System.out.println("Enter alert ID:");
+                    String alertID = input.nextLine();
+                    boolean success = getController().acknowledgeAlert(alertID, getLocalStorage().getUserID());
+                    if (success) {
+                        System.out.println("Alert was acknowledged successfully.");
+                    } else {
+                        printError("Something went wrong, did NOT acknowledge the given alert.");
+                    }
+                    return new AlertMenu(getLocalStorage(),getModel(),getController());
+                case "2":
+                    return new EditAlertView(getLocalStorage(), getModel(),getController());
+                case "3":
+                    System.out.println("Please enter the ID of the alert you would like to delete: ");
+                    String deleteAlertID = input.nextLine();
+                    boolean deleted = getController().deleteAlertByID(deleteAlertID, getLocalStorage().getUserID());
+                    if (deleted){
+                        System.out.println("The Alert is being deleted:");
+                    } else {
+                        System.out.println("The Alert deletion was not complete");
+                    }
+                    return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "~":
-                    return new AlertMenu(getLocalStorage(), null, getController());
+                    return new AlertMenu(getLocalStorage(), getModel(), getController());
                 default:
                     super.printInputError();
             }

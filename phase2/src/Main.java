@@ -58,15 +58,15 @@ public class Main {
         UseCaseManager useCaseManager = new UseCaseManager(alertManager, calendarManager, eventManager, invitationManager, memoManager, tagManager, seriesManager, userManager);
         Controller controller = new Controller(useCaseManager);
 
-//        userManager.createUser("Michael", "password");
-//        String userID = userManager.getUsers().get(0).getUserID();
-//        String eventID = eventManager.createEvent("Event", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Place", userID, "");
-//        alertManager.createIndividualAlert(eventID, "Alert", LocalDateTime.now(), userID);
-//        calendarManager.createCalendar(userID, "Calendar");
-//        memoManager.createMemo("Memo", "Memo content", userID);
-//        tagManager.createTag("Tag", userID);
-//        seriesManager.createSeriesFromEventFormula("236 Lecture", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "w", 2, userID);
-//        invitationManager.createInvitation(eventID, userID, userID, "Hi");
+        userManager.createUser("Michael", "password");
+        String userID = userManager.getUsers().get(0).getUserID();
+        String eventID = eventManager.createEvent("Event", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Place", userID, "");
+        alertManager.createIndividualAlert(eventID, "Alert", LocalDateTime.now(), userID);
+        calendarManager.createCalendar(userID, "Calendar");
+        memoManager.createMemo("Memo", "Memo content", userID);
+        tagManager.createTag("Tag", userID);
+        seriesManager.createSeriesFromEventFormula("236 Lecture", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "w", 2, userID);
+        invitationManager.createInvitation(eventID, userID, userID, "Hi");
 
         ViewManager vm = new ViewManager(controller);
         vm.run();

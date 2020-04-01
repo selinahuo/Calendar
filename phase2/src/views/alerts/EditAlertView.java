@@ -20,7 +20,7 @@ public class EditAlertView extends View{
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Edit the Name of an Alert");
         System.out.println("[2] Edit the time of an Individual Alert");
-        System.out.println("[~] Return to main menu");
+        System.out.println("[~] Return to Alert menu");
     }
 
     @Override
@@ -71,7 +71,7 @@ public class EditAlertView extends View{
                     }
                     return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "~":
-                    return new MainMenu(getLocalStorage(), null, getController());
+                    return new AlertMenu(getLocalStorage(),getModel(),getController());
                 default:
                     printInputError();
             }
