@@ -68,6 +68,9 @@ public class Controller {
     public boolean acceptInvitation(String invitationID, String respondingMessage, Boolean accept, String userID) {
         return useCaseManager.acceptInvitation(invitationID, respondingMessage, accept, userID);
     }
+    public String createInvitation(String eventID, String inviterID, String inviteeID, String initialMessage) {
+        return useCaseManager.createInvitation(eventID, inviterID, inviteeID, initialMessage);
+    }
     public boolean deleteInvitation(String invitationID, String userID) {
         return useCaseManager.deleteInvitation(invitationID, userID);
     }

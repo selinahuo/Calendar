@@ -52,7 +52,7 @@ public class TimeMenu extends View {
                     int hour = input.nextInt();
                     System.out.println("Enter new time minute:");
                     int minute = input.nextInt();
-                    // Read the next line so that the \n character is not read
+                    // Read the next line so that the \n character is not read later
                     input.nextLine();
                     System.out.println("");
 

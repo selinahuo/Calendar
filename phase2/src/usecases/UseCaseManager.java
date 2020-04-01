@@ -181,6 +181,9 @@ public class UseCaseManager {
     }
 
     // INVITATIONS
+    public String createInvitation(String eventID, String inviterID, String inviteeID, String initialMessage) {
+        return invitationManager.createInvitation(eventID, inviterID, inviteeID, initialMessage);
+    }
     public ArrayList<Invitation> getIncomingInvitations(String inviteeID) {
         return invitationManager.getInvitationsByInviteeID(inviteeID);
     }
