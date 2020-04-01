@@ -30,14 +30,18 @@ public class CalendarMenu extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    System.out.println("Please name your calendar:");
+                    String calendarName = input.nextLine();
+                    String userID = getLocalStorage().getUserID();
                 case "2":
                     ListModel calendarModel = getController().getCalendarsByUserID(getLocalStorage().getUserID());
                     return new CalendarList(getLocalStorage(), calendarModel, getController());
                 case "~":
+                    System.out.println("");
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
+                    System.out.println("");
             }
         }
     }
