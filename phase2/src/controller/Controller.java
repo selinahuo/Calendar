@@ -56,6 +56,26 @@ public class Controller {
         return CalendarAdapter.createCalendarListModel(useCaseManager.getCalendarsByOwnerID(ownerID));
     }
 
+    public String createCalendar(String userID, String calendarName){
+        return useCaseManager.createCalendar(userID, calendarName);
+    }
+
+    public boolean editCalendarName(String calendarID, String newName, String ownerID) {
+        return useCaseManager.editCalendarName(calendarID, newName, ownerID);
+    }
+
+    public boolean addEventToCalendar(String eventID, String calendarID, String ownerID) {
+        return useCaseManager.addEventToCalendar(eventID, calendarID, ownerID);
+    }
+
+    public boolean removeEventFromCalendar(String eventID, String ownerID) {
+        return useCaseManager.removeEventFromCalendar(eventID, ownerID);
+    }
+
+    public boolean deleteCalendar(String calendarID, String ownerID) {
+        return useCaseManager.deleteCalendar(calendarID, ownerID);
+    }
+
     // EVENTS
     public ListModel getEventsByName(String name, String userID) {
         return EventAdapter.createEventListModel(useCaseManager.getEventsByNameAndUserID(name, userID));
