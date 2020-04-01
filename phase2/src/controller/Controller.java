@@ -51,6 +51,10 @@ public class Controller {
     public boolean editAlertTimeAsIndividual(String alertID, LocalDateTime time, String userID){
         return useCaseManager.editAlertTimeAsIndividual(alertID, time, userID);
     }
+
+    public boolean deleteAlertByID(String alertID, String userID){
+        return useCaseManager.deleteAlertByID(alertID, userID);
+    }
     // CALENDARS
     public ListModel getCalendarsByUserID(String ownerID){
         return CalendarAdapter.createCalendarListModel(useCaseManager.getCalendarsByOwnerID(ownerID));
