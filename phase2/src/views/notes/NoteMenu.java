@@ -45,6 +45,7 @@ public class NoteMenu extends View {
                     System.out.println("Please enter the ID of the event it will be attached to:");
                     String eventID = input.nextLine();
                     String memoID = getController().createMemo(name, memoNote, userID);
+                    System.out.println(memoID);
                     if (memoID == null) {
                         printError("Something went wrong creating the memo.");
                         break;
@@ -122,21 +123,22 @@ public class NoteMenu extends View {
                             } else {
                                 System.out.println("An error occurred, the memo was not removed.");
                             }
-                        case "6":
-                            System.out.println("Please enter the name of the tag:");
-                            String tagName = input.nextLine();
-                            System.out.println("Please enter the ID of the event it will be attached to:");
-                            String tagEventID = input.nextLine();
-                            String tagID = getController().createTag(tagName, userID);
-                            if (tagID == null) {
-                                printError("Something went wrong creating the tag.");
-                                break;
-                            }
-                            boolean var1 = getController().addTagToEvent(tagID, tagEventID, userID);
-                            if (!var1) {
-                                System.out.println("Something went wrong adding the tag to the event.");
-                            }
-                            return new NoteMenu(getLocalStorage(), null, getController());
+                    }
+                    case "6":
+                        System.out.println("Please enter the name of the tag:");
+                        String tagName = input.nextLine();
+                        System.out.println("Please enter the ID of the event it will be attached to:");
+                        String tagEventID = input.nextLine();
+                        String tagID = getController().createTag(tagName, userID);
+                        if (tagID == null) {
+                            printError("Something went wrong creating the tag.");
+                            break;
+                        }
+                        boolean var1 = getController().addTagToEvent(tagID, tagEventID, userID);
+                        if (!var1) {
+                            System.out.println("Something went wrong adding the tag to the event.");
+                        }
+                        return new NoteMenu(getLocalStorage(), null, getController());
                         case "7":
                             ListModel allTags = getController().getTagsByOwnerID(userID);
                             return new TagList(getLocalStorage(), allTags, getController());
@@ -144,7 +146,7 @@ public class NoteMenu extends View {
                             return new MainMenu(getLocalStorage(), null, getController());
                         default:
                             printInputError();
-                    }
+
             }
         }
     }
