@@ -83,8 +83,11 @@ public class Controller {
         return useCaseManager.getEventsByMemoIDAndOwnerID(memoID, ownerID);
     }
 
-    public Memo getMemoByNameAndOwnerID(String name, String ownerID){
-        return useCaseManager.getMemoByNameAndOwnerID(name, ownerID);
+    public Memo getMemoByMemoIDAndOwnerID(String memoID, String ownerID){
+        return useCaseManager.getMemoByMemoIDAndOwnerID(memoID, ownerID);
+    }
+    public ArrayList<Memo> getMemosArrayListByOwnerID(String ownerID){
+        return useCaseManager.getMemosByOwnerID(ownerID);
     }
 
     public ListModel getMemosByOwnerID(String ownerID){

@@ -205,8 +205,8 @@ public class UseCaseManager {
         return memoManager.getEventsByMemoIDAndOwnerID(memoID, ownerID);
     }
 
-    public Memo getMemoByNameAndOwnerID(String name, String ownerID){
-        return  memoManager.getMemoByNameAndOwnerID(name, ownerID);
+    public Memo getMemoByMemoIDAndOwnerID(String memoID, String ownerID){
+        return  memoManager.getMemoByMemoIDAndOwnerID(memoID, ownerID);
     }
     public String createMemo(String name, String note, String userID){
         return memoManager.createMemo(name, note, userID);

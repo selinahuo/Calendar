@@ -56,9 +56,9 @@ public class NoteMenu extends View {
                     }
                     return new NoteMenu(getLocalStorage(), null, getController());
                 case "2":
-                    System.out.println("Enter memo name:");
-                    String memoName = input.nextLine();
-                    ListModel eventModel = getController().getEventsByMemoIDAndOwnerID(getController().getMemoByNameAndOwnerID(memoName, userID).getMemoID(), userID);
+                    System.out.println("Enter memo ID:");
+                    String memoID3 = input.nextLine();
+                    ListModel eventModel = getController().getEventsByMemoIDAndOwnerID(getController().getMemoByMemoIDAndOwnerID(memoID3, userID).getMemoID(), userID);
                     return new EventList(getLocalStorage(), eventModel, getController());
                 case "3":
                     ListModel allMemos = getController().getMemosByOwnerID(userID);
@@ -98,6 +98,10 @@ public class NoteMenu extends View {
                 case "5":
                     System.out.println("Enter memo ID:");
                     String memoID2 = input.nextLine();
+                    if (!getController().getMemosArrayListByOwnerID(userID).contains(getController().getMemoByMemoIDAndOwnerID(memoID2, userID))){
+                        System.out.println("Invalid memo ID");
+                        return new NoteMenu(getLocalStorage(), null, getController());
+                }
                     System.out.println("Please select one of the following choices by entering a number:");
                     System.out.println("[1] Add to event");
                     System.out.println("[2] Remove from event");
@@ -123,6 +127,10 @@ public class NoteMenu extends View {
                             } else {
                                 System.out.println("An error occurred, the memo was not removed.");
                             }
+                        case "~":
+                            return new NoteMenu(getLocalStorage(), null, getController());
+                        default:
+                            printInputError();
                     }
                     case "6":
                         System.out.println("Please enter the name of the tag:");
