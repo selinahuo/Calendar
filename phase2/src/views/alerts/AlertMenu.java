@@ -48,9 +48,17 @@ public class AlertMenu extends View{
                 case "3":
                     return new CreateAlertView(getLocalStorage(), getModel(), getController());
                 case "4":
-                    return null;
+                    System.out.println("Enter alert ID:");
+                    String alertID = input.nextLine();
+                    boolean success = getController().acknowledgeAlert(alertID, getLocalStorage().getUserID());
+                    if (success) {
+                        System.out.println("Alert was acknowledged successfully.");
+                    } else {
+                        printError("Something went wrong, did NOT acknowledge the given alert.");
+                    }
+                    return new MainMenu(getLocalStorage(), null, getController());
                 case "5":
-                    return null;
+                    return new EditAlertView(getLocalStorage(), getModel(),getController());
                 case "6":
                     return null;
                 case "~":

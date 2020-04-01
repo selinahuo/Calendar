@@ -32,8 +32,24 @@ public class Controller {
                 userID, startTime, frequency));
     }
 
-    public LocalDateTime alertTimeFromInterger(int year,int month, int day, int hour, int minute) {
+    public LocalDateTime alertTimeFromInteger(int year,int month, int day, int hour, int minute) {
         return GlobalAdapter.inputToDate(year, month, day, hour, minute);
+    }
+
+    public boolean acknowledgeAlert(String alertID, String userID) {
+        return useCaseManager.acknowledgeAlert(alertID, userID);
+    }
+
+    public boolean editAlertName(String alertID, String name, String userID){
+        return useCaseManager.editAlertName(alertID, name, userID);
+    }
+
+    public String getAlertByIDAndUserID(String alertID, String userID){
+        return AlertAdapter.createAlertString(useCaseManager.getAlertByIDAndUserID(alertID, userID));
+    }
+
+    public boolean editAlertTimeAsIndividual(String alertID, LocalDateTime time, String userID){
+        return useCaseManager.editAlertTimeAsIndividual(alertID, time, userID);
     }
     // CALENDARS
     public ListModel getCalendarsByUserID(String ownerID){

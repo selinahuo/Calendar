@@ -60,6 +60,23 @@ public class UseCaseManager {
         return alertManager.createFrequencyAlertOnEvent(eventID, alertName, userID, startTime, frequency);
     }
 
+    public boolean acknowledgeAlert(String alertID, String userID) {
+        return alertManager.acknowledgeAlert(alertID, userID);
+    }
+
+    public boolean editAlertName(String alertID, String name, String userID){
+        return alertManager.editAlertName(alertID, name, userID);
+    }
+
+    public boolean editAlertTimeAsIndividual(String alertID, LocalDateTime time, String userID){
+        return alertManager.editAlertTimeAsIndividual(alertID, time, userID);
+    }
+
+    public Alert getAlertByIDAndUserID(String alertID, String userID){
+        return alertManager.getAlertByIDAndUserID(alertID, userID);
+    }
+
+
     // CALENDARS
     public String createCalendar(String userID, String calendarName) {
         return calendarManager.createCalendar(userID, calendarName);
