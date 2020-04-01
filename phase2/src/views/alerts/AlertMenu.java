@@ -46,7 +46,7 @@ public class AlertMenu extends View{
                     ListModel alertModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
                     return new AlertList(getLocalStorage(), alertModel, getController());
                 case "3":
-                    return null;
+                    return new CreateAlertView(getLocalStorage(), getModel(), getController());
                 case "4":
                     return null;
                 case "5":

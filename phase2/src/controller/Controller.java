@@ -22,6 +22,19 @@ public class Controller {
     public ListModel getOverdueAlerts(String userID) {
         return AlertAdapter.createAlertListModel(useCaseManager.getOverdueAlerts(userID));
     }
+    public String createIndividualAlert(String eventID, String alertName, LocalDateTime time, String userID ){
+        return AlertAdapter.createAlertString(useCaseManager.createIndividualAlert(eventID, alertName, time, userID));
+    }
+
+    public String createFrequencyAlert(String eventID, String alertName, String userID,
+                                       LocalDateTime startTime, String frequency){
+        return AlertAdapter.createAlertString(useCaseManager.createFrequencyAlert(eventID, alertName,
+                userID, startTime, frequency));
+    }
+
+    public LocalDateTime alertTimeFromInterger(int year,int month, int day, int hour, int minute) {
+        return GlobalAdapter.inputToDate(year, month, day, hour, minute);
+    }
     // CALENDARS
     public ListModel getCalendarsByUserID(String ownerID){
         return CalendarAdapter.createCalendarListModel(useCaseManager.getCalendarsByOwnerID(ownerID));

@@ -33,12 +33,12 @@ public class AlertManager implements IEventDeletionObserver {
      * @param start the alert time of this Individual alert
      * @return alert
      */
-    public String createIndividualAlert(String eventID, String alertName, LocalDateTime start, String userID) {
+    public Alert createIndividualAlert(String eventID, String alertName, LocalDateTime start, String userID) {
         // create an alert
         Alert alert = new Alert(alertName, userID, start);
         if (eventManager.editAlertID(eventID, alert.getAlertID(), userID)) {
             alertRepository.saveAlert(alert);
-            return alert.getAlertID();
+            return alert;
         }
         return null;
     }
@@ -93,16 +93,16 @@ public class AlertManager implements IEventDeletionObserver {
      * @param frequency the frequency of which the alert is repeating
      * @return True is successful
      */
-    public boolean createFrequencyAlertOnEvent(String eventID, String alertName, String userID, LocalDateTime startTime, String frequency) {
+    public Alert createFrequencyAlertOnEvent(String eventID, String alertName, String userID, LocalDateTime startTime, String frequency) {
         // create frequency alert
         Alert alert = createFrequencyAlert(eventID, alertName, userID, startTime, frequency);
         if (alert == null) {
-            return false;
+            return null;
         }
         //update the event's alertID
         eventManager.editAlertID(eventID, alert.getAlertID(), userID);
         alertRepository.saveAlert(alert);
-        return true;
+        return alert;
     }
 
     /**

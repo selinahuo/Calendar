@@ -50,6 +50,16 @@ public class UseCaseManager {
         LocalDateTime now = TimeManager.getTime();
         return alertManager.getOverdueAlertsAfterDate(now, userID);
     }
+
+    public Alert createIndividualAlert(String eventID, String alertName, LocalDateTime start, String userID) {
+        return alertManager.createIndividualAlert(eventID, alertName, start, userID);
+    }
+
+    public Alert createFrequencyAlert(String eventID, String alertName, String userID,
+                                      LocalDateTime startTime, String frequency) {
+        return alertManager.createFrequencyAlertOnEvent(eventID, alertName, userID, startTime, frequency);
+    }
+
     // CALENDARS
     public String createCalendar(String userID, String calendarName) {
         return calendarManager.createCalendar(userID, calendarName);
