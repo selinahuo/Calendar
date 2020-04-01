@@ -5,6 +5,7 @@ import controller.viewmodels.ListModel;
 import views.ListView;
 import views.LocalStorage;
 import views.View;
+import views.calendars.CalendarMenu;
 import views.users.UserMenu;
 
 import java.util.Scanner;
@@ -14,15 +15,27 @@ public class SeriesList extends ListView {
         super(localStorage, model, controller);
     }
 
-    private void inputPromt(){
+    private void inputPrompt(){
         System.out.println("Please select one of the following choices by entering a number:");
-//        System.out.println("[1] View individual event");
-        System.out.println("[~] Back to event menu");
+        System.out.println("[~] Back to series menu");
     }
 
 
     @Override
     public View run() {
-        return null;
+        printTitle("Series List");
+        Scanner input = new Scanner(System.in);
+
+        printList();
+
+        while (true) {
+            inputPrompt();
+            String selection = input.nextLine();
+            if ("~".equals(selection)) {
+                return new SeriesMenu(getLocalStorage(), null, getController());
+            } else {
+                super.printInputError();
+            }
+        }
     }
 }

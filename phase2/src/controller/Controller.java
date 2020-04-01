@@ -165,11 +165,11 @@ public class Controller {
         return useCaseManager.createSeriesFromEventFormula(seriesName, start, end, frequency, numEvents, userID);
     }
 
-    public ArrayList<Series> getSeriesByUserID(String userID) {
-        return useCaseManager.getSeriesByUserID(userID);
+    public ListModel getSeriesByUserID(String userID) {
+        return SeriesAdapter.createSeriesListModel(useCaseManager.getSeriesByUserID(userID));
     }
-    public ArrayList<Series> getSeriesBySeriesName(String seriesName, String userID) {
-        return useCaseManager.getSeriesBySeriesName(seriesName, userID);
+    public ListModel getSeriesBySeriesName(String seriesName, String userID) {
+        return SeriesAdapter.createSeriesListModel(useCaseManager.getSeriesBySeriesName(seriesName, userID));
     }
 
     public boolean editSeriesName(String seriesID, String seriesName, String userID){
