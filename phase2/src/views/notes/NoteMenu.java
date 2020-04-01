@@ -58,7 +58,7 @@ public class NoteMenu extends View {
                 case "2":
                     System.out.println("Enter memo ID:");
                     String memoID3 = input.nextLine();
-                    ListModel eventModel = getController().getEventsByMemoIDAndOwnerID(getController().getMemoByMemoIDAndOwnerID(memoID3, userID).getMemoID(), userID);
+                    ListModel eventModel = getController().getEventsByMemoIDAndOwnerID(memoID3, userID);
                     return new EventList(getLocalStorage(), eventModel, getController());
                 case "3":
                     ListModel allMemos = getController().getMemosByOwnerID(userID);
@@ -98,10 +98,6 @@ public class NoteMenu extends View {
                 case "5":
                     System.out.println("Enter memo ID:");
                     String memoID2 = input.nextLine();
-                    if (!getController().getMemosArrayListByOwnerID(userID).contains(getController().getMemoByMemoIDAndOwnerID(memoID2, userID))){
-                        System.out.println("Invalid memo ID");
-                        return new NoteMenu(getLocalStorage(), null, getController());
-                }
                     System.out.println("Please select one of the following choices by entering a number:");
                     System.out.println("[1] Add to event");
                     System.out.println("[2] Remove from event");

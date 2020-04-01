@@ -127,16 +127,6 @@ public class Controller {
     public ListModel getEventsByMemoIDAndOwnerID(String memoID, String ownerID){
         return EventAdapter.createEventListModel(useCaseManager.getEventsByMemoIDAndOwnerID(memoID, ownerID));
     }
-    public ArrayList<CalendarEvent> getEventsArrayListByMemoIDAndOwnerID(String memoID, String ownerID){
-        return useCaseManager.getEventsByMemoIDAndOwnerID(memoID, ownerID);
-    }
-
-    public Memo getMemoByMemoIDAndOwnerID(String memoID, String ownerID){
-        return useCaseManager.getMemoByMemoIDAndOwnerID(memoID, ownerID);
-    }
-    public ArrayList<Memo> getMemosArrayListByOwnerID(String ownerID){
-        return useCaseManager.getMemosByOwnerID(ownerID);
-    }
 
     public ListModel getMemosByOwnerID(String ownerID){
         return NoteAdapter.createMemoListModel(useCaseManager.getMemosByOwnerID(ownerID));
