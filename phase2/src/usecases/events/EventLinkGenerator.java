@@ -6,13 +6,13 @@ import java.net.URLEncoder;
 
 public class EventLinkGenerator {
     public static String getEventDirections(CalendarEvent event) {
-        String url = "https://www.google.com/maps/dir//" + event.getLocation();
-        return encodeURL(url);
+        String url = "https://www.google.com/maps/dir//" + encodeURL(event.getLocation());
+        return url;
     }
 
     public static String getEventWeather(CalendarEvent event) {
-        String url = "https://www.google.com/search?q=" + event.getLocation() + " weather";
-        return encodeURL(url);
+        String url = "https://www.google.com/search?q=" + encodeURL(event.getLocation() + " weather");
+        return url;
     }
 
     public static String getEventTwitterShare(CalendarEvent event) {
@@ -22,8 +22,8 @@ public class EventLinkGenerator {
                 event.getStart().toString(),
                 event.getEnd().toString()
         );
-        String url = "https://twitter.com/?status=" + eventString;
-        return encodeURL(url);
+        String url = "https://twitter.com/?status=" + encodeURL(eventString);
+        return url;
     }
 
     public static String getEventEmailShare(CalendarEvent event) {
@@ -33,8 +33,8 @@ public class EventLinkGenerator {
                 event.getStart().toString(),
                 event.getEnd().toString()
         );
-        String url = "mailto:?subject=" + eventString;
-        return encodeURL(url);
+        String url = "mailto:?subject=" + encodeURL(eventString);
+        return url;
     }
 
     private static String encodeURL(String url) {

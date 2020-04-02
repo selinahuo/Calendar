@@ -1,6 +1,5 @@
 package usecases;
 
-import dataclasses.Quintuple;
 import dataclasses.Sextuple;
 import dataclasses.Tuple;
 import entities.*;
@@ -115,28 +114,28 @@ public class UseCaseManager {
         return eventManager.createEventByFirstWeekDay(name, year, month, weekDay, location, userID, calendarID);
     }
 
-    public Sextuple<CalendarEvent, ArrayList<Memo>, ArrayList<Tag>, Alert, Calendars, Series> getSingularEvent(String eventID, String userID) {
-//        CalendarEvent event = this.eventManager.getEventByIDAndUserID(eventID, userID);
-//        if (event != null) {
-//            Alert alert = null;
-//            ArrayList<Memo> memo = null;
-//            ArrayList<Tag> tag = null;
-//            Series series = null;
-//            if (event.getAlertID() != null && event.getUserID().equals(userID)) {
-////                alert = this.alertManager.getAlertByIDAndUserID(event.getAlertID(), userID);
-//            }
-//            if (event.getMemoIDs() != null && event.getMemoIDs().size() != 0) {
-//                memo = this.noteManager.getMemoById(event.getMemoIDs().get(0));
-//            }
-//            if (event.getTagIDs() != null && event.getTagIDs().size() != 0) {
-//                tag = this.noteManager.getTagByID(event.getTagIDs().get(0));
-//            }
-//            if (event.getSeriesID() != null && !event.getSeriesID().equals("")) {
-//                series = this.seriesManager.getSeriesByIDAndUserID(event.getSeriesID(), userID);
-//            }
-//            return new Quintuple<CalendarEvent, Alert, Memo, Tag, Series>(event, alert, memo, tag, series);
-//        }
-        return null;
+    public Sextuple<CalendarEvent, Memo, ArrayList<Tag>, Alert, Calendars, Series> getSingularEvent(String eventID, String userID) {
+        CalendarEvent event = this.eventManager.getEventByIDAndUserID(eventID, userID);
+        if (event == null) {
+            return null;
+        }
+
+        Memo memo = memoManager.getMemoByMemoID(event.getMemoID());
+        ArrayList<Tag> tags = new ArrayList<>();
+        for (String tagID: event.getTagIDs()) {
+            tags.add(tagManager.getTagByTagID(tagID));
+        }
+
+        Alert alert = null;
+        Series series = null;
+        Calendars calendar = null;
+        if (event.getUserID().equals(userID)) {
+            alert = alertManager.getAlertByIDAndUserID(event.getAlertID(), userID);
+            System.out.println(event.getSeriesID());
+            series = seriesManager.getSeriesBySeriesIDAndUserID(event.getSeriesID(), userID);
+            calendar = calendarManager.getCalendarByIDAndOwnerID(event.getCalendarID(), userID);
+        }
+        return new Sextuple<CalendarEvent, Memo, ArrayList<Tag>, Alert, Calendars, Series>(event, memo, tags, alert, calendar, series);
     }
 
     public String getEventDirections(String eventID) {

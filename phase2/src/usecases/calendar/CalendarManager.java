@@ -36,6 +36,17 @@ public class CalendarManager implements IEventDeletionObserver {
     }
 
     /**
+     * Get a Calendar by its ID and the ownerID
+     *
+     * @param calendarID the calendar's unique ID
+     * @param ownerID the owner of a calendar
+     * @return calendar or null if it does not exist
+     */
+    public Calendars getCalendarByIDAndOwnerID(String calendarID, String ownerID) {
+        return repository.fetchCalendarByCalendarIDAndOwnerID(calendarID, ownerID);
+    }
+
+    /**
      * Get all the calendar that the user belongs to
      *
      * @param ownerID the owner of the list of calendars returned

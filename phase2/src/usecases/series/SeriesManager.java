@@ -36,7 +36,8 @@ public class SeriesManager implements IEventDeletionObserver {
         Series newSeries = new Series(seriesName, numEvents, userID);
         ArrayList<LocalDateTime[]> times = getTimes(start, end, frequency, numEvents);
         for (LocalDateTime[] time : times) {
-            eventManager.createEvent(seriesName, time[0], time[1], "", userID, "");
+            String eventID = eventManager.createEvent(seriesName, time[0], time[1], "", userID, "");
+            eventManager.editSeriesID(eventID, newSeries.getSeriesID(), userID);
         }
         repository.saveSeries(newSeries);
         return true;

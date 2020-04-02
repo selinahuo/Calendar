@@ -106,7 +106,7 @@ public class EventManager {
     public Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> getEventsByDayAndUserID(LocalDate date, String userID) {
         LocalDateTime dayStart = date.atTime(0, 0);
         LocalDateTime dayEnd = LocalDateTime.from(dayStart).plusDays(1);
-        ArrayList<CalendarEvent> dayEvents = repository.fetchEventsStartBeforeAndStartAfterAndUserID(dayStart, dayEnd, userID);
+        ArrayList<CalendarEvent> dayEvents = repository.fetchEventsStartBeforeAndStartAfterAndUserID(dayEnd, dayStart, userID);
 
         ArrayList<LocalDateTime> times = new ArrayList<>();
         times.add(dayStart);
@@ -120,7 +120,7 @@ public class EventManager {
         ArrayList<LocalDateTime> times = new ArrayList<>();
         ArrayList<ArrayList<CalendarEvent>> events = new ArrayList<>();
         for (int i = 1; i <= 7; i++) {
-            ArrayList<CalendarEvent> dayEvents = repository.fetchEventsStartBeforeAndStartAfterAndUserID(dayStart, dayEnd, userID);
+            ArrayList<CalendarEvent> dayEvents = repository.fetchEventsStartBeforeAndStartAfterAndUserID(dayEnd, dayStart, userID);
             times.add(dayStart);
             events.add(dayEvents);
             dayStart = LocalDateTime.from(dayEnd);
@@ -138,7 +138,7 @@ public class EventManager {
         ArrayList<ArrayList<CalendarEvent>> events = new ArrayList<>();
 
         for (int i = 1; i <= daysInMonth; i++) {
-            ArrayList<CalendarEvent> dayEvents = repository.fetchEventsStartBeforeAndStartAfterAndUserID(dayStart, dayEnd, userID);
+            ArrayList<CalendarEvent> dayEvents = repository.fetchEventsStartBeforeAndStartAfterAndUserID(dayEnd, dayStart, userID);
             times.add(dayStart);
             events.add(dayEvents);
             dayStart = LocalDateTime.from(dayEnd);

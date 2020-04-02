@@ -96,8 +96,39 @@ public class EventMenu extends View {
                         return new EventList(getLocalStorage(), currentEvents, getController());
                     }
                 case "5":
-                    // TODO using time frame
-                    return null;
+                    System.out.println("View events by [h]our/[d]ay/[w]eek/[m]onth (defaults to day)");
+                    String timeFrame = input.nextLine();
+                    switch (timeFrame) {
+                        case "h":
+                            System.out.println("Enter day to filter (yyyy-mm-dd):");
+                            String hourDate = input.nextLine();
+                            System.out.println("Enter hour of the day (0-23):");
+                            int hour = input.nextInt();
+                            input.nextLine();
+                            ListModel hourlyEvents = getController().getHourlyEvents(hourDate, hour, getLocalStorage().getUserID());
+                            printTitle("Hour Events");
+                            return new EventList(getLocalStorage(), hourlyEvents, getController());
+                        case "w":
+                            System.out.println("Enter first day of week (yyyy-mm-dd):");
+                            String weekDate = input.nextLine();
+                            ListModel weeklyEvents = getController().getWeeklyEvents(weekDate, getLocalStorage().getUserID());
+                            printTitle("Week Events");
+                            return new EventList(getLocalStorage(), weeklyEvents, getController());
+                        case "m":
+                            System.out.println("Enter year of month to filter (0-yyyy):");
+                            int monthYear = input.nextInt();
+                            System.out.println("Enter month (1-12)");
+                            int monthFilter = input.nextInt();
+                            ListModel monthlyEvents = getController().getMonthlyEvents(monthYear, monthFilter, getLocalStorage().getUserID());
+                            printTitle("Month Events");
+                            return new EventList(getLocalStorage(), monthlyEvents, getController());
+                        default: // Day
+                            System.out.println("Enter day to filter (yyyy-mm-dd):");
+                            String dayDate = input.nextLine();
+                            ListModel dailyEvents = getController().getDailyEvents(dayDate, getLocalStorage().getUserID());
+                            printTitle("Day Events");
+                            return new EventList(getLocalStorage(), dailyEvents, getController());
+                    }
                 case "~":
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:

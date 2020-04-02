@@ -2,10 +2,16 @@ package controller;
 
 import controller.viewmodels.ListModel;
 import controller.viewmodels.SingularInvitationModel;
+import controller.viewmodels.SingularModel;
+import dataclasses.Sextuple;
+import dataclasses.Tuple;
 import entities.*;
+import jdk.nashorn.internal.objects.Global;
 import usecases.UseCaseManager;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 
 public class Controller {
@@ -82,13 +88,33 @@ public class Controller {
 
     // EVENTS
     public String createEvent(String name, String start, String end, String location, String userID, String calendarID) {
-        return useCaseManager.createEvent(name, GlobalAdapter.stringToDate(start), GlobalAdapter.stringToDate(end),
+        return useCaseManager.createEvent(name, GlobalAdapter.stringToDateTime(start), GlobalAdapter.stringToDateTime(end),
                 location, userID, calendarID);
     }
     public String createHolidayEvent(String name, int year, int month, String weekDay, String location, String userID, String calendarID) {
         return useCaseManager.createEventByFirstWeekDay(name, year, GlobalAdapter.intToMonth(month),
                 GlobalAdapter.stringToWeekDay(weekDay), location, userID, calendarID);
     }
+    public SingularModel getSingularEvent(String eventID, String userID) {
+        Sextuple<CalendarEvent, Memo, ArrayList<Tag>, Alert, Calendars, Series> meta = useCaseManager.getSingularEvent(eventID, userID);
+        if (meta == null) {
+            return null;
+        }
+        return EventAdapter.createEventSingularModel(meta.getFirst(), meta.getSecond(), meta.getThird(), meta.getFourth(), meta.getFifth(), meta.getSixth());
+    }
+    public String getEventDirections(String eventID) {
+        return useCaseManager.getEventDirections(eventID);
+    }
+    public String getEventWeather(String eventID) {
+        return useCaseManager.getEventWeather(eventID);
+    }
+    public String getEventTwitterShare(String eventID) {
+        return useCaseManager.getEventTwitterShare(eventID);
+    }
+    public String getEventEmailShare(String eventID) {
+        return useCaseManager.getEventEmailShare(eventID);
+    }
+
     public ListModel getEventsByName(String name, String userID) {
         return EventAdapter.createEventListModel(useCaseManager.getEventsByNameAndUserID(name, userID));
     }
@@ -102,6 +128,26 @@ public class Controller {
         return EventAdapter.createEventListModel(useCaseManager.getFutureEvents(userID));
     }
 
+    public ListModel getHourlyEvents(String date, int hour, String userID) {
+        LocalDate dateObject = GlobalAdapter.stringToDate(date);
+        Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> eventTimes = useCaseManager.getEventsByHour(dateObject, hour, userID);
+        return EventAdapter.createEventDateListModel(eventTimes.getSecond(), eventTimes.getFirst());
+    }
+    public ListModel getDailyEvents(String date, String userID) {
+        LocalDate dateObject = GlobalAdapter.stringToDate(date);
+        Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> eventTimes = useCaseManager.getEventsByDay(dateObject, userID);
+        return EventAdapter.createEventDateListModel(eventTimes.getSecond(), eventTimes.getFirst());
+    }
+    public ListModel getWeeklyEvents(String date, String userID) {
+        LocalDate dateObject = GlobalAdapter.stringToDate(date);
+        Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> eventTimes = useCaseManager.getEventsByWeek(dateObject, userID);
+        return EventAdapter.createEventDateListModel(eventTimes.getSecond(), eventTimes.getFirst());
+    }
+    public ListModel getMonthlyEvents(int year, int month, String userID) {
+        Month monthObject = GlobalAdapter.intToMonth(month);
+        Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> eventTimes = useCaseManager.getEventsByMonth(year, monthObject, userID);
+        return EventAdapter.createEventDateListModel(eventTimes.getSecond(), eventTimes.getFirst());
+    }
 
     // INVITATIONS
     public ListModel getIncomingInvitations(String userID) {

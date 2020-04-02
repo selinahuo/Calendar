@@ -2,9 +2,12 @@ package views.events;
 
 import controller.Controller;
 import controller.viewmodels.ListModel;
+import controller.viewmodels.SingularInvitationModel;
+import controller.viewmodels.SingularModel;
 import views.ListView;
 import views.LocalStorage;
 import views.View;
+import views.invitations.SingularInvitation;
 import views.users.UserMenu;
 
 import java.util.Scanner;
@@ -16,7 +19,7 @@ public class EventList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-//        System.out.println("[1] View individual event");
+        System.out.println("[1] View individual event");
         System.out.println("[~] Back to event menu");
     }
 
@@ -32,7 +35,15 @@ public class EventList extends ListView {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    System.out.println("Please enter an event ID:");
+                    String eventID = input.nextLine();
+                    SingularModel eventModel = getController().getSingularEvent(eventID, getLocalStorage().getUserID());
+                    if (eventModel == null) {
+                        printError("Event could not be found.");
+                        break;
+                    }
+                    System.out.println("");
+                    return new SingularEvent(getLocalStorage(), eventModel, getController());
                 case "~":
                     return new EventMenu(getLocalStorage(), null, getController());
                 default:
