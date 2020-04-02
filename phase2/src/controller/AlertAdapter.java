@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class AlertAdapter {
 
     public static String createAlertString (Alert alert) {
-        return String.format("ID: %s | Alert: %s | Alert Times: %s",
-                alert.getAlertID(), alert.getAlertName(), alert.getTimes());
+        return String.format("ID: %s | Alert: %s | My Next Alert Time: %s | Total Alert Times: %s ",
+                alert.getAlertID(), alert.getAlertName(), alert.getNextRing(), alert.getTimes());
     }
 
     public static ListModel createAlertListModel(ArrayList<Alert> alerts) {

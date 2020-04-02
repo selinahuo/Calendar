@@ -21,9 +21,6 @@ public class AlertMenu extends View{
         System.out.println("[1] Get Overdue Alerts");
         System.out.println("[2] List Alerts");
         System.out.println("[3] Create a new Alert");
-        System.out.println("[4] Acknowledge Alert");
-        System.out.println("[5] Edit an Alert");
-        System.out.println("[6] Delete an Alert");
         System.out.println("[~] Return to main menu");
     }
 
@@ -49,28 +46,6 @@ public class AlertMenu extends View{
                     return new AlertList(getLocalStorage(), alertModel, getController());
                 case "3":
                     return new CreateAlertView(getLocalStorage(), getModel(), getController());
-                case "4":
-                    System.out.println("Enter alert ID:");
-                    String alertID = input.nextLine();
-                    boolean success = getController().acknowledgeAlert(alertID, getLocalStorage().getUserID());
-                    if (success) {
-                        System.out.println("Alert was acknowledged successfully.");
-                    } else {
-                        printError("Something went wrong, did NOT acknowledge the given alert.");
-                    }
-                    return new AlertMenu(getLocalStorage(),getModel(),getController());
-                case "5":
-                    return new EditAlertView(getLocalStorage(), getModel(),getController());
-                case "6":
-                    System.out.println("Please enter the ID of the alert you would like to delete: ");
-                    String deleteAlertID = input.nextLine();
-                    boolean deleted = getController().deleteAlertByID(deleteAlertID, getLocalStorage().getUserID());
-                    if (deleted){
-                        System.out.println("The Alert is being deleted:");
-                    } else {
-                        System.out.println("The Alert deletion was not complete");
-                    }
-                    return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "~":
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:

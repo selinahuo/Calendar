@@ -21,7 +21,7 @@ public class CreateAlertView extends View {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Create Individual Alert");
         System.out.println("[2] Create Frequency Alert");
-        System.out.println("[~] Return to Main Menu");
+        System.out.println("[~] Return to Alert Menu");
     }
 
     @Override
@@ -55,6 +55,9 @@ public class CreateAlertView extends View {
                     LocalDateTime alertTime = getController().alertTimeFromInteger(year,month,day,hour,minute);
                     // Creating the alert
                     System.out.println(getController().createIndividualAlert(eventID, alertName, alertTime, getLocalStorage().getUserID()));
+                    // return to this user's list of alerts
+                    ListModel alertModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
+                    return new AlertList(getLocalStorage(), alertModel, getController());
                 case "2":
                     // EventID
                     System.out.println("Enter Event ID:");
@@ -84,8 +87,11 @@ public class CreateAlertView extends View {
                     // Creating the alert
                     System.out.println(getController().createFrequencyAlert(frequencyEventID, frequencyAlertName,
                             getLocalStorage().getUserID(), startTime, frequency));
+                    // return to this user's list of alerts
+                    ListModel alertListModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
+                    return new AlertList(getLocalStorage(), alertListModel, getController());
                 case "~":
-                    return new MainMenu(getLocalStorage(), null, getController());
+                    return new AlertMenu(getLocalStorage(),getModel(),getController());
 
                 default:
                     printInputError();
