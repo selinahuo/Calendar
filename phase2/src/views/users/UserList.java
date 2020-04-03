@@ -15,7 +15,7 @@ public class UserList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-//        System.out.println("[1] View individual event");
+        System.out.println("[1] Clip user ID");
         System.out.println("[~] Back to user menu");
     }
 
@@ -31,7 +31,14 @@ public class UserList extends ListView {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    System.out.print("Current ");
+                    printClipBoard();
+                    System.out.println("Enter user ID to clip");
+                    String userID = input.nextLine();
+                    getLocalStorage().setClipUser(userID);
+                    System.out.print("New ");
+                    printClipBoard();
+                    break;
                 case "~":
                     return new UserMenu(getLocalStorage(), null, getController());
                 default:

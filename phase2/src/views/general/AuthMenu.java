@@ -28,8 +28,10 @@ public class AuthMenu extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
+                    System.out.println("");
                     return new Login(getLocalStorage(), getModel(), getController());
                 case "2":
+                    System.out.println("");
                     return new CreateUser(getLocalStorage(), getModel(), getController());
                 case "q":
                     return null;

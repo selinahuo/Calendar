@@ -24,12 +24,12 @@ public class Login extends View {
         String userID = getController().loginUser(username, password);
 
         if (userID == null) {
-            printError("Login failed.");
+            printError("Login failed.\n");
             return new AuthMenu(getLocalStorage(), null, getController());
         }
 
         getLocalStorage().setUserID(userID);
-        System.out.println("Login successful.");
+        System.out.println("Login successful.\n");
         return new MainMenu(getLocalStorage(), null, getController());
     }
 }

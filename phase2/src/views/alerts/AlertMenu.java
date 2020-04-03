@@ -34,19 +34,23 @@ public class AlertMenu extends View{
             switch(selection) {
                 case "1":
                     ListModel overdueModel = getController().getOverdueAlerts(getLocalStorage().getUserID());
+                    System.out.println("");
                     if (overdueModel != null) {
                         return new AlertList(getLocalStorage(), overdueModel, getController());
                     }
                     else {
-                        super.printError("Oops, Something went wrong.");
-                        new AlertMenu(getLocalStorage(),getModel(),getController());
+                        printError("Oops, Something went wrong.");
+                        return new AlertMenu(getLocalStorage(),getModel(),getController());
                     }
                 case "2":
+                    System.out.println("");
                     ListModel alertModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
                     return new AlertList(getLocalStorage(), alertModel, getController());
                 case "3":
+                    System.out.println("");
                     return new CreateAlertView(getLocalStorage(), getModel(), getController());
                 case "~":
+                    System.out.println("");
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();

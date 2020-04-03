@@ -53,7 +53,6 @@ public class UseCaseManager {
     public Alert createIndividualAlert(String eventID, String alertName, LocalDateTime start, String userID) {
         return alertManager.createIndividualAlert(eventID, alertName, start, userID);
     }
-
     public Alert createFrequencyAlert(String eventID, String alertName, String userID,
                                       LocalDateTime startTime, String frequency) {
         return alertManager.createFrequencyAlertOnEvent(eventID, alertName, userID, startTime, frequency);
@@ -66,7 +65,6 @@ public class UseCaseManager {
     public boolean editAlertName(String alertID, String name, String userID){
         return alertManager.editAlertName(alertID, name, userID);
     }
-
     public boolean editAlertTimeAsIndividual(String alertID, LocalDateTime time, String userID){
         return alertManager.editAlertTimeAsIndividual(alertID, time, userID);
     }
@@ -74,7 +72,6 @@ public class UseCaseManager {
     public Alert getAlertByIDAndUserID(String alertID, String userID){
         return alertManager.getAlertByIDAndUserID(alertID, userID);
     }
-
     public boolean deleteAlertByID(String alertID, String userID){
         return alertManager.deleteAlertByIDAndUserID(alertID, userID);
     }
@@ -184,6 +181,10 @@ public class UseCaseManager {
     }
     public Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> getEventsByMonth(int year, Month month, String userID) {
         return eventManager.getEventsByMonthAndUserID(year, month, userID);
+    }
+
+    public ArrayList<CalendarEvent> getEventsByAlertID(String alertID, String ownerID) {
+        return eventManager.getEventsByAlertIDAndOwnerID(alertID, ownerID);
     }
 
     public boolean editEventName(String eventID, String name, String ownerID) {

@@ -29,6 +29,7 @@ public class CreateUser extends View {
             printError("That username is already in use, please choose another username.");
         }
 
+        System.out.println("");
         return new AuthMenu(getLocalStorage(), null, getController());
     }
 }

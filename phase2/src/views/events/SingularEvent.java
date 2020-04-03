@@ -21,10 +21,10 @@ public class SingularEvent extends SingularView {
         System.out.println("[3] Share event on Twitter");
         System.out.println("[4] Share event using Email");
         if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
-            System.out.println("[1] Delete event");
-        } else {
-            System.out.println("[a] Accept invitation");
-            System.out.println("[d] Decline invitation");
+            System.out.println("[e1] Edit name");
+            System.out.println("[e2] Edit time");
+            System.out.println("[e3] Edit location");
+            System.out.println("[d] Delete event");
         }
         System.out.println("[~] Return to event menu");
     }
@@ -64,30 +64,49 @@ public class SingularEvent extends SingularView {
                         printError("Something went wrong opening your browser.");
                     }
                     break;
-                case "a":
-//                    if (getModel().getAccept() == null) {
-//                        System.out.println("Enter your response:");
-//                        String acceptingResponse = input.nextLine();
-//                        getController().acceptInvitation(getModel().getEntityID(), acceptingResponse, true, getLocalStorage().getUserID());
-//
-//                        System.out.println("");
-//                        SingularInvitationModel acceptModel = getController().getSingularInvitation(getModel().getEntityID(), getLocalStorage().getUserID());
-//                        return new SingularEvent(getLocalStorage(), acceptModel, getController());
-//                    }
-//                    printInputError();
-//                    break;
+                case "e1":
+                    if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
+                        System.out.println("Enter new name:");
+                        String newName = input.nextLine();
+                        getController().editEventName(getModel().getEntityID(), newName, getLocalStorage().getUserID());
+                        System.out.println("Event edited\n");
+                        SingularModel nameModel = getController().getSingularEvent(getModel().getEntityID(), getLocalStorage().getUserID());
+                        return new SingularEvent(getLocalStorage(), nameModel, getController());
+                    }
+                    printInputError();
+                    break;
+                case "e2":
+                    if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
+                        System.out.println("Enter new start time (yyyy-MM-dd HH:mm):");
+                        String newStart = input.nextLine();
+                        System.out.println("Enter new end time (yyyy-MM-dd HH:mm):");
+                        String newEnd = input.nextLine();
+                        getController().editEventTime(getModel().getEntityID(), newStart, newEnd, getLocalStorage().getUserID());
+                        System.out.println("Event edited\n");
+                        SingularModel timeModel = getController().getSingularEvent(getModel().getEntityID(), getLocalStorage().getUserID());
+                        return new SingularEvent(getLocalStorage(), timeModel, getController());
+                    }
+                    printInputError();
+                    break;
+                case "e3":
+                    if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
+                        System.out.println("Enter new location:");
+                        String newLocation = input.nextLine();
+                        getController().editEventLocation(getModel().getEntityID(), newLocation, getLocalStorage().getUserID());
+                        System.out.println("Event edited\n");
+                        SingularModel locationModel = getController().getSingularEvent(getModel().getEntityID(), getLocalStorage().getUserID());
+                        return new SingularEvent(getLocalStorage(), locationModel, getController());
+                    }
+                    printInputError();
+                    break;
                 case "d":
-//                    if (getModel().getAccept() == null) {
-//                        System.out.println("Enter your response:");
-//                        String declineResponse = input.nextLine();
-//                        getController().acceptInvitation(getModel().getEntityID(), declineResponse, false, getLocalStorage().getUserID());
-//
-//                        System.out.println("");
-//                        SingularInvitationModel acceptModel = getController().getSingularInvitation(getModel().getEntityID(), getLocalStorage().getUserID());
-//                        return new SingularEvent(getLocalStorage(), acceptModel, getController());
-//                    }
-//                    printInputError();
-//                    break;
+                    if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
+                        getController().deleteEvent(getModel().getEntityID(), getLocalStorage().getUserID());
+                        System.out.println("Event deleted\n");
+                        return new EventMenu(getLocalStorage(), null, getController());
+                    }
+                    printInputError();
+                    break;
                 case "~":
                     System.out.println("");
                     return new EventMenu(getLocalStorage(), null, getController());

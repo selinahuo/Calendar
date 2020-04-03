@@ -28,6 +28,9 @@ public interface IEventRepository {
     ArrayList<CalendarEvent> fetchEventsStartAfterAndUserID(LocalDateTime after, String userID);
     ArrayList<CalendarEvent> fetchEventsStartBeforeAndStartAfterAndUserID(LocalDateTime before, LocalDateTime after, String userID);
 
+    // Alerts
+    ArrayList<CalendarEvent> fetchEventsByAlertIDAndOwnerID(String alertID, String ownerID);
+
     // Calendar
     ArrayList<CalendarEvent> fetchEventsByCalendarIDAndOwnerID(String calendarID, String ownerID);
 
@@ -39,6 +42,7 @@ public interface IEventRepository {
 
     // Series
     ArrayList<CalendarEvent> fetchEventsBySeriesIDAndOwnerID(String seriesID, String ownerID);
+
 
     // edit
     boolean editEventName(String eventID, String name, String ownerID);

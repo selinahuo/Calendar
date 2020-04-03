@@ -17,9 +17,9 @@ public class SeriesList extends ListView {
 
     private void inputPrompt(){
         System.out.println("Please select one of the following choices by entering a number:");
+        System.out.println("[1] Edit series' name");
         System.out.println("[~] Back to series menu");
     }
-
 
     @Override
     public View run() {
@@ -31,10 +31,23 @@ public class SeriesList extends ListView {
         while (true) {
             inputPrompt();
             String selection = input.nextLine();
-            if ("~".equals(selection)) {
-                return new SeriesMenu(getLocalStorage(), null, getController());
-            } else {
-                super.printInputError();
+            switch (selection) {
+                case "1":
+                    System.out.println("Enter series ID:");
+                    String seriesID = input.nextLine();
+                    System.out.println("Enter a new series name:");
+                    String newName = input.nextLine();
+                    boolean nameModified = getController().editSeriesName(seriesID, newName, getLocalStorage().getUserID());
+                    if (nameModified) {
+                        System.out.println("The series was modified");
+                    } else {
+                        System.out.println("The series name change was not complete");
+                    }
+                    return new SeriesMenu(getLocalStorage(), getModel(), getController());
+                case "~":
+                    return new SeriesMenu(getLocalStorage(), null, getController());
+                default:
+                    printInputError();
             }
         }
     }

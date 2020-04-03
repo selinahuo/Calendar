@@ -94,6 +94,15 @@ public class SerializableEventRepository extends SerializableRepository<Calendar
     }
 
     @Override
+    public ArrayList<CalendarEvent> fetchEventsByAlertIDAndOwnerID(String alertID, String ownerID) {
+        return fetchSortedPlural(
+                (CalendarEvent e) ->
+                        e.getAlertID().equals(alertID)
+                        && e.getUserID().equals(ownerID)
+        );
+    }
+
+    @Override
     public ArrayList<CalendarEvent> fetchEventsByCalendarIDAndOwnerID(String calendarID, String ownerID) {
         return fetchSortedPlural(
                 (CalendarEvent e) -> e.getCalendarID().equals(calendarID) && e.getUserID().equals(ownerID)

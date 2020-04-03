@@ -20,7 +20,7 @@ public class InvitationMenu extends View {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] List incoming invitations");
         System.out.println("[2] List outgoing invitations");
-        System.out.println("[3] Invite User to Event");
+        System.out.println("[3] Invite User to Event (have an user and event clipped)");
         System.out.println("[~] Return to main menu");
     }
 
@@ -41,6 +41,7 @@ public class InvitationMenu extends View {
                     System.out.println("");
                     return new InvitationList(getLocalStorage(), outgoingModel, getController());
                 case "3":
+                    printClipBoard();
                     System.out.println("Please enter event ID of the invitation:");
                     String eventID = input.nextLine();
                     System.out.println("Please enter the ID of the user you will invite:");

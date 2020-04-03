@@ -6,7 +6,6 @@ import controller.viewmodels.SingularModel;
 import dataclasses.Sextuple;
 import dataclasses.Tuple;
 import entities.*;
-import jdk.nashorn.internal.objects.Global;
 import usecases.UseCaseManager;
 
 import java.time.LocalDate;
@@ -28,12 +27,12 @@ public class Controller {
     public ListModel getOverdueAlerts(String userID) {
         return AlertAdapter.createAlertListModel(useCaseManager.getOverdueAlerts(userID));
     }
+
     public String createIndividualAlert(String eventID, String alertName, LocalDateTime time, String userID ){
         return AlertAdapter.createAlertString(useCaseManager.createIndividualAlert(eventID, alertName, time, userID));
     }
-
     public String createFrequencyAlert(String eventID, String alertName, String userID,
-                                       LocalDateTime startTime, String frequency){
+                                       LocalDateTime startTime, String frequency) {
         return AlertAdapter.createAlertString(useCaseManager.createFrequencyAlert(eventID, alertName,
                 userID, startTime, frequency));
     }
@@ -114,6 +113,20 @@ public class Controller {
     public String getEventEmailShare(String eventID) {
         return useCaseManager.getEventEmailShare(eventID);
     }
+    public boolean editEventName(String eventID, String name, String ownerID) {
+        return useCaseManager.editEventName(eventID, name, ownerID);
+    }
+    public boolean editEventLocation(String eventID, String location, String ownerID) {
+        return useCaseManager.editEventLocation(eventID, location, ownerID);
+    }
+    public boolean editEventTime(String eventID, String start, String end, String ownerID) {
+        LocalDateTime startTime = GlobalAdapter.stringToDateTime(start);
+        LocalDateTime endTime = GlobalAdapter.stringToDateTime(end);
+        return useCaseManager.editEventTime(eventID, startTime, endTime, ownerID);
+    }
+    public boolean deleteEvent(String eventID, String ownerID) {
+        return useCaseManager.deleteEvent(eventID, ownerID);
+    }
 
     public ListModel getEventsByName(String name, String userID) {
         return EventAdapter.createEventListModel(useCaseManager.getEventsByNameAndUserID(name, userID));
@@ -147,6 +160,10 @@ public class Controller {
         Month monthObject = GlobalAdapter.intToMonth(month);
         Tuple<ArrayList<LocalDateTime>, ArrayList<ArrayList<CalendarEvent>>> eventTimes = useCaseManager.getEventsByMonth(year, monthObject, userID);
         return EventAdapter.createEventDateListModel(eventTimes.getSecond(), eventTimes.getFirst());
+    }
+
+    public ListModel getEventsFromAlert(String alertID, String ownerID) {
+        return EventAdapter.createEventListModel(useCaseManager.getEventsByAlertID(alertID, ownerID));
     }
 
     // INVITATIONS

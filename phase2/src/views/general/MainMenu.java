@@ -42,22 +42,31 @@ public class MainMenu extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
+                    System.out.println("");
                     return new AlertMenu(getLocalStorage(),null, getController());
                 case "2":
+                    System.out.println("");
                     return new CalendarMenu(getLocalStorage(), null, getController());
                 case "3":
+                    System.out.println("");
                     return new EventMenu(getLocalStorage(), null, getController());
                 case "4":
+                    System.out.println("");
                     return new InvitationMenu(getLocalStorage(), null, getController());
                 case "5":
+                    System.out.println("");
                     return new NoteMenu(getLocalStorage(), null, getController());
                 case "6":
+                    System.out.println("");
                     return new SeriesMenu(getLocalStorage(), null, getController());
                 case "7":
+                    System.out.println("");
                     return new TimeMenu(getLocalStorage(), null, getController());
                 case "8":
+                    System.out.println("");
                     return new UserMenu(getLocalStorage(), null, getController());
                 case "q":
+                    System.out.println("");
                     return new AuthMenu(new LocalStorage(), null, getController());
                 default:
                     printInputError();

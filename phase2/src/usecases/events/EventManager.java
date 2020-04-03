@@ -162,6 +162,9 @@ public class EventManager {
     public ArrayList<CalendarEvent> getEventsByCalendarIDAndOwnerID(String calendarID, String ownerID) {
         return repository.fetchEventsByCalendarIDAndOwnerID(calendarID, ownerID);
     }
+    public ArrayList<CalendarEvent> getEventsByAlertIDAndOwnerID(String alertID, String ownerID) {
+        return repository.fetchEventsByAlertIDAndOwnerID(alertID, ownerID);
+    }
 
     // edit
     public boolean editEventName(String eventID, String name, String ownerID) {

@@ -2,13 +2,24 @@ package controller;
 import controller.viewmodels.ListModel;
 import entities.Alert;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class AlertAdapter {
 
+    private static String alertStatusString(Alert alert) {
+        LocalDateTime nextRing = alert.getNextRing();
+        if (nextRing != null) {
+            return "Alert will ring next at: " + GlobalAdapter.dateToString(nextRing);
+        } else if (alert.getTotalAcknowledged()) {
+            return "Completely Acknowledged";
+        }
+        return "";
+    }
+
     public static String createAlertString (Alert alert) {
-        return String.format("ID: %s | Alert: %s | My Next Alert Time: %s | Total Alert Times: %s ",
-                alert.getAlertID(), alert.getAlertName(), alert.getNextRing(), alert.getTimes());
+        return String.format("ID: %s | Alert: %s | %s",
+                alert.getAlertID(), alert.getAlertName(), alertStatusString(alert));
     }
 
     public static ListModel createAlertListModel(ArrayList<Alert> alerts) {

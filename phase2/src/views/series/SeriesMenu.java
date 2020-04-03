@@ -1,11 +1,10 @@
 package views.series;
 
-//import com.sun.tools.corba.se.idl.StringGen;
 import controller.Controller;
+import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
-import views.alerts.EditAlertView;
 import views.general.MainMenu;
 
 import java.time.LocalDateTime;
@@ -19,8 +18,8 @@ public class SeriesMenu extends View {
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Create series");
-        System.out.println("[2] Get series");
-        System.out.println("[3] Edit series");
+        System.out.println("[2] Get all series");
+        System.out.println("[3] Get series by name");
         System.out.println("[~] Return to main menu");
     }
 
@@ -103,18 +102,18 @@ public class SeriesMenu extends View {
                         case "2":
                             System.out.println("Please enter the name of the series:");
                             String seriesName = input.nextLine();
-                            System.out.println("Please enter the start time:");
+                            System.out.println("Please enter the start time of the first event:");
                             LocalDateTime startTime = getTime();
-                            System.out.println("Please enter the end time:");
+                            System.out.println("Please enter the end time of the first event:");
                             LocalDateTime endTime = getTime();
-                            System.out.println("Please enter the frequency:");
+                            System.out.println("Please enter the frequency ([d]ay/[w]eek):");
                             String frequency = input.nextLine();
                             System.out.println("Please enter number of the events:");
-                            String numEvents = input.nextLine();
-                            int num = Integer.parseInt(numEvents);
+                            int numEvents = input.nextInt();
+                            input.nextLine();
 
                             boolean createFromEventFormula = getController().createSeriesFromEventFormula(seriesName,
-                                    startTime, endTime, frequency, num,getLocalStorage().getUserID());
+                                    startTime, endTime, frequency, numEvents, getLocalStorage().getUserID());
                             if (createFromEventFormula){
                                 System.out.println("new series has been created from the event formula");
                             } else {
@@ -123,11 +122,13 @@ public class SeriesMenu extends View {
                             return new SeriesMenu(getLocalStorage(), null, getController());
                     }
                 case "2":
-                    return new GetSeriesView(getLocalStorage(), null, getController());
+                    ListModel seriesByUserID = getController().getSeriesByUserID(getLocalStorage().getUserID());
+                    return new SeriesList(getLocalStorage(), seriesByUserID, getController());
                 case "3":
-                    System.out.println("Please enter the ID of the series you would like to modify");
-                    String seriesID = input.nextLine();
-                    return new EditSeriesView(getLocalStorage(), getModel(), getController(), seriesID);
+                    System.out.println("Enter Series Name:");
+                    String seriesName = input.nextLine();
+                    ListModel seriesBySeriesName = getController().getSeriesBySeriesName(seriesName, getLocalStorage().getUserID());
+                    return new SeriesList(getLocalStorage(), seriesBySeriesName, getController());
                 case "~":
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
