@@ -9,12 +9,20 @@ import java.time.format.DateTimeFormatter;
 public class GlobalAdapter {
     public static LocalDateTime stringToDateTime(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(date, formatter);
+        try {
+            return LocalDateTime.parse(date, formatter);
+        } catch (Exception e) {
+            return LocalDateTime.now();
+        }
     }
 
     public static LocalDate stringToDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(date, formatter);
+        try {
+            return LocalDate.parse(date, formatter);
+        } catch (Exception e) {
+            return LocalDate.now();
+        }
     }
 
     public static Month intToMonth(int month) {
@@ -46,6 +54,10 @@ public class GlobalAdapter {
     }
 
     public static LocalDateTime inputToDate(int year, int month, int day, int hour, int minute) {
-        return LocalDateTime.of(year, month, day, hour, minute);
+        try {
+            return LocalDateTime.of(year, month, day, hour, minute);
+        } catch (Exception e) {
+            return LocalDateTime.now();
+        }
     }
 }

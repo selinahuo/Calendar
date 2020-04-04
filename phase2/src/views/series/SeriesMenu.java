@@ -40,7 +40,7 @@ public class SeriesMenu extends View {
         switch (answer) {
             case "y":
                 Scanner input = new Scanner(System.in);
-                System.out.println("Please enter the eventIDs:");
+                System.out.println("Please enter the event ID:");
                 String eventID = input.nextLine();
                 createEventList(events, indexCount, eventID);
                 inputEvent(answer, events, indexCount);
@@ -115,7 +115,7 @@ public class SeriesMenu extends View {
                             boolean createFromEventFormula = getController().createSeriesFromEventFormula(seriesName,
                                     startTime, endTime, frequency, numEvents, getLocalStorage().getUserID());
                             if (createFromEventFormula){
-                                System.out.println("new series has been created from the event formula");
+                                System.out.println("New series has been created from the event formula");
                             } else {
                                 System.out.println("An error occurred, the series was not created.");
                             }

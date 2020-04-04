@@ -103,12 +103,12 @@ public class UseCaseManager {
     }
 
     // EVENTS
-    public String createEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID, String calendarID) {
-        return eventManager.createEvent(name, start, end, location, userID, calendarID);
+    public String createEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID) {
+        return eventManager.createEvent(name, start, end, location, userID);
     }
 
-    public String createEventByFirstWeekDay(String name, int year, Month month, DayOfWeek weekDay, String location, String userID, String calendarID) {
-        return eventManager.createEventByFirstWeekDay(name, year, month, weekDay, location, userID, calendarID);
+    public String createEventByFirstWeekDay(String name, int year, Month month, DayOfWeek weekDay, String location, String userID) {
+        return eventManager.createEventByFirstWeekDay(name, year, month, weekDay, location, userID);
     }
 
     public Sextuple<CalendarEvent, Memo, ArrayList<Tag>, Alert, Calendars, Series> getSingularEvent(String eventID, String userID) {

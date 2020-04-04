@@ -42,7 +42,7 @@ public class EventAdapter {
             entityString += "Series " + SeriesAdapter.createSeriesString(series) + "\n";
         }
         if (memo != null) {
-            entityString += "Memo " + NoteAdapter.createMemoString(memo);
+            entityString += "Memo " + NoteAdapter.createMemoString(memo) + "\n";
         }
         if (tags.size() > 0) {
             entityString += "Tags:\n";

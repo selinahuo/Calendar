@@ -42,21 +42,11 @@ public class TimeMenu extends View {
                     printApplicationTime();
                     break;
                 case "2":
-                    System.out.println("Enter new time year:");
-                    int year = input.nextInt();
-                    System.out.println("Enter new time month:");
-                    int month = input.nextInt();
-                    System.out.println("Enter new time day:");
-                    int day = input.nextInt();
-                    System.out.println("Enter new time hour:");
-                    int hour = input.nextInt();
-                    System.out.println("Enter new time minute:");
-                    int minute = input.nextInt();
-                    // Read the next line so that the \n character is not read later
-                    input.nextLine();
+                    System.out.println("Time will be paused until you reset the time");
+                    System.out.println("Please enter the new time (yyyy-mm-dd hh:mm):");
+                    String dateTime = input.nextLine();
                     System.out.println("");
-
-                    getController().setTime(year, month, day, hour, minute);
+                    getController().setTime(dateTime);
                     printTitle("Time set to:");
                     printApplicationTime();
                     break;

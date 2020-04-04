@@ -16,22 +16,18 @@ public class EventLinkGenerator {
     }
 
     public static String getEventTwitterShare(CalendarEvent event) {
-        String eventString = String.format("%s @ %s from %s to %s.",
+        String eventString = String.format("%s @ %s",
                 event.getName(),
-                event.getLocation(),
-                event.getStart().toString(),
-                event.getEnd().toString()
+                event.getLocation()
         );
         String url = "https://twitter.com/?status=" + encodeURL(eventString);
         return url;
     }
 
     public static String getEventEmailShare(CalendarEvent event) {
-        String eventString = String.format("%s @ %s from %s to %s.",
+        String eventString = String.format("%s @ %s",
                 event.getName(),
-                event.getLocation(),
-                event.getStart().toString(),
-                event.getEnd().toString()
+                event.getLocation()
         );
         String url = "mailto:?subject=" + encodeURL(eventString);
         return url;
@@ -39,7 +35,7 @@ public class EventLinkGenerator {
 
     private static String encodeURL(String url) {
         try {
-            return URLEncoder.encode( url, "UTF-8" );
+            return URLEncoder.encode( url, "UTF-8" ).replace("+", "%20");
         } catch(Exception e) {
             return null;
         }

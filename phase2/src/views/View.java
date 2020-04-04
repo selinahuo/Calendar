@@ -44,7 +44,7 @@ abstract public class View {
         if (eventID != "") {
             clipString += String.format("| Event: %s%s%s ", CLIPBOARD, eventID, RESET);
         }
-        System.out.println(clipString);
+        System.out.println(clipString + "\n");
     }
 
     public void printTitle(String output) {

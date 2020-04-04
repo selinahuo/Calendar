@@ -24,6 +24,9 @@ public class SingularEvent extends SingularView {
             System.out.println("[e1] Edit name");
             System.out.println("[e2] Edit time");
             System.out.println("[e3] Edit location");
+            System.out.println("[e4] Remove memo from event");
+            System.out.println("[e5] Remove event from calendar");
+            System.out.println("[e6] Remove tag from event");
             System.out.println("[d] Delete event");
         }
         System.out.println("[~] Return to event menu");
@@ -93,6 +96,35 @@ public class SingularEvent extends SingularView {
                         System.out.println("Enter new location:");
                         String newLocation = input.nextLine();
                         getController().editEventLocation(getModel().getEntityID(), newLocation, getLocalStorage().getUserID());
+                        System.out.println("Event edited\n");
+                        SingularModel locationModel = getController().getSingularEvent(getModel().getEntityID(), getLocalStorage().getUserID());
+                        return new SingularEvent(getLocalStorage(), locationModel, getController());
+                    }
+                    printInputError();
+                    break;
+                case "e4":
+                    if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
+                        getController().removeMemoFromEvent(getModel().getEntityID(), getLocalStorage().getUserID());
+                        System.out.println("Event edited\n");
+                        SingularModel locationModel = getController().getSingularEvent(getModel().getEntityID(), getLocalStorage().getUserID());
+                        return new SingularEvent(getLocalStorage(), locationModel, getController());
+                    }
+                    printInputError();
+                    break;
+                case "e5":
+                    if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
+                        getController().removeEventFromCalendar(getModel().getEntityID(), getLocalStorage().getUserID());
+                        System.out.println("Event edited\n");
+                        SingularModel locationModel = getController().getSingularEvent(getModel().getEntityID(), getLocalStorage().getUserID());
+                        return new SingularEvent(getLocalStorage(), locationModel, getController());
+                    }
+                    printInputError();
+                    break;
+                case "e6":
+                    if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
+                        System.out.println("Enter tag ID to remove:");
+                        String tagToRemove = input.nextLine();
+                        // todo remove tag from event?
                         System.out.println("Event edited\n");
                         SingularModel locationModel = getController().getSingularEvent(getModel().getEntityID(), getLocalStorage().getUserID());
                         return new SingularEvent(getLocalStorage(), locationModel, getController());

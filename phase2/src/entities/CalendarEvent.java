@@ -16,7 +16,7 @@ public class CalendarEvent implements Serializable {
     private String location;
 
     private String userID;
-    private String calendarID;
+    private String calendarID = "";
     private ArrayList<String> collaborators;
     private ArrayList<String> tagIDs;
     private String memoID = "";
@@ -24,7 +24,7 @@ public class CalendarEvent implements Serializable {
     private String alertID = "";
 
     public CalendarEvent(String name, LocalDateTime start, LocalDateTime end, String location,
-                         String userID, String calendarID) {
+                         String userID) {
         this.name = name;
         this.start = start;
         this.end = end;

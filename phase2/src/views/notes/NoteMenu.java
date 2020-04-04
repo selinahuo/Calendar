@@ -143,13 +143,13 @@ public class NoteMenu extends View {
                             System.out.println("Something went wrong adding the tag to the event.");
                         }
                         return new NoteMenu(getLocalStorage(), null, getController());
-                        case "7":
-                            ListModel allTags = getController().getTagsByOwnerID(userID);
-                            return new TagList(getLocalStorage(), allTags, getController());
-                        case "~":
-                            return new MainMenu(getLocalStorage(), null, getController());
-                        default:
-                            printInputError();
+                    case "7":
+                        ListModel allTags = getController().getTagsByOwnerID(userID);
+                        return new TagList(getLocalStorage(), allTags, getController());
+                    case "~":
+                        return new MainMenu(getLocalStorage(), null, getController());
+                    default:
+                        printInputError();
 
             }
         }

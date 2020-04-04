@@ -67,6 +67,7 @@ public class MainMenu extends View {
                     return new UserMenu(getLocalStorage(), null, getController());
                 case "q":
                     System.out.println("");
+                    getController().resetTime();
                     return new AuthMenu(new LocalStorage(), null, getController());
                 default:
                     printInputError();

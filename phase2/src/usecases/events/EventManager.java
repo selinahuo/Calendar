@@ -24,18 +24,17 @@ public class EventManager {
     }
 
     // save
-    public String createEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID, String calendarID) {
-        CalendarEvent event = new CalendarEvent(name, start, end, location, userID, calendarID);
+    public String createEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID) {
+        CalendarEvent event = new CalendarEvent(name, start, end, location, userID);
         repository.saveEvent(event);
         return event.getEventID();
     }
 
-    public String createEventByFirstWeekDay(String name, int year, Month month, DayOfWeek weekDay, String location, String userID, String calendarID) {
+    public String createEventByFirstWeekDay(String name, int year, Month month, DayOfWeek weekDay, String location, String userID) {
         LocalDateTime day = LocalDateTime.of(year, month, 1, 0, 0, 0);
         LocalDateTime start = day.with(firstInMonth(weekDay));
-        LocalDateTime end = LocalDateTime.from(start);
-        end.plusDays(1);
-        return createEvent(name, start, end, location, userID, calendarID);
+        LocalDateTime end = LocalDateTime.from(start).plusDays(1);
+        return createEvent(name, start, end, location, userID);
     }
 
     // get - singular

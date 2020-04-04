@@ -2,6 +2,7 @@ package views.events;
 
 import controller.Controller;
 import controller.viewmodels.ListModel;
+import controller.viewmodels.SingularModel;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
@@ -42,16 +43,15 @@ public class EventMenu extends View {
                     String createEnd = input.nextLine();
                     System.out.println("Enter event location:");
                     String createLocation = input.nextLine();
-                    System.out.println("Enter calendar ID (leave blank for no calendar):");
-                    String createCalendar = input.nextLine();
                     String eventID = getController().createEvent(createName, createStart, createEnd, createLocation,
-                            getLocalStorage().getUserID(), createCalendar);
+                            getLocalStorage().getUserID());
                     if (eventID == null) {
                         printError("Something went wrong creating the event.");
                         break;
                     }
-                    // TODO send to event single page
-                    return new EventMenu(getLocalStorage(), null, getController());
+                    SingularModel eventModel = getController().getSingularEvent(eventID, getLocalStorage().getUserID());
+                    System.out.println("");
+                    return new SingularEvent(getLocalStorage(), eventModel, getController());
                 case "2":
                     System.out.println("Enter event name:");
                     String holidayName = input.nextLine();
@@ -64,16 +64,15 @@ public class EventMenu extends View {
                     String holidayWeekDay = input.nextLine();
                     System.out.println("Enter event location:");
                     String holidayLocation = input.nextLine();
-                    System.out.println("Enter calendar ID (leave blank for no calendar):");
-                    String holidayCalendar = input.nextLine();
                     String holidayEventID = getController().createHolidayEvent(holidayName, holidayYear, holidayMonth,
-                            holidayWeekDay, holidayLocation, getLocalStorage().getUserID(), holidayCalendar);
+                            holidayWeekDay, holidayLocation, getLocalStorage().getUserID());
                     if (holidayEventID == null) {
                         printError("Something went wrong creating the event.");
                         break;
                     }
-                    // TODO send to event single page
-                    return new EventMenu(getLocalStorage(), null, getController());
+                    SingularModel holidayEventModel = getController().getSingularEvent(holidayEventID, getLocalStorage().getUserID());
+                    System.out.println("");
+                    return new SingularEvent(getLocalStorage(), holidayEventModel, getController());
                 case "3":
                     System.out.println("Enter event name:");
                     String eventName = input.nextLine();

@@ -30,8 +30,10 @@ public class UserMenu extends View {
             switch(selection) {
                 case "1":
                     ListModel model = getController().getUsers();
+                    System.out.println("");
                     return new UserList(getLocalStorage(), model, getController());
                 case "~":
+                    System.out.println("");
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();

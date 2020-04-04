@@ -20,6 +20,7 @@ public class EventList extends ListView {
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] View individual event");
+        System.out.println("[2] Clip event");
         System.out.println("[~] Back to event menu");
     }
 
@@ -44,6 +45,15 @@ public class EventList extends ListView {
                     }
                     System.out.println("");
                     return new SingularEvent(getLocalStorage(), eventModel, getController());
+                case "2":
+                    System.out.print("Current ");
+                    printClipBoard();
+                    System.out.println("Enter event ID to clip:");
+                    String clipEvent = input.nextLine();
+                    getLocalStorage().setClipEvent(clipEvent);
+                    System.out.print("New ");
+                    printClipBoard();
+                    break;
                 case "~":
                     return new EventMenu(getLocalStorage(), null, getController());
                 default:

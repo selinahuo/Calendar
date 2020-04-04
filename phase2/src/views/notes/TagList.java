@@ -16,7 +16,6 @@ public class TagList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-//        System.out.println("[1] View individual tag");
         System.out.println("[~] Back to Note menu");
     }
 
@@ -31,8 +30,6 @@ public class TagList extends ListView {
             inputPrompt();
             String selection = input.nextLine();
             switch(selection) {
-                case "1":
-                    return null;
                 case "~":
                     return new NoteMenu(getLocalStorage(), null, getController());
                 default:

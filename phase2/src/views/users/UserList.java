@@ -40,9 +40,10 @@ public class UserList extends ListView {
                     printClipBoard();
                     break;
                 case "~":
+                    System.out.println("");
                     return new UserMenu(getLocalStorage(), null, getController());
                 default:
-                    super.printInputError();
+                    printInputError();
             }
         }
     }

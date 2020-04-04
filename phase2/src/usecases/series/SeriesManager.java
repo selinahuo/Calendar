@@ -28,15 +28,19 @@ public class SeriesManager implements IEventDeletionObserver {
                 count++;
             }
         }
-        repository.editSeriesEventCount(newSeries.getSeriesID(), count, userID);
-        return true;
+        if (count > 0) {
+            repository.editSeriesEventCount(newSeries.getSeriesID(), count, userID);
+            return true;
+        }
+        repository.deleteSeries(newSeries.getSeriesID(), userID);
+        return false;
     }
 
     public boolean createSeriesFromEventFormula(String seriesName, LocalDateTime start, LocalDateTime end, String frequency, int numEvents, String userID){
         Series newSeries = new Series(seriesName, numEvents, userID);
         ArrayList<LocalDateTime[]> times = getTimes(start, end, frequency, numEvents);
         for (LocalDateTime[] time : times) {
-            String eventID = eventManager.createEvent(seriesName, time[0], time[1], "", userID, "");
+            String eventID = eventManager.createEvent(seriesName, time[0], time[1], "", userID);
             eventManager.editSeriesID(eventID, newSeries.getSeriesID(), userID);
         }
         repository.saveSeries(newSeries);

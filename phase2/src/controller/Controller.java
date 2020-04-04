@@ -86,13 +86,13 @@ public class Controller {
     }
 
     // EVENTS
-    public String createEvent(String name, String start, String end, String location, String userID, String calendarID) {
+    public String createEvent(String name, String start, String end, String location, String userID) {
         return useCaseManager.createEvent(name, GlobalAdapter.stringToDateTime(start), GlobalAdapter.stringToDateTime(end),
-                location, userID, calendarID);
+                location, userID);
     }
-    public String createHolidayEvent(String name, int year, int month, String weekDay, String location, String userID, String calendarID) {
+    public String createHolidayEvent(String name, int year, int month, String weekDay, String location, String userID) {
         return useCaseManager.createEventByFirstWeekDay(name, year, GlobalAdapter.intToMonth(month),
-                GlobalAdapter.stringToWeekDay(weekDay), location, userID, calendarID);
+                GlobalAdapter.stringToWeekDay(weekDay), location, userID);
     }
     public SingularModel getSingularEvent(String eventID, String userID) {
         Sextuple<CalendarEvent, Memo, ArrayList<Tag>, Alert, Calendars, Series> meta = useCaseManager.getSingularEvent(eventID, userID);
@@ -245,8 +245,8 @@ public class Controller {
     public String getTime() {
         return GlobalAdapter.dateToString(useCaseManager.getTime());
     }
-    public void setTime(int year, int month, int day, int hour, int minute) {
-        useCaseManager.setTime(GlobalAdapter.inputToDate(year, month, day, hour, minute));
+    public void setTime(String dateTime) {
+        useCaseManager.setTime(GlobalAdapter.stringToDateTime(dateTime));
     }
     public void resetTime() {
         useCaseManager.resetTime();
