@@ -5,7 +5,6 @@ import controller.viewmodels.ListModel;
 import views.ListView;
 import views.LocalStorage;
 import views.View;
-import views.events.EventMenu;
 
 import java.util.Scanner;
 
@@ -16,6 +15,7 @@ public class CalendarList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
+        System.out.println("[1] Edit your calendar");
         System.out.println("[~] Back to Calendar menu");
     }
 
@@ -31,7 +31,9 @@ public class CalendarList extends ListView {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    System.out.println("Please enter the ID of the calendar you would like to modify");
+                    String calendarID = input.nextLine();
+                    return new EditCalendarView(getLocalStorage(), getModel(), getController(), calendarID);
                 case "~":
                     return new CalendarMenu(getLocalStorage(), null, getController());
                 default:

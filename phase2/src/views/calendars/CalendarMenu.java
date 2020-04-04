@@ -5,7 +5,6 @@ import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
-import views.alerts.CreateAlertView;
 import views.general.MainMenu;
 
 import java.util.Scanner;

@@ -6,7 +6,6 @@ import controller.viewmodels.SingularInvitationModel;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
-import views.events.EventList;
 import views.general.MainMenu;
 
 import java.util.Scanner;

@@ -4,10 +4,7 @@ import controller.Controller;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
-import views.alerts.AlertMenu;
 import views.general.MainMenu;
-
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class EditCalendarView extends View {
