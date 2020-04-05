@@ -33,6 +33,7 @@ public class CreateAlertView extends View {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
+                    printClipBoard();
                     // EventID
                     System.out.println("Enter Event ID:");
                     String eventID = input.nextLine();
@@ -40,25 +41,15 @@ public class CreateAlertView extends View {
                     System.out.println("Enter new Alert name:");
                     String alertName = input.nextLine();
                     // Alert Time
-                    System.out.println("Enter new time year:");
-                    int year = input.nextInt();
-                    System.out.println("Enter new time month:");
-                    int month = input.nextInt();
-                    System.out.println("Enter new time day:");
-                    int day = input.nextInt();
-                    System.out.println("Enter new time hour:");
-                    int hour = input.nextInt();
-                    System.out.println("Enter new time minute:");
-                    int minute = input.nextInt();
-                    input.nextLine();
-                    System.out.println("");
-                    LocalDateTime alertTime = getController().alertTimeFromInteger(year,month,day,hour,minute);
+                    System.out.println("Enter alert start time (yyyy-mm-dd hh:mm):");
+                    String alertTime = input.nextLine();
                     // Creating the alert
                     System.out.println(getController().createIndividualAlert(eventID, alertName, alertTime, getLocalStorage().getUserID()));
                     // return to this user's list of alerts
                     ListModel alertModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
                     return new AlertList(getLocalStorage(), alertModel, getController());
                 case "2":
+                    printClipBoard();
                     // EventID
                     System.out.println("Enter Event ID:");
                     String frequencyEventID = input.nextLine();
@@ -66,24 +57,11 @@ public class CreateAlertView extends View {
                     System.out.println("Enter new Alert name:");
                     String frequencyAlertName = input.nextLine();
                     // Frequency
-                    System.out.println("Enter frequency of the alert");
+                    System.out.println("Enter frequency of the alert, [d]ay, [w]eek, [h]our: ");
                     String frequency = input.nextLine();
                     // Alert Time
-                    System.out.println("Enter the start time of this frequency alert");
-                    System.out.println("Enter new time year:");
-                    int frequencyYear = input.nextInt();
-                    System.out.println("Enter new time month:");
-                    int frequencyMonth = input.nextInt();
-                    System.out.println("Enter new time day:");
-                    int frequencyDay = input.nextInt();
-                    System.out.println("Enter new time hour:");
-                    int frequencyHour = input.nextInt();
-                    System.out.println("Enter new time minute:");
-                    int frequencyMinute = input.nextInt();
-                    input.nextLine();
-                    System.out.println("");
-                    LocalDateTime startTime = getController().alertTimeFromInteger(frequencyYear,frequencyMonth,
-                            frequencyDay,frequencyHour,frequencyMinute);
+                    System.out.println("Enter alert start time of this frequency alert (yyyy-mm-dd hh:mm):");
+                    String startTime = input.nextLine();
                     // Creating the alert
                     System.out.println(getController().createFrequencyAlert(frequencyEventID, frequencyAlertName,
                             getLocalStorage().getUserID(), startTime, frequency));

@@ -28,13 +28,14 @@ public class Controller {
         return AlertAdapter.createAlertListModel(useCaseManager.getOverdueAlerts(userID));
     }
 
-    public String createIndividualAlert(String eventID, String alertName, LocalDateTime time, String userID ){
-        return AlertAdapter.createAlertString(useCaseManager.createIndividualAlert(eventID, alertName, time, userID));
+    public String createIndividualAlert(String eventID, String alertName, String time, String userID ){
+        return AlertAdapter.createAlertString(useCaseManager.createIndividualAlert(eventID, alertName,
+                GlobalAdapter.stringToDateTime(time), userID));
     }
     public String createFrequencyAlert(String eventID, String alertName, String userID,
-                                       LocalDateTime startTime, String frequency) {
+                                       String startTime, String frequency) {
         return AlertAdapter.createAlertString(useCaseManager.createFrequencyAlert(eventID, alertName,
-                userID, startTime, frequency));
+                userID, GlobalAdapter.stringToDateTime(startTime), frequency));
     }
 
     public LocalDateTime alertTimeFromInteger(int year,int month, int day, int hour, int minute) {
@@ -53,8 +54,8 @@ public class Controller {
         return AlertAdapter.createAlertString(useCaseManager.getAlertByIDAndUserID(alertID, userID));
     }
 
-    public boolean editAlertTimeAsIndividual(String alertID, LocalDateTime time, String userID){
-        return useCaseManager.editAlertTimeAsIndividual(alertID, time, userID);
+    public boolean editAlertTimeAsIndividual(String alertID, String time, String userID){
+        return useCaseManager.editAlertTimeAsIndividual(alertID, GlobalAdapter.stringToDateTime(time), userID);
     }
 
     public boolean deleteAlertByID(String alertID, String userID){

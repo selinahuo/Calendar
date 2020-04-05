@@ -19,9 +19,10 @@ public class AlertList extends ListView {
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Acknowledge an Alert");
-        System.out.println("[2] Edit Alert");
-        System.out.println("[3] Delete Alert");
-        System.out.println("[4] View event associated with alert");
+        System.out.println("[2] Edit Alert Name");
+        System.out.println("[3] Edit Individual Alert Time");
+        System.out.println("[4] Delete Alert");
+        System.out.println("[5] View event associated with alert");
         System.out.println("[~] Back to Alert menu");
     }
 
@@ -48,9 +49,35 @@ public class AlertList extends ListView {
                     System.out.println("");
                     return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "2":
-                    System.out.println("");
-                    return new EditAlertView(getLocalStorage(), getModel(),getController());
+                    // Edit Alert Name
+                    System.out.println("Enter Alert ID:");
+                    String editAlertID = input.nextLine();
+                    System.out.println("Enter the new name for this alert:");
+                    String newName = input.nextLine();
+                    boolean modified = getController().editAlertName(editAlertID, newName, getLocalStorage().getUserID());
+                    if (modified){
+                        System.out.println("The Alert is being modified:");
+                        System.out.println(getController().getAlertByIDAndUserID(editAlertID,getLocalStorage().getUserID()));
+                    } else {
+                        System.out.println("The Alert name change was not complete");
+                    }
+                    return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "3":
+                    // Edit Individual Alert Time
+                    System.out.println("Enter Alert ID:");
+                    String EditTimeAlertID = input.nextLine();
+                    // The new alert time
+                    System.out.println("Enter new alert start time (yyyy-mm-dd hh:mm):");
+                    String editStart = input.nextLine();
+                    boolean changed = getController().editAlertTimeAsIndividual(EditTimeAlertID, editStart, getLocalStorage().getUserID());
+                    if (changed) {
+                        System.out.println("the new alert time is modified: ");
+                        System.out.println(getController().getAlertByIDAndUserID(EditTimeAlertID,getLocalStorage().getUserID()));
+                    } else {
+                        System.out.println("Something went wrong.");
+                    }
+                    return new AlertMenu(getLocalStorage(),getModel(),getController());
+                case "4":
                     System.out.println("Please enter the ID of the alert you would like to delete: ");
                     String deleteAlertID = input.nextLine();
                     boolean deleted = getController().deleteAlertByID(deleteAlertID, getLocalStorage().getUserID());
@@ -61,7 +88,7 @@ public class AlertList extends ListView {
                     }
                     System.out.println("");
                     return new AlertMenu(getLocalStorage(),getModel(),getController());
-                case "4":
+                case "5":
                     System.out.println("Please enter the alert ID to view the associated event:");
                     String eventAlertID = input.nextLine();
                     ListModel alertEvents = getController().getEventsFromAlert(eventAlertID, getLocalStorage().getUserID());
