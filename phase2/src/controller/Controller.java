@@ -167,6 +167,10 @@ public class Controller {
         return EventAdapter.createEventListModel(useCaseManager.getEventsByAlertID(alertID, ownerID));
     }
 
+    public ListModel getEventsByTagIDAndOwnerID(String tagID, String ownerID){
+        return EventAdapter.createEventListModel(useCaseManager.getEventsByTagIDAndOwnerID(tagID, ownerID));
+    }
+
     // INVITATIONS
     public ListModel getIncomingInvitations(String userID) {
         return InvitationAdapter.createInvitationListModel(useCaseManager.getIncomingInvitations(userID));

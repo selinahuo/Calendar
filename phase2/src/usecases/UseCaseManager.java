@@ -155,6 +155,10 @@ public class UseCaseManager {
         return eventManager.getEventsByNameAndUserID(name, userID);
     }
 
+    public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID){
+        return eventManager.getEventsByTagIDAndOwnerID(tagID, ownerID);
+    }
+
     public ArrayList<CalendarEvent> getPastEvents(String userID) {
         LocalDateTime now = TimeManager.getTime();
         return eventManager.getEventsStartBeforeAndUserID(now, userID);
