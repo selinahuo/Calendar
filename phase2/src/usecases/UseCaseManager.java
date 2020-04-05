@@ -102,6 +102,10 @@ public class UseCaseManager {
         return calendarManager.deleteCalendar(calendarID, ownerID);
     }
 
+    public ArrayList<CalendarEvent> getEventsByCalendarIDAndOwnerID(String calendarID, String ownerID) {
+        return eventManager.getEventsByAlertIDAndOwnerID(calendarID, ownerID);
+    }
+
     // EVENTS
     public String createEvent(String name, LocalDateTime start, LocalDateTime end, String location, String userID) {
         return eventManager.createEvent(name, start, end, location, userID);
