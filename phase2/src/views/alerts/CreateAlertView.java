@@ -7,6 +7,7 @@ import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
 import views.events.EventList;
+import views.events.EventMenu;
 import views.general.MainMenu;
 
 import java.time.LocalDateTime;
@@ -35,36 +36,44 @@ public class CreateAlertView extends View {
                 case "1":
                     printClipBoard();
                     // EventID
-                    System.out.println("Enter Event ID:");
-                    String eventID = input.nextLine();
-                    // Alert Name
-                    System.out.println("Enter new Alert name:");
-                    String alertName = input.nextLine();
-                    // Alert Time
-                    System.out.println("Enter alert start time (yyyy-mm-dd hh:mm):");
-                    String alertTime = input.nextLine();
-                    // Creating the alert
-                    System.out.println(getController().createIndividualAlert(eventID, alertName, alertTime, getLocalStorage().getUserID()));
+                    System.out.println("Enter Event ID, or enter [E] to go to Event Menu :");
+                    String choice = input.nextLine();
+                    if (choice.equals("E")) {
+                            return new EventMenu(getLocalStorage(), null, getController());
+                    } else {
+                        // Alert Name
+                        System.out.println("Enter new Alert name:");
+                        String alertName = input.nextLine();
+                        // Alert Time
+                        System.out.println("Enter alert start time (yyyy-mm-dd hh:mm):");
+                        String alertTime = input.nextLine();
+                        // Creating the alert
+                        System.out.println(getController().createIndividualAlert(choice, alertName, alertTime, getLocalStorage().getUserID()));
+                    }
                     // return to this user's list of alerts
                     ListModel alertModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
                     return new AlertList(getLocalStorage(), alertModel, getController());
                 case "2":
                     printClipBoard();
                     // EventID
-                    System.out.println("Enter Event ID:");
+                    System.out.println("Enter Event ID, or enter [E] to go to Event Menu :");
                     String frequencyEventID = input.nextLine();
-                    // Alert Name
-                    System.out.println("Enter new Alert name:");
-                    String frequencyAlertName = input.nextLine();
-                    // Frequency
-                    System.out.println("Enter frequency of the alert, [d]ay, [w]eek, [h]our: ");
-                    String frequency = input.nextLine();
-                    // Alert Time
-                    System.out.println("Enter alert start time of this frequency alert (yyyy-mm-dd hh:mm):");
-                    String startTime = input.nextLine();
-                    // Creating the alert
-                    System.out.println(getController().createFrequencyAlert(frequencyEventID, frequencyAlertName,
-                            getLocalStorage().getUserID(), startTime, frequency));
+                    if (frequencyEventID.equals("E")) {
+                        return new EventMenu(getLocalStorage(), null, getController());
+                    } else {
+                        // Alert Name
+                        System.out.println("Enter new Alert name:");
+                        String frequencyAlertName = input.nextLine();
+                        // Frequency
+                        System.out.println("Enter frequency of the alert, [d]ay, [w]eek, [h]our: ");
+                        String frequency = input.nextLine();
+                        // Alert Time
+                        System.out.println("Enter alert start time of this frequency alert (yyyy-mm-dd hh:mm):");
+                        String startTime = input.nextLine();
+                        // Creating the alert
+                        System.out.println(getController().createFrequencyAlert(frequencyEventID, frequencyAlertName,
+                                getLocalStorage().getUserID(), startTime, frequency));
+                    }
                     // return to this user's list of alerts
                     ListModel alertListModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
                     return new AlertList(getLocalStorage(), alertListModel, getController());
