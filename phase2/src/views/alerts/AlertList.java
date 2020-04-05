@@ -61,13 +61,14 @@ public class AlertList extends ListView {
                     } else {
                         System.out.println("The Alert name change was not complete");
                     }
+                    System.out.println("");
                     return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "3":
                     // Edit Individual Alert Time
                     System.out.println("Enter Alert ID:");
                     String EditTimeAlertID = input.nextLine();
                     // The new alert time
-                    System.out.println("Enter new alert start time (yyyy-mm-dd hh:mm):");
+                    System.out.println("Enter new alert start time (yyyy-mm-dd hh:mm), default - set to current time:");
                     String editStart = input.nextLine();
                     boolean changed = getController().editAlertTimeAsIndividual(EditTimeAlertID, editStart, getLocalStorage().getUserID());
                     if (changed) {
@@ -76,6 +77,7 @@ public class AlertList extends ListView {
                     } else {
                         System.out.println("Something went wrong.");
                     }
+                    System.out.println("");
                     return new AlertMenu(getLocalStorage(),getModel(),getController());
                 case "4":
                     System.out.println("Please enter the ID of the alert you would like to delete: ");

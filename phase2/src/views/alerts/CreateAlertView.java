@@ -39,7 +39,8 @@ public class CreateAlertView extends View {
                     System.out.println("Enter Event ID, or enter [E] to go to Event Menu :");
                     String choice = input.nextLine();
                     if (choice.equals("E")) {
-                            return new EventMenu(getLocalStorage(), null, getController());
+                        System.out.println("");
+                        return new EventMenu(getLocalStorage(), null, getController());
                     } else {
                         // Alert Name
                         System.out.println("Enter new Alert name:");
@@ -51,6 +52,7 @@ public class CreateAlertView extends View {
                         System.out.println(getController().createIndividualAlert(choice, alertName, alertTime, getLocalStorage().getUserID()));
                     }
                     // return to this user's list of alerts
+                    System.out.println("");
                     ListModel alertModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
                     return new AlertList(getLocalStorage(), alertModel, getController());
                 case "2":
@@ -59,6 +61,7 @@ public class CreateAlertView extends View {
                     System.out.println("Enter Event ID, or enter [E] to go to Event Menu :");
                     String frequencyEventID = input.nextLine();
                     if (frequencyEventID.equals("E")) {
+                        System.out.println("");
                         return new EventMenu(getLocalStorage(), null, getController());
                     } else {
                         // Alert Name
@@ -74,10 +77,12 @@ public class CreateAlertView extends View {
                         System.out.println(getController().createFrequencyAlert(frequencyEventID, frequencyAlertName,
                                 getLocalStorage().getUserID(), startTime, frequency));
                     }
+                    System.out.println("");
                     // return to this user's list of alerts
                     ListModel alertListModel = getController().getAlertsByUserID(getLocalStorage().getUserID());
                     return new AlertList(getLocalStorage(), alertListModel, getController());
                 case "~":
+                    System.out.println("");
                     return new AlertMenu(getLocalStorage(),getModel(),getController());
 
                 default:
