@@ -5,6 +5,7 @@ import controller.viewmodels.ListModel;
 import views.ListView;
 import views.LocalStorage;
 import views.View;
+import views.events.EventList;
 
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class MemoList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
+        System.out.println("[1] Display all events containing a certain memo");
         System.out.println("[~] Back to Note menu");
     }
 
@@ -31,7 +33,10 @@ public class MemoList extends ListView {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
-                    return null;
+                    System.out.println("Enter memo ID:");
+                    String memoID3 = input.nextLine();
+                    ListModel eventModel = getController().getEventsByMemoIDAndOwnerID(memoID3, getLocalStorage().getUserID());
+                    return new EventList(getLocalStorage(), eventModel, getController());
                 case "~":
                     return new NoteMenu(getLocalStorage(), null, getController());
                 default:

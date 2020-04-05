@@ -19,12 +19,11 @@ public class NoteMenu extends View {
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Create memo");
-        System.out.println("[2] List all events containing a specific memo");
-        System.out.println("[3] List all memos");
-        System.out.println("[4] Edit a memo");
-        System.out.println("[5] Add/remove a memo from an event");
-        System.out.println("[6] Create tag");
-        System.out.println("[7] List all tags");
+        System.out.println("[2] List all memos");
+        System.out.println("[3] Edit a memo");
+        System.out.println("[4] Add/remove a memo from an event");
+        System.out.println("[5] Create tag");
+        System.out.println("[6] List all tags");
         System.out.println("[~] Return to main menu");
     }
 
@@ -56,14 +55,9 @@ public class NoteMenu extends View {
                     }
                     return new NoteMenu(getLocalStorage(), null, getController());
                 case "2":
-                    System.out.println("Enter memo ID:");
-                    String memoID3 = input.nextLine();
-                    ListModel eventModel = getController().getEventsByMemoIDAndOwnerID(memoID3, userID);
-                    return new EventList(getLocalStorage(), eventModel, getController());
-                case "3":
                     ListModel allMemos = getController().getMemosByOwnerID(userID);
                     return new MemoList(getLocalStorage(), allMemos, getController());
-                case "4":
+                case "3":
                     System.out.println("Enter memo ID:");
                     String memoID1 = input.nextLine();
                     System.out.println("Please select one of the following choices by entering a number:");
@@ -95,7 +89,7 @@ public class NoteMenu extends View {
                         default:
                             printInputError();
                     }
-                case "5":
+                case "4":
                     System.out.println("Enter memo ID:");
                     String memoID2 = input.nextLine();
                     System.out.println("Please select one of the following choices by entering a number:");
@@ -128,7 +122,7 @@ public class NoteMenu extends View {
                         default:
                             printInputError();
                     }
-                    case "6":
+                    case "5":
                         System.out.println("Please enter the name of the tag:");
                         String tagName = input.nextLine();
                         System.out.println("Please enter the ID of the event it will be attached to:");
@@ -143,7 +137,7 @@ public class NoteMenu extends View {
                             System.out.println("Something went wrong adding the tag to the event.");
                         }
                         return new NoteMenu(getLocalStorage(), null, getController());
-                    case "7":
+                    case "6":
                         ListModel allTags = getController().getTagsByOwnerID(userID);
                         return new TagList(getLocalStorage(), allTags, getController());
                     case "~":
