@@ -19,6 +19,8 @@ import usecases.users.IUserRepository;
 import usecases.users.UserManager;
 import views.ViewManager;
 
+import java.time.LocalDateTime;
+
 public class CalendarApp {
     public void run() {
         IEventRepository eventRepository = RepositoryFactory.getEventRepository();
@@ -55,11 +57,11 @@ public class CalendarApp {
         UseCaseManager useCaseManager = new UseCaseManager(alertManager, calendarManager, eventManager, invitationManager, memoManager, tagManager, seriesManager, userManager);
         Controller controller = new Controller(useCaseManager);
 
-//        userManager.createUser("Michael", "password");
-//        userManager.createUser("Jim", "password");
-//        String userID = userManager.getUsers().get(0).getUserID();
-//        String userID2 = userManager.getUsers().get(1).getUserID();
-//
+        userManager.createUser("Michael", "password");
+        userManager.createUser("Jim", "password");
+        String userID = userManager.getUsers().get(0).getUserID();
+        String userID2 = userManager.getUsers().get(1).getUserID();
+
 //        String eventID = eventManager.createEvent("Event", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Place", userID);
 //        alertManager.createIndividualAlert(eventID, "Alert", LocalDateTime.now(), userID);
 //        calendarManager.createCalendar(userID, "Calendar");
