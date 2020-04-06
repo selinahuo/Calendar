@@ -55,9 +55,11 @@ public class EventList extends ListView {
                     printClipBoard();
                     break;
                 case "~":
+                    System.out.println("");
                     return new EventMenu(getLocalStorage(), null, getController());
                 default:
-                    super.printInputError();
+                    printInputError();
+                    System.out.println("");
             }
         }
     }

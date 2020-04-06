@@ -16,9 +16,10 @@ public class CalendarList extends ListView {
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Clip calendar");
-        System.out.println("[2] Edit the Name of your Calendar");
+        System.out.println("[2] Edit the calendar name");
         System.out.println("[3] Add Events to your Calendar");
         System.out.println("[4] View events of your Calendar");
+        System.out.println("[5] Delete calendar");
         System.out.println("[~] Back to Calendar menu");
     }
 
@@ -54,6 +55,8 @@ public class CalendarList extends ListView {
                     } else {
                         System.out.println("The Calendar name change was not complete");
                     }
+                    ListModel nameCalendarModel = getController().getCalendarsByUserID(getLocalStorage().getUserID());
+                    return new CalendarList(getLocalStorage(), nameCalendarModel, getController());
                 case "3":
                     System.out.println("Please enter the ID of the calendar you would like to modify");
                     String add_calendarID = input.nextLine();
@@ -62,22 +65,36 @@ public class CalendarList extends ListView {
                     boolean addedEvent = getController().addEventToCalendar(addEventID, add_calendarID,
                             getLocalStorage().getUserID());
                     if (addedEvent){
-                        System.out.println("The Event has been added");
+                        System.out.println("The event has been added\n");
                     } else {
-                        System.out.println("The Calendar change was not complete");
+                        System.out.println("The event could not be added\n");
                     }
-
+                    ListModel addCalendarModel = getController().getCalendarsByUserID(getLocalStorage().getUserID());
+                    return new CalendarList(getLocalStorage(), addCalendarModel, getController());
                 case "4":
                     System.out.println("Please enter the ID of the calendar");
                     String eve_calendarID = input.nextLine();
                     ListModel eventModel = getController().getEventsByCalendarIDAndOwnerID(eve_calendarID,
                             getLocalStorage().getUserID());
+                    System.out.println("");
                     return new EventList(getLocalStorage(), eventModel, getController());
-
+                case "5":
+                    System.out.println("Please enter the ID of the calendar you would like to delete");
+                    String deleteCalendarID = input.nextLine();
+                    boolean deleted = getController().deleteCalendar(deleteCalendarID, getLocalStorage().getUserID());
+                    if (deleted){
+                        System.out.println("Calendar has been deleted\n");
+                    } else {
+                        System.out.println("Calendar deletion was not completed. Make sure there are no events " +
+                                "in the calendar\n");
+                    }
+                    return new CalendarMenu(getLocalStorage(), getModel(), getController());
                 case "~":
+                    System.out.println("");
                     return new CalendarMenu(getLocalStorage(), null, getController());
                 default:
-                    super.printInputError();
+                    printInputError();
+                    System.out.println("");
             }
         }
     }

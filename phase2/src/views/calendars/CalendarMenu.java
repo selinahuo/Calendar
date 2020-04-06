@@ -18,7 +18,6 @@ public class CalendarMenu extends View {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Create calendar");
         System.out.println("[2] List your calendars");
-        System.out.println("[3] Delete an calendar");
         System.out.println("[~] Return to main menu");
     }
 
@@ -37,25 +36,15 @@ public class CalendarMenu extends View {
                     String calendarID = getController().createCalendar(userID, calendarName);
                     System.out.println(calendarID);
                     if (calendarID == null) {
-                        printError("Something went wrong creating the calendar.");
+                        printError("Something went wrong creating the calendar.\n");
                         break;
                     }
+                    System.out.println("");
 
                 case "2":
                     ListModel calendarModel = getController().getCalendarsByUserID(getLocalStorage().getUserID());
+                    System.out.println("");
                     return new CalendarList(getLocalStorage(), calendarModel, getController());
-
-                case "3":
-                    System.out.println("Please enter the ID of the calendar you would like to delete");
-                    String deleteCalendarID = input.nextLine();
-                    boolean deleted = getController().deleteCalendar(deleteCalendarID, getLocalStorage().getUserID());
-                    if (deleted){
-                        System.out.println("The Calendar is being deleted:");
-                    } else {
-                        System.out.println("The Calendar deletion was not complete. Make sure there are no events " +
-                                "in the calendar");
-                    }
-                    return new CalendarMenu(getLocalStorage(),getModel(),getController());
 
                 case "~":
                     System.out.println("");

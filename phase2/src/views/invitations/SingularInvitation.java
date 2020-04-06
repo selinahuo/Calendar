@@ -81,6 +81,7 @@ public class SingularInvitation extends SingularView {
                     return new InvitationMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
+                    System.out.println("");
             }
         }
     }

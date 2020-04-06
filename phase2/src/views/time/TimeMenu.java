@@ -56,9 +56,11 @@ public class TimeMenu extends View {
                     printApplicationTime();
                     break;
                 case "~":
+                    System.out.println("");
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
+                    System.out.println("");
             }
         }
     }
