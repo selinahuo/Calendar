@@ -5,7 +5,7 @@ import controller.viewmodels.ListModel;
 import views.ListView;
 import views.LocalStorage;
 import views.View;
-
+import views.events.EventList;
 import java.util.Scanner;
 
 public class CalendarList extends ListView {
@@ -15,7 +15,10 @@ public class CalendarList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-        System.out.println("[1] Edit your calendar");
+        System.out.println("[1] Clip calendar");
+        System.out.println("[2] Edit the Name of your Calendar");
+        System.out.println("[3] Add Events to your Calendar");
+        System.out.println("[4] View events of your Calendar");
         System.out.println("[~] Back to Calendar menu");
     }
 
@@ -31,9 +34,46 @@ public class CalendarList extends ListView {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
+                    System.out.print("Current ");
+                    printClipBoard();
+                    System.out.println("Enter calendar ID to clip:");
+                    String clipCalendar = input.nextLine();
+                    getLocalStorage().setClipEvent(clipCalendar);
+                    System.out.print("New ");
+                    printClipBoard();
+                    break;
+                case "2":
                     System.out.println("Please enter the ID of the calendar you would like to modify");
-                    String calendarID = input.nextLine();
-                    return new EditCalendarView(getLocalStorage(), getModel(), getController(), calendarID);
+                    String name_calendarID = input.nextLine();
+                    System.out.println("Enter the new name for this calendar:");
+                    String newName = input.nextLine();
+                    boolean nameModified = getController().editCalendarName(name_calendarID, newName,
+                            getLocalStorage().getUserID());
+                    if (nameModified){
+                        System.out.println("The Calendar is being modified:");
+                    } else {
+                        System.out.println("The Calendar name change was not complete");
+                    }
+                case "3":
+                    System.out.println("Please enter the ID of the calendar you would like to modify");
+                    String add_calendarID = input.nextLine();
+                    System.out.println("Enter the ID of the event your would like to add to the calendar");
+                    String addEventID = input.nextLine();
+                    boolean addedEvent = getController().addEventToCalendar(addEventID, add_calendarID,
+                            getLocalStorage().getUserID());
+                    if (addedEvent){
+                        System.out.println("The Event has been added");
+                    } else {
+                        System.out.println("The Calendar change was not complete");
+                    }
+
+                case "4":
+                    System.out.println("Please enter the ID of the calendar");
+                    String eve_calendarID = input.nextLine();
+                    ListModel eventModel = getController().getEventsByCalendarIDAndOwnerID(eve_calendarID,
+                            getLocalStorage().getUserID());
+                    return new EventList(getLocalStorage(), eventModel, getController());
+
                 case "~":
                     return new CalendarMenu(getLocalStorage(), null, getController());
                 default:

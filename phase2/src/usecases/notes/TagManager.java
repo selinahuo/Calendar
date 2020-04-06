@@ -105,16 +105,6 @@ public class TagManager implements IEventDeletionObserver {
         return false;
     }
 
-    /**
-     * Retrieve a list of events which contain a specific tag.
-     *
-     * @param tagID the ID of the tag
-     * @param ownerID the ID of the user who owns the tag.
-     * @return the list of desired events.
-     */
-    public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID) {
-        return eventManager.getEventsByTagIDAndOwnerID(tagID, ownerID);
-    }
 
     /**
      * Adds the tag to  event.
