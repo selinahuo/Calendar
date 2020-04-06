@@ -5,8 +5,8 @@ import usecases.users.IUserRepository;
 
 import java.util.ArrayList;
 
-public class SerializableUserRepository extends SerializableRepository<User> implements IUserRepository {
-    public SerializableUserRepository() {
+class SerializableUserRepository extends SerializableRepository<User> implements IUserRepository {
+    SerializableUserRepository() {
         super("./users.ser");
     }
 

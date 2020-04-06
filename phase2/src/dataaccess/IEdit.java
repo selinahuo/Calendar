@@ -1,5 +1,5 @@
 package dataaccess;
 
-public interface IEdit<T> {
+interface IEdit<T> {
     void edit(T item);
 }

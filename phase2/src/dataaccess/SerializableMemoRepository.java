@@ -6,8 +6,8 @@ import usecases.notes.IMemoRepository;
 
 import java.util.ArrayList;
 
-public class SerializableMemoRepository extends SerializableRepository<Memo> implements IMemoRepository {
-    public SerializableMemoRepository() {
+class SerializableMemoRepository extends SerializableRepository<Memo> implements IMemoRepository {
+    SerializableMemoRepository() {
         super("./memos.ser");
     }
 

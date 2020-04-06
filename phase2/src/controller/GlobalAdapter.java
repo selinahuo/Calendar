@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
-public class GlobalAdapter {
-    public static LocalDateTime stringToDateTime(String date) {
+class GlobalAdapter {
+    static LocalDateTime stringToDateTime(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             return LocalDateTime.parse(date, formatter);
@@ -16,7 +16,7 @@ public class GlobalAdapter {
         }
     }
 
-    public static LocalDate stringToDate(String date) {
+    static LocalDate stringToDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
             return LocalDate.parse(date, formatter);
@@ -25,11 +25,11 @@ public class GlobalAdapter {
         }
     }
 
-    public static Month intToMonth(int month) {
+    static Month intToMonth(int month) {
         return Month.of(month);
     }
 
-    public static DayOfWeek stringToWeekDay(String weekDay) {
+    static DayOfWeek stringToWeekDay(String weekDay) {
         switch (weekDay) {
             case "m":
                 return DayOfWeek.MONDAY;
@@ -48,12 +48,12 @@ public class GlobalAdapter {
         }
     }
 
-    public static String dateToString(LocalDateTime time) {
+    static String dateToString(LocalDateTime time) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return time.format(formatter);
     }
 
-    public static LocalDateTime inputToDate(int year, int month, int day, int hour, int minute) {
+    static LocalDateTime inputToDate(int year, int month, int day, int hour, int minute) {
         try {
             return LocalDateTime.of(year, month, day, hour, minute);
         } catch (Exception e) {
