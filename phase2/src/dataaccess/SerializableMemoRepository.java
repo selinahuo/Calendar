@@ -1,7 +1,6 @@
 package dataaccess;
 
 import entities.Memo;
-import entities.Tag;
 import usecases.notes.IMemoRepository;
 
 import java.util.ArrayList;
