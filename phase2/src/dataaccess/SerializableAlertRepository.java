@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
-public class SerializableAlertRepository extends SerializableRepository<Alert> implements IAlertRepository {
-    public SerializableAlertRepository() {
+class SerializableAlertRepository extends SerializableRepository<Alert> implements IAlertRepository {
+    SerializableAlertRepository() {
         super("./alerts.ser");
     }
 

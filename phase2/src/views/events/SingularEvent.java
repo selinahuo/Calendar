@@ -144,6 +144,7 @@ public class SingularEvent extends SingularView {
                     return new EventMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
+                    System.out.println("");
             }
         }
     }

@@ -7,7 +7,7 @@ import entities.Invitation;
 
 import java.util.ArrayList;
 
-public class InvitationAdapter {
+class InvitationAdapter {
     private static String createInvitationString(Invitation invitation) {
         String statusString = InvitationAdapter.createInvitationStatusString(invitation);
         return String.format("ID: %s | Invitation for: %s | To: %s | From: %s | Status: %s",
@@ -26,7 +26,7 @@ public class InvitationAdapter {
         return statusString;
     }
 
-    public static SingularInvitationModel createInvitationSingularModel(Invitation inv) {
+    static SingularInvitationModel createInvitationSingularModel(Invitation inv) {
         if (inv == null) {
             return null;
         }
@@ -37,7 +37,7 @@ public class InvitationAdapter {
         return new SingularInvitationModel(entityString, inv.getInviterID(), inv.getInvitationID(), inv.getAccept());
     }
 
-    public static ListModel createInvitationListModel(ArrayList<Invitation> invitations) {
+    static ListModel createInvitationListModel(ArrayList<Invitation> invitations) {
         ArrayList<String> invitationList = new ArrayList<>();
         for (Invitation invitation: invitations) {
             invitationList.add(createInvitationString(invitation));

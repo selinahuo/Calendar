@@ -53,6 +53,7 @@ public class InvitationMenu extends View {
                         break;
                     }
                     SingularInvitationModel newInvitation = getController().getSingularInvitation(invitationID, getLocalStorage().getUserID());
+                    System.out.println("");
                     return new SingularInvitation(getLocalStorage(), newInvitation, getController());
                 case "~":
                     System.out.println("");

@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class SerializableEventRepository extends SerializableRepository<CalendarEvent> implements IEventRepository {
-    public SerializableEventRepository() { super("events.ser"); }
+class SerializableEventRepository extends SerializableRepository<CalendarEvent> implements IEventRepository {
+    SerializableEventRepository() { super("events.ser"); }
 
     private class SortAscendingDate implements Comparator<CalendarEvent> {
         @Override

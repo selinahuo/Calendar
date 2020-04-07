@@ -61,6 +61,7 @@ public class Controller {
     public boolean deleteAlertByID(String alertID, String userID){
         return useCaseManager.deleteAlertByID(alertID, userID);
     }
+
     // CALENDARS
     public ListModel getCalendarsByUserID(String ownerID){
         return CalendarAdapter.createCalendarListModel(useCaseManager.getCalendarsByOwnerID(ownerID));
@@ -84,6 +85,10 @@ public class Controller {
 
     public boolean deleteCalendar(String calendarID, String ownerID) {
         return useCaseManager.deleteCalendar(calendarID, ownerID);
+    }
+
+    public ListModel getEventsByCalendarIDAndOwnerID(String calendarID, String ownerID) {
+        return EventAdapter.createEventListModel(useCaseManager.getEventsByCalendarIDAndOwnerID(calendarID, ownerID));
     }
 
     // EVENTS

@@ -7,13 +7,13 @@ import entities.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class EventAdapter {
-    private static String createEventString(CalendarEvent event) {
+class EventAdapter {
+    static String createEventString(CalendarEvent event) {
         return String.format("ID: %s | Event: %s @ %s | From %s to %s", event.getEventID(), event.getName(), event.getLocation(),
                 GlobalAdapter.dateToString(event.getStart()), GlobalAdapter.dateToString(event.getEnd()));
     }
 
-    public static ListModel createEventListModel(ArrayList<CalendarEvent> events) {
+    static ListModel createEventListModel(ArrayList<CalendarEvent> events) {
         ArrayList<String> eventList = new ArrayList<>();
         for (CalendarEvent event: events) {
             eventList.add(createEventString(event));
@@ -21,7 +21,7 @@ public class EventAdapter {
         return new ListModel(eventList);
     }
 
-    public static ListModel createEventDateListModel(ArrayList<ArrayList<CalendarEvent>> events, ArrayList<LocalDateTime> times) {
+    static ListModel createEventDateListModel(ArrayList<ArrayList<CalendarEvent>> events, ArrayList<LocalDateTime> times) {
         ArrayList<String> eventDateList = new ArrayList<>();
         for (int i = 0; i < times.size(); i++) {
             eventDateList.add(GlobalAdapter.dateToString(times.get(i)));
@@ -33,7 +33,7 @@ public class EventAdapter {
         return new ListModel(eventDateList);
     }
 
-    public static SingularModel createEventSingularModel(CalendarEvent event, Memo memo, ArrayList<Tag> tags, Alert alert, Calendars calendar, Series series) {
+    static SingularModel createEventSingularModel(CalendarEvent event, Memo memo, ArrayList<Tag> tags, Alert alert, Calendars calendar, Series series) {
         String entityString = "Event " + createEventString(event) + "\n";
         if (calendar != null) {
             entityString += "Calendar " + CalendarAdapter.createCalendarString(calendar) + "\n";

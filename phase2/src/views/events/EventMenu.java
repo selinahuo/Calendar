@@ -77,10 +77,12 @@ public class EventMenu extends View {
                     System.out.println("Enter event name:");
                     String eventName = input.nextLine();
                     ListModel nameModel = getController().getEventsByName(eventName, getLocalStorage().getUserID());
+                    System.out.println("");
                     return new EventList(getLocalStorage(), nameModel, getController());
                 case "4":
                     System.out.println("Choose [p]ast/[f]uture (or any value for current events):");
                     String relativeTime = input.nextLine();
+                    System.out.println("");
                     if (relativeTime.equals("p")) {
                         ListModel pastEvents = getController().getPastEvents(getLocalStorage().getUserID());
                         printTitle("Past Events");
@@ -97,6 +99,7 @@ public class EventMenu extends View {
                 case "5":
                     System.out.println("View events by [h]our/[d]ay/[w]eek/[m]onth (defaults to day)");
                     String timeFrame = input.nextLine();
+                    System.out.println("");
                     switch (timeFrame) {
                         case "h":
                             System.out.println("Enter day to filter (yyyy-mm-dd):");
@@ -129,9 +132,11 @@ public class EventMenu extends View {
                             return new EventList(getLocalStorage(), dailyEvents, getController());
                     }
                 case "~":
+                    System.out.println("");
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
+                    System.out.println("");
             }
         }
     }

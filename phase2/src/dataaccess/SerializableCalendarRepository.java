@@ -5,8 +5,8 @@ import usecases.calendar.ICalendarRepository;
 
 import java.util.ArrayList;
 
-public class SerializableCalendarRepository extends SerializableRepository<Calendars> implements ICalendarRepository {
-    public SerializableCalendarRepository() {
+class SerializableCalendarRepository extends SerializableRepository<Calendars> implements ICalendarRepository {
+    SerializableCalendarRepository() {
         super("./calendars.ser");
     }
 

@@ -5,8 +5,8 @@ import usecases.notes.ITagRepository;
 
 import java.util.ArrayList;
 
-public class SerializableTagRepository extends SerializableRepository<Tag> implements ITagRepository {
-    public SerializableTagRepository() {
+class SerializableTagRepository extends SerializableRepository<Tag> implements ITagRepository {
+    SerializableTagRepository() {
             super("./tags.ser");
         }
 

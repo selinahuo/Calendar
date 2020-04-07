@@ -1,12 +1,12 @@
 package controller;
+
 import controller.viewmodels.ListModel;
 import entities.Alert;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class AlertAdapter {
-
+class AlertAdapter {
     private static String alertStatusString(Alert alert) {
         LocalDateTime nextRing = alert.getNextRing();
         if (nextRing != null) {
@@ -17,12 +17,12 @@ public class AlertAdapter {
         return "";
     }
 
-    public static String createAlertString (Alert alert) {
+    static String createAlertString (Alert alert) {
         return String.format("ID: %s | Alert: %s | %s",
                 alert.getAlertID(), alert.getAlertName(), alertStatusString(alert));
     }
 
-    public static ListModel createAlertListModel(ArrayList<Alert> alerts) {
+    static ListModel createAlertListModel(ArrayList<Alert> alerts) {
         ArrayList<String> alertList = new ArrayList<>();
         for (Alert alert: alerts ) {
             alertList.add(createAlertString(alert));

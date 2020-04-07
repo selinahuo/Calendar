@@ -45,7 +45,8 @@ public class InvitationList extends ListView {
                     System.out.println("");
                     return new InvitationMenu(getLocalStorage(), null, getController());
                 default:
-                    super.printInputError();
+                    printInputError();
+                    System.out.println("");
             }
         }
     }

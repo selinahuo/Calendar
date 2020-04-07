@@ -5,8 +5,8 @@ import usecases.invitations.IInvitationRepository;
 
 import java.util.ArrayList;
 
-public class SerializableInvitationRepository extends SerializableRepository<Invitation> implements IInvitationRepository {
-    public SerializableInvitationRepository() {
+class SerializableInvitationRepository extends SerializableRepository<Invitation> implements IInvitationRepository {
+    SerializableInvitationRepository() {
         super("./invitations.ser");
     }
 

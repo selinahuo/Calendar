@@ -3,11 +3,11 @@ package dataaccess;
 import java.io.*;
 import java.util.ArrayList;
 
-public abstract class SerializableRepository<T> {
+abstract class SerializableRepository<T> {
     private ArrayList<T> items;
     private String serFile;
 
-    public SerializableRepository(String serFile) {
+    SerializableRepository(String serFile) {
         this.items = new ArrayList<T>();
         this.serFile = serFile;
     }

@@ -6,8 +6,8 @@ import usecases.series.ISeriesRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SerializableSeriesRepository extends SerializableRepository<Series> implements ISeriesRepository {
-    public SerializableSeriesRepository() {
+class SerializableSeriesRepository extends SerializableRepository<Series> implements ISeriesRepository {
+    SerializableSeriesRepository() {
         super("./series.ser");
     }
 

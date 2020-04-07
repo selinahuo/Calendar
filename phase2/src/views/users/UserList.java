@@ -44,6 +44,7 @@ public class UserList extends ListView {
                     return new UserMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
+                    System.out.println("");
             }
         }
     }

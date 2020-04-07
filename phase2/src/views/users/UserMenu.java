@@ -37,6 +37,7 @@ public class UserMenu extends View {
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
+                    System.out.println("");
             }
         }
     }
