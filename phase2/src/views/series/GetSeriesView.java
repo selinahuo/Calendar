@@ -19,7 +19,7 @@ public class GetSeriesView extends View {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Get Series by UserID");
         System.out.println("[2] Get Series (plural) by Series Name");
-        System.out.println("[~] Return to main menu");
+        System.out.println("[~] Return to Main menu");
     }
 
     @Override
@@ -41,7 +41,7 @@ public class GetSeriesView extends View {
                     System.out.println("");
                     return new SeriesList(getLocalStorage(), seriesBySeriesName, getController());
                 case "~":
-                    return new MainMenu(getLocalStorage(), null, getController());
+                    return new SeriesMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
                     System.out.println("");

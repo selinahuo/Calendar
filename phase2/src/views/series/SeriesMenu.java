@@ -42,11 +42,7 @@ public class SeriesMenu extends View {
                     System.out.println("");
                     return new SeriesList(getLocalStorage(), seriesByUserID, getController());
                 case "3":
-                    System.out.println("Enter Series Name:");
-                    String seriesName = input.nextLine();
-                    ListModel seriesBySeriesName = getController().getSeriesBySeriesName(seriesName, getLocalStorage().getUserID());
-                    System.out.println("");
-                    return new SeriesList(getLocalStorage(), seriesBySeriesName, getController());
+                    return new GetSeriesView(getLocalStorage(), null, getController());
                 case "4":
                     System.out.println("Enter SeriesID:");
                     String seriesID = input.nextLine();
