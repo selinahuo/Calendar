@@ -14,10 +14,20 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class CreateAlertView extends View {
+    /**
+     * A view that allows user to choose to create an alert instance.
+     *
+     * @param localStorage the local storage for current user
+     * @param model view model
+     * @param controller general controller that this view calls
+     */
     public CreateAlertView(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
     }
 
+    /**
+     * Lines that prompt the user to select the options from this menu.
+     */
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Create Individual Alert");

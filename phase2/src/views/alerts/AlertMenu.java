@@ -5,17 +5,25 @@ import controller.viewmodels.ListModel;
 import controller.viewmodels.ViewModel;
 import views.LocalStorage;
 import views.View;
-import views.calendars.CalendarMenu;
-import views.events.EventList;
 import views.general.MainMenu;
-
 import java.util.Scanner;
 
 public class AlertMenu extends View{
+
+    /**
+     * A constructor for the Alert Menu.
+     *
+     * @param localStorage local storage that saves current user's information
+     * @param model view model
+     * @param controller general controller that this view calls
+     */
     public AlertMenu(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
     }
 
+    /**
+     * Lines that prompt the user to select the options from this menu.
+     */
     private void inputPrompt(){
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Get Overdue Alerts");
