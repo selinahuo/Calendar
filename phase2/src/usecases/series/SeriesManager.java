@@ -18,7 +18,7 @@ public class SeriesManager implements IEventDeletionObserver {
     }
 
     // save
-    public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID){
+    public boolean createSeriesByCombiningEvents(String seriesName, ArrayList<String> eventIDs, String userID){
         Series newSeries = new Series(seriesName, 0, userID);
         repository.saveSeries(newSeries);
         int count = 0;

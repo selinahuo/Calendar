@@ -43,11 +43,14 @@ public class SeriesList extends ListView {
                     } else {
                         System.out.println("The series name change was not complete");
                     }
+                    System.out.println("");
                     return new SeriesMenu(getLocalStorage(), getModel(), getController());
                 case "~":
+                    System.out.println("");
                     return new SeriesMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
+                    System.out.println("");
             }
         }
     }

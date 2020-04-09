@@ -163,6 +163,10 @@ public class UseCaseManager {
         return eventManager.getEventsByTagIDAndOwnerID(tagID, ownerID);
     }
 
+    public ArrayList<CalendarEvent> getEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
+        return eventManager.getEventsBySeriesIDAndOwnerID(seriesID, ownerID);
+    }
+
     public ArrayList<CalendarEvent> getPastEvents(String userID) {
         LocalDateTime now = TimeManager.getTime();
         return eventManager.getEventsStartBeforeAndUserID(now, userID);
@@ -270,7 +274,7 @@ public class UseCaseManager {
 
 
     // SERIES
-    public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {
+    public boolean createSeriesByCombiningEvents(String seriesName, ArrayList<String> eventIDs, String userID) {
         return seriesManager.createSeriesByCombiningEvents(seriesName, eventIDs, userID);
     }
 

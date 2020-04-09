@@ -172,6 +172,10 @@ public class Controller {
         return EventAdapter.createEventListModel(useCaseManager.getEventsByAlertID(alertID, ownerID));
     }
 
+    public ListModel getEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
+        return EventAdapter.createEventListModel(useCaseManager.getEventsBySeriesIDAndOwnerID(seriesID, ownerID));
+    }
+
     public ListModel getEventsByTagIDAndOwnerID(String tagID, String ownerID){
         return EventAdapter.createEventListModel(useCaseManager.getEventsByTagIDAndOwnerID(tagID, ownerID));
     }
@@ -232,12 +236,12 @@ public class Controller {
     }
 
     // SERIES
-    public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {
+    public boolean createSeriesByCombiningEvents(String seriesName, ArrayList<String> eventIDs, String userID) {
         return useCaseManager.createSeriesByCombiningEvents(seriesName, eventIDs, userID);
     }
 
-    public boolean createSeriesFromEventFormula(String seriesName, LocalDateTime start, LocalDateTime end, String frequency, int numEvents, String userID) {
-        return useCaseManager.createSeriesFromEventFormula(seriesName, start, end, frequency, numEvents, userID);
+    public boolean createSeriesFromEventFormula(String seriesName, String start, String end, String frequency, int numEvents, String userID) {
+        return useCaseManager.createSeriesFromEventFormula(seriesName, GlobalAdapter.stringToDateTime(start), GlobalAdapter.stringToDateTime(end), frequency, numEvents, userID);
     }
 
     public ListModel getSeriesByUserID(String userID) {
