@@ -34,7 +34,9 @@ class SerializableInvitationRepository extends SerializableRepository<Invitation
     @Override
     public Invitation fetchInvitationByIDAndUserID(String invitationID, String userID) {
         return fetchSingular(
-                (Invitation i) -> i.getInvitationID().equals(invitationID) && (i.getInviterID().equals(userID) || i.getInviteeID().equals(userID))
+                (Invitation i) ->
+                        i.getInvitationID().equals(invitationID)
+                        && (i.getInviterID().equals(userID) || i.getInviteeID().equals(userID))
         );
     }
 
@@ -50,7 +52,9 @@ class SerializableInvitationRepository extends SerializableRepository<Invitation
 
     @Override
     public boolean deleteInvitation(String invitationID, String inviterID) {
-        return deleteSingular((Invitation i) -> i.getInvitationID().equals(invitationID) && i.getInviterID().equals(inviterID));
+        return deleteSingular((Invitation i) ->
+                i.getInvitationID().equals(invitationID)
+                && i.getInviterID().equals(inviterID));
     }
 
     @Override

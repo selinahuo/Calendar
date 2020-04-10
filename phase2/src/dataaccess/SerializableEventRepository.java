@@ -41,7 +41,9 @@ class SerializableEventRepository extends SerializableRepository<CalendarEvent> 
     @Override
     public CalendarEvent fetchEventByEventIDAndUserID(String eventID, String userID) {
         return fetchSingular(
-                (CalendarEvent e) -> e.getEventID().equals(eventID) && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
+                (CalendarEvent e) ->
+                        e.getEventID().equals(eventID)
+                        && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
         );
     }
 
@@ -55,19 +57,24 @@ class SerializableEventRepository extends SerializableRepository<CalendarEvent> 
     @Override
     public ArrayList<CalendarEvent> fetchEventsByNameAndUserID(String name, String userID) {
         return fetchSortedPlural(
-                (CalendarEvent e) -> e.getName().equals(name) && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
+                (CalendarEvent e) ->
+                        e.getName().equals(name) &&
+                        (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
         );
     }
 
     @Override
     public ArrayList<CalendarEvent> fetchEventsStartBeforeAndUserID(LocalDateTime start, String userID) {
         return fetchSortedPlural(
-                (CalendarEvent e) -> e.getStart().isBefore(start) && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
+                (CalendarEvent e) ->
+                        e.getStart().isBefore(start) &&
+                        (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
         );
     }
 
     @Override
-    public ArrayList<CalendarEvent> fetchEventsStartBeforeAndEndAfterAndUserID(LocalDateTime start, LocalDateTime end, String userID) {
+    public ArrayList<CalendarEvent> fetchEventsStartBeforeAndEndAfterAndUserID(LocalDateTime start, LocalDateTime end,
+                                                                               String userID) {
         return fetchSortedPlural(
                 (CalendarEvent e) ->
                         e.getStart().isBefore(start)
@@ -79,12 +86,15 @@ class SerializableEventRepository extends SerializableRepository<CalendarEvent> 
     @Override
     public ArrayList<CalendarEvent> fetchEventsStartAfterAndUserID(LocalDateTime after, String userID) {
         return fetchSortedPlural(
-                (CalendarEvent e) -> e.getStart().isAfter(after) && (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
+                (CalendarEvent e) ->
+                        e.getStart().isAfter(after) &&
+                        (e.getUserID().equals(userID) || e.getCollaborators().contains(userID))
         );
     }
 
     @Override
-    public ArrayList<CalendarEvent> fetchEventsStartBeforeAndStartAfterAndUserID(LocalDateTime before, LocalDateTime after, String userID) {
+    public ArrayList<CalendarEvent> fetchEventsStartBeforeAndStartAfterAndUserID(LocalDateTime before,
+                                                                                 LocalDateTime after, String userID) {
         return fetchSortedPlural(
                 (CalendarEvent e) ->
                         e.getStart().isBefore(before)
