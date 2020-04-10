@@ -7,6 +7,13 @@ import views.View;
 
 import java.util.Scanner;
 
+/**
+ * A view for display and handle the following options for edit series menu.
+ * Functions including:
+ * 1. Edit series name - edit the name of the series - back to the series menu after modification
+ * 2. Return to main menu - back to the series menu
+ */
+
 public class EditSeriesView extends View {
 
     String seriesID;

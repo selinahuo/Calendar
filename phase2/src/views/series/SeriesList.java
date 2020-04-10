@@ -10,6 +10,14 @@ import views.users.UserMenu;
 
 import java.util.Scanner;
 
+/**
+ * A view for display and handle the following options for series list menu.
+ * Functions including:
+ * 1. View the list of series
+ * 2. Edit series name - after modification - back to the series menu
+ * 3. Return to main menu - back to the series menu
+ */
+
 public class SeriesList extends ListView {
     public SeriesList(LocalStorage localStorage, ListModel model, Controller controller) {
         super(localStorage, model, controller);

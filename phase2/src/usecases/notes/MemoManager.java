@@ -167,11 +167,6 @@ public class MemoManager implements IEventDeletionObserver {
         return true;
     }
 
-    /**
-     * Handle event deletion by removing count of memo associated with deleted event
-     *
-     * @param event event which was deleted and reacted to
-     */
     @Override
     public void handleEventDeletion(CalendarEvent event) {
         repository.editMemoCountRemove(event.getMemoID(), event.getUserID());

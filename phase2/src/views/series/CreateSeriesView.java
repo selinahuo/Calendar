@@ -8,6 +8,13 @@ import views.View;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A view for display and handle the following options for create series menu.
+ * Functions including:
+ * 1. Create series by combining events - enters all events that want to be in one series then the series will be created
+ * 2. Create series from event formula - follow the event formula to create a series
+ * 5. Return to main menu - back to the series menu
+ */
 public class CreateSeriesView extends View{
     public CreateSeriesView(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);

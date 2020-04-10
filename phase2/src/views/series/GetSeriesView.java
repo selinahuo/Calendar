@@ -9,6 +9,13 @@ import views.general.MainMenu;
 
 import java.util.Scanner;
 
+/**
+ * A view for display and handle the following options for get series menu.
+ * Functions including:
+ * 1. Get series by userID - goes to SeriesList View
+ * 2. Get multiple series by seriesName - goes to SeriesList View
+ * 3. Return to main menu - back to the series menu
+ */
 public class GetSeriesView extends View {
 
     public GetSeriesView(LocalStorage localStorage, ViewModel model, Controller controller){

@@ -87,4 +87,13 @@ public class Calendars implements Serializable {
     public void removeCount(){
         this.count--;
     }
+
+    /**
+     * A public method returns a string representation of this calendar.
+     */
+    @Override
+    public String toString() {
+        return String.format("ID: %s | Calendar: %s | Count: %d | User: %s",
+                getCalendarID(), getCalendarName(), getCount(), getOwnerID());
+    }
 }
