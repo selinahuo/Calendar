@@ -13,9 +13,14 @@ import views.general.MainMenu;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+/**
+ * A view for display and handle the following options for create alert menu.
+ * Functions including:
+ * Create individual alert, and create frequency alerts.
+ */
 public class CreateAlertView extends View {
     /**
-     * A view that allows user to choose to create an alert instance.
+     * Constructor for a view that allows user to choose to create an alert instance.
      *
      * @param localStorage the local storage for current user
      * @param model view model
@@ -25,9 +30,6 @@ public class CreateAlertView extends View {
         super(localStorage, model, controller);
     }
 
-    /**
-     * Lines that prompt the user to select the options from this menu.
-     */
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Create Individual Alert");

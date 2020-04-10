@@ -11,6 +11,11 @@ import views.events.EventMenu;
 
 import java.util.Scanner;
 
+/**
+ * A view for display and handle the following options for showing list of alerts.
+ * Functions including:
+ * Showing this user's list of alerts, edit alert options, alert deletion, and acknowledge alert.
+ */
 public class AlertList extends ListView {
     public AlertList(LocalStorage localStorage, ListModel model, Controller controller) {
         super(localStorage, model, controller);

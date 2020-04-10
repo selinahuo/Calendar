@@ -32,14 +32,11 @@ public class Controller {
         return AlertAdapter.createAlertString(useCaseManager.createIndividualAlert(eventID, alertName,
                 GlobalAdapter.stringToDateTime(time), userID));
     }
+
     public String createFrequencyAlert(String eventID, String alertName, String userID,
                                        String startTime, String frequency) {
         return AlertAdapter.createAlertString(useCaseManager.createFrequencyAlert(eventID, alertName,
                 userID, GlobalAdapter.stringToDateTime(startTime), frequency));
-    }
-
-    public LocalDateTime alertTimeFromInteger(int year,int month, int day, int hour, int minute) {
-        return GlobalAdapter.inputToDate(year, month, day, hour, minute);
     }
 
     public boolean acknowledgeAlert(String alertID, String userID) {

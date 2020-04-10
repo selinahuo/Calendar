@@ -8,6 +8,11 @@ import views.View;
 import views.general.MainMenu;
 import java.util.Scanner;
 
+/**
+ * A view for display and handle the options for alert menu.
+ * Functions including:
+ * Get overdue Alerts, and showing List of alerts.
+ */
 public class AlertMenu extends View{
 
     /**
@@ -21,9 +26,6 @@ public class AlertMenu extends View{
         super(localStorage, model, controller);
     }
 
-    /**
-     * Lines that prompt the user to select the options from this menu.
-     */
     private void inputPrompt(){
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Get Overdue Alerts");
