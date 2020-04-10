@@ -97,7 +97,7 @@ public class TagManager implements IEventDeletionObserver {
      * @param ownerID the ownerID of the user that is associated with this tag
      * @return true if the tag is deleted
      */
-    boolean deleteTag(String tagID, String ownerID) {
+    public boolean deleteTag(String tagID, String ownerID) {
         Tag tag = repository.fetchTagByTagIDAndOwnerID(tagID, ownerID);
         if (tag.getCount() <= 0) {
             return repository.deleteTag(tagID, ownerID);

@@ -424,6 +424,16 @@ public class UseCaseManager {
     }
 
     /**
+     * @see MemoManager#deleteMemo(String, String)
+     */
+    public boolean deleteMemo(String memoID, String ownerID){
+        return memoManager.deleteMemo(memoID, ownerID);
+    }
+    public boolean deleteTag(String tagID, String ownerID) {
+        return tagManager.deleteTag(tagID, ownerID);
+    }
+
+    /**
      * @see MemoManager#createMemo(String, String, String)
      */
     public String createMemo(String name, String note, String userID){
