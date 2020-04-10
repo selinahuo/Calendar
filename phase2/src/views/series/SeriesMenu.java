@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * A view for display and hand;e the following options for Series menu.
+ * A view for display and handle the following options for Series Menu.
  * Functions including:
  * 1. Create series - goes to CreateSeriesView
  * 2. Get all series - goes to SeriesList where list of series will be presented
