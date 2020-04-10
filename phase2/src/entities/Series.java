@@ -76,10 +76,4 @@ public class Series implements Serializable {
      * @param seriesName
      */
     public void setSeriesName(String seriesName) { this.seriesName = seriesName; }
-
-    @Override
-    public String toString() {
-        return String.format("ID: %s | Series: %s | Count: %d | User: %s",
-                getSeriesID(), getSeriesName(), getEventCount(), getUserID());
-    }
 }

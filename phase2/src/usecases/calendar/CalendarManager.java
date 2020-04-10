@@ -125,7 +125,7 @@ public class CalendarManager implements IEventDeletionObserver {
     }
 
     /**
-     * called when an event is being deleted
+     * Decrement count of calendar with deleted event
      *
      * @param event the event being deleted
      */

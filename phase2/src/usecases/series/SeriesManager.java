@@ -75,15 +75,6 @@ public class SeriesManager implements IEventDeletionObserver {
         return true;
     }
 
-    /**
-     * get times
-     *
-     * @param start
-     * @param end
-     * @param frequency
-     * @param numEvents
-     * @return
-     */
     private ArrayList<LocalDateTime[]> getTimes(LocalDateTime start, LocalDateTime end, String frequency, int numEvents) {
         int daysToAdd;
         if (frequency.equals("d")) {
@@ -107,7 +98,6 @@ public class SeriesManager implements IEventDeletionObserver {
         return times;
     }
 
-    // singular
     /**
      * Get a single Series by SeriesID and userID.
      *
@@ -119,12 +109,11 @@ public class SeriesManager implements IEventDeletionObserver {
         return repository.fetchSeriesBySeriesIDAndUserID(seriesID, userID);
     }
 
-    // plural
     /**
-     * Get multiple Series by userID.
+     * Get multiple Series by user
      *
-     * @param userID
-     * @return
+     * @param userID ID of user
+     * @return list of matching series
      */
     public ArrayList<Series> getSeriesByUserID(String userID){
         return repository.fetchSeriesByUserID(userID);
@@ -141,7 +130,6 @@ public class SeriesManager implements IEventDeletionObserver {
         return repository.fetchSeriesBySeriesNameAndUserID(seriesName, userID);
     }
 
-    // edit
     /**
      * Edit Series's name.
      *
@@ -154,6 +142,11 @@ public class SeriesManager implements IEventDeletionObserver {
         return repository.editSeriesName(seriesID, seriesName, userID);
     }
 
+    /**
+     * Handle event deletion by decrementing count of series associated with events. Deletes series with 0 events.
+     *
+     * @param event event which was deleted and reacted to
+     */
     @Override
     public void handleEventDeletion(CalendarEvent event) {
         Series series = repository.fetchSeriesBySeriesIDAndUserID(event.getSeriesID(), event.getUserID());

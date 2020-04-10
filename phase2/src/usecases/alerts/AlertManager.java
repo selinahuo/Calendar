@@ -217,7 +217,10 @@ public class AlertManager implements IEventDeletionObserver {
         return false;
     }
 
-    // delete alert
+    /**
+     * Handle event deletion by deleting alerts associated with deleted event
+     * @param event event which was deleted and reacted to
+     */
     @Override
     public void handleEventDeletion(CalendarEvent event) {
         alertRepository.deleteAlert(event.getAlertID(), event.getUserID());

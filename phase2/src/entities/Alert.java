@@ -168,10 +168,4 @@ public class Alert implements Serializable {
             }
         }
     }
-
-    @Override
-    public String toString() {
-        return String.format("ID: %s | Alert: %s | Next Ring: %s | User: %s",
-                getAlertID(), getAlertName(), getNextRing(), getUserID());
-    }
 }
