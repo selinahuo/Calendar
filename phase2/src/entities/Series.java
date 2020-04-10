@@ -14,9 +14,9 @@ public class Series implements Serializable {
 
     /**
      * Constructor of an individual series
-     * @param seriesName
-     * @param eventCount
-     * @param userID
+     * @param seriesName the name of this series
+     * @param eventCount the number of event in this series
+     * @param userID the user id of this series
      */
     public Series(String seriesName, int eventCount, String userID) {
         this.seriesName = seriesName;
@@ -27,7 +27,7 @@ public class Series implements Serializable {
     /**
      * A public method that returns the seriesID of this series.
      *
-     * @return
+     * @return a String representation of the seriesID
      */
     public String getSeriesID() {
         return seriesID;
@@ -35,7 +35,8 @@ public class Series implements Serializable {
 
     /**
      * A public method that returns the name of this series.
-     * @return
+     *
+     * @return a String representation of the series nmae
      */
     public String getSeriesName() {
         return seriesName;
@@ -44,7 +45,7 @@ public class Series implements Serializable {
     /**
      * A public method that returns the event count of this series.
      *
-     * @return
+     * @return a Integer representation of number of events in the series
      */
     public int getEventCount() {
         return eventCount;
@@ -53,7 +54,7 @@ public class Series implements Serializable {
     /**
      * A public method sets the event count.
      *
-     * @param eventCount
+     * @param eventCount the new number of event in the series
      */
     public void setEventCount(int eventCount) { this.eventCount = eventCount; }
 
@@ -65,7 +66,8 @@ public class Series implements Serializable {
 
     /**
      * A public method that gets userID.
-     * @return
+     *
+     * @return a String representation of the user ID
      */
     public String getUserID() {
         return userID;
@@ -73,7 +75,8 @@ public class Series implements Serializable {
 
     /**
      * A public method sets the series name.
-     * @param seriesName
+     *
+     * @param seriesName the new series name
      */
     public void setSeriesName(String seriesName) { this.seriesName = seriesName; }
 
