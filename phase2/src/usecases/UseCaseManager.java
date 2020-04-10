@@ -216,8 +216,7 @@ public class UseCaseManager {
             series = seriesManager.getSeriesBySeriesIDAndUserID(event.getSeriesID(), userID);
             calendar = calendarManager.getCalendarByIDAndOwnerID(event.getCalendarID(), userID);
         }
-        return new Sextuple<CalendarEvent, Memo, ArrayList<Tag>, Alert, Calendars, Series>(event, memo, tags, alert,
-                calendar, series);
+        return new Sextuple<>(event, memo, tags, alert, calendar, series);
     }
 
     /**
@@ -260,6 +259,13 @@ public class UseCaseManager {
      */
     public ArrayList<CalendarEvent> getEventsByTagIDAndOwnerID(String tagID, String ownerID){
         return eventManager.getEventsByTagIDAndOwnerID(tagID, ownerID);
+    }
+
+    /**
+     * @see EventManager#getEventsBySeriesIDAndOwnerID(String, String)
+     */
+    public ArrayList<CalendarEvent> getEventsBySeriesIDAndOwnerID(String seriesID, String ownerID) {
+        return eventManager.getEventsBySeriesIDAndOwnerID(seriesID, ownerID);
     }
 
     /**
@@ -362,12 +368,7 @@ public class UseCaseManager {
     }
 
     /**
-     * 
-     * @param eventID
-     * @param inviterID
-     * @param inviteeID
-     * @param initialMessage
-     * @return
+     * @see InvitationManager#createInvitation(String, String, String, String) 
      */
     public String createInvitation(String eventID, String inviterID, String inviteeID, String initialMessage) {
         return invitationManager.createInvitation(eventID, inviterID, inviteeID, initialMessage);
@@ -486,9 +487,9 @@ public class UseCaseManager {
     }
 
     /**
-     * @see SeriesManager#createSeriesByCombiningEvents(String, String[], String)
+     * @see SeriesManager#createSeriesByCombiningEvents(String, ArrayList, String)
      */
-    public boolean createSeriesByCombiningEvents(String seriesName, String[] eventIDs, String userID) {
+    public boolean createSeriesByCombiningEvents(String seriesName, ArrayList<String> eventIDs, String userID) {
         return seriesManager.createSeriesByCombiningEvents(seriesName, eventIDs, userID);
     }
 
