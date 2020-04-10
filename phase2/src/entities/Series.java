@@ -14,9 +14,9 @@ public class Series implements Serializable {
 
     /**
      * Constructor of an individual series
-     * @param seriesName the name of this series
-     * @param eventCount the number of event in this series
-     * @param userID the user id of this series
+     * @param seriesName
+     * @param eventCount
+     * @param userID
      */
     public Series(String seriesName, int eventCount, String userID) {
         this.seriesName = seriesName;
@@ -27,7 +27,7 @@ public class Series implements Serializable {
     /**
      * A public method that returns the seriesID of this series.
      *
-     * @return a String representation of the seriesID
+     * @return
      */
     public String getSeriesID() {
         return seriesID;
@@ -35,8 +35,7 @@ public class Series implements Serializable {
 
     /**
      * A public method that returns the name of this series.
-     *
-     * @return a String representation of the series nmae
+     * @return
      */
     public String getSeriesName() {
         return seriesName;
@@ -45,7 +44,7 @@ public class Series implements Serializable {
     /**
      * A public method that returns the event count of this series.
      *
-     * @return a Integer representation of number of events in the series
+     * @return
      */
     public int getEventCount() {
         return eventCount;
@@ -54,7 +53,7 @@ public class Series implements Serializable {
     /**
      * A public method sets the event count.
      *
-     * @param eventCount the new number of event in the series
+     * @param eventCount
      */
     public void setEventCount(int eventCount) { this.eventCount = eventCount; }
 
@@ -66,8 +65,7 @@ public class Series implements Serializable {
 
     /**
      * A public method that gets userID.
-     *
-     * @return a String representation of the user ID
+     * @return
      */
     public String getUserID() {
         return userID;
@@ -75,14 +73,7 @@ public class Series implements Serializable {
 
     /**
      * A public method sets the series name.
-     *
-     * @param seriesName the new series name
+     * @param seriesName
      */
     public void setSeriesName(String seriesName) { this.seriesName = seriesName; }
-
-    @Override
-    public String toString() {
-        return String.format("ID: %s | Series: %s | Count: %d | User: %s",
-                getSeriesID(), getSeriesName(), getEventCount(), getUserID());
-    }
 }

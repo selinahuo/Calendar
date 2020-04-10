@@ -150,6 +150,11 @@ public class TagManager implements IEventDeletionObserver {
         return false;
     }
 
+    /**
+     * Handle event deletion by removing count of tags associated with deleted event
+     *
+     * @param event event which was deleted and reacted to
+     */
     @Override
     public void handleEventDeletion(CalendarEvent event) {
         String ownerID = event.getUserID();

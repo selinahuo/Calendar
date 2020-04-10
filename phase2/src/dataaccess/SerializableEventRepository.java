@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 class SerializableEventRepository extends SerializableRepository<CalendarEvent> implements IEventRepository {
-    SerializableEventRepository() { super("events.ser"); }
+    SerializableEventRepository() { super("./events.ser"); }
 
     private class SortAscendingDate implements Comparator<CalendarEvent> {
         @Override

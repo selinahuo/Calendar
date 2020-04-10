@@ -4,18 +4,18 @@ import entities.CalendarEvent;
 
 import java.net.URLEncoder;
 
-public class EventLinkGenerator {
-    public static String getEventDirections(CalendarEvent event) {
+class EventLinkGenerator {
+    static String getEventDirections(CalendarEvent event) {
         String url = "https://www.google.com/maps/dir//" + encodeURL(event.getLocation());
         return url;
     }
 
-    public static String getEventWeather(CalendarEvent event) {
+    static String getEventWeather(CalendarEvent event) {
         String url = "https://www.google.com/search?q=" + encodeURL(event.getLocation() + " weather");
         return url;
     }
 
-    public static String getEventTwitterShare(CalendarEvent event) {
+    static String getEventTwitterShare(CalendarEvent event) {
         String eventString = String.format("%s @ %s",
                 event.getName(),
                 event.getLocation()
@@ -24,7 +24,7 @@ public class EventLinkGenerator {
         return url;
     }
 
-    public static String getEventEmailShare(CalendarEvent event) {
+    static String getEventEmailShare(CalendarEvent event) {
         String eventString = String.format("%s @ %s",
                 event.getName(),
                 event.getLocation()
