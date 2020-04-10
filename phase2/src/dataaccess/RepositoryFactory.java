@@ -72,7 +72,7 @@ public class RepositoryFactory {
     }
 
     /**
-     * Construact a repository satisfying IUserRepository
+     * Construct a repository satisfying IUserRepository
      * @return IUserRepository implementation
      */
     public static IUserRepository getUserRepository() {
