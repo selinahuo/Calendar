@@ -12,6 +12,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A view for display and hand;e the following options for Series menu.
+ * Functions including:
+ * 1. Create series - goes to CreateSeriesView
+ * 2. Get all series - goes to SeriesList where list of series will be presented
+ * 3. Get events by name - goes to GetSeriesView
+ * 4. Get events by series - goes to EventList where list of events will be presented
+ * 5. Return to main menu - back to the home menu
+ */
 public class SeriesMenu extends View {
     public SeriesMenu(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
