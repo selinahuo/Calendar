@@ -20,6 +20,8 @@ import usecases.users.IUserRepository;
 import usecases.users.UserManager;
 import views.ViewManager;
 
+import java.time.LocalDateTime;
+
 /**
  * Model's an instance of our CalendarApp
  */
@@ -69,7 +71,7 @@ public class CalendarApp {
 //        userManager.createUser("Jim", "password");
 //        String userID = userManager.getUsers().get(0).getUserID();
 //        String userID2 = userManager.getUsers().get(1).getUserID();
-
+//
 //        String eventID = eventManager.createEvent("Event", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Place", userID);
 //        alertManager.createIndividualAlert(eventID, "Alert", LocalDateTime.now(), userID);
 //        calendarManager.createCalendar(userID, "Calendar");
@@ -77,6 +79,7 @@ public class CalendarApp {
 //        tagManager.createTag("Tag", userID);
 //        seriesManager.createSeriesFromEventFormula("236 Lecture", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "w", 2, userID);
 //        invitationManager.createInvitation(eventID, userID, userID2, "Hi");
+
 
         // Instantiate and run user interface
         ViewManager vm = new ViewManager(controller);

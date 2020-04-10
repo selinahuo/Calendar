@@ -30,8 +30,12 @@ class AlertAdapter {
      * @return A String representation of the information of an alert instance
      */
     static String createAlertString (Alert alert) {
-        return String.format("ID: %s | Alert: %s | %s",
-                alert.getAlertID(), alert.getAlertName(), alertStatusString(alert));
+        if (alert == null) {
+            return "Something went wrong, did not create alert.";
+        } else {
+            return String.format("ID: %s | Alert: %s | %s",
+                    alert.getAlertID(), alert.getAlertName(), alertStatusString(alert));
+        }
     }
 
     /**
