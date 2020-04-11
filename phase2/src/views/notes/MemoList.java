@@ -78,6 +78,7 @@ public class MemoList extends ListView {
                     System.out.println("\n");
                     return new NoteMenu(getLocalStorage(), null, getController());
                 case "~":
+                    System.out.println("\n");
                     return new NoteMenu(getLocalStorage(), null, getController());
                 default:
                     super.printInputError();

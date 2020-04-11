@@ -17,8 +17,8 @@ public class TagList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-        System.out.println("[1] Display all events attached to this tag");
-        System.out.println("[2] Delete tag");
+        System.out.println("[1] Display all events attached to a tag");
+        System.out.println("[2] Delete a tag");
         System.out.println("[~] Back to Note menu");
     }
 
@@ -35,11 +35,13 @@ public class TagList extends ListView {
             String selection = input.nextLine();
             switch(selection) {
                 case "1":
+                    System.out.println("\n");
                     System.out.println("Please input the tag ID");
                     String tagID = input.nextLine();
                     ListModel eventModel = getController().getEventsByTagIDAndOwnerID(tagID, getLocalStorage().getUserID());
                     return new EventList(getLocalStorage(), eventModel, getController());
                 case "2":
+                    System.out.println("\n");
                     System.out.println("Enter tag ID:");
                     String tagID1 = input.nextLine();
                     boolean deleted = getController().deleteTag(tagID1, userID);
@@ -51,6 +53,7 @@ public class TagList extends ListView {
                     System.out.println("\n");
                     return new NoteMenu(getLocalStorage(), null, getController());
                 case "~":
+                    System.out.println("\n");
                     return new NoteMenu(getLocalStorage(), null, getController());
                 default:
                     super.printInputError();

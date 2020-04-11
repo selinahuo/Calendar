@@ -53,6 +53,8 @@ public class NoteMenu extends View {
                         boolean var = getController().addMemoToEvent(memoID, eventID, userID);
                         if (!var){
                             System.out.println("Something went wrong adding the memo to the event.");
+                        }else{
+                            System.out.println("The memo was successfully added to the event.");
                         }
                     }else{
                         System.out.println("The memo was not attached to an event.");
@@ -67,6 +69,7 @@ public class NoteMenu extends View {
                     System.out.println("\n");
                     System.out.println("Enter memo ID:");
                     String memoID2 = input.nextLine();
+                    System.out.println("\n");
                     printClipBoard();
                     System.out.println("Enter event ID:");
                     String eventID1 = input.nextLine();
@@ -95,8 +98,10 @@ public class NoteMenu extends View {
                         if (!var1) {
                             System.out.println("Something went wrong adding the tag to the event.");
                         }else{
-                            System.out.println("The tag was not attached to an event.");
+                            System.out.println("The tag was successfully added to the event.");
                         }
+                    }else{
+                        System.out.println("The tag was not attached to an event.");
                     }
                     System.out.println("\n");
                     return new NoteMenu(getLocalStorage(), null, getController());
