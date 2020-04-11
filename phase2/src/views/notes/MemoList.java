@@ -74,6 +74,7 @@ public class MemoList extends ListView {
                         System.out.println("The memo has successfully been deleted.");
                     }else{
                         System.out.println("An error occurred, the memo was not deleted.");
+                        System.out.println("Reminder: a memo cannot be attached to any events to be deleted.");
                     }
                     System.out.println("\n");
                     return new NoteMenu(getLocalStorage(), null, getController());
