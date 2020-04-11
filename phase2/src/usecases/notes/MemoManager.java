@@ -122,8 +122,10 @@ public class MemoManager implements IEventDeletionObserver {
      */
     public boolean deleteMemo(String memoID, String ownerID) {
         Memo memo = repository.fetchMemoByMemoIDAndOwnerID(memoID, ownerID);
-        if (memo.getCount() <= 0) {
-            return repository.deleteMemo(memoID, ownerID);
+        if (memo != null){
+            if (memo.getCount() <= 0) {
+                return repository.deleteMemo(memoID, ownerID);
+            }
         }
         return false;
     }

@@ -99,8 +99,10 @@ public class TagManager implements IEventDeletionObserver {
      */
     public boolean deleteTag(String tagID, String ownerID) {
         Tag tag = repository.fetchTagByTagIDAndOwnerID(tagID, ownerID);
-        if (tag.getCount() <= 0) {
-            return repository.deleteTag(tagID, ownerID);
+        if (tag != null){
+            if (tag.getCount() <= 0) {
+                return repository.deleteTag(tagID, ownerID);
+            }
         }
         return false;
     }
