@@ -8,7 +8,20 @@ import views.View;
 import views.events.EventList;
 import java.util.Scanner;
 
+/**
+ * A view for display and handle the following options for showing list of calendars.
+ * Functions including:
+ * Showing this user's list of calendars, edit calendar options, calendar deletion, and view events of the calendar
+ */
 public class CalendarList extends ListView {
+
+    /**
+     * Construct an CalendarList view
+     *
+     * @param localStorage session storage for calendar, similar to browser local storage
+     * @param model list view model used by this view
+     * @param controller controller the view interacts with
+     */
     public CalendarList(LocalStorage localStorage, ListModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -23,6 +36,13 @@ public class CalendarList extends ListView {
         System.out.println("[~] Back to Calendar menu");
     }
 
+    /**
+     * Displays a representation of a list of calendars.
+     * Allows for following options to interact with entities: clip an calendar to clipboard,
+     * edit calendar options, calendar deletion, and view events of the calendar or navigate back to the event menu.
+     *
+     * @return the next view; calendar menu or an individual selected calendar view
+     */
     @Override
     public View run() {
         printTitle("Calendar List");

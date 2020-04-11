@@ -1,13 +1,10 @@
 package views.alerts;
 import controller.Controller;
 import controller.viewmodels.ListModel;
-import controller.viewmodels.SingularModel;
 import views.ListView;
 import views.LocalStorage;
 import views.View;
-import views.alerts.AlertMenu;
 import views.events.EventList;
-import views.events.EventMenu;
 
 import java.util.Scanner;
 
