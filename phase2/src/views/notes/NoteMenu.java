@@ -41,6 +41,7 @@ public class NoteMenu extends View {
                     String name = input.nextLine();
                     System.out.println("Please enter the memo's note:");
                     String memoNote = input.nextLine();
+                    printClipBoard();
                     System.out.println("Please enter the ID of the event it will be attached to: (leave empty for no event)");
                     String eventID = input.nextLine();
                     String memoID = getController().createMemo(name, memoNote, userID);
@@ -66,6 +67,7 @@ public class NoteMenu extends View {
                     System.out.println("\n");
                     System.out.println("Enter memo ID:");
                     String memoID2 = input.nextLine();
+                    printClipBoard();
                     System.out.println("Enter event ID:");
                     String eventID1 = input.nextLine();
                     boolean changed2 = getController().addMemoToEvent(memoID2, eventID1, userID);
@@ -80,6 +82,7 @@ public class NoteMenu extends View {
                     System.out.println("\n");
                     System.out.println("Please enter the name of the tag:");
                     String tagName = input.nextLine();
+                    printClipBoard();
                     System.out.println("Please enter the ID of the event it will be attached to: (leave empty for no event)");
                     String tagEventID = input.nextLine();
                     String tagID = getController().createTag(tagName, userID);
@@ -106,6 +109,7 @@ public class NoteMenu extends View {
                     System.out.println("\n");
                     System.out.println("Enter tag ID:");
                     String tagID2 = input.nextLine();
+                    printClipBoard();
                     System.out.println("Enter event ID:");
                     String eventID2 = input.nextLine();
                     boolean changed3 = getController().addTagToEvent(tagID2, eventID2, userID);
