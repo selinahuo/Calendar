@@ -10,7 +10,17 @@ import views.general.MainMenu;
 
 import java.util.Scanner;
 
+/**
+ * View for displaying and manipulating application time
+ */
 public class TimeMenu extends View {
+    /**
+     * Create a TimeMenu
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model view model used by this view, no model necessary for menu
+     * @param controller controller the view interacts with
+     */
     public TimeMenu(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -28,6 +38,13 @@ public class TimeMenu extends View {
         System.out.println("");
     }
 
+    /**
+     * Displays and handles application time interaction options. Following options: getting time, and setting and
+     * resetting time.
+     * Allows user to navigate back to the main menu.
+     *
+     * @return next view; main menu
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);

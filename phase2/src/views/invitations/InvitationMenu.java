@@ -10,7 +10,18 @@ import views.general.MainMenu;
 
 import java.util.Scanner;
 
+/**
+ * View dedicated to displaying and handling invitation entity functionality
+ */
 public class InvitationMenu extends View {
+
+    /**
+     * Create an InvitationMenu
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model view model used by this view, no model necessary for menu
+     * @param controller controller the view interacts with
+     */
     public InvitationMenu(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -23,6 +34,13 @@ public class InvitationMenu extends View {
         System.out.println("[~] Return to main menu");
     }
 
+    /**
+     * Displays and handles invitation entity interaction options. Options include, listing incoming and outgoing
+     * invitations, and creating new invitations.
+     * Allows user to navigate back to the main menu.
+     *
+     * @return next view; main menu, or an invitation list
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);

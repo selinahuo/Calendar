@@ -17,7 +17,7 @@ public class TagList extends ListView {
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
-        System.out.println("[1] display all events attached to this tag");
+        System.out.println("[1] Display all events attached to this tag");
         System.out.println("[~] Back to Note menu");
     }
 

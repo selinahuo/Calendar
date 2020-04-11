@@ -11,7 +11,18 @@ import views.users.UserList;
 
 import java.util.Scanner;
 
+/**
+ * View dedicated to displaying and handling event entity functionality
+ */
 public class EventMenu extends View {
+
+    /**
+     * Create an EventMenu view
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model view model used by this view, no model necessary for menu
+     * @param controller controller the view interacts with
+     */
     public EventMenu(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -26,6 +37,13 @@ public class EventMenu extends View {
         System.out.println("[~] Return to main menu");
     }
 
+    /**
+     * Displays and handles event entity interaction options. Options include, creating events, creating holiday events,
+     * listing events by name, relative time, and list events with time frames.
+     * Allows user to navigate back to the main menu.
+     *
+     * @return next view; main menu, or an event list
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);
@@ -136,7 +154,6 @@ public class EventMenu extends View {
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:
                     printInputError();
-                    System.out.println("");
             }
         }
     }

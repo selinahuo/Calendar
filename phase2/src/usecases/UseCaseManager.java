@@ -497,6 +497,13 @@ public class UseCaseManager {
     }
 
     /**
+     * @see TagManager#removeTagFromEvent(String, String, String)
+     */
+    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID) {
+        return tagManager.removeTagFromEvent(tagID, eventID, ownerID);
+    }
+
+    /**
      * @see SeriesManager#createSeriesByCombiningEvents(String, ArrayList, String)
      */
     public boolean createSeriesByCombiningEvents(String seriesName, ArrayList<String> eventIDs, String userID) {

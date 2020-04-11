@@ -15,7 +15,18 @@ import views.users.UserMenu;
 
 import java.util.Scanner;
 
+/**
+ * View for displaying and navigating to entity menus. Default authenticated view.
+ */
 public class MainMenu extends View {
+
+    /**
+     * Create an MainMenu view
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model view model used by this view, no model necessary for menu
+     * @param controller controller the view interacts with
+     */
     public MainMenu(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -33,6 +44,13 @@ public class MainMenu extends View {
         System.out.println("[q] Log out");
     }
 
+    /**
+     * Displays and handles navigation options. Options include: alert, calendar, event, invitation, note, series, time,
+     * and user menus.
+     * Allows user to logout and return to the AuthMenu.
+     *
+     * @return next view from above options
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);
@@ -74,7 +92,6 @@ public class MainMenu extends View {
             }
         }
     }
-
 }
 
 

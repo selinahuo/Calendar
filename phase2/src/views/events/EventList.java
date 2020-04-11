@@ -12,7 +12,18 @@ import views.users.UserMenu;
 
 import java.util.Scanner;
 
+/**
+ * View for displaying and handling options related to a list of events
+ */
 public class EventList extends ListView {
+
+    /**
+     * Construct an EventList view
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model list view model used by this view
+     * @param controller controller the view interacts with
+     */
     public EventList(LocalStorage localStorage, ListModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -24,6 +35,13 @@ public class EventList extends ListView {
         System.out.println("[~] Back to event menu");
     }
 
+    /**
+     * Displays a representation of a list of events.
+     * Allows for following options to interact with entities: view an individual invitation, clip an event to clipboard
+     * or navigate back to the event menu.
+     *
+     * @return the next view; event menu or an individual selected event view
+     */
     @Override
     public View run() {
         printTitle("Event List");
