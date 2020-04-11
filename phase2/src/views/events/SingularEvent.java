@@ -9,7 +9,18 @@ import views.View;
 
 import java.util.Scanner;
 
+/**
+ * View for displaying and handling options related to a single event
+ */
 public class SingularEvent extends SingularView {
+
+    /**
+     * Construct a SingleEvent view
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model single view model for this instance
+     * @param controller controller the view interacts with
+     */
     public SingularEvent(LocalStorage localStorage, SingularModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -32,6 +43,14 @@ public class SingularEvent extends SingularView {
         System.out.println("[~] Return to event menu");
     }
 
+    /**
+     * Displays a string representation of a event and associated entities.
+     * Allows for following options to interact with invitation:
+     * Get event directions, weather, share on twitter or using email.
+     * Edit, and delete the event if current session user is the owner of the event.
+     *
+     * @return the next view; event menu
+     */
     @Override
     public View run() {
         printTitle("Event Single");

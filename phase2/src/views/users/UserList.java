@@ -8,7 +8,18 @@ import views.View;
 
 import java.util.Scanner;
 
+/**
+ * View for displaying and handling options related to a list of users
+ */
 public class UserList extends ListView {
+
+    /**
+     * Construct a UserList
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model list view model used by this view
+     * @param controller controller the view interacts with
+     */
     public UserList(LocalStorage localStorage, ListModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -19,6 +30,13 @@ public class UserList extends ListView {
         System.out.println("[~] Back to user menu");
     }
 
+    /**
+     * Displays a representation of a list of users.
+     * Allows for following options to interact with entities: copy a user to clipboard, or navigate back to the user
+     * menu.
+     *
+     * @return the next view; the user menu
+     */
     @Override
     public View run() {
         printTitle("User List");

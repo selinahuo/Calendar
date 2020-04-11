@@ -9,14 +9,29 @@ import views.View;
 
 import java.util.Scanner;
 
+/**
+ * View for displaying and handling options related to a single invitation
+ */
 public class SingularInvitation extends SingularView {
     private SingularInvitationModel model;
 
+    /**
+     * Construct a SingleInvitation view
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model single invitation view model for this instance
+     * @param controller controller the view interacts with
+     */
     public SingularInvitation(LocalStorage localStorage, SingularInvitationModel model, Controller controller) {
         super(localStorage, model, controller);
         this.model = model;
     }
 
+    /**
+     * Get the SingularInvitationModel associated with this view
+     *
+     * @return view's SingularInvitationModel
+     */
     @Override
     public SingularInvitationModel getModel() {
         return model;
@@ -33,6 +48,14 @@ public class SingularInvitation extends SingularView {
         System.out.println("[~] Return to invitation menu");
     }
 
+    /**
+     * Displays a string representation of a invitation.
+     * Allows for following options to interact with invitation:
+     * Accept or decline the invitation if current session user is the invitee.
+     * Delete the invitation if current session user is the inviter
+     *
+     * @return the next view; invitation menu
+     */
     @Override
     public View run() {
         printTitle("Invitation Single");
