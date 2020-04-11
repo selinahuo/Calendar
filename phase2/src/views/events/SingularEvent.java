@@ -143,7 +143,7 @@ public class SingularEvent extends SingularView {
                     if (getLocalStorage().getUserID().equals(getModel().getEntityOwner())) {
                         System.out.println("Enter tag ID to remove:");
                         String tagToRemove = input.nextLine();
-                        // todo remove tag from event?
+                        getController().removeTagFromEvent(tagToRemove, getModel().getEntityID(), getLocalStorage().getUserID());
                         System.out.println("Event edited\n");
                         SingularModel locationModel = getController().getSingularEvent(getModel().getEntityID(), getLocalStorage().getUserID());
                         return new SingularEvent(getLocalStorage(), locationModel, getController());

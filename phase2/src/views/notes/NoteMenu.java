@@ -25,6 +25,7 @@ public class NoteMenu extends View {
         System.out.println("[5] Add a memo to an event");
         System.out.println("[6] Remove a memo from an event");
         System.out.println("[7] Create tag");
+        System.out.println("[8] List all tags");
         System.out.println("[~] Return to main menu");
     }
 

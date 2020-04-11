@@ -228,6 +228,9 @@ public class Controller {
     public boolean removeMemoFromEvent(String eventID, String ownerID){
         return useCaseManager.removeMemoFromEvent(eventID, ownerID);
     }
+    public boolean removeTagFromEvent(String tagID, String eventID, String ownerID) {
+        return useCaseManager.removeTagFromEvent(tagID, eventID, ownerID);
+    }
     public boolean addTagToEvent(String tagID, String eventID, String ownerID){
         return useCaseManager.addTagToEvent(tagID, eventID, ownerID);
     }
