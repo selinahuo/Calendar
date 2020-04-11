@@ -231,6 +231,12 @@ public class Controller {
     public boolean addTagToEvent(String tagID, String eventID, String ownerID){
         return useCaseManager.addTagToEvent(tagID, eventID, ownerID);
     }
+    public boolean deleteMemo(String memoID, String ownerID){
+        return useCaseManager.deleteMemo(memoID, ownerID);
+    }
+    public boolean deleteTag(String tagID, String ownerID){
+        return useCaseManager.deleteTag(tagID, ownerID);
+    }
 
     // SERIES
     public boolean createSeriesByCombiningEvents(String seriesName, ArrayList<String> eventIDs, String userID) {

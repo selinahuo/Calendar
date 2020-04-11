@@ -1,5 +1,4 @@
 package dataaccess;
-
 import entities.Memo;
 import usecases.notes.IMemoRepository;
 

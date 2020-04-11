@@ -64,7 +64,7 @@ public class AlertList extends ListView {
                         System.out.println("The Alert is being modified:");
                         System.out.println(getController().getAlertByIDAndUserID(editAlertID,getLocalStorage().getUserID()));
                     } else {
-                        System.out.println("The Alert name change was not complete");
+                        printError("The Alert name change was not complete");
                     }
                     System.out.println("");
                     return new AlertMenu(getLocalStorage(),getModel(),getController());
@@ -80,7 +80,7 @@ public class AlertList extends ListView {
                         System.out.println("the new alert time is modified: ");
                         System.out.println(getController().getAlertByIDAndUserID(EditTimeAlertID,getLocalStorage().getUserID()));
                     } else {
-                        System.out.println("Something went wrong.");
+                        printError("Something went wrong.");
                     }
                     System.out.println("");
                     return new AlertMenu(getLocalStorage(),getModel(),getController());
@@ -91,7 +91,7 @@ public class AlertList extends ListView {
                     if (deleted){
                         System.out.println("The alert was deleted");
                     } else {
-                        System.out.println("The alert deletion was not complete");
+                        printError("The alert deletion was not complete");
                     }
                     System.out.println("");
                     return new AlertMenu(getLocalStorage(),getModel(),getController());

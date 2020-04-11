@@ -79,6 +79,7 @@ public class CalendarApp {
 //        tagManager.createTag("Tag", userID);
 //        seriesManager.createSeriesFromEventFormula("236 Lecture", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "w", 2, userID);
 //        invitationManager.createInvitation(eventID, userID, userID2, "Hi");
+//
 
 
         // Instantiate and run user interface
