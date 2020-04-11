@@ -18,6 +18,8 @@ public class MemoList extends ListView {
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
         System.out.println("[1] Display all events containing a certain memo");
+        System.out.println("[2] Edit memo name");
+        System.out.println("[3] Edit memo note");
         System.out.println("[~] Back to Note menu");
     }
 
@@ -25,6 +27,7 @@ public class MemoList extends ListView {
     public View run() {
         printTitle("Memo List");
         Scanner input = new Scanner(System.in);
+        String userID = getLocalStorage().getUserID();
 
         printList();
 
@@ -37,6 +40,31 @@ public class MemoList extends ListView {
                     String memoID3 = input.nextLine();
                     ListModel eventModel = getController().getEventsByMemoIDAndOwnerID(memoID3, getLocalStorage().getUserID());
                     return new EventList(getLocalStorage(), eventModel, getController());
+                case "2":
+                    System.out.println("Enter memo ID:");
+                    String memoID1 = input.nextLine();
+                    System.out.println("Enter new memo name:");
+                    String newMemoName = input.nextLine();
+                    boolean changed = getController().editMemoName(memoID1, newMemoName, userID);
+                    if (changed) {
+                        System.out.println("The name has successfully been changed.");
+                    } else {
+                        System.out.println("An error occurred, the name was not changed.");
+                    }
+                    return new NoteMenu(getLocalStorage(), null, getController());
+                case "3":
+                    System.out.println("\n");
+                    System.out.println("Enter memo ID:");
+                    String memoID4 = input.nextLine();
+                    System.out.println("Enter new memo note:");
+                    String newMemoNote = input.nextLine();
+                    boolean changed1 = getController().editMemoNote(memoID4, newMemoNote, userID);
+                    if (changed1) {
+                        System.out.println("The note has successfully been changed.");
+                    } else {
+                        System.out.println("An error occurred, the note was not changed.");
+                    }
+                    return new NoteMenu(getLocalStorage(), null, getController());
                 case "~":
                     return new NoteMenu(getLocalStorage(), null, getController());
                 default:
