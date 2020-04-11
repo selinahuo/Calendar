@@ -34,6 +34,12 @@ public class AlertMenu extends View{
         System.out.println("[~] Return to main menu");
     }
 
+    /**
+     * Displays and handles alert entity interaction options. Options include, acknowledging alerts, listing alerts,
+     * creating alerts.
+     *
+     * @return next view, main menu, or an alert list.
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);

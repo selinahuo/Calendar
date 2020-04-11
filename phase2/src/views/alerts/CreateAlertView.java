@@ -37,6 +37,13 @@ public class CreateAlertView extends View {
         System.out.println("[~] Return to Alert Menu");
     }
 
+    /**
+     * Displays a representation of a alert creation menu.
+     * Allows for following options to interact with entities: clip an calendar to clipboard,
+     * create individual alert and frequency alert, or navigate back to the event menu.
+     *
+     * @return Alert menu view
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);

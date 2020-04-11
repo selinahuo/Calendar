@@ -28,6 +28,13 @@ public class AlertList extends ListView {
         System.out.println("[~] Back to Alert menu");
     }
 
+    /**
+     * Displays a representation of a list of alerts.
+     * Allows for following options to interact with entities:
+     * edit alert options, alert deletion, and view alerts  or navigate back to the alert menu.
+     *
+     * @return Alert menu view.
+     */
     @Override
     public View run() {
         printTitle("Alert List");
