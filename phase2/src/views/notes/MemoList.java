@@ -20,6 +20,7 @@ public class MemoList extends ListView {
         System.out.println("[1] Display all events containing a certain memo");
         System.out.println("[2] Edit memo name");
         System.out.println("[3] Edit memo note");
+        System.out.println("[4] Delete memo");
         System.out.println("[~] Back to Note menu");
     }
 
@@ -64,6 +65,17 @@ public class MemoList extends ListView {
                     } else {
                         System.out.println("An error occurred, the note was not changed.");
                     }
+                    return new NoteMenu(getLocalStorage(), null, getController());
+                case "4":
+                    System.out.println("Enter memo ID:");
+                    String memoID = input.nextLine();
+                    boolean deleted = getController().deleteMemo(memoID, userID);
+                    if (deleted){
+                        System.out.println("The memo has successfully been deleted.");
+                    }else{
+                        System.out.println("An error occurred, the memo was not deleted.");
+                    }
+                    System.out.println("\n");
                     return new NoteMenu(getLocalStorage(), null, getController());
                 case "~":
                     return new NoteMenu(getLocalStorage(), null, getController());
