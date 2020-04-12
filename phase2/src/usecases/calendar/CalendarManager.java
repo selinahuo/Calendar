@@ -27,7 +27,7 @@ public class CalendarManager implements IEventDeletionObserver {
      *
      * @param userID the user that that this calendar belongs to
      * @param calendarName the name of this calendar
-     * @return Calendar
+     * @return id of the calendar created
      */
     public String createCalendar(String userID, String calendarName) {
         Calendars calendar = new Calendars(userID, calendarName);
@@ -62,7 +62,7 @@ public class CalendarManager implements IEventDeletionObserver {
      * @param calendarID the calendarID of the calendar being modified
      * @param newName the new name of this calendar
      * @param ownerID the userID of the user that is associated with this calendar
-     * @return true is modification is successful
+     * @return true if modification is successful
      */
     public boolean editCalendarName(String calendarID, String newName, String ownerID) {
         return repository.editCalendarName(calendarID, newName, ownerID);
@@ -74,7 +74,7 @@ public class CalendarManager implements IEventDeletionObserver {
      * @param eventID the ID of the event being added to the calendar
      * @param calendarID the ID of the calendar where the event is being added
      * @param ownerID the userID of the user that is associated with this calendar
-     * @return true is modification is successful
+     * @return true if modification is successful
      */
     public boolean addEventToCalendar(String eventID, String calendarID, String ownerID) {
         Calendars calendar = repository.fetchCalendarByCalendarIDAndOwnerID(calendarID, ownerID);
@@ -93,7 +93,7 @@ public class CalendarManager implements IEventDeletionObserver {
      *
      * @param eventID the ID of the event being removed from the calendar
      * @param ownerID the userID of the user that is associated with this calendar
-     * @return true is modification is successful
+     * @return true if modification is successful
      */
     public boolean removeEventFromCalendar(String eventID, String ownerID) {
         CalendarEvent event = eventManager.getEventByIDAndUserID(eventID, ownerID);

@@ -69,30 +69,81 @@ public class Controller {
     }
 
     // CALENDARS
+
+    /**
+     * Get list model of calendars with the user
+     *
+     * @param ownerID user to filter calendars by
+     * @return ListModel of calendars
+     */
     public ListModel getCalendarsByUserID(String ownerID){
         return CalendarAdapter.createCalendarListModel(useCaseManager.getCalendarsByOwnerID(ownerID));
     }
 
+    /**
+     * Create an Individual Calendar.
+     *
+     * @param userID the user that that this calendar belongs to
+     * @param calendarName the name of this calendar
+     * @return id of the calendar created
+     */
     public String createCalendar(String userID, String calendarName){
         return useCaseManager.createCalendar(userID, calendarName);
     }
 
+    /**
+     * Edit the calendar's name.
+     *
+     * @param calendarID the calendarID of the calendar being modified
+     * @param newName the new name of this calendar
+     * @param ownerID the userID of the user that is associated with this calendar
+     * @return true if modification is successful
+     */
     public boolean editCalendarName(String calendarID, String newName, String ownerID) {
         return useCaseManager.editCalendarName(calendarID, newName, ownerID);
     }
 
+    /**
+     * Add event to the calendar
+     *
+     * @param eventID the ID of the event being added to the calendar
+     * @param calendarID the ID of the calendar where the event is being added
+     * @param ownerID the userID of the user that is associated with this calendar
+     * @return true if modification is successful
+     */
     public boolean addEventToCalendar(String eventID, String calendarID, String ownerID) {
         return useCaseManager.addEventToCalendar(eventID, calendarID, ownerID);
     }
 
+    /**
+     * Remove event from the calendar
+     *
+     * @param eventID the ID of the event being removed from the calendar
+     * @param ownerID the userID of the user that is associated with this calendar
+     * @return true if modification is successful
+     */
     public boolean removeEventFromCalendar(String eventID, String ownerID) {
         return useCaseManager.removeEventFromCalendar(eventID, ownerID);
     }
 
+    /**
+     * Delete the Calendar
+     *
+     * @param calendarID the ID of the calendar being deleted
+     * @param ownerID the userID of the user who has the calendar
+     * @return true is modification is successful
+     */
     public boolean deleteCalendar(String calendarID, String ownerID) {
         return useCaseManager.deleteCalendar(calendarID, ownerID);
     }
 
+    /**
+     * Get list model of events with in the calendar
+     *
+     * @param calendarID the calendar that the events are in
+     * @param ownerID the user where the events belong to
+     * @return ListModel of events
+     */
     public ListModel getEventsByCalendarIDAndOwnerID(String calendarID, String ownerID) {
         return EventAdapter.createEventListModel(useCaseManager.getEventsByCalendarIDAndOwnerID(calendarID, ownerID));
     }
