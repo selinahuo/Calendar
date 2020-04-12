@@ -30,40 +30,110 @@ public class Controller {
     }
 
     // ALERTS
+
+    /**
+     * Get a list of alerts for a user.
+     *
+     * @param userID the ID of the associated user
+     * @return List model of alerts
+     */
     public ListModel getAlertsByUserID(String userID) {
         return AlertAdapter.createAlertListModel(useCaseManager.getAlertsByUserID(userID));
     }
+
+    /**
+     * Get overdue Alerts for the user.
+     *
+     * @param userID the ID of the associated user
+     * @return List model of overdue alerts
+     */
     public ListModel getOverdueAlerts(String userID) {
         return AlertAdapter.createAlertListModel(useCaseManager.getOverdueAlerts(userID));
     }
 
+    /**
+     * Create an Individual Alert.
+     *
+     * @param eventID the ID of the event associated with this alert
+     * @param alertName the name of this individual alert
+     * @param time the time which this alert notifies the user
+     * @param userID the ID of the user who would be notified
+     * @return String representation of this alert information
+     */
     public String createIndividualAlert(String eventID, String alertName, String time, String userID ){
         return AlertAdapter.createAlertString(useCaseManager.createIndividualAlert(eventID, alertName,
                 GlobalAdapter.stringToDateTime(time), userID));
     }
 
+    /**
+     * Create a frequency alert.
+     *
+     * @param eventID the ID of the event associated with this alert
+     * @param alertName the name of this frequency alert
+     * @param userID the ID of the user who would be notified
+     * @param startTime the first notification time of this series of alert
+     * @param frequency the rate of which the alert is repeating
+     * @return a String representation of this alert information
+     */
     public String createFrequencyAlert(String eventID, String alertName, String userID,
                                        String startTime, String frequency) {
         return AlertAdapter.createAlertString(useCaseManager.createFrequencyAlert(eventID, alertName,
                 userID, GlobalAdapter.stringToDateTime(startTime), frequency));
     }
 
+    /**
+     * Acknowledge an alert.
+     *
+     * @param alertID the ID of the alert that wished to be acknowledged
+     * @param userID the ID of the user that would be notified by this alert
+     * @return true if acknowledgement is successful
+     */
     public boolean acknowledgeAlert(String alertID, String userID) {
         return useCaseManager.acknowledgeAlert(alertID, userID);
     }
 
+    /**
+     * Edit an individual or frequency alert's name.
+     *
+     * @param alertID the ID of the alert
+     * @param name the new name for the alert
+     * @param userID the ID of the user that would be notified by this alert
+     * @return true if modification is successful
+     */
     public boolean editAlertName(String alertID, String name, String userID){
         return useCaseManager.editAlertName(alertID, name, userID);
     }
 
+    /**
+     * Get alert by inputting alertID and userID.
+     *
+     * @param alertID the ID of the alert that wished to be retrieved
+     * @param userID the ID of the user that would be notified by this alert
+     * @return a String representation of this alert information
+     */
     public String getAlertByIDAndUserID(String alertID, String userID){
         return AlertAdapter.createAlertString(useCaseManager.getAlertByIDAndUserID(alertID, userID));
     }
 
+    /**
+     * Edit the alert time of an Individual Alert.
+     *
+     * @param alertID the ID of the alert
+     * @param time the new alert time of this alert
+     * @param userID the ID of the user that would be notified by this alert
+     * @return true if modification is successful
+     */
     public boolean editAlertTimeAsIndividual(String alertID, String time, String userID){
         return useCaseManager.editAlertTimeAsIndividual(alertID, GlobalAdapter.stringToDateTime(time), userID);
     }
 
+    /**
+     * Delete an alert.
+     *
+     * @param alertID the ID of the alert that wished to be deleted
+     * @param userID the ID of the user that owns this alert
+     * @return true is deletion is successful
+     */
     public boolean deleteAlertByID(String alertID, String userID){
         return useCaseManager.deleteAlertByID(alertID, userID);
     }
