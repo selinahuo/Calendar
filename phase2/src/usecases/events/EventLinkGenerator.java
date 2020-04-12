@@ -20,7 +20,7 @@ class EventLinkGenerator {
                 event.getName(),
                 event.getLocation()
         );
-        String url = "https://twitter.com/?status=" + encodeURL(eventString);
+        String url = "https://twitter.com/intent/tweet?text="+ encodeURL(eventString);
         return url;
     }
 
