@@ -9,11 +9,22 @@ import views.general.MainMenu;
 
 import java.util.Scanner;
 
+/**
+ * View dedicated to displaying and handling memo entity functionality
+ */
 public class NoteMenu extends View {
 
+    /**
+     * Create an EventMenu view
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model view model used by this view, no model necessary for menu
+     * @param controller controller the view interacts with
+     */
     public NoteMenu(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
     }
+
 
     private void inputPrompt() {
         System.out.println("Please select one of the following choices by entering a number:");
@@ -24,6 +35,13 @@ public class NoteMenu extends View {
         System.out.println("[~] Return to main menu");
     }
 
+    /**
+     * Displays and handles event entity interaction options. Options include, creating memos and tags, listing memos
+     * and tags.
+     * Allows user to navigate back to the main menu.
+     *
+     * @return next view; main menu, another note menu, tag list or an memo list.
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);

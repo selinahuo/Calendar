@@ -37,7 +37,7 @@ public class EventList extends ListView {
 
     /**
      * Displays a representation of a list of events.
-     * Allows for following options to interact with entities: view an individual invitation, clip an event to clipboard
+     * Allows for following options to interact with entities: view an individual event, clip an event to clipboard
      * or navigate back to the event menu.
      *
      * @return the next view; event menu or an individual selected event view

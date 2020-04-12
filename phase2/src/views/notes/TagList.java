@@ -9,8 +9,18 @@ import views.events.EventList;
 
 import java.util.Scanner;
 
+/**
+ * View for displaying and handling options related to a list of tags
+ */
 public class TagList extends ListView {
 
+    /**
+     * Construct a MemoList view
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model list view model used by this view
+     * @param controller controller the view interacts with
+     */
     public TagList(LocalStorage localStorage, ListModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -23,6 +33,13 @@ public class TagList extends ListView {
         System.out.println("[~] Back to Note menu");
     }
 
+    /**
+     * Displays a representation of a list of memos.
+     * Allows for following options to interact with entities: view all events containing a certain tag, attach a tag
+     * to an event, delete a tag, or navigate back to the event menu.
+     *
+     * @return the next view; Note menu or Event list
+     */
     @Override
     public View run() {
         printTitle("Tag List");

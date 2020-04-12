@@ -9,8 +9,18 @@ import views.events.EventList;
 
 import java.util.Scanner;
 
+/**
+ * View for displaying and handling options related to a list of memos
+ */
 public class MemoList extends ListView {
 
+    /**
+     * Construct a MemoList view
+     *
+     * @param localStorage session storage for views, similar to browser local storage
+     * @param model list view model used by this view
+     * @param controller controller the view interacts with
+     */
     public MemoList(LocalStorage localStorage, ListModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -25,6 +35,13 @@ public class MemoList extends ListView {
         System.out.println("[~] Back to Note menu");
     }
 
+    /**
+     * Displays a representation of a list of memos.
+     * Allows for following options to interact with entities: view all events containing a certain memo, attach a memo
+     * to an event, edit a memo's name or note, delete a memo, or navigate back to the event menu.
+     *
+     * @return the next view; Note menu or event list
+     */
     @Override
     public View run() {
         printTitle("Memo List");
