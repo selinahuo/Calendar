@@ -455,7 +455,7 @@ public class Controller {
      * @param respondingMessage message response to invitation
      * @param accept whether to accept or decline the invitation
      * @param userID ID of the recipient of the invitation
-     * @return
+     * @return True if the invitation was accepted, false otherwise
      */
     public boolean acceptInvitation(String invitationID, String respondingMessage, Boolean accept, String userID) {
         return useCaseManager.acceptInvitation(invitationID, respondingMessage, accept, userID);
@@ -486,45 +486,147 @@ public class Controller {
     }
 
     // NOTES
+    /**
+     * Get list model of events attached to a memo
+     *
+     * @param memoID ID of the memo attached to the events
+     * @param ownerID the owner of the memo, and of the event
+     * @return list model of events
+     */
     public ListModel getEventsByMemoIDAndOwnerID(String memoID, String ownerID){
         return EventAdapter.createEventListModel(useCaseManager.getEventsByMemoIDAndOwnerID(memoID, ownerID));
     }
 
+    /**
+     * Get list model of all the memos belonging to a user
+     *
+     * @param ownerID the owner of the memos
+     * @return list model of memos
+     */
     public ListModel getMemosByOwnerID(String ownerID){
         return NoteAdapter.createMemoListModel(useCaseManager.getMemosByOwnerID(ownerID));
     }
 
+    /**
+     * Edit a memo's name
+     *
+     * @param memoID ID of the memo
+     * @param name the memo's new name
+     * @param ownerID the owner of the memo
+     * @return if the name was successfully changed
+     */
     public boolean editMemoName(String memoID, String name, String ownerID){
         return useCaseManager.editMemoName(memoID, name, ownerID);
     }
 
+    /**
+     * Edit a memo's note
+     *
+     * @param memoID ID of the memo
+     * @param note the memo's new note
+     * @param ownerID the owner of the memo
+     * @return if the note was successfully changed
+     */
     public boolean editMemoNote(String memoID, String note, String ownerID){
         return useCaseManager.editMemoNote(memoID, note, ownerID);
     }
+
+    /**
+     * Attach a memo to an event
+     *
+     * @param memoID ID of the memo to be attached
+     * @param eventID ID of the event to attach the memo to
+     * @param ownerID the owner of the memo, and of the event
+     * @return if the memo was successfully attached
+     */
     public boolean addMemoToEvent(String memoID, String eventID, String ownerID){
         return useCaseManager.addMemoToEvent(memoID, eventID, ownerID);
     }
+
+    /**
+     * Get list model of all the tags belonging to a user
+     *
+     * @param ownerID the owner of the tags
+     * @return list model of tags
+     */
     public ListModel getTagsByOwnerID(String ownerID){
         return NoteAdapter.createTagListModel(useCaseManager.getTagsByOwnerID(ownerID));
     }
+
+    /**
+     * Create a memo
+     *
+     * @param name The name of the memo
+     * @param note The memo's note
+     * @param userID ID of the user creating the memo
+     * @return the memo's ID
+     */
     public String createMemo(String name, String note, String userID){
         return useCaseManager.createMemo(name, note, userID);
     }
+
+    /**
+     * Create a tag
+     *
+     * @param name The name of the tag
+     * @param userID ID of the user creating the tag
+     * @return the tag's ID
+     */
     public String createTag(String name, String userID){
         return useCaseManager.createTag(name, userID);
     }
+
+    /**
+     * Remove a memo from an event
+     *
+     * @param eventID the ID of the event
+     * @param ownerID ID of the user who owns the event
+     * @return If the memo was successfully removed
+     */
     public boolean removeMemoFromEvent(String eventID, String ownerID){
         return useCaseManager.removeMemoFromEvent(eventID, ownerID);
     }
+
+    /**
+     * Remove a tag from an event
+     *
+     * @param eventID the ID of the event
+     * @param ownerID ID of the user who owns the event
+     * @return If the tag was successfully removed
+     */
     public boolean removeTagFromEvent(String tagID, String eventID, String ownerID) {
         return useCaseManager.removeTagFromEvent(tagID, eventID, ownerID);
     }
+
+    /**
+     * Add a tag to an event
+     *
+     * @param eventID the ID of the event
+     * @param ownerID ID of the user who owns the event
+     * @return If the tag was successfully added
+     */
     public boolean addTagToEvent(String tagID, String eventID, String ownerID){
         return useCaseManager.addTagToEvent(tagID, eventID, ownerID);
     }
+
+    /**
+     * Deletes a memo
+     *
+     * @param memoID the ID of the memo
+     * @param ownerID ID of the user who owns the memo
+     * @return If the memo was successfully deleted
+     */
     public boolean deleteMemo(String memoID, String ownerID){
         return useCaseManager.deleteMemo(memoID, ownerID);
     }
+
+    /**
+     * Deletes a tag
+     *
+     * @param tagID the ID of the tag
+     * @param ownerID ID of the user who owns the tag
+     * @return If the tag was successfully deleted
+     */
     public boolean deleteTag(String tagID, String ownerID){
         return useCaseManager.deleteTag(tagID, ownerID);
     }
