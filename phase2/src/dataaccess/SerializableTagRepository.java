@@ -31,8 +31,8 @@ class SerializableTagRepository extends SerializableRepository<Tag> implements I
     }
 
     @Override
-    public ArrayList<Tag> fetchTagByNameAndOwnerID(String name, String ownerID) {
-        return fetchPlural((Tag tag) -> tag.getName().equals(name) && tag.getUserID().equals(ownerID));
+    public Tag fetchTagByNameAndOwnerID(String name, String ownerID) {
+        return fetchSingular((Tag tag) -> tag.getName().equals(name) && tag.getUserID().equals(ownerID));
     }
 
     @Override
