@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 class NoteAdapter {
     static String createMemoString(Memo memo) {
-        return String.format("ID: %s | Memo: %s | Count: %s", memo.getMemoID(), memo.getName(), memo.getCount());
+        return String.format("ID: %s | Memo: %s | Note: %s | Count: %s", memo.getMemoID(), memo.getName(),
+                memo.getNote(), memo.getCount());
     }
     static String createTagString(Tag tag) {
         return String.format("ID: %s | Tag: %s | Count: %s", tag.getTagID(), tag.getName(), tag.getCount());
