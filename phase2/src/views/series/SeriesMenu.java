@@ -19,7 +19,8 @@ import java.util.Scanner;
  * 2. Get all series - goes to SeriesList where list of series will be presented
  * 3. Get events by name - goes to GetSeriesView
  * 4. Get events by series - goes to EventList where list of events will be presented
- * 5. Return to main menu - back to the home menu
+ * 5. Edit series - goes to EditSeries
+ * ~. Return to main menu - back to the home menu
  */
 public class SeriesMenu extends View {
     public SeriesMenu(LocalStorage localStorage, ViewModel model, Controller controller) {
@@ -32,6 +33,7 @@ public class SeriesMenu extends View {
         System.out.println("[2] Get all series");
         System.out.println("[3] Get series by name");
         System.out.println("[4] Get events by series");
+        System.out.println("[5] Edit series");
         System.out.println("[~] Return to main menu");
     }
 
@@ -58,6 +60,10 @@ public class SeriesMenu extends View {
                     ListModel eventsBySeriesID = getController().getEventsBySeriesIDAndOwnerID(seriesID, getLocalStorage().getUserID());
                     System.out.println("");
                     return new EventList(getLocalStorage(), eventsBySeriesID, getController());
+                case "5":
+                    System.out.println("Enter SeriesID:");;
+                    String newSeriesID = input.nextLine();
+                    return new EditSeriesView(getLocalStorage(), null, getController(), newSeriesID);
                 case "~":
                     return new MainMenu(getLocalStorage(), null, getController());
                 default:

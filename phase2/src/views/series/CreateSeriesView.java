@@ -10,12 +10,15 @@ import java.util.Scanner;
 
 /**
  * A view for display and handle the following options for create series menu.
- * Functions including:
- * 1. Create series by combining events - enters all events that want to be in one series then the series will be created
- * 2. Create series from event formula - follow the event formula to create a series
- * 5. Return to main menu - back to the series menu
  */
 public class CreateSeriesView extends View{
+
+    /**
+     * A constructor for create series view
+     * @param localStorage the local storage of the current view
+     * @param model the model of the current view
+     * @param controller the controller of the current view
+     */
     public CreateSeriesView(LocalStorage localStorage, ViewModel model, Controller controller) {
         super(localStorage, model, controller);
     }
@@ -52,6 +55,12 @@ public class CreateSeriesView extends View{
 
     }
 
+    /**
+     *  Functions including:
+     *  1. Create series by combining events - enters all events that want to be in one series then the series will be created
+     *  2. Create series from event formula - follow the event formula to create a series
+     * @return back to the series menu
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);

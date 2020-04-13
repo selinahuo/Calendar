@@ -9,15 +9,18 @@ import java.util.Scanner;
 
 /**
  * A view for display and handle the following options for edit series menu.
- * Functions including:
- * 1. Edit series name - edit the name of the series - back to the series menu after modification
- * 2. Return to main menu - back to the series menu
  */
 
 public class EditSeriesView extends View {
 
     String seriesID;
 
+    /**
+     * A constructor for edit series view
+     * @param localStorage the local storage of the current view
+     * @param model the model of the current view
+     * @param controller the controller of the current view
+     */
     public EditSeriesView(LocalStorage localStorage, ViewModel model, Controller controller, String seriesID) {
         super(localStorage, model, controller);
         this.seriesID = seriesID;
@@ -29,6 +32,13 @@ public class EditSeriesView extends View {
         System.out.println("[~] Return to series menu");
     }
 
+    /**
+     *  Functions including:
+     *  1. Edit series name - edit the name of the series - back to the series menu after modification
+     *  2. Return to main menu - back to the series menu
+     *  ~. back to the series menu
+     * @return as described above, if any problem occurs, back to edit series menu
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);

@@ -12,10 +12,6 @@ import java.util.Scanner;
 
 /**
  * A view for display and handle the following options for series list menu.
- * Functions including:
- * 1. View the list of series
- * 2. Edit series name - after modification - back to the series menu
- * 3. Return to main menu - back to the series menu
  */
 
 public class SeriesList extends ListView {
@@ -25,10 +21,16 @@ public class SeriesList extends ListView {
 
     private void inputPrompt(){
         System.out.println("Please select one of the following choices by entering a number:");
-        System.out.println("[1] Edit series' name");
+        System.out.println("[1] Edit series's name");
         System.out.println("[~] Back to series menu");
     }
 
+    /**
+     *  Functions including:
+     *  1. Edit series's name
+     *  ~. Return to series menu
+     * @return back to series menu
+     */
     @Override
     public View run() {
         printTitle("Series List");

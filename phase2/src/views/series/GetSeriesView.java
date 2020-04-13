@@ -11,13 +11,15 @@ import java.util.Scanner;
 
 /**
  * A view for display and handle the following options for get series menu.
- * Functions including:
- * 1. Get series by userID - goes to SeriesList View
- * 2. Get multiple series by seriesName - goes to SeriesList View
- * 3. Return to main menu - back to the series menu
  */
 public class GetSeriesView extends View {
 
+    /**
+     * A constructor for get series view
+     * @param localStorage the local storage of the current view
+     * @param model the model of the current view
+     * @param controller the controller of the current view
+     */
     public GetSeriesView(LocalStorage localStorage, ViewModel model, Controller controller){
         super(localStorage, model, controller);
     }
@@ -29,6 +31,13 @@ public class GetSeriesView extends View {
         System.out.println("[~] Return to Main menu");
     }
 
+    /**
+     *  Functions including:
+     *  1. Get series by userID - goes to SeriesList View
+     *  2. Get multiple series by seriesName - goes to SeriesList View
+     *  ~. Return back to series menu
+     * @return as described above
+     */
     @Override
     public View run() {
         Scanner input = new Scanner(System.in);
