@@ -14,9 +14,9 @@ public class Series implements Serializable {
 
     /**
      * Constructor of an individual series
-     * @param seriesName
-     * @param eventCount
-     * @param userID
+     * @param seriesName the name of the series
+     * @param eventCount number of events in the series
+     * @param userID the user ID of the series
      */
     public Series(String seriesName, int eventCount, String userID) {
         this.seriesName = seriesName;
@@ -27,7 +27,7 @@ public class Series implements Serializable {
     /**
      * A public method that returns the seriesID of this series.
      *
-     * @return
+     * @return the ID of the series
      */
     public String getSeriesID() {
         return seriesID;
@@ -35,7 +35,8 @@ public class Series implements Serializable {
 
     /**
      * A public method that returns the name of this series.
-     * @return
+     *
+     * @return the name of the series
      */
     public String getSeriesName() {
         return seriesName;
@@ -44,7 +45,7 @@ public class Series implements Serializable {
     /**
      * A public method that returns the event count of this series.
      *
-     * @return
+     * @return number of events in the series
      */
     public int getEventCount() {
         return eventCount;
@@ -53,7 +54,7 @@ public class Series implements Serializable {
     /**
      * A public method sets the event count.
      *
-     * @param eventCount
+     * @param eventCount the number of events in the series
      */
     public void setEventCount(int eventCount) { this.eventCount = eventCount; }
 
@@ -65,7 +66,8 @@ public class Series implements Serializable {
 
     /**
      * A public method that gets userID.
-     * @return
+     *
+     * @return the user ID of the series
      */
     public String getUserID() {
         return userID;
@@ -73,7 +75,8 @@ public class Series implements Serializable {
 
     /**
      * A public method sets the series name.
-     * @param seriesName
+     *
+     * @param seriesName the new name of the series
      */
     public void setSeriesName(String seriesName) { this.seriesName = seriesName; }
 }
