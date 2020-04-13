@@ -740,7 +740,7 @@ public class Controller {
     /**
      * Get list of series by user name
      * @param seriesName the name of the series
-     * @param userID the user ID of the series
+     * @param userID the ID of the user of the series
      * @return List of series that in the series name
      */
     public ListModel getSeriesBySeriesName(String seriesName, String userID) {
