@@ -18,8 +18,8 @@ public class SeriesManager implements IEventDeletionObserver {
     /**
      * Constructor for SeriesManager.
      *
-     * @param repository
-     * @param eventManager
+     * @param repository the repository associated with events
+     * @param eventManager the eventManager of the calendar events that the tags are associated to
      */
     public SeriesManager(ISeriesRepository repository, EventManager eventManager) {
         this.repository = repository;
@@ -30,10 +30,10 @@ public class SeriesManager implements IEventDeletionObserver {
     /**
      * Create a Series by combining events.
      *
-     * @param seriesName
-     * @param eventIDs
-     * @param userID
-     * @return
+     * @param seriesName the name of the series that is going to create
+     * @param eventIDs list of event IDs for the events that going to be in the series
+     * @param userID the user that this series will notify
+     * @return If the series was successfully created
      */
     public boolean createSeriesByCombiningEvents(String seriesName, ArrayList<String> eventIDs, String userID){
         Series newSeries = new Series(seriesName, 0, userID);
@@ -54,15 +54,14 @@ public class SeriesManager implements IEventDeletionObserver {
     }
 
     /**
-     * Create a Series from Event formula.
-     *
-     * @param seriesName
-     * @param start
-     * @param end
-     * @param frequency
-     * @param numEvents
-     * @param userID
-     * @return
+     * Create a series from the event formula
+     * @param seriesName the name of the series that is going to be create
+     * @param start the start time of the events in series
+     * @param end the end time of the events in series
+     * @param frequency the frequency of the events
+     * @param numEvents the number of events in the series
+     * @param userID the user ID of the series
+     * @return If the series was successfully created
      */
     public boolean createSeriesFromEventFormula(String seriesName, LocalDateTime start, LocalDateTime end, String frequency, int numEvents, String userID){
         Series newSeries = new Series(seriesName, numEvents, userID);
@@ -101,9 +100,9 @@ public class SeriesManager implements IEventDeletionObserver {
     /**
      * Get a single Series by SeriesID and userID.
      *
-     * @param seriesID
-     * @param userID
-     * @return
+     * @param seriesID the ID of the seires
+     * @param userID the ID of the user
+     * @return the series that the use has which corresponds to the seriesID
      */
     public Series getSeriesBySeriesIDAndUserID(String seriesID, String userID){
         return repository.fetchSeriesBySeriesIDAndUserID(seriesID, userID);
@@ -122,9 +121,9 @@ public class SeriesManager implements IEventDeletionObserver {
     /**
      * Get Series by Series name.
      *
-     * @param seriesName
-     * @param userID
-     * @return
+     * @param seriesName the name of the series
+     * @param userID the ID of the user
+     * @return List of series that in the series name
      */
     public ArrayList<Series> getSeriesBySeriesName(String seriesName, String userID){
         return repository.fetchSeriesBySeriesNameAndUserID(seriesName, userID);
@@ -133,10 +132,10 @@ public class SeriesManager implements IEventDeletionObserver {
     /**
      * Edit Series's name.
      *
-     * @param seriesID
-     * @param seriesName
-     * @param userID
-     * @return
+     * @param seriesID the ID of the seires
+     * @param seriesName the new name of the series
+     * @param userID the ID of the user
+     * @return If the edition is successful
      */
     public boolean editSeriesName(String seriesID, String seriesName, String userID){
         return repository.editSeriesName(seriesID, seriesName, userID);

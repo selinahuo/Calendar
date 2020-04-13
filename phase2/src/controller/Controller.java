@@ -705,7 +705,7 @@ public class Controller {
 
     /**
      * Create a series by combining events
-     * @param seriesName the name of the series that is going to be create
+     * @param seriesName the name of the series that is going to create
      * @param eventIDs list of event IDs for the events that going to be in the series
      * @param userID the user ID of the series
      * @return If the series was successfully created
@@ -741,12 +741,20 @@ public class Controller {
      * Get list of series by user name
      * @param seriesName the name of the series
      * @param userID the user ID of the series
-     * @return List of series
+     * @return List of series that in the series name
      */
     public ListModel getSeriesBySeriesName(String seriesName, String userID) {
         return SeriesAdapter.createSeriesListModel(useCaseManager.getSeriesBySeriesName(seriesName, userID));
     }
 
+    /**
+     * Edit Series's name.
+     *
+     * @param seriesID the ID of the seires
+     * @param seriesName the new name of the series
+     * @param userID the ID of the user
+     * @return If the edition is successful
+     */
     public boolean editSeriesName(String seriesID, String seriesName, String userID){
         return useCaseManager.editSeriesName(seriesID, seriesName, userID);
     }
