@@ -702,17 +702,47 @@ public class Controller {
     }
 
     // SERIES
+
+    /**
+     * Create a series by combining events
+     * @param seriesName the name of the series that is going to be create
+     * @param eventIDs list of event IDs for the events that going to be in the series
+     * @param userID the user ID of the series
+     * @return If the series was successfully created
+     */
     public boolean createSeriesByCombiningEvents(String seriesName, ArrayList<String> eventIDs, String userID) {
         return useCaseManager.createSeriesByCombiningEvents(seriesName, eventIDs, userID);
     }
 
+    /**
+     * Create a series from the event formula
+     * @param seriesName the name of the series that is going to be create
+     * @param start the start time of the events in series
+     * @param end the end time of the events in series
+     * @param frequency the frequency of the events
+     * @param numEvents the number of events in the series
+     * @param userID the user ID of the series
+     * @return If the series was successfully created
+     */
     public boolean createSeriesFromEventFormula(String seriesName, String start, String end, String frequency, int numEvents, String userID) {
         return useCaseManager.createSeriesFromEventFormula(seriesName, GlobalAdapter.stringToDateTime(start), GlobalAdapter.stringToDateTime(end), frequency, numEvents, userID);
     }
 
+    /**
+     * Get list of series by user ID
+     * @param userID the id of the user
+     * @return List of series that the user has
+     */
     public ListModel getSeriesByUserID(String userID) {
         return SeriesAdapter.createSeriesListModel(useCaseManager.getSeriesByUserID(userID));
     }
+
+    /**
+     * Get list of series by user name
+     * @param seriesName the name of the series
+     * @param userID the user ID of the series
+     * @return List of series
+     */
     public ListModel getSeriesBySeriesName(String seriesName, String userID) {
         return SeriesAdapter.createSeriesListModel(useCaseManager.getSeriesBySeriesName(seriesName, userID));
     }
