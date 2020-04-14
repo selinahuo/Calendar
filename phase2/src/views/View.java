@@ -67,17 +67,21 @@ abstract public class View {
     public abstract View run();
 
     /**
-     * Print's clipboard for storing entity IDs
+     * Prints clipboard for storing entity IDs
      */
     public void printClipBoard() {
         String userID = localStorage.getClipUser();
         String eventID = localStorage.getClipEvent();
+        String calendarID = localStorage.getClipCalendar();
         String clipString = "Clipboard: ";
         if (userID != "") {
             clipString += String.format("| User: %s%s%s ", CLIPBOARD, userID, RESET);
         }
         if (eventID != "") {
             clipString += String.format("| Event: %s%s%s ", CLIPBOARD, eventID, RESET);
+        }
+        if (calendarID != "") {
+            clipString += String.format("| Calendar: %s%s%s ", CLIPBOARD, calendarID, RESET);
         }
         System.out.println(clipString + "\n");
     }

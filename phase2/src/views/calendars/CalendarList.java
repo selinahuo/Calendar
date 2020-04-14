@@ -59,7 +59,7 @@ public class CalendarList extends ListView {
                     printClipBoard();
                     System.out.println("Enter calendar ID to clip:");
                     String clipCalendar = input.nextLine();
-                    getLocalStorage().setClipEvent(clipCalendar);
+                    getLocalStorage().setClipCalendar(clipCalendar);
                     System.out.print("New ");
                     printClipBoard();
                     break;
@@ -80,6 +80,7 @@ public class CalendarList extends ListView {
                 case "3":
                     System.out.println("Please enter the ID of the calendar you would like to modify");
                     String add_calendarID = input.nextLine();
+                    printClipBoard();
                     System.out.println("Enter the ID of the event your would like to add to the calendar");
                     String addEventID = input.nextLine();
                     boolean addedEvent = getController().addEventToCalendar(addEventID, add_calendarID,

@@ -7,6 +7,7 @@ public class LocalStorage {
     private String userID = "";
     private String clipEvent = "";
     private String clipUser = "";
+    private String clipCalendar = "";
 
     /**
      * Get the current session's user ID
@@ -60,5 +61,23 @@ public class LocalStorage {
      */
     public void setClipUser(String clipUser) {
         this.clipUser = clipUser;
+    }
+
+    /**
+     * Get calendar ID on current sessions' clipboard
+     *
+     * @return calendar ID on clipboard
+     */
+    public String getClipCalendar() {
+        return clipCalendar;
+    }
+
+    /**
+     * Copy a calendar on to the current session's clipboard
+     *
+     * @param clipCalendar calendar ID to clip
+     */
+    public void setClipCalendar(String clipCalendar) {
+        this.clipCalendar = clipCalendar;
     }
 }
