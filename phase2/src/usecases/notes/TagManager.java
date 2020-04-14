@@ -74,7 +74,7 @@ public class TagManager implements IEventDeletionObserver {
      * @param ownerID the ID of the owner of the tag
      * @return the desired tag.
      */
-    public ArrayList<Tag> getTagByNameAndOwnerID(String name, String ownerID){
+    public Tag getTagByNameAndOwnerID(String name, String ownerID){
         return repository.fetchTagByNameAndOwnerID(name, ownerID);
     }
 
