@@ -4,6 +4,9 @@ import usecases.notes.IMemoRepository;
 
 import java.util.ArrayList;
 
+/**
+ * Memo Repository implementation using serial files.
+ */
 class SerializableMemoRepository extends SerializableRepository<Memo> implements IMemoRepository {
     SerializableMemoRepository() {
         super("./memos.ser");

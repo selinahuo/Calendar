@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Adapter responsible for converting generic data to types convenient for use cases and views.
+ */
 class GlobalAdapter {
     static LocalDateTime stringToDateTime(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -49,7 +52,7 @@ class GlobalAdapter {
     }
 
     static String dateToString(LocalDateTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E yyyy-MM-dd HH:mm");
         return time.format(formatter);
     }
 

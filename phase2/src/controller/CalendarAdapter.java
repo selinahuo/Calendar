@@ -5,6 +5,9 @@ import entities.Calendars;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter responsible for converting calendar data to types convenient for use cases and views.
+ */
 class CalendarAdapter {
     /**
      * A static method that allows translating calendar information to a String representation.

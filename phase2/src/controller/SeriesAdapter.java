@@ -5,6 +5,9 @@ import entities.Series;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter responsible for converting series data to types convenient for use cases and views.
+ */
 class SeriesAdapter {
 
     /**

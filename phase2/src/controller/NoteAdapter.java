@@ -6,6 +6,9 @@ import entities.Tag;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter responsible for converting note data to types convenient for use cases and views.
+ */
 class NoteAdapter {
     static String createMemoString(Memo memo) {
         return String.format("ID: %s | Memo: %s | Note: %s | Count: %s", memo.getMemoID(), memo.getName(),

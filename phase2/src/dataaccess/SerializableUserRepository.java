@@ -5,6 +5,9 @@ import usecases.users.IUserRepository;
 
 import java.util.ArrayList;
 
+/**
+ * User Repository implementation using serial files.
+ */
 class SerializableUserRepository extends SerializableRepository<User> implements IUserRepository {
     SerializableUserRepository() {
         super("./users.ser");

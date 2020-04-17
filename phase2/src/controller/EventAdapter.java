@@ -7,6 +7,9 @@ import entities.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Adapter responsible for converting event data to types convenient for use cases and views.
+ */
 class EventAdapter {
     static String createEventString(CalendarEvent event) {
         return String.format("ID: %s | Event: %s @ %s | From %s to %s", event.getEventID(), event.getName(), event.getLocation(),

@@ -5,6 +5,9 @@ import usecases.notes.ITagRepository;
 
 import java.util.ArrayList;
 
+/**
+ * Tag Repository implementation using serial files.
+ */
 class SerializableTagRepository extends SerializableRepository<Tag> implements ITagRepository {
     SerializableTagRepository() {
             super("./tags.ser");

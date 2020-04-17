@@ -7,6 +7,9 @@ import entities.Invitation;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter responsible for converting invitation data to types convenient for use cases and views.
+ */
 class InvitationAdapter {
     private static String createInvitationString(Invitation invitation) {
         String statusString = InvitationAdapter.createInvitationStatusString(invitation);

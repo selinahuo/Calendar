@@ -4,7 +4,9 @@ import usecases.alerts.IAlertRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-
+/**
+ * Alert Repository implementation using serial files.
+ */
 class SerializableAlertRepository extends SerializableRepository<Alert> implements IAlertRepository {
     SerializableAlertRepository() {
         super("./alerts.ser");

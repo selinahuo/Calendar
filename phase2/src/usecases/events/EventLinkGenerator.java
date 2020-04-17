@@ -4,6 +4,9 @@ import entities.CalendarEvent;
 
 import java.net.URLEncoder;
 
+/**
+ * Class responsible for generating URL links for events
+ */
 class EventLinkGenerator {
     static String getEventDirections(CalendarEvent event) {
         String url = "https://www.google.com/maps/dir//" + encodeURL(event.getLocation());

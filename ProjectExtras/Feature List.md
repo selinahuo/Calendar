@@ -20,27 +20,30 @@ The purpose of this section is to describe how to access each feature through th
 
 ## Phase II Features
 * Multiple calendars per user: 
-    * The user can create multiple calendars, which will each have their own events, memos, alerts, etc. In order to create them, the user can go to the [Calendar Menu] from the [Main Menu]. Once that is selected, he can create a new calendar, and add events to it. Since the memos, tags etc. are connected to the event, all the calendar needs to keep track of is the events that are added to it.
+    * The user can create multiple calendars, which will each have their own events, memos, alerts, etc. In order to create them, the user can go to the [Calendar Menu] from the [Main Menu]. Once that is selected, the user can create a new calendar, and add events to it. Since the memos, tags etc. are connected to the event, all the calendar needs to keep track of is the events that are added to it.
     * Once a calendar is created, the user can choose to edit its name, add events to it, view the events that are linked to it, or delete itself.
     * Each user contains their own calendars, which cannot be accessed by other users.
 * Multiple users have the same event in their calendar and the Invitations
     * The user can create invitations, which allow them to invite other users to have the same event as them. The inviter will retain the ability to edit everything related to the event, but the invitee will be unable to edit any of its info.
-    * The user accesses the [Invitations Menu] from the [Main Menu], where he can see the incoming invitation, outgoing invitations, or can invite a seperate user to an event.
+    * The user accesses the [Invitations Menu] from the [Main Menu], where the user can see the incoming invitation, outgoing invitations, or can invite a seperate user to an event.
 * Deletion\editing memos, tags, events, alerts, calendars
     * In order to delete memos, the user must navigate to the [Note Menu] from the [Main Menu], and then select the [List All Memos] option. Then, the user must select the [Delete Memo] option and input the ID of the memo to delete. This menus also has the options to edit the name or note of a memo.
     * The process to delete a tag is extremely similar, however instead of selecting [List All Memos] from the [Note Menu], the user must select [List All Tags], and then the [Delete Tag] option, and input the ID of the tag to delete. Tags do not support editing since they only have a name, so instead a user can simply create a new one and delete the old one.
     * In order to delete an event, the user must access the [Event Menu] from the [Main Menu], and select an option which lists events, and then select the [View Individual Event] option, which will open allow the user to have access to all the functionalities for separate events. The user can then select the [Delete Event] option, which deletes the event, and disassociates tags, memos, etc. that were associated with the event. The options to edit an event’s name, time and location are also in this menu.
     * To delete an Alert, the user would go to the [Alert List Menu] from [Alert menu], and select [Delete Alert]. The user only has to enter an alert ID of the alert that wished to be deleted, then the alert would then be eliminated. The user can double check by going to the [Alert List Menu] to see all the alerts for this user. The options to edit an alert’s name or time are also in this menu.
 * One specific feature to our team: Finding the directions to the location of the event, and finding the weather using the location of the event.
-    * In order to share information about an event on social media, the user must enter the [Event Menu], and select an option to view events from there. Then, they must choose [View Individual Event], which will allow them to enter the single event menu, which has the options to [Get Event Directions] and [Get Event Weather]. The directions opens google maps with the location of the selected, and the weather searches the weather for the location of the event.
+    * In order to get directions and weather of an event, the user must enter the [Event Menu], and select an option to view events from there. Then, they must choose [View Individual Event], which will allow them to enter the single event view, which has the options to [Get Event Directions] and [Get Event Weather]. The directions open Google Maps with the location of the selected, and the weather searches the weather for the location of the event.
 
 ## Optional Features 
 * Invitations
     * The user can create invitations, which allow them to invite other users to have the same event as them. The inviter will retain the ability to edit everything related to the event, but the invitee will be unable to edit any of its info.
-    * The user accesses the [Invitations Menu] from the [Main Menu], where he can see the incoming invitation, outgoing invitations, or can invite a separate user to an event.
-    * As part of the invitation the two users can exchange messages.
+    * The user accesses the [Invitations Menu] from the [Main Menu], where they can see the incoming invitation, outgoing invitations, or can invite a separate user to an event.
+    * As part of the invitation, the two users can exchange messages.
 * Viewing events by day/hour/week/month
     * In order to access this functionality, the user must go to the [Event Menu] from the [Main Menu], and select the [List Events Using Time Frame] option. The user must then input information based on how he wants the events displayed, and then the events will be shown.
+    * Viewing using the event time frame view also allows the user to see the day of the week of specific dates.
     * We also added the feature to schedule holiday events in the [Event Menu].
 * Share events on social media
     * In order to share information about an event on social media, the user must enter the [Event Menu], and select an option to view events from there. Then, they must choose [View Individual Event], which will allow them to enter the single event menu, which has the options to [Share Event On Twitter] or [Share event using Email].
+* Time
+    * For testing purposes the user can set the application to a specific time. Note after setting the time, the application time will not move until it is reset.

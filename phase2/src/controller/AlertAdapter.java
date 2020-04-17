@@ -6,6 +6,9 @@ import entities.Alert;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Adapter responsible for converting alert data to types convenient for use cases and views.
+ */
 class AlertAdapter {
     /**
      * A private static method that allows translating alert status to a String representation.

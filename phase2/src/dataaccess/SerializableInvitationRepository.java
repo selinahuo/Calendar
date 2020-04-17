@@ -5,6 +5,9 @@ import usecases.invitations.IInvitationRepository;
 
 import java.util.ArrayList;
 
+/**
+ * Invitation Repository implementation using serial files.
+ */
 class SerializableInvitationRepository extends SerializableRepository<Invitation> implements IInvitationRepository {
     SerializableInvitationRepository() {
         super("./invitations.ser");

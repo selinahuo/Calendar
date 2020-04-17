@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Event Repository implementation using serial files.
+ */
 class SerializableEventRepository extends SerializableRepository<CalendarEvent> implements IEventRepository {
     SerializableEventRepository() { super("./events.ser"); }
 

@@ -6,6 +6,9 @@ import usecases.series.ISeriesRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Series Repository implementation using serial files.
+ */
 class SerializableSeriesRepository extends SerializableRepository<Series> implements ISeriesRepository {
     SerializableSeriesRepository() {
         super("./series.ser");

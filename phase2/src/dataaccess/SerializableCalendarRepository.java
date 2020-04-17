@@ -5,6 +5,9 @@ import usecases.calendar.ICalendarRepository;
 
 import java.util.ArrayList;
 
+/**
+ * Calendar Repository implementation using serial files.
+ */
 class SerializableCalendarRepository extends SerializableRepository<Calendars> implements ICalendarRepository {
     SerializableCalendarRepository() {
         super("./calendars.ser");
