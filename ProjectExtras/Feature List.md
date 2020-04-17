@@ -16,8 +16,9 @@ The purpose of this section is to describe how to access each feature through th
 * Find events by date, name, series name, and tag
     * How to find events by date: Go to [Event Menu] and select [5] List events using time frame (hour, day, week, month). Here the user can enter h,d,w,m to see all the events occurring in the hour, day, week, or month. The user would then proceed to enter the specific start time of the desired time frame. 
     * How to find events by name: In the same [Event Menu], the user can select [3] List events by name. By entering the event’s name, the user can view all the events that are under the entered name. 
-    * How to find event’s by tag: Go to the [Note Menu] for the [Main Menu], and select [4] List all tags. From the [Tag List] menu, the user can select [1] Display all events attached to the tag. By entering the Tag ID, the user can view all the events that are listed under the desired tag. 
-### Phase II Features
+    * How to find event’s by tag: Go to the [Note Menu] for the [Main Menu], and select [4] List all tags. From the [Tag List] menu, the user can select [1] Display all events attached to the tag. By entering the Tag ID, the user can view all the events that are listed under the desired tag.
+
+## Phase II Features
 * Multiple calendars per user: 
     * The user can create multiple calendars, which will each have their own events, memos, alerts, etc. In order to create them, the user can go to the [Calendar Menu] from the [Main Menu]. Once that is selected, he can create a new calendar, and add events to it. Since the memos, tags etc. are connected to the event, all the calendar needs to keep track of is the events that are added to it.
     * Once a calendar is created, the user can choose to edit its name, add events to it, view the events that are linked to it, or delete itself.
@@ -32,7 +33,8 @@ The purpose of this section is to describe how to access each feature through th
     * To delete an Alert, the user would go to the [Alert List Menu] from [Alert menu], and select [Delete Alert]. The user only has to enter an alert ID of the alert that wished to be deleted, then the alert would then be eliminated. The user can double check by going to the [Alert List Menu] to see all the alerts for this user. The options to edit an alert’s name or time are also in this menu.
 * One specific feature to our team: Finding the directions to the location of the event, and finding the weather using the location of the event.
     * In order to share information about an event on social media, the user must enter the [Event Menu], and select an option to view events from there. Then, they must choose [View Individual Event], which will allow them to enter the single event menu, which has the options to [Get Event Directions] and [Get Event Weather]. The directions opens google maps with the location of the selected, and the weather searches the weather for the location of the event.
-### Optional Features 
+
+## Optional Features 
 * Invitations
     * The user can create invitations, which allow them to invite other users to have the same event as them. The inviter will retain the ability to edit everything related to the event, but the invitee will be unable to edit any of its info.
     * The user accesses the [Invitations Menu] from the [Main Menu], where he can see the incoming invitation, outgoing invitations, or can invite a separate user to an event.
@@ -42,7 +44,3 @@ The purpose of this section is to describe how to access each feature through th
     * We also added the feature to schedule holiday events in the [Event Menu].
 * Share events on social media
     * In order to share information about an event on social media, the user must enter the [Event Menu], and select an option to view events from there. Then, they must choose [View Individual Event], which will allow them to enter the single event menu, which has the options to [Share Event On Twitter] or [Share event using Email].
-
-
-
-
